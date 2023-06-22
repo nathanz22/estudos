@@ -1,0 +1,12 @@
+SAP
+Protheus da TOTVS
+Oracle Database
+Oracle Exadata
+Amazon QuickSight
+Salesforce
+BMC Control-M
+Power Center
+RPA - Robot Process Automation
+Cobol
+Machine Learning
+Deep Learing
