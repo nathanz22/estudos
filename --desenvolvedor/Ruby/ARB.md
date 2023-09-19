@@ -1,0 +1,1570 @@
+# Ruby
+
+## Impressão de Valores
+
+As funções `puts`, `print`, `printf` e `p` permitem imprimir algum valor no terminal.
+
+### `puts`
+
+Imprime uma mensagem ou valor adicionando uma quebra de linha ao final.
+
+```Ruby
+puts 'Olá, Mundo!'
+# Imprime "Olá, Mundo!"
+```
+
+### `print`
+
+Semelhante ao `puts`, porém sem a quebra de linha ao final.
+
+Exemplo `print`:
+
+```Ruby
+print 'Olá, '
+print 'Mundo!'
+# Imprime "Olá, Mundo!"
+```
+
+### `printf`
+
+Formata a mensagem ou valor antes de imprimí-la. É bem semelhante a função `format`.
+
+```Ruby
+printf 'Valor recebido é de R$%.2f', 100.5231
+# Imprime a mensagem, substituindo a formatação pelo valor formatado
+```
+
+Assim como a função `print`, a função `printf` não cria uma quebra de linha ao final.
+
+### `p`
+
+Imprime e ao mesmo tempo retorna o valor imprimido.
+
+```Ruby
+p 22
+# => 22
+```
+
+## Variáveis
+
+Em Ruby, essa é a sintaxe para criar uma variável:
+
+```Ruby
+nome_variavel = valor_variavel
+```
+
+Os nomes das variáveis são normalmente escritas em letras minúsculas e utilizando `_` para separar os nomes.
+
+### Atribuição Condicional
+
+O operador `||=` é a junção dos operadores 'ou' (`||`) e o operador de atribuição (`=`). Ele é usado para atribuir algum valor à variável somente se essa mesma variável ainda não possuir algum valor, ou seja, se a mesma for igual a `nil`
+
+```Ruby
+var = nil
+# => nil
+
+var ||= 'Olá, Mundo!'
+# => "Olá, Mundo!"
+
+var ||= 'Ruby!'
+# => "Olá, Mundo!"
+```
+
+## Tipos de Dados
+
+### String
+
+Em Ruby, tudo entre aspas simples ou duplas são considerados strings.
+
+#### Métodos de String
+
+* **`upcase`**: Transformatodas as letras da string em maiúsculas.
+
+  ``` Ruby
+  str = 'Olá, Mundo!'
+  str.upcase
+  # => "OLÁ, MUNDO!"
+  ```
+
+* **`downcase`**: Transforma todas as letras da string em minúsculas.
+
+  ``` Ruby
+  str = 'Olá, Mundo!'
+  str.downcase
+  # => "olá, mundo!"
+  ```
+
+* **`capitalize`**: Transforma a primeira letra da string em maiúscula e o resto em minúsculas.
+
+  ``` Ruby
+  str = 'mundo!'
+  str.capitalize
+  # => "Mundo!"
+  ```
+
+* **`reverse`**: Inverte o texto da string.
+
+  ``` Ruby
+  str = 'Olá, Mundo!'
+  str.reverse
+  # => "!odnuM ,álO"
+  ```
+
+* **`length`**, **`.size`**: Retorna a quantidade de caracteres que a string possui.
+
+  ``` Ruby
+  str = 'Olá, Mundo!'
+  str.length
+  # => 11
+  ```
+
+  Ou:
+
+  ``` Ruby
+  str = 'Olá, Mundo!'
+  str.size
+  # => 11
+  ```
+
+* **`strip`**: Remove os espaços em branco no início e no fim da string.
+
+    ``` Ruby
+    str = '     Olá, Mundo!     '
+    str.strip
+    # => "Olá, Mundo!"
+    ```
+
+* **`concat`**, **`+`**: Concatena duas ou mais strings.
+
+    ``` Ruby
+    str1 = 'Olá, '
+    str2 = 'Mundo!'
+
+    str1.concat str2
+    # => "Olá, Mundo!"
+    ```
+
+    Ou:
+
+    ``` Ruby
+    str1 = 'Olá, '
+    str2 = 'Mundo!'
+
+    str1 + str2
+    # => "Olá, Mundo!"
+    ```
+
+* **`index`**: Retorna a posição da primeira ocorrência de uma substring.
+
+    ``` Ruby
+    str = 'Olá, Mundo!'
+    str.index 'Mundo!'
+    # => 5
+    ```
+
+* **`count`**: Retorna quantas vezes uma substring ocorreu na string.
+
+    ``` Ruby
+    str = 'Olá, Mundo! Olá, Todos!'
+    str.count 'O' # => 2
+    str.count 'o' # => 3
+    ```
+
+* **`sub`**: Substitui a primeira ocorrência de uma substring por outra.
+
+    ``` Ruby
+    str = 'Adeus, Mundo!'
+    str.sub 'Adeus', 'Olá'
+    # => "Olá, MUndo!"
+    ```
+
+* **`gsub`**: Substitui todas as ocorrências de uma substring por outra.
+
+    ``` Ruby
+    str = 'dias e dias'
+    str.gsub 'dias', 'noites'
+    # => noites e noites
+    ```
+
+* **`include?`**: Retorna `true` ou `false` se uma substring existir ou não, respectivamente, dentro da string.
+
+    ``` Ruby
+    str = '1, 2, 3, 4, 5, 6, 7, 8'
+    str.include? '5' => true
+    str.include? '9' => false
+    ```
+
+* **`chomp`**: Remove a quebra de linha ao final da string.
+
+    ``` Ruby
+    str = "Olá, Mundo!\n"
+    str.chomp
+    # => "Olá, Mundo!"
+    ```
+
+* **`split`**: Divide a string em um array com base em um delimitador.
+
+    ``` Ruby
+    str = '1, 2, 3, 4, 5, 6, 7, 8'
+    str.split ', '
+    # => ["1", "2", "3", "4", "5", "6", "7", "8"]
+    ```
+
+* **`slice`**, **`[]`**: Formam uma nova string a partir de um índice e, se especificada, quantidade de caracteres contando com esses índices.
+
+    ``` Ruby
+    str = 'Olá, Mundo!'
+    str.slice 5, 6
+    # => "Mundo!"
+
+    # Ou
+
+    str[5, 6]
+    # => "Mundo!"
+    ```
+
+  É possível utilizar também com intervalo de índices, que retorna uma substring que começa no índice de início e vai até o índice de fim.
+
+    ``` Ruby
+    str = 'Olá, Mundo!'
+    str.slice 5..10
+    # => "Mundo!"
+
+    # Ou
+
+    str[5..10]
+    # => "Mundo!"
+    ```
+
+    Neste caso, é possível omitir o índice de fim, já que vai do índice `5` até o fim da string, ficando `5..`.
+    Índices negativos contam da direita para a esquerda, ou seja, `-1` é igual ao último caractere da string.
+
+* **`delete`**: Remove um trecho da string.
+
+    ``` Ruby
+    str = 'Olá, Mundo!'
+    str.delete 'Olá, '
+    # => "Mundo!"
+    ```
+
+* **`casecmp`**: Retorna `-1` caso a primeira string seja menor que a segunda(a primeira string vem antes da segunda em ordem alfabética), `0` se as duas strings forem iguais em termos de ordenação (desconsidera diferenças de maiúsculas e minúsculas), ou `1` se a primeira string for maior que a segunda string(a primeira string vem depois da segunda na ordem alfabética).
+
+    ``` Ruby
+    str = 'Olá'
+    str.casecmp 'oLÁ' # =>  1
+    str.casecmp 'Olá' # =>  0
+    str.casecmp 'olá' # =>  0
+    str.casecmp 'álo' # => -1
+    ```
+
+#### Interpolação
+
+A interpolação permite adicionar variáveis ou expressões dentro de uma string.
+
+Em Ruby, a interpolação é feita por meio de chaves após o caractere hash (`#{}`). A interpolação pode ser feita somente com o uso de aspas duplas.
+
+``` Ruby
+n1 = 13
+n2 = 5
+str = "A soma entre #{n1} e #{n2} é #{n1 + n2}."
+# => "A soma entre 13 e 5 é 18."
+```
+
+### Conversão de Tipos
+
+Primeiramente, devemos saber como verificar o tipo de um objeto específico. Para isso, existe o método `.class`.
+
+``` Ruby
+str = 'Olá, Mundo!'
+num = 13
+num_f = 2.2
+sym = :abc
+
+str.class   # => String
+num.class   # => Integer
+num_f.class # => Float
+sym.class   # => Symbol
+```
+
+#### Conversões
+
+* **`to_i`**, **`.to_int`**: Converte para `Integer`.
+* **`to_f`**: Converte para `Float`.
+* **`to_s`**: Converte para `String`.
+* **`to_sym`**, **`.intern`**: Converte para `Symbol`.
+* **`to_c`**: Converte para `Complex`.
+* **`to_enum`**: Converte para `Enumerator`.
+* **`to_a`**: Converte para `Array`.
+* **`to_h`**: Converte para `Hash`
+
+## Atribuição de Método à Variável
+
+Em Ruby, é possível atribuir o valor de um objeto com um método. Para isso, basta utilizar `!` antes do nome do método.
+
+``` Ruby
+str = 'Olá, Mundo!'
+str.!upcase
+# => "OLÁ, MUNDO!"
+
+# Seria o mesmo que:
+
+str = str.upcase
+# => "OLÁ, MUNDO!"
+```
+
+## Entrada do Usuário
+
+Para que o usuário possa interagir por meio de uma entrada, existe a função `gets`.
+
+``` Ruby
+input = gets
+# A variável 'input' vai receber o que o usuário digitou
+```
+
+Para criar uma entrada na mesma linha de um texto, você pode fazer o seguinte:
+
+``` Ruby
+print 'Digite alguma coisa: '
+input = gets.chomp
+puts "Você digitou: #{input}"
+```
+
+O método **`chomp`** é utilizado para remover a quebra de linha no final.
+
+## Estruturas Condicionais
+
+Em Ruby, são: `if` / `unless`, `else` e `elsif`.
+
+A sintaxe é a seguinte:
+
+``` Ruby
+if (condicao)
+  # Bloco a ser executado caso a condição seja verdadeira
+else
+  # Bloco a ser executado caso o 'if' não tenha sido executado
+end
+```
+
+Exemplo:
+
+``` Ruby
+num = 10
+if num > 10
+  puts "#{num} é MAIOR que 10"
+elsif num == 10
+  puts "#{num} é IGUAL a 10"
+else
+  puts "#{num} é MENOR que 10"
+end
+```
+
+### `unless`
+
+O `unless` é o oposto do `if`, ou seja, ele executa o bloco abaixo caso sua condição seja falsa.
+
+``` Ruby
+condicao = false
+unless condicao
+  puts 'A condição é FALSA'
+else
+  puts 'A condição é VERDADEIRA'
+end
+```
+
+> OBS.: Não pode haver nenhum `elsif` em estruturas `unless`.
+
+### Comparadores
+
+* **`>`**:      Maior.
+* **`<`**:      Menor.
+* **`==`**:     Igual.
+* **`>=`**:     Maior ou igual.
+* **`<=`**:     Menor ou igual.
+
+#### Operador de Comparação Combinada
+
+O operador de comparação combinada, representado por **`<=>`**, retorna:
+
+* **`1`**: Caso o valor da esquerda seja maior que o valor da direita.
+
+* **`-1`**: Caso o valor da direita seja maior que o valor da esquerda.
+
+* **`0`**: Caso os valores sejam iguais.
+
+### Operadores Booleanos
+
+Os operadores booleanos são:
+
+* `&&`: Todas as expressões devem ser verdadeiras. Lê-se como *and*.
+
+* `||`: Pelo menos uma das expressões deve ser verdadeira. Lê-se como *or*.
+
+* `!`: Se a expressão for verdadeira, ela se torna falsa, e caso a expressão seja falsa, ela se torna verdadeira. Lê-se como *not*.
+
+    ``` Ruby
+    if !(2 < 1) # Verdadeiro
+      # Declaração
+    end
+    ```
+
+### Expressão Condicional Ternária
+
+A Expressão Condicional Ternária é uma forma de usar as estruturas `if` e `else` de forma maneira mais compacta. A declaração é feita em apenas uma linha.
+
+``` Ruby
+condicao = true
+puts condicao ? 'Verdadeiro' : 'Falso'
+# Imprimirá "Verdadeiro"
+```
+
+Primeiro o valor **booleano**, em seguida, **`?`** para `if` e **`:`** para `else`.
+
+## Arrays
+
+Existem duas formas de declarar um array:
+
+1. Declaração literal:
+
+  ``` Ruby
+  my_array = []
+  ```
+
+1. `Array.new`:
+
+  ``` Ruby
+  my_array = Array.new
+  ```
+
+Exemplo de array:
+
+``` Ruby
+my_array = [22, 'Olá, Mundo!', true, 1.3]
+# => [22, "Olá, Mundo!", true, 1.3]
+```
+
+### Acesso aos Elementos do Array
+
+É usada a Notação de Colchetes com o índice de uma elemento específico.
+
+``` Ruby
+my_array = [2, 22, 13]
+my_array[0] # => 2
+my_array[1] # => 22
+my_array[2] # => 13
+```
+
+### Array Multidimensional
+
+Assim é chamado um array que tem como elementos internos outros arrays. Por exemplo:
+
+``` Ruby
+my_array = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+```
+
+Para acessar um elemento dentro de um array interno, deve ser passado dois índices dentro de colchetes.
+
+``` Ruby
+my_array[0][1] # => 2
+my_array[1][1] # => 5
+my_array[2][2] # => 9
+```
+
+### Iterando Sobre um Array
+
+Com o método `each`, é possível iterar sobre um array. Deve ser passado um nome para referência de cada item dentro do array.
+
+``` Ruby
+my_array = ['a', 'b', 'c', 'd', 'e']
+my_array.each { |i| puts i }
+# Imprime cada valor do array
+```
+
+No exemplo acima, `i` faz referência a cada elemento dentro do array.
+
+### Ordenando um Array
+
+O método **`sort`** permite ordenar um array em ordem alfabética ou numérica.
+
+No caso de número:
+
+``` Ruby
+my_array = [5, 6, 2, 3, 1, 4, 7, 9, 8]
+my_array.sort!
+# => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+No caso de strings:
+
+``` Ruby
+my_array = ['e', 'u', 'o', 'a', 'i']
+my_array.sort!
+# => ["a", "e", "i", "o", "u"]
+```
+
+> Se em um mesmo array exista números e strings, ocorrerá um erro (**`ArgumentError`**) ao aplicar o método `sort`.
+
+### Métodos de Array
+
+* **`push`**: Adiciona um ou mais elementos ao final do array.
+
+  ``` Ruby
+  my_array = ['a', 'b', 'c']
+  my_array.push 'd'
+  # => ["a", "b", "c", "d"]
+  ```
+
+* **`unshift`**: Adiciona um ou mais elementos ao início do array.
+
+  ``` Ruby
+  my_array = [3, 4, 5]
+  my_array.unshift 1, 2
+  # => [1, 2, 3, 4, 5]
+  ```
+
+* **`pop`**: Exclui o último elemento do array e o retorna.
+
+  ``` Ruby
+  my_array = [1, 2, 3, 4, 5]
+  del = my_array.pop # => 5
+  # [1, 2, 3, 4]
+  ```
+
+* **`shift`**: Exclui o primeiro elemento do array e o retorna.
+
+  ``` Ruby
+  my_array = [1, 2, 3, 4, 5]
+  del = my_array.shift # => 1
+  # [2, 3, 4, 5]
+  ```
+
+* **`concat`**, **`+`**: Concatena dois ou mais arrays e um novo array.
+
+  ``` Ruby
+  array1 = [1, 2, 3]
+  array2 = ['a', 'b', 'c']
+  array3 = array1.concat array2
+  # => [1, 2, 3, "a", "b", "c"]
+  ```
+
+  Ou:
+
+  ``` Ruby
+  array1 = [1, 2, 3]
+  array2 = ['a', 'b', 'c']
+  array3 = array1 + array2
+  # => [1, 2, 3, "a", "b", "c"]
+  ```
+
+* **`include?`**: Verifica se um elemento está presente dentro do array. Se presente, retorna `true`, em caso contrário, retorna `false`.
+
+  ``` Ruby
+  my_array = [1, 2, 3, 4, 5]
+  my_array.include? 2 # => true
+  my_array.include? 7 # => false
+  ```
+
+* **`index`**: Retorna o índice do elemento especificado dentro do array. Caso o elemento não exista dentro do array, retorna `nil`.
+
+  ``` Ruby
+  my_array = ['a', 'b', 'c', 'd']
+  my_array.index 'b' # => 1
+  my_array.index 'e' # => nil
+  ```
+
+* **`count`**: Retorna a quantidade de aparições de um elemento dentro de um array.
+
+  ``` Ruby
+  my_array = [2, 5, 2, 3, 1, 2]
+  my_array.count 2 # => 3
+  ```
+
+* **`uniq`**: Retorna um array com elementos únicos.
+
+  ``` Ruby
+  my_array = [1, 2, 2, 3, 3, 1]
+  my_array.uniq # => [1, 2, 3]
+  ```
+
+* **`collect`**, **`map`**: Aplica a expressão de um bloco a cada elemento de um array.
+
+  ``` Ruby
+  array = [1, 2, 3, 4, 5]
+  array.collect { |i| i * 2 }
+  # => [2, 4, 6, 8, 10]
+  ```
+
+* **`select`**: Cria um novo array apenas com os elementos que testam verdadeiro para uma expressão.
+
+  ``` Ruby
+  my_array = [1, 2, 3, 4, 5]
+  my_array.select { |n| n.odd? }
+  # => [1, 3, 5]
+  ```
+
+  Seria o mesmo que:
+
+  ``` Ruby
+  my_array = [1, 2, 3, 4, 5]
+  my_array.select(&:odd?)
+  # => [1, 3, 5]
+  ```
+
+## Estruturas de Repetição e Iteradores
+
+### `for`
+
+Repete um bloco em uma quantidade específica de vezes, baseado em um intervalo.
+
+``` Ruby
+for num in 0...10
+  puts num
+end
+# Imprime de 0 a 9
+```
+
+Este é um intervalo exclusivo, onde é considerado o primeiro valor (0) e desconsiderado o último (10).
+
+Para um intervalo inclusivo, ou seja, considerando o último valor, use **`..`** ao invés de `...`.
+
+``` Ruby
+for num in 0..10
+  puts num
+end
+# Imprime de 0 a 10
+```
+
+### `while`
+
+Repete um bloco enquanto sua condição for verdadeira.
+
+``` Ruby
+c = 0
+while c <= 10
+  puts c
+  c += 1
+end
+# Imprime de 0 a 10
+```
+
+### `until`
+
+É como o `while`, só que ao contrário, pois repete um bloco enquanto sua condição for falsa.
+
+``` Ruby
+c = 0
+until c > 10
+  puts c
+  c += 1
+end
+# Imprime de 0 a 10
+```
+
+### `loop`
+
+A função `loop` repete um bloco infinitamente, interrompendo apenas com `break` ou `return`(caso esteja dentor de uma função).
+A função `loop` aceita um bloco como repetição.
+
+``` Ruby
+c = 0
+loop do
+  break if c > 10
+  puts c
+  c += 1
+end
+# Imprime de 0 a 10
+```
+
+Aqui também um exemplo de `loop` infinito.
+
+``` Ruby
+loop { puts 'Olá, Mundo!' }
+```
+
+### Controle de Fluxo
+
+#### `break`
+
+A palavra-chave `break` interrompe uma repetição.
+
+``` Ruby
+for c in (0..30)
+  puts c
+  break if c == 10
+end
+# Imprime de 0 a 10
+```
+
+#### `next`
+
+A palavra-chave `next` pula para a próxima repetição.
+
+``` Ruby
+for c in (0..20)
+  next if c.odd?
+  puts c
+end
+# Imprime os números pares entre 0 e 20
+```
+
+### Iteradores
+
+#### `each`
+
+Repete um bloco em uma quantidade de vezes que a quantidade de elementos dentro do objeto. Se aplicado a uma string, repetirá na mesma quantidade de caracteres.
+
+``` Ruby
+nums = [1, 2, 3, 4, 5]
+num.each { |num| puts num }
+# Imprime cada número do array
+```
+
+O mesmo seria:
+
+``` Ruby
+nums = [1, 2, 3, 4, 5]
+num.each do |num|
+  puts num
+end
+# Imprime cada número do array
+```
+
+#### `times`
+
+Executa um bloco em uma quantidade específica de vezes. É como um `for`, porém mais simples e compacto.
+
+``` Ruby
+15.times { |n| puts n }
+# Imprime os números de 0 a 14
+# => 15
+```
+
+Este método retorna a quantidade de repetições.
+
+#### `upto` e `downto`
+
+Permitem iterar sobre valores específicos em um sequência, sendo `upto` para iterar de forma crescente e `downto` para decrescente.
+
+``` Ruby
+50.upto(55) { |n| puts n }
+# Imprime de 50 a 55
+
+50.downto(45) { |n| puts n }
+# Imprime de 50 a 45
+```
+
+Dessa forma, é possível iterar até mesmo sobre letras.
+
+``` Ruby
+'a'.upto('z') { |v| puts v }
+# Imprime as letras de "a" a "z".
+```
+
+## Funções
+
+Em Ruby, as função são criadas a partir da palavra-chave **`def`**, e após ela deve vir o nome e parâmetros (opcional) da função.
+
+Sintaxe:
+
+``` Ruby
+def nome_funcao(param1, param2, ..., param5)
+  declaraçao
+end
+```
+
+Exemplo de função:
+
+``` Ruby
+def dobro(num)
+  puts "O dobro de #{num} é #{num * 2}."
+end
+```
+
+### Chamando Funções
+
+Simplesmente escrever o nome da função já a chama.
+
+``` Ruby
+def saudacao(nome)
+  puts "Olá, #{nome}!"
+end
+
+saudacao 'Mundo'
+# Imprime "Olá, Mundo!"
+```
+
+> Em Ruby, não há a necessidade de parênteses após o nome da função, a não ser para as funções que recebem um bloco entre chaves, nesse caso é obrigatório o uso de parênteses.
+
+### Múltiplos Argumentos
+
+Caso o número de argumento seja indefinido, podendo não ser a mesma quantidade em diferentes execuções da função, é possível fazer com que esses argumentos se agrupem dentro de um array. Para isso, é adicionado um asterisco (**`*`**) antes do nome do parâmetro.
+
+``` Ruby
+def multi_dobro(*num)
+  num.each { |n| print "#{n * 2} " }
+end
+
+multi_dobro 5, 2, 4, 3, 13
+# Imprime: 10, 4, 8, 6, 26
+```
+
+### Retorno
+
+A palavra-chave **`return`** retorna algum valor, encerrando a função no mesmo momento.
+
+``` Ruby
+def saudacao(nome)
+  return "Olá, #{nome}!"
+end
+
+saudacao 'Mundo'
+# => "Olá, Mundo!"
+```
+
+Caso não haja nenhum retorno em uma função, ela retorna **`nil`**.
+
+#### Retorno Implícito
+
+Em Ruby, é retornado automaticamente o valor da última expressão calculada dentro da função.
+
+``` Ruby
+def soma_nums(num1, num2)
+  num1 + num2
+end
+
+soma_nums 13, 22
+# => 35
+```
+
+> Caso o valor a ser retornado esteja dentro de um laço de repetição, o retorno precisa ser explícito (`return`).
+
+## Hashes
+
+Existem duas formas de declarar um hash:
+
+1. Declaração literal:
+
+  ``` Ruby
+  my_hash = {}
+  ```
+
+1. `Hash.new`:
+
+  ``` Ruby
+  my_hash = Hash.new
+  ```
+
+Exemplo de hash:
+
+``` Ruby
+my_hash = {
+  'nome' => 'João',
+  'idade' => 18,
+  'sexo' => 'masculino'
+}
+# => => {"nome"=>"João", "idade"=>18, "sexo"=>"masculino"}
+```
+
+Em um hash, existem as chaves(*keys*) e os valores(*values*).
+No exemplo acima, as chaves são: `'nome'`, `'idade'` e `'sexo'`.
+E os valores são: `'João'`, `18` e `'masculino'`.
+
+### Acesso aos Dados do Hash
+
+É usado uma chave para referenciar um valor por meio de Notação de Colchetes.
+
+``` Ruby
+my_hash = {
+  'nome' => 'João',
+  'idade' => 18,
+  'sexo' => 'masculino'
+}
+
+my_hash['nome']
+# => "João"
+```
+
+### Adicionar/Substituir Dados
+
+Para **adicionar dados a um hash**, é necessário atribuir o valor desejado à chave desejada.
+
+``` Ruby
+my_hash = {
+  'nome' => 'João',
+  'idade' => 18,
+  'sexo' => 'masculino'
+}
+
+my_hash['altura'] = 1.79
+# 'my_hash' será: {"nome"=>"João", "idade"=>18, "sexo"=>"masculino", "altura"=>1.79}
+```
+
+Para **substituir o valor** de uma chave já existente, basta atribuir um novo valor a essa chave.
+
+``` Ruby
+my_hash = {
+  'nome' => 'João',
+  'idade' => 18,
+  'sexo' => 'masculino'
+}
+
+my_hash['idade'] = 29
+# 'my_hash' será: {"nome"=>"João", "idade"=>29, "sexo"=>"masculino"}
+```
+
+### Iterando Sobre o Hash
+
+Utilizando o método **`each`** e passando os nomes para as variáveis relativas às chaves e ao valores, podemos iterar sobre um hash.
+
+``` Ruby
+my_hash = {
+  'nome' => 'João',
+  'idade' => 18,
+  'sexo' => 'masculino'
+}
+
+my_hash.each { |k, v| puts "#{k}: #{v}"}
+# Imprime: nome: João
+#          idade: 18
+#          sexo: masculino
+```
+
+Para iterar apenas sobre as chaves ou apenas sobre os valores, você pode usar os métodos **`each_key`** e **`each_value`**.
+
+``` Ruby
+my_hash = {
+  'nome' => 'João',
+  'idade' => 18,
+  'sexo' => 'masculino'
+}
+
+my_hash.each_key { |k| puts k }
+# Imprime: nome
+#          idade
+#          sexo
+
+my_hash.each_value { |v| puts v }
+# Imprime: João
+#          18
+#          masculino
+```
+
+### Valor Padrão Para Chaves
+
+Caso haja uma solicitação para uma chave inexistente, será retornado **`nil`**, mas caso queira um valor padrão nesses casos, você pode especificar na declaração do hash.
+
+``` Ruby
+my_hash = Hash.new 'Nada aqui!'
+# => {}
+
+my_hash['chave1']
+# => "Nada aqui!"
+```
+
+## Símbolos
+
+Símbolos são nomes para referenciar alguma coisa, assim como chaves string em hashes.
+
+Não devem estar envoltos em aspas, mas sim possuir `:` no início do nome.
+
+``` Ruby
+my_sym = :simbolo
+```
+
+### Símbolos Como Chave Hash
+
+Os símbolos podem ser usados como chave em hashes. Nesse caso, a sintaxe se torna bem mais simples:
+
+``` Ruby
+my_hash = {
+  nome: 'Paula',
+  idade: 19,
+  sexo: 'feminino'
+}
+```
+
+Perceba que não é mais necessário `=>` para atribuir o valor à chave, pois o mesmo é substituído por `:` ao fim do nome.
+
+## Estrutura `case`
+
+A estrutura `case` torna seu código bem mais simples e limpo, sem a necessidade de utilizar vários `if`s e `elsif`s.
+
+Após a palavra-chave `case`, é escrita uma expressão ou variável, e com base em seu valor, é executado um trecho de código.
+
+Dentro da estrutura `case`, podem ser escritos um ou mais `when`s, que recebem um valor possível para a variável ou expressão especificada.
+
+``` Ruby
+print 'Digite um número [1 - 3]: '
+escolha = Integer(gets.chomp)
+case escolha
+when 1 # Caso o valor de 'escolha' seja 1
+  puts 'Você digitou 1!'
+when 2 # Caso o valor de 'escolha' seja 2
+  puts 'Você digitou 2!'
+when 3 # Caso o valor de 'escolha' seja 3
+  puts 'Você digitou 3!'
+else
+  puts 'Escolha um número entre 1 e 3'
+end
+```
+
+O bloco de `else` será executado caso nenhum `when` acima possua valor igual a variável `escolha`.
+
+### `then`
+
+Permite escrever uma declaração `when` em uma única linha.
+
+``` Ruby
+print 'Digite um número [1 - 3]: '
+escolha = Integer(gets.chomp)
+case escolha
+when 1 then puts 'Você digitou 1!'
+when 2 then puts 'Você digitou 2!'
+when 3 then puts 'Você digitou 3!'
+else puts 'Escolha um número entre 1 e 3'
+end
+```
+
+## Método `respond_to?`
+
+Verifica se algum método pode ser aplicado a um objeto específico, retornando **`true`**, se sim, ou **`false`**, em caso contrário.
+
+``` Ruby
+num = 22
+
+num.respond_to? :next   # => true
+num.respond_to? :length # => false
+```
+
+O método deve ser escrito em forma de símbolo.
+
+## Concatenação com `<<`
+
+O operador **`<<`** é usado para concatenação.
+
+``` Ruby
+my_array = [1, 2, 3] << 4
+# => [1, 2, 3, 4]
+
+my_string = 'Olá, '
+my_string << 'Mundo!'
+# => "Olá, Mundo!!
+```
+
+No caso de arrays, funciona como o método `push`, e no caso de string, tem o mesmo resultado que o método `concat`.
+
+## Métodos *Yield*
+
+Assim são chamados os métodos que aceitam um bloco. Esses métodos usam esses blocos para transferir o controle da chamada para o bloco e vice-versa.
+
+Exemplos de blocos *yield's* são `each` e `map`, mas também é possível criar métodos desse tipo.
+
+``` Ruby
+def abc(nome)
+  yield nome
+end
+
+abc('Luana') { |n| puts "Olá, #{n}!" }
+```
+
+## Procs e Lambdas
+
+### Procs
+
+São blocos reutilizáveis salvos em uma variável.
+
+``` Ruby
+par = proc do |n|
+  n.even?
+end
+
+(0..10).to_a.select(&par)
+# => [0, 2, 4, 6, 8, 10]
+```
+
+O **`&`** converte o proc em um bloco, e deve ser usado sempre que um método espera um bloco como argumento.
+
+### Lambdas
+
+Assim como um proc, uma lambda é um bloco armazenado dentro de uma variável, e sua sintaxe é inclusive a mesma, trocando apenas `proc` por `lambda` (ou `->`).
+
+``` Ruby
+nums = [1, 2, 3, 4, 5]
+quadrado = lambda { |n| n * 2 }
+
+nums.map(&quadrado)
+# => [2, 4, 6, 8, 10]
+```
+
+Podemos substituir `lambda` por **`->`** e passar o elemento entre parênteses. O resultado será o mesmo.
+
+``` Ruby
+nums = [1, 2, 3, 4, 5]
+quadrado = ->(n) { n * 2 }
+nums.map(&quadrado)
+# => [2, 4, 6, 8, 10]
+```
+
+### Procs vs. Lambdas
+
+Procs e Lambdas possuem duas diferenças:
+
+1. As lambdas verificam o número de argumentos passados a ela, ou seja, uma lambda lançará um erro caso passado o número errado de argumentos, enquanto um proc ignora argumentos inesperados, atribuindo `nil` a qualquer um que estiver faltando.
+
+1. Ao retornar um valor (`return`), as lambdas não interromper o método, ao contrário dos procs.
+
+``` Ruby
+def lambda_ex
+  l = -> { return 'Retorno da lambda' }
+  l.call
+  'Retorno ao fim da lambda'
+end
+
+def proc_ex
+  p = proc { return 'Retorno do proc' }
+  p.call
+  'Retorno ao fim do proc'
+end
+
+lambda_ex # => "Retorno ao fim da lambda"
+proc_ex   # => "Retorno do proc"
+```
+
+### Método `call`
+
+O método **`call`** permite chamar procs e lambdas de forma simples.
+
+``` Ruby
+oi = proc { puts "Olá!" }
+oi.call
+# Imprime "Olá!"
+```
+
+### Métodos Para Blocos
+
+Usando o nome de um método e adicionando **`:`** ao início, fará com que se torne um símbolo. Adicionar **`&`** antes desse símbolo, fará com que se torne um bloco. Então fica: **`&:metodo`**.
+
+``` Ruby
+array = ['1', '2', '3']
+array.map!(&:to_i)
+# => [1, 2, 3]
+
+# Forma simplificada comparada com:
+
+array.map! { |e| e.to_i }
+```
+
+## Tratamento de Erros
+
+Para tratar erros, são usadas as estruturas **`begin`** (caso já não esteja dentro de uma estrutura), **`rescue`**, **`else`** e **`ensure`**.
+
+1. **`begin`**: Contém o trecho de código que pode ocorrer uma exceção (erro).
+  É apenas necessário caso o bloco em que pode ocorrer a exceção já não esteja dentro de uma estrutura
+
+1. **`rescue`**: Executa um bloco ao capturar uma exceção.
+
+1. **`else`**: Executa um bloco caso não ocorra nenhuma exceção.
+
+1. **`ensure`**: Executa independentemente de ter ou não ocorrido alguma exceção.
+
+``` Ruby
+begin
+  # Código com possibilidade de erro
+rescue ExcecaoTipo1
+  # Executado caso ocorra a 'ExcecaoTipo1'
+rescue ExcecaoTipo2
+  # Executado caso ocorra a 'ExcecaoTipo2'
+else
+  # Executado caso não ocorra exceções
+ensure
+  # Será executado não importa o que aconteça
+end
+```
+
+Abaixo um exemplo que verifica se um valor é par ou ímpar. É lançado uma exceção caso o valor passado pelo usuário não seja um número inteiro.
+
+``` Ruby
+loop do
+  print 'Digite um número: '
+  num = Integer(gets.chomp)
+  puts num.even? ? "O número #{num} é PAR" : "O número #{num} é ÍMPAR!"
+  break
+rescue ArgumentError
+  puts 'ERRO | O valor digitado deve ser um número inteiro.'
+  # Quando 'num' não receber um valor válido
+rescue Interrupt
+  puts "\nINTERRUPÇÃO | O usuário preferiu encerrar o programa."
+  break
+  # Caso o usuário force a interrupção do programa
+end
+```
+
+Perceba que `loop do` substitui `begin`, pois o código com potencial de erro já está dentro de uma estrutura.
+
+A primeira exceção tratada foi `ArgumentError`, que é lançada quando o valor é diferente de um número inteiro neste caso.
+
+A segunda exceção tratada foi `Interrupt`, que é lançada quando o usuário encerra o script.
+
+### Método `raise`
+
+É usado para lançar uma exceção explicitamente, inclusive com uma mensagem personalizada se desejado.
+
+A sintaxe é a seguinte:
+
+``` Ruby
+raise TipoExcecao, 'Mensagem de erro(opcional)'
+```
+
+Exemplo:
+
+``` Ruby
+def divide(x, y)
+  raise ZeroDivisionError, 'Não pode dividir por zero'
+  x / y
+end
+```
+
+A mensagem não deve conter acentos e alguns caracteres, ou não será exibida.
+
+Caso `raise` seja escrito sozinho, irá relançar a exceção capturada.
+
+## Classes
+
+Ruby é uma linguagem de programação orientada a objetos, o que significa que ela manipula objetos.
+
+Uma classe é construída a partir da palavra-chave **`class`**, e após isso, o nome da classe.
+
+A sintaxe é a seguinte:
+
+``` Ruby
+class NomeClasse
+  # Conteúdo da class
+end
+```
+
+### Método `initialize`
+
+Este método é executado sempre que uma nova instância de uma class for criada usando o método **`new`**. Geralmente, é onde são dafinidas as variáveis de instância. **O método `initialize` é opcional**.
+
+Os parâmetros deste método devem ser recebidos assim que criada uma nova instância de uma classe.
+
+``` Ruby
+class Pessoa
+  def initialize(nome)
+    puts "Olá, #{nome}!"
+  end
+end
+
+Pessoa.new 'Mundo'
+# Imprime "Olá, Mundo!"
+```
+
+### Variáveis de Instância
+
+Variáveis de instância são variáveis que pertencem a uma instância específica de uma classe, ou seja, podem existir dois objetos com a mesma classe com variáveis de instância com valores diferentes.
+
+Variáveis de instância são declaradas com **`@`** no início do nome da variável.
+
+``` Ruby
+class Pessoa
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+
+  def apresentacao
+    puts "Olá! Meu nome é #{@nome} e eu tenho #{@idade} anos."
+  end
+end
+
+pessoa1 = Pessoa.new 'Matheus', 23
+pessoa1.apresentacao
+```
+
+A função `apresentacao` utilizada essas variáveis de instância para imprimir uma mensagem.
+
+### Variáveis de Classe
+
+São variáveis que, ao definir ou alterar seu valor em uma instância, altera também em todas as outras instâncias. Ou seja, em todas as instâncias as variáveis de classe terão o mesmo valor.
+
+Essas variáveis são declaradas com **`@@`** ao início do nome da variável.
+
+``` Ruby
+class NomeClasse
+  @@var1 = 2
+  @@var2 = 5
+end
+```
+
+### Variáveis Globais
+
+São variáveis que possuem o escopo global, ou seja, podem ser usadas e alteradas em qualquer lugar do código.
+
+Elas são declaradas com **`$`** ao início do nome da variável.
+
+``` Ruby
+$global_var = 'Olá, Mundo!'
+
+def mostrar_global_var
+  puts $global_var
+end
+
+mostrar_global_var
+# Imprime "Olá, Mundo!"
+```
+
+### *Inheritance* (Herança)
+
+Herança é o processo pelo qual uma classe assume os atributos e métodos de uma outra classe. Essa relação de classes é feita por meio do caractere **`<`**, onde a classe da esquerda herdará da classe da direita.
+
+``` Ruby
+class Error
+  def print_erro
+    puts 'Error! Error!'
+  end
+end
+
+class OtherError < Error
+  ###
+end
+
+oe = OtherError.new
+oe.print_erro
+# Imprime "Error! Error!"
+```
+
+#### Substituição de Métodos
+
+É possível substituir métodos da classe pai para a classe que está herdando. Para isso, deve ser recriado o método com o mesmo nome.
+
+``` Ruby
+class Error
+  def print_erro
+    puts 'Error! Error!'
+  end
+end
+
+class OtherError < Error
+  def print_erro
+    puts 'Other Error!'
+  end
+end
+
+oe = OtherError.new
+oe.print_erro
+# Imprime "Other Error!"
+```
+
+#### Execução do Método Original
+
+Com o método **`super`** é possível executar a versão original do método.
+
+``` Ruby
+class Error
+  def print_erro
+    puts 'Error! Error!'
+  end
+end
+
+class OtherError < Error
+  def print_erro
+    super
+  end
+end
+
+oe = OtherError.new
+oe.print_erro
+# Imprime "Error! Error!"
+```
+
+Caso necessário, podem ser passados parâmetros para **`super`**.
+
+### Restrições a Métodos
+
+#### *Public Methods*
+
+Não há restrições quanto aos métodos públicos. Eles podem ser chamados de dentro ou de fora da classe em que foram definidos.
+
+Qualquer objeto ou instância da classe possuem permissão para acessar métodos públicos definidos a classe.
+
+Ao definir um método, automaticamente ele se torna público ao menos que definido manualmente para privado. Mesmo assim você pode explicitamente dizer que é um método público, definindo **`public`** uma linha antes de definir o método.
+
+``` Ruby
+class MyClass
+
+  public
+
+  def metodo_publico
+    'Isto é um método público!'
+  end
+end
+```
+
+#### *Private Methods*
+
+Os métodos privados só podem ser chamados de dentro da própria classe em que foram definidos ou em subclasses (classes que herdam de uma outra classe).
+
+Um método se torna privado ao definir ‘private’ uma linha antes de definir o método.
+
+``` Ruby
+# Classe
+class MinhaClasse
+
+  private
+
+  def metodo_privado
+    'Isto é um método privado!'
+  end
+end
+
+# Subclasse
+class SubClasse < MinhaClasse
+  def print_metodo_privado
+    puts metodo_privado
+  end
+end
+```
+
+Será lançado uma exceção quando é chamado um método privado.
+
+``` Ruby
+obj = MinhaClasse.new
+obg.metodo_privado
+# Ocorrerá um erro
+```
+
+### Métodos de Atributo
+
+Os métodos de atributo são usados para definir automaticante um método para cada atributo em uma classe, criando ***getters***, ***setters*** ou ambos.
+
+#### `attr_reader`
+
+Define automaticamente um método de leitura para um ou mais atributos. Os atributos devem ser passados em forma de símbolo.
+
+A sintaxe é a seguinte:
+
+``` Ruby
+attr_reader :atributo1, :atributo2
+```
+
+Então, ao invés de:
+
+``` Ruby
+class Pessoa
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+
+  def nome
+    @nome
+  end
+
+  def idade
+    @idade
+  end
+end
+```
+
+Podemos fazer:
+
+``` Ruby
+class Pessoa
+  attr_reader :nome, :idade
+
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+end
+```
+
+Dessa forma, são criados automaticamente os métodos ***getters*** para `nome` e `idade` por meio do método **`attr_reader`**.
+
+#### `attr-writer`
+
+Define automaticamente um método para redefinição de um atributo.
+
+A sintaxe é a seguinte:
+
+``` Ruby
+attr_writer :atributo1, :atributo2
+```
+
+Então, ao invés de:
+
+``` Ruby
+class Pessoa
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+
+  def name=(novo_nome)
+    @nome = novo_nome
+  end
+
+  def idade=(nova_idade)
+    @idade = nova_idade
+  end
+end
+```
+
+Podemos fazer o seguinte:
+
+``` Ruby
+class Pessoa
+  attr_writer :nome, :idade
+
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+end
+```
+
+> É comum que os métodos de definição, como os gerados por `attr_writer` possuam o operador de atribuição ao final, indicando sua função.
+
+#### `attr_accessor`
+
+
+Este método é junção dos dois anteriores (`attr_reader` e `attr_writer`), ou seja, ele cria automaticamente os métodos ***getters*** e ***setters***.
+
+``` Ruby
+attr_accessor :nome, :idade
+
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+```
+
+### Métodos de Classe
+
+Métodos de classe são métodos para a própria classe, e não para uma instância dessa classe.
+
+Um método de classe possui **`self`** e um ponto `.` antes do nome do método.
+
+``` Ruby
+class NomeClasse
+  def self.metodo_de_classe
+    'Eu sou um método de classe!'
+  end
+end
+```
+
+Além disso, métodos de classes podem ser chamados sem que haja uma instância, utilizando apenas o nome da classe e depois o método.
+
+``` Ruby
+class NomeClasse
+  def self.metodo_de_classe
+    'Eu sou um método de classe!'
+  end
+end
+
+NomeClasse.metodo_de_classe
+# => "Eu sou um método de classe!"
+```
