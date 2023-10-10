@@ -270,6 +270,91 @@ str = "A soma entre #{n1} e #{n2} é #{n1 + n2}."
 # => "A soma entre 13 e 5 é 18."
 ```
 
+### Integer
+
+São números inteiros, e com eles é possível fazer operações matemáticas simples.
+
+``` Ruby
+num1 = 5
+num2 = -5
+num3 = 0
+```
+
+#### Operadores Matemáticos
+
+* **`+`**: Operador de adição.
+
+  ``` Ruby
+  10 + 3
+  # => 13
+  ```
+
+* **`-`**: Operador de subtração.
+
+  ``` Ruby
+  11 - 2
+  # => 9
+  ```
+
+* **`*`**: Operador de multiplicação.
+
+  ``` Ruby
+  5 * 2
+  # => 10
+  ```
+
+* **`/`**: Operador de divisão.
+
+  ``` Ruby
+  8 / 2
+  # => 4
+  ```
+
+* **`%`**: Operador de divisão inteira.
+
+  ``` Ruby
+  12 % 3
+  # => 0
+  ```
+
+* **`**`**: Operador de potencia.
+
+  ``` Ruby
+  5 ** 2
+  # => 25
+  ```
+
+##### Ordem de Precedência
+
+A ordem de precedência é feita na seguinte ordem:
+
+1. `()`
+1. `**`
+1. `+`, `-`
+1. `*`, `/`
+1. `%`
+
+#### Raiz Quadrada de Um Inteiro
+
+**`Integer.sqrt`** e **`Math.sqrt`** retornam a raiz quadrada de um número inteiro.
+
+``` Ruby
+Integer.sqrt 4
+# => 2
+
+Integer.sqrt 25
+# => 5
+```
+
+Se o número não for inteiro, ele o converte para inteiro.
+
+``` Ruby
+Integer.sqrt 4.3
+# => 2
+```
+
+Caso o número seja negativo, será lançada uma exceção.
+
 ### Conversão de Tipos
 
 Primeiramente, devemos saber como verificar o tipo de um objeto específico. Para isso, existe o método `.class`.
@@ -1529,7 +1614,6 @@ end
 > É comum que os métodos de definição, como os gerados por `attr_writer` possuam o operador de atribuição ao final, indicando sua função.
 
 #### `attr_accessor`
-
 
 Este método é junção dos dois anteriores (`attr_reader` e `attr_writer`), ou seja, ele cria automaticamente os métodos ***getters*** e ***setters***.
 
