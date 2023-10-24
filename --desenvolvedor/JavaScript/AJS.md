@@ -240,7 +240,7 @@ typeof float; // -> 'number'
 
 ### Operador Ternário
 
-São os operadores **`?`** e **`:`**.
+São os operadores **'`?`'** e **'`:`'**.
 
 ``` js
 let idade = 20;
@@ -1244,6 +1244,1096 @@ Características do BigInt:
 
     ``` js
     console.log(Math.random());  // Output: Número aleatório entre 0 e 1
+    ```
+
+##### Método `random()`
+
+Como já dito, retorna um número aleatório entre 0 e 1, onde 0 é inclusivo e 1 é exclusivo.
+
+Para conseguir um número aleatório entre 0 e 10, por exemplo, podemos utilizar o `random()` multiplicando seu resultado por 10, e utilizando o método `floor()` para arredondar o número para o inteiro mais abaixo.
+
+``` js
+// Retorna um número inteiro entre 0 e 10
+Math.floor(Math.random() * 11);
+```
+
+Podemos criar uma função que recebe como argumentos o intervalo entre os valores.
+
+``` js
+// Esta função retorna um número inteiro entre um intervalo
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+```
+
+## Estruturas Condicionais
+
+### Instruções `if`, `else` e `else if`
+
+São **`if`**, **`else`** e **`else if`**.
+
+A sintaxe é a seguinte:
+
+``` js
+if (condicao1) {
+    // Executa quando `condicao1` for verdadeiro
+} else if (condicao2) {
+    // Executa quando `condicao2` for verdadeiro
+} else {
+    // Executa quando nenhuma das instruções acima forem verdadeiras
+}
+```
+
+Exemplo:
+
+``` js
+let num = 3;
+
+if (num > 5) {
+    console.log('Valor é MAIOR que 5');
+} else if (num < 5) {
+    console.log('Valor é MENOR que 5');
+} else {
+    console.log('Valor é IGUAL a 5');
+}
+// Output: Valor é MENOR que 5
+```
+
+### Instrução `switch`
+
+Dado uma expressão ou variável, executa um bloco dependendo do valor dessa expressão ou variável.
+
+Cada caso é definido com a palavra-chave `case`.
+
+A sintaxe é a seguinte:
+
+``` js
+switch (expressao) {
+    case valor1:
+        // Código a ser executado caso `expressao` seja `valor1`
+        break;
+    case valor2:
+        // Código a ser executado caso `expressao` seja `valor2`
+        break;
+    case valor3:
+        // Código a ser executado caso `expressao` seja `valor3`
+        break;
+    default:
+        // Executa quando nenhum dos blocos acima é executado
+}
+```
+
+Exemplo:
+
+``` js
+let num = 3;
+
+switch (num) {
+    case num > 5:
+        console.log('Valor é MAIOR que 5');
+        break;
+    case num < 5:
+        console.log('Valor é MENOR que 5');
+        break;
+    default:
+        console.log('Valor é IGUAL a 5');
+}
+// Output: Valor é IGUAL a 5
+```
+
+A palavra-chave **`break`** sai da estrutura `switch` imediatamente. Se omitido, o próximo bloco `case` será executado mesmo que seu valor não corresponda à expressão.
+
+O bloco **`default`** é executado sempre que nenhum bloco `case` corresponda ao valor da expressão.
+
+O `if` marca o início da estrutura condicional, `else` e `else if` não são obrigatórios em uma estrutura condicional.
+
+A instrução `else` será executada sempre que as instruções acima testarem falso, ou seja, não executarem.
+
+Em uma estrutura condicional, pode haver apenas um `if`, um `else` e vários `else if`.
+
+#### Comparação do `switch`
+
+Os casos `switch` usam o comparador estrito (`===`).
+
+``` js
+let valor = '5';
+
+switch (valor) {
+    case 5:
+        console.log('Valor é IGUAL a 5');
+        break;
+    default:
+        console.log('Valor é DIFERENTE de 5');
+}
+// Output: Valor é DIFERENTE de 5
+```
+
+## Arrays
+
+Permitem armazenar vários valores em uma única variável. Os valores devem estar dentro de colchetes, cada um deles separadados por uma vírgula.
+
+Sintaxe:
+
+``` js
+const myArray = [valor1, valor2, valor3, ..., valor10];
+```
+
+Exemplo de array:
+
+``` js
+const myArray = [10, 'false', '22', true, 5.3];
+```
+
+Como pode ver no exemplo acima, é possível armazenar diversos valores em um array, ainda que os valores possuam tipos diferentes uns dos outros.
+
+> É comum que arrays sejam declaradas como constantes.
+
+### Acessar Valores do Array
+
+Cada item dentro do array é acessado por suas respectivas posições, considerando que a primeira posição é 0.
+
+Exemplo:
+
+``` js
+let myArray = ['a', 'b', 'c', 'd', 'e'];
+
+console.log(myArray[0]); // Output: a
+console.log(myArray[1]); // Output: b
+console.log(myArray[2]); // Output: c
+console.log(myArray[3]); // Output: d
+console.log(myArray[4]); // Output: e
+```
+
+Caso fornecido um índice inexistente no array, é retornado `underfined`.
+
+``` js
+const myArray = ['a', 'b', 'c', 'd', 'e'];
+
+console.log(myArray[5]); // Output: undefined
+```
+
+### Mutação de Array
+
+Mesmo que um array seja declarado como constante, ainda é possível alterar seus valores. Porém, a variável em si é imutável.
+
+``` js
+const myArray = ['a', 'b', 'c', 'd', 'e'];
+myArray = [1, 2, 3, 4, 5]; // Ocorrerá um erro
+```
+
+Como dito, por mais que a variável em que o array está armazenado seja constante, seus elementos podem ser alterados.
+
+``` js
+const myArray = ['a', 'b', 'c', 'd', 'e'];
+myArray[0] = 1;
+myArray[1] = 2;
+myArray[2] = 3;
+myArray[3] = 4;
+myArray[4] = 5;
+
+console.log(myArray); // Output: [ 1, 2, 3, 4, 5 ]
+```
+
+### Array Multidimensional
+
+Assim são chamados os arrays que possuem outros arrays como elementos.
+
+``` js
+const myArray = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+```
+
+No exemplo acima, há três arrays dentro de um único array, e para acessar seus valores, deve ser primeiro especificado a posição do array e em seguida a posição do elemento dentro do array.
+
+Exemplo:
+
+``` js
+const myArray = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
+console.log(myArray[0][0]); // Output: 1
+console.log(myArray[0][1]); // Output: 2
+console.log(myArray[0][2]); // Output: 3
+console.log(myArray[1][0]); // Output: 4
+console.log(myArray[1][1]); // Output: 5
+console.log(myArray[1][2]); // Output: 6
+console.log(myArray[2][0]); // Output: 7
+console.log(myArray[2][1]); // Output: 8
+console.log(myArray[2][2]); // Output: 9
+```
+
+### Comprimento de um Array
+
+Com a propriedade **`length`** é possível obter o número de elementos que um array possui.
+
+``` js
+const myArray = ['A', 'B', 'C', 'D', 'E'];
+console.log(myArray.length); // Output: 5
+```
+
+### Verificar Se Uma Variável é Um Array
+
+Há duas maneiras:
+
+* Utilizando o método `isArray()` de `Array`:
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    Array.isArray(myArray); // -> true
+    ```
+
+* Utilizando o operador `instanceOf`:
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    myArray instanceof Array; // -> true
+    ```
+
+### Métodos de Array
+
+* **'`toString()`'**: Converte o array para string.
+
+    ``` js
+    const myArray = ['Olá', true, 2.1, false, 9];
+    console.log(myArray.toString()); // Output: Olá,true,2.1,false,9
+    ```
+
+* **'`push()`'**: Adiciona um ou mais elementos ao fim do array.
+
+    ``` js
+    const myArray = [1, 2, 3];
+    myArray.push(4, 5);
+
+    console.log(myArray); // Output: [ 1, 2, 3, 4, 5 ]
+    ```
+
+* **'`unshift()`'**: Adiciona um ou mais elementos ao início do array.
+
+    ``` js
+    const myArray = [1, 2, 3];
+    myArray.unshift(-1, 0);
+
+    console.log(myArray); // Output: [ -1, 0, 1, 2, 3 ]
+    ```
+
+* **'`fill()`'**: Preenche o array com um elemento entre as posições de início e fim, especificadas nos argumentos.
+
+    Recebe três argumentos:
+
+    1. Elemento que irá preencher
+    1. Início (inclusivo)
+    1. Fim (exclusivo)
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    myArray.fill('X', 2, 3);
+
+    console.log(myArray); // Output: [ 'A', 'B', 'X', 'D', 'E' ]
+    ```
+
+* **'`pop()`'**: Remove o último elemento do array e o retorna.
+
+    ``` js
+    const myArray = ['a', 'b', 'c', 'd', 'e'];
+    const elementoRemovido = myArray.pop(); // -> e
+
+    console.log(myArray); // Output: [ 'a', 'b', 'c', 'd' ]
+    ```
+
+* **'`shift()`'**: Remove o primeiro elemento da matriz e o retorna.
+
+    ``` js
+    const myArray = ['a', 'b', 'c', 'd', 'e'];
+    const elementoRemovido = myArray.shift(); // -> a
+
+    console.log(myArray); // Output: [ 'b', 'c', 'd', 'e' ]
+    ```
+
+* **'`slice()`'**: Cria uma cópia do array, começando e terminando pelas posições definidas.
+
+    São dois argumentos:
+
+    1. Índice do elemento que vai iniciar o array
+    1. Índice do elemento que vai terminar o array
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    const copiaArray = myArray.slice(2, 5);
+
+    console.log(copiaArray); // Output: [ 'C', 'D', 'E' ]
+    ```
+
+* **'`splice()`'**: Adiciona, remove ou substitui elementos a partir de uma posição específica no array.
+
+    Recebe dois argumentos, e em seguida pode receber múltiplos argumentos.
+
+    1. Posição em que começará as alterações
+    1. Quantidade de valores que serão excluídos
+    1. A partir daqui, pode receber múltiplos valores, que são os elementos a serem adicionados
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+    const elementosExcluidos = myArray.splice(2, 4, 'X', 'Y', 'Z');
+
+    console.log(myArray); // Output: [ 'A', 'B', 'X', 'Y', 'Z', 'G', 'H', 'I' ]
+    console.log(elementosExcluidos); // Output: [ 'C', 'D', 'E', 'F' ]
+    ```
+
+    > OBS.: Essas modificações são feitas no array original.
+
+* **'`concat()`'**: Concatena dois ou mais arrays.
+
+    ``` js
+    const array1 = [1, 2, 3];
+    const array2 = [4, 5, 6];
+    const array3 = [7, 8, 9];
+
+    const myArray = array1.concat(array2, array3);
+    console.log(myArray); // Output: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    ```
+
+* **'`reverse()`'**: Inverte as posições dos elementos no array original.
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    myArray.reverse();
+    console.log(myArray); // Output: [ 'E', 'D', 'C', 'B', 'A' ]
+    ```
+
+* **'`includes()`'**: Retorna `true` se um elemento existir dentro do array, ou `false` em caso contrário.
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    console.log(myArray.includes('B')); // Output: true
+    console.log(myArray.includes('F')); // Output: false
+    ```
+
+* **'`sort()`'**: Organiza o array original em ordem alfabética ou numérica.
+
+    ``` js
+    const myArray = ['C', 'D', 'A', 'E', 'B'];
+    myArray.sort();
+    console.log(myArray); // Output: [ 'A', 'B', 'C', 'D', 'E' ]
+    ```
+
+    No caso de um array numérico:
+
+    ``` js
+    const myArray = [20, 100, 44, 12];
+    myArray.sort();
+    console.log(myArray); // Output: [ 100, 12, 20, 44 ]
+    ```
+
+    Isso acontece pois os valores são convertidos para string para a organização, logo, os números são ordenados lexicograficamente.
+
+    Para que os números sejam ordenados de forma numérica, é possível fornecer uma função de comparação como argumento do método `sort()`.
+
+    ``` js
+    const myArray = [20, 100, 44, 12];
+    myArray.sort(function (a, b) { return a - b; });
+    console.log(myArray); // Output: [ 12, 20, 44, 100 ]
+    ```
+
+* **'`join()`'**: Cria uma string a partir dos elementos que compõem o array. Os elementos são separados por um separador especificado como argumento.
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    const myStr = myArray.join(' > ');
+    console.log(myStr); // Output: A > B > C > D > E
+    ```
+
+* **'`indexOf()`'**: Retorna a posição da primeira ocorrência do elemento especificado, ou `-1` caso o elemento não exista dentro do array.
+
+    Pode receber dois argumentos:
+
+    1. Elemento a ser encontrado
+    1. Posição em que começará a busca
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    console.log(myArray.indexOf('A')); // Output: 0
+    console.log(myArray.indexOf('B')); // Output: 1
+    console.log(myArray.indexOf('C')); // Output: 2
+    console.log(myArray.indexOf('D')); // Output: 3
+    console.log(myArray.indexOf('E')); // Output: 4
+    console.log(myArray.indexOf('F')); // Output: -1
+    ```
+
+* **'`lastIndexOf()`'**: Retorna a posição da última ocorrência do elemento especificado, ou `-1` caso o elemento não exista dentro do array.
+
+    Pode receber dois argumentos:
+
+    1. Elemento a ser encontrado
+    1. Posição em que começará a busca
+
+    ``` js
+    const myArray = [1, 2, 7, 1, 5, 1];
+    console.log(myArray.lastIndexOf(1)); // Output: 5
+    console.log(myArray.lastIndexOf(8)); // Output: -1
+    ```
+
+* **'`flat()`'**: É aplicado à arrays multidimensionais, unindo todos os elementos em um novo array.
+
+    ``` js
+    const myArray = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+    ];
+    const newArray = myArray.flat();
+    console.log(newArray); // Output: [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    ```
+
+* **'`forEach()`'**: É um iterador que executa uma função para cada elemento do array.
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+
+    myArray.forEach(function (letra, indice) {
+        console.log(`A letra ${letra} está no índice ${indice}`);
+    });
+
+    /* Output:
+    A letra A está no índice 0
+    A letra B está no índice 1
+    A letra C está no índice 2
+    A letra D está no índice 3
+    A letra E está no índice 4
+    */
+    ```
+
+* **'`map()`'**: É um iterador que cria um novo array aplicando uma função a cada elemento dentro do array.
+
+    ``` js
+    const myArray = [1, 2, 3, 4, 5];
+    const newArray = myArray.map(function (num) {
+        return num * 2;
+    });
+    console.log(newArray); // Output: [ 2, 4, 6, 8, 10 ]
+    ```
+
+* **'`flatMap()`'**: É um iterador que une os métodos `flat()` e `map()`.
+
+    ``` js
+    const myArray = ['olá', 'mundo'];
+    const palavras = myArray.flatMap(function (palavra) {
+        return palavra.split('');
+    });
+
+    console.log(palavras); // Output: [ o, l, á, m, u, n, d, o ]
+    ```
+
+* **'`filter()`'**: Itera sobre o array e retorna um novo array apenas com os elementos que testaram `true` para uma função.
+
+    ``` js
+    const myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const newArray = myArray.filter(function (num) {
+        if (num % 2 == 0) return true; // Apenas valores pares
+    });
+    console.log(newArray); // Output: [ 0, 2, 4, 6, 8 ]
+    ```
+
+* **'`every()`'**: Itera sobre o array e retorna `true` apenas se todos os elementos testarem verdadeiro para uma função.
+
+    ``` js
+    function isPar(num) {
+        if (num % 2 == 0) return true;
+    }
+
+    const array1 = [0, 3, 2, 1].every(isPar);
+    const array2 = [2, 0, 6, 8].every(isPar);
+
+    console.log(array1); // Output: false
+    console.log(array2); // Output: true
+    ```
+
+* **'`some()`'**: Itera sobre o array e retorna `true` se pelo menos um elemento do array testar verdadeiro para uma função.
+
+    ``` js
+    function isPar(num) {
+        if (num % 2 == 0) return true;
+    }
+
+    const array1 = [5, 3, 7, 9, 2].some(isPar);
+    const array2 = [3, 7, 15, 11, 9].some(isPar);
+
+    console.log(array1); // Output: true
+    console.log(array2); // Output: false
+    ```
+
+* **'`reduce()`'**: Itera sobre o array e o reduz para um valor único de acordo com uma função.
+
+    ``` js
+    const myArray = [1, 2, 3, 4, 5];
+    const newArray = myArray.reduce(function (acumulador, elemento) {
+        return acumulador - elemento;
+    });
+
+    console.log(newArray); // Output: -13
+    ```
+
+* **'`reduceRight()`'**: O mesmo que o método `reduce()`, porém iniciando com os elementos da direita para a esquerda.
+
+    ``` js
+    const myArray = [1, 2, 3, 4, 5];
+    const newArray = myArray.reduceRight(function (acumulador, elemento) {
+        return acumulador - elemento;
+    });
+
+    console.log(newArray); // Output: -5
+    ```
+
+* **'`find()`'**: É um iterador que retorna o primeiro elemento que testar verdadeiro para uma função.
+
+    ``` js
+    const myArray = [2, 10, 13, 21, 22, 35];
+    const elemento = myArray.find(function (elemento) {
+        return elemento > 10;
+    })
+
+    console.log(elemento); // Output: 13
+    ```
+
+* **'`findIndex()`'**: É um iterador que retorna o índice do primeiro elemento que testar verdadeiro para uma função.
+
+    ``` js
+    const myArray = [2, 10, 13, 21, 22, 35];
+    const indice = myArray.findIndex(function (elemento) {
+        return elemento > 10;
+    })
+
+    console.log(indice); // Output: 2
+    ```
+
+* **'`keys()`'**: Itera sobre as chaves do array, ou seja, os índices.
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    const chaves = myArray.keys();
+    for (let x of chaves) {
+        console.log(x);
+    }
+    /* Output:
+    0
+    1
+    2
+    3
+    4
+    */
+    ```
+
+* **'`entries()`'**: Itera sobre os pares chave/valor de um array.
+
+    ``` js
+    const myArray = ['A', 'B', 'C', 'D', 'E'];
+    const kv = myArray.entries();
+    for (let x of kv) {
+        console.log(`${x[0]}: ${x[1]}`);
+    }
+    /* Output:
+    0: A
+    1: B
+    2: C
+    3: D
+    4: E
+    */
+    ```
+
+## Estruturas de Repetição
+
+### Loop '`for`'
+
+Executa um bloco uma quantidade específica de vezes.
+
+A sintaxe é a seguinte:
+
+``` js
+for (inicializacao; condicao; incremento) {
+    // Bloco de código que vai ser repetido
+}
+```
+
+Exemplo:
+
+``` js
+for (let n = 0; n <= 10; n++) {
+    console.log(n);
+}
+/* Output:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+*/
+```
+
+### Loop  '`for...in`'
+
+Percorre um objeto, enumerando cada propriedade/índice e executando seu bloco de código uma vez para cada uma propriedade/índice.
+
+A sintaxe é a seguinte:
+
+``` js
+for (let propriedade in objeto) {
+    // Bloco a ser repetido
+}
+```
+
+Exemplo:
+
+``` js
+const myObj = {um: 1, dois: 2, tres: 3};
+
+for (let p in myObj) {
+    console.log(p);
+}
+/* Output:
+um
+dois
+tres
+*/
+```
+
+No exemplo acima, o loop `for...in` iterou sobre o objeto `myObj`, e a cada iteração a variável `p` possuia o nome de uma das propriedades de `myObj`.
+
+Também é possível iterar sobre arrays:
+
+``` js
+const myArray = ['A', 'B', 'C', 'D', 'E'];
+
+for (let i in myArray) {
+    console.log(i);
+}
+/* Output:
+0
+1
+2
+3
+4
+*/
+```
+
+Quando utilizado em arrays, o loop `for...in` itera sobre os índices do array.
+
+Quando usado para iterar sobre strings, funciona de maneira semelhante a arrays.
+
+``` js
+const myStr = 'Olá, Mundo!';
+
+for (let i in myStr) {
+    console.log(i);
+}
+/* Output:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+*/
+```
+
+### Loop '`for...of`'
+
+É parecido com o `for...in`, porém ao invés de iterar sobre os índices, o **`for...of`** itera sobre os valores.
+
+> Não pode ser utilizado para iterar sobre objetos.
+
+Exemplo com array:
+
+``` js
+const myArray = ['A', 'B', 'C', 'D', 'E'];
+
+for (let v of myArray) {
+    console.log(v);
+}
+/* Output:
+A
+B
+C
+D
+E
+*/
+```
+
+> É preferível o uso do loop `for...of` para arrays no lugar de `for...in` para evitar possíveis problemas de ordem.
+
+Exemplo com string:
+
+``` js
+const myStr = 'Olá, Mundo!';
+
+for (let v of myStr) {
+    console.log(v);
+}
+/* Output:
+O
+l
+á
+,
+
+M
+u
+n
+d
+o
+!
+*/
+```
+
+### Loop '`while`'
+
+Executa um bloco de código enquanto a condição passada for verdadeira.
+
+Sintaxe:
+
+``` js
+while (condicao) {
+    // Bloco a ser repetido
+}
+```
+
+Exemplo:
+
+``` js
+let contador = 0;
+while (contador <= 5) {
+    console.log(contador);
+    contador++;
+}
+/* Output:
+0
+1
+2
+3
+4
+5
+*/
+```
+
+### Loop '`do...while`'
+
+É uma variante do loop `while` e executa um bloco uma vez, e suas próximas execuções ocorrem apenas se uma condição for verdadeira.
+
+Sintaxe:
+
+``` js
+do {
+    // Bloco a ser repetido
+} while (condicao);
+```
+
+Exemplo:
+
+``` js
+let contador = 10;
+
+do {
+    console.log(contador)
+    contador++;
+} while (contador <= 5);
+// Output: 10
+```
+
+### Declarações '`break`' e '`continue`'
+
+São usadas para controlar os loops, onde **`break`** interrompe e sai de um loop imediatamente e **`continue`** pula para a próxima execução do loop.
+
+Exemplo com `break`:
+
+``` js
+let contador = 0;
+
+while (true) {
+    console.log(contador);
+    contador++;
+    if (contador == 6) { break }
+}
+/* Output:
+0
+1
+2
+3
+4
+5
+6
+*/
+```
+
+No exemplo acima, temos um loop `while` infinito, que utilizada a declaração `break` para encerrar quando o contador for igual a 6.
+
+Exemplo com `continue`:
+
+``` js
+for (let contador = 0; contador <= 10; contador++) {
+    if (contador % 2 != 0) { continue }
+    console.log(contador);
+}
+/* Output:
+0
+2
+4
+6
+8
+10
+*/
+```
+
+No exemplo acima, temos um loop que imprime apenas os valores pares entre 0 e 10.
+
+#### Etiquetas
+
+As labels, ou etiquetas, são nomes dados a loops, muito úteis para redirecionar o controle de fluxo à loops específicos.
+
+Sintaxe:
+
+``` js
+nomeLabel: instrucao
+
+// Ou
+
+nomeLabel:
+instrucao
+```
+
+Exemplo:
+
+``` js
+label1: while (true) {
+    label2: for (let c = 0; c <= 5; c++) {
+        console.log(c);
+        if (c == 2) { break label1} // Sai do loop `while`
+    }
+    console.log('Olá, Mundo!');
+}
+/* Output
+0
+1
+2
+*/
+```
+
+No exemplo acima, a mensagem "Olá, Mundo!" sequer é mostrada no console, isso acontece porquê no loop `for` existe uma declaração  `break` endereçada à etiqueta `label1`, que rotula o loop `while`, o qual a mensagem está dentro e é encerrado antes de mostrá-la.
+
+> Etiquetas podem rotular qualquer instrução, como `if`, porém são usadas com as instruções de loop combinadas às declarações de controle de fluxo.
+
+## Datas
+
+São criadas a partir do construtor `new Date()`.
+
+``` js
+const myDate = new Date();
+```
+
+Dessa forma, são criados o horário e data atual.
+
+### Datas a Partir de Strings
+
+É possível criar datas a partir de strings, devem ser especificados:
+
+``` js
+const myDate = new Date('February 27, 2013 12:22:00');
+console.log(myDate); // Output: 2013-02-27T15:22:00.000Z
+```
+
+O mesmo seria:
+
+``` js
+const myDate = new Date('2013-02-27, 12:22:00');
+console.log(myDate); // Output: 2013-02-27T15:22:00.000Z
+```
+
+### Datas a Partir de Argumentos
+
+É possível criar datas passando argumentos para ano, mês, dia, etc.
+
+``` js
+const myDate = new Date(2013, 1, 27, 12, 22, 0);
+console.log(myDate); // Output: 2013-02-27T15:22:00.000Z
+```
+
+A ordem dos argumentos são:
+
+1. Ano
+1. Mês
+1. Dia
+1. Horas
+1. Minutos
+1. Segundos
+1. Milissegundos
+
+> Anos escritos com 1 ou dois dígitos são tratados como o século anterior.
+
+> Os meses são escritos como índices, ou seja, janeiro é 0, fevereiro é 1, março é 3 e assim por diante.
+
+### Datas a Partir de Milissegundos
+
+Fornecer apenas um argumento ao `Date()` fará com que esse argumento seja tratado como milissegundos, e então gerará uma data através deles.
+
+``` js
+const myDate = new Date(10000000000);
+console.log(myDate); // Output: 1970-04-26T17:46:40.000Z
+```
+
+O método **`Date.parse()`** converte uma data em milissegundos:
+
+``` js
+const myDate = Date.parse('2020-10-22');
+console.log(myDate); // Output: 1603324800000
+```
+
+São contadas a partir do ano de 1970, ou seja, o argumento é a quantidade de milissegundos a mais ou a menos que o ano de 1970.
+
+O método **`Date.now()`** retorna a quantidade de milissegundos desde o ano de 1970 até a data atual.
+
+### Métodos de Exibição de Data
+
+* **'`toDateString()`'**: Formata a data para uma melhor legibilidade.
+
+    ``` js
+    const myDate = new Date('2020-10-23');
+    console.log(myDate.toDateString()); // Output: Thu Oct 22 2020
+    ```
+
+* **'`toUTCString()`'**: Converte a data usando um UTC padrão.
+
+    ``` js
+    const myDate = new Date('2020-10-22');
+    console.log(myDate.toUTCString()); // Output: Thu, 22 Oct 2020 00:00:00 GMT
+    ```
+
+* **'`toISOString()`'**: Converte a data usando um ISO padrão.
+
+    ``` js
+    const myDate = new Date('2020-10-22');
+    console.log(myDate.toISOString()); // Output: 2020-10-22T00:00:00.000Z
+    ```
+
+### Métodos Para Obter Datas
+
+* **'`getFullYear()`'**: Retorna o ano de uma data.
+
+    ``` js
+    const myDate = new Date('2010-05-30');
+    console.log(myDate.getFullYear()); // Output: 2010
+    ```
+
+* **'`getMonth()`'**: Retorna o mês da data.
+
+    ``` js
+    const myDate = new Date('2010-05-30');
+    console.log(myDate.getMonth()); // Output: 4
+    ```
+
+    Lembrando que os meses são contados a partir do zero, ou seja, janeiro = 0 e dezembro = 11.
+
+* **'`getDate()`'**: Retorna o dia do mês da data.
+
+    ``` js
+    const myDate = new Date('2010-05-30');
+    console.log(myDate.getDate()); // Output: 29
+    ```
+
+* **'`getDay()`'**: Retorna o dia da semana da data.
+
+    ``` js
+    const myDate = new Date('2010-05-30');
+    console.log(myDate.getDay()); // Output: 6
+    ```
+
+    Assim como os meses, os dias da semana são contados a partir do 0.
+
+* **'`getHours()`'**: Retorna as hora da data (0 - 23).
+
+    ``` js
+    const myDate = new Date('2010-05-30, 11:55:32');
+    console.log(myDate.getHours()); // Output: 11
+    ```
+
+* **'`getMinutes()`'**: Retorna os minutos da data (0 - 59).
+
+    ``` js
+    const myDate = new Date('2010-05-30, 11:55:32');
+    console.log(myDate.getMinutes()); // Output: 55
+    ```
+
+* **'`getSeconds()`'**: Retorna os segundos da data (0 - 59).
+
+    ``` js
+    const myDate = new Date('2010-05-30, 11:55:32');
+    console.log(myDate.getSeconds()); // Output: 32
+    ```
+
+* **'`getMilliseconds()`'**: Retorna os milissegundos da data (0 - 999).
+
+    ``` js
+    const myDate = new Date('2010-05-30, 11:55:32:16');
+    console.log(myDate.getMilliseconds()); // Output: 16
+    ```
+
+* **'`getTime()`'**: Retorna o tempo em milissegundos.
+
+    ``` js
+    const myDate = new Date('2010-05-30, 11:55:32');
+    console.log(myDate.getTime()); // Output: 1275231332000
+    ```
+
+* **'`getUTCDate()`'**: Retorna a data UTC.
+* **'`getUTCFullYear()`'**: Retorna o ano UTC.
+* **'`getUTCMonth()`'**: Retorna o mês UTC.
+* **'`getUTCDay()`'**: Retorna o dia UTC.
+* **'`getUTCHours()`'**: Retorna as horas UTC.
+* **'`getUTCMinutes()`'**: Retorna os minutos UTC.
+* **'`getUTCSeconds()`'**: Retorna os segundos UTC.
+* **'`getUTCMilliseconds()`'**: Retorna os milissegundos UTC.
+* **'`getTimezoneOffset()`'**: Retorna a diferença em minutos entre o horário local e o horário UTC.
+
+### Métodos Para Definir Datas
+
+* **'`setFullYear()`'**: Define o ano da data.
+* **'`setMonth()`'**: Define o mês da data (0 - 11).
+* **'`setDate()`'**: Define o dia da data (1 - 31).
+* **'`setHours()`'**: Define as horas da data (0 - 23).
+* **'`setMinutes()`'**: Define os minutos da data (0 - 59)
+* **'`setSeconds()`'**: Define os segundos da data (0 - 59)
+* **'`setMilliseconds()`'**: Define os milissegundos da data (0 - 999).
+
+``` js
+const myDate = new Date();
+myDate.setFullYear(2007);
+myDate.setMonth(1);
+myDate.setDate(4);
+myDate.setHours(0);
+myDate.setMinutes(5);
+myDate.setMilliseconds(0);
+
+console.log(myDate); // Output: Sun Feb 04 2007 00:05:16 GMT-0200 (Horário de Verão de Brasília)
+```
+
+* **'`setTime()`'**: Define o tempo em milissegundos desde o dia 1 de janeiro de 1970.
+
+    ``` js
+    const myDate = new Date();
+    myDate.setTime(1275231332000);
+    console.log(myDate); // Output: 2010-05-30T14:55:32.000Z
     ```
 
 ## Objetos
