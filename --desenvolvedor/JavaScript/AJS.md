@@ -150,9 +150,9 @@ Em JavaScript, são:
 A função '`typeof`' retorna o tipo primitivo de uma variável.
 
 ``` js
-var str = 'Olá, Mundo!';
-var int = 5;
-var float = 2.7;
+let str = 'Olá, Mundo!';
+let int = 5;
+let float = 2.7;
 
 typeof str; // -> 'string'
 typeof int; // -> 'number'
@@ -304,7 +304,7 @@ console.log(str); // Output: Olá, Mundo!
 
 No exemplo acima, a variável `str` só recebeu o valor "Olá, Mundo!" porque ela era nula antes.
 
-#### Operador de Coaliescência Nula de Atribuição
+#### Operador de Coalescência Nula de Atribuição
 
 O operador **`??=`** verifica se o primeiro valor é nulo ou indefinido, e se for, atrubui o segundo valor.
 
@@ -1264,6 +1264,39 @@ Podemos criar uma função que recebe como argumentos o intervalo entre os valor
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+```
+
+## `Undefined` e `Null`
+
+Variáveis declaradas com valores não atribuídos são `undefined`.
+
+``` js
+let myVar;
+console.log(myVar); // Output: undefined
+```
+
+Variávels que possuem o valor `null` são basicamente variáveis sem um valor.
+
+``` js
+let myVar = null;
+console.log(myVar); // Output: null
+```
+
+Comparando os valores `undefined` e `null`, eles são iguais, porém não estritamente iguais.
+
+``` js
+let varUndefined = undefined;
+let varNull = null;
+
+console.log(varUndefined == varNull);   // Output: true
+console.log(varUndefined === varNull);  // Output: false
+```
+
+O tipo primitivo de `undefined` e `null` são diferentes:
+
+``` js
+console.log(typeof undefined);  // Output: undefined
+console.log(typeof null);       // Output: object
 ```
 
 ## Estruturas Condicionais
@@ -2646,3 +2679,260 @@ isPar(5); // -> false
 ```
 
 No exemplo acima, a função `isPar()` verifica se um valor é par, e se for, retorna `true`.
+
+## Sets
+
+São como arrays, porém um valor específico só pode ocorrer uma vez dentro do set.
+
+É utilizado o construtor **`new Set()`** para criar um set.
+
+``` js
+const mySet = new Set();
+```
+
+É muito útil para remover itens duplicados em um array.
+
+``` js
+const myArray = [2, 3, 5, 3, 1];
+const mySet = new Set(myArray);
+
+console.log(mySet);
+// Output: Set(4) { 2, 3, 5, 1 }
+```
+
+Existe apenas uma propriedade para sets, a propriedade **`size`**, que retorna o número de elementos dentro do set.
+
+``` js
+const mySet = new Set(['A', 'B', 'C', 'D', 'E']);
+console.log(mySet.size); // Output: 5
+```
+
+### Métodos para Set
+
+* **'`add()`'**: Adiciona um elemento ao fim do set.
+
+    ``` js
+    const mySet = new Set();
+    mySet.add('A');
+    mySet.add('B');
+    mySet.add('C');
+    mySet.add('D');
+    mySet.add('E');
+
+    console.log(mySet);
+    // Output: Set(5) { 'A', 'B', 'C', 'D', 'E' }
+    ```
+
+* **'`delete()`'**: Exclui o elemento especificado. Caso o elemento exista dentro do set, ele irá retornar `true`, caso contrário, retornará `false`.
+
+    ``` js
+    const mySet = new Set([1, 2, 3, 4, 5]);
+
+    let deletado =  mySet.delete(3);
+    console.log(deletado); // Output: true
+    ```
+
+* **'`has()`'**: Retorna verdadeiro se o elemento especificado existir dentro do set.
+
+    ``` js
+    const mySet = new Set([1, 2, 3, 4, 5]);
+    console.log(mySet.has(2)); // Output: true
+    console.log(mySet.has(6)); // Output: false
+    ```
+
+* **'`forEach()`'**: Executa uma função para cada elemento dentro do set.
+
+    ``` js
+    const mySet = new Set([1, 2, 3, 4, 5]);
+    mySet.forEach((elemento) => {
+        console.log(elemento);
+    })
+    /* Output:
+    1
+    2
+    3
+    4
+    5
+    */
+    ```
+
+* **'`values()`'**: Retorna um objeto iterador para acessar os elementos.
+
+    ``` js
+    const mySet = new Set([1, 2, 3, 4, 5]);
+    for (let elemento of mySet.values()) {
+        console.log(elemento);
+    }
+    /*Output:
+    1
+    2
+    3
+    4
+    5
+    */
+    ```
+
+## Maps
+
+Maps armazenam dados com pares chave-valor.
+
+Um map é declarado a partir do construtor **`new Map()`**.
+
+``` js
+const myMap = newMap();
+```
+
+Exemplo de map:
+
+``` js
+const myMap = new Map([
+    ['chave1', 'valor1'],
+    ['chave2', 'valor2'],
+    ['chave3', 'valor3']
+]);
+console.log(myMap);
+/* Output:
+Map(3) {
+  'chave1' => 'valor1',
+  'chave2' => 'valor2',
+  'chave3' => 'valor3'
+}
+*/
+```
+
+Os maps preservam a ordem em que os pares chave-valor foram inseridos, logo, é possível iterar pelos elementos na ordem em que foram inseridos.
+
+Assim como os sets, os maps possuem a propriedade **`size`**, que retorna o número de elementos no map.
+
+``` js
+const myMap = new Map([
+    ['chave1', 'valor1'],
+    ['chave2', 'valor2'],
+    ['chave3', 'valor3']
+]);
+console.log(myMap.size); // Output: 3
+```
+
+### Métodos para Maps
+
+* **'`set()`'**: Adiciona novos elementos ou substitui valores de elementos já existentes.
+
+    ``` js
+    const materiais = new Map();
+
+    materiais.set('lápis', 2);
+    materiais.set('caneta', 1);
+    materiais.set('borracha', 1);
+    materiais.set('apontador', 1);
+
+    console.log(materiais);
+    /* Output:
+    Map(4) {
+    'lápis' => 2,
+    'caneta' => 1,
+    'borracha' => 1,
+    'apontador' => 1
+    }
+    */
+    ```
+
+    Substituição de valor:
+
+    ``` js
+    const numeros = new Map([
+    ['numero1', 0],
+    ['numero2', 1]
+    ]);
+
+    numeros.set('numero1', 1);
+    numeros.set('numero2', 2);
+
+    console.log(numeros);
+    // Output: Map(2) { 'numero1' => 1, 'numero2' => 2 }
+    ```
+
+* **'`get()`'**: Retorna o valor da chave especificada.
+
+    ``` js
+    const myMap = new Map([
+        ['primeiro', 1],
+        ['segundo', 2],
+        ['terceiro', 3]
+    ]);
+
+    console.log(myMap.get('primeiro'));   // Output: 1
+    console.log(myMap.get('segundo'));    // Output: 2
+    console.log(myMap.get('terceiro'));   // Output: 3
+    ```
+
+* **'`delete()`'**: Exclui um elemento do map.
+
+    ``` js
+    const myMap = new Map([
+        ['primeiro', 1],
+        ['segundo', 2],
+        ['terceiro', 3]
+    ]);
+    myMap.delete('primeiro');
+
+    console.log(myMap);
+    // Output: Map(2) { 'segundo' => 2, 'terceiro' => 3 }
+    ```
+
+* **'`has()`'**: Retorna verdadeiro caso a chave especificada exista dentro do map.
+
+    ``` js
+    const myMap = new Map([
+        ['primeiro', 1],
+        ['segundo', 2],
+        ['terceiro', 3]
+    ]);
+
+    console.log(myMap.has('segundo'));  // Output: true
+    console.log(myMap.has('quarto'));   // Output: false
+    ```
+
+* **'`forEach()`'**: Chama uma função para cada elemento dentro do map.
+
+    ``` js
+    const myMap = new Map([
+        ['primeiro', 1],
+        ['segundo', 2],
+        ['terceiro', 3]
+    ]);
+
+    myMap.forEach((v, k) => {
+        console.log(`${k}: ${v}`);
+    })
+    /* Output:
+    primeiro: 1
+    segundo: 2
+    terceiro: 3
+    */
+    ```
+
+* **'`entries()`'**: Retorna um objeto iterável com as chaves e os valores do map.
+
+    ``` js
+    const myMap = new Map([
+        ['primeiro', 1],
+        ['segundo', 2],
+        ['terceiro', 3]
+    ]);
+    for (let x of myMap.entries()) {
+        console.log(x);
+    }
+
+    /* Output:
+    [ 'primeiro', 1 ]
+    [ 'segundo', 2 ]
+    [ 'terceiro', 3 ]
+    */
+    ```
+
+### Diferenças Entre Maps e Objetos
+
+* Maps são iteráveis, objetos não.
+* Maps podem receber qualquer tipo de dado como chave, objetos não.
+* Objetos possuem valores padrões para chaves, maps não.
+* Maps possuem chaves ordenadas por inserção, objetos não.
