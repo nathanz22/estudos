@@ -878,7 +878,7 @@ Características do BigInt:
     console.log(x.toFixed(3)); // Output: 50.231
     ```
 
-* **'`toPrecision()`'**: Retorna uma string com um número escritos com um número específico.
+* **'`toPrecision()`'**: Retorna uma string com um número específico de números.
 
     ``` js
     let x = 50.231;
@@ -2214,7 +2214,6 @@ A ordem dos argumentos são:
 1. Milissegundos
 
 > Anos escritos com 1 ou dois dígitos são tratados como o século anterior.
-
 > Os meses são escritos como índices, ou seja, janeiro é 0, fevereiro é 1, março é 3 e assim por diante.
 
 ### Datas a Partir de Milissegundos
@@ -2628,6 +2627,21 @@ console.log(soma(2, 5)); // Output: 7
 
 No exemplo acima, a função `soma()` não pede nenhum argumento, de qualquer modo, ela consegue somar argumentos passados por meio da variável local `arguments`, que é usada tanto como condição para o `for`, quanto para ter acesso aos valores passados como argumentos para a soma.
 
+### Retorno de Valores
+
+A palavra-chave **`return`** retorna um valor e encerra a função.
+
+``` js
+function isPar(valor) {
+    return valor % 2 === 0;
+}
+
+isPar(2); // -> true
+isPar(5); // -> false
+```
+
+No exemplo acima, a função `isPar()` verifica se um valor é par, e se for, retorna `true`.
+
 ### *Arrow Functions*
 
 As funções de seta são funções escritas de maneira mais curta e simples, onde a palavra `function` pode ser omitida. Caso a função possua apenas uma declaração, as chaves e a palavra `return` também podem ser omitidos.
@@ -2664,21 +2678,6 @@ Sobre as Arrow Functions:
 * As chaves e a palavra-chave `return` só podem ser omitidos caso a função possua apenas uma declaração
 * Elas não são ideais para métodos de objetos
 * Elas mantém o valor do `this` do contexto em que foram definidas
-
-### Retorno de Valores
-
-A palavra-chave **`return`** retorna um valor e encerra a função.
-
-``` js
-function isPar(valor) {
-    return valor % 2 === 0;
-}
-
-isPar(2); // -> true
-isPar(5); // -> false
-```
-
-No exemplo acima, a função `isPar()` verifica se um valor é par, e se for, retorna `true`.
 
 ## Sets
 
@@ -2936,3 +2935,359 @@ console.log(myMap.size); // Output: 3
 * Maps podem receber qualquer tipo de dado como chave, objetos não.
 * Objetos possuem valores padrões para chaves, maps não.
 * Maps possuem chaves ordenadas por inserção, objetos não.
+
+## Expressões Regulares
+
+São padrões de textos utilizados para pesquisa ou substituição dentro de textos.
+
+Sintaxe:
+
+``` js
+let myRegExp = /padrao/modificador
+```
+
+Exemplo:
+
+``` js
+let myRegExp = /javascript/i;
+```
+
+No exemplo acima, `javascript` é o padrão e o `i` é o modificador.
+
+### Modificadores
+
+* **'`i`'**: Não diferencia maiúsculas de minúsculas.
+* **'`g`'**: Faz uma busca global (em toda a string).
+* **'`m`'**: Faz a correspondência em múltiplas linhas.
+
+### Pesquisa dentro de Strings
+
+Com o método de string **`search()`** é possível ter o índice da primeira ocorrência de um padrão em uma string.
+
+``` js
+let str = 'Olá, Mundo! Olá, JS!';
+
+console.log(str.search(/mundo/i));
+// Output: 5
+```
+
+### Substituindo Strings
+
+Como já falado anteriormente, o método **`replace()`** substitui uma ou mais ocorrências de uma substring dentro de uma string. Com uma expressão regular, essa substituição pode ser feita da seguinte forma:
+
+``` js
+let str = 'Olá, Mundo! Olá, JS!';
+
+console.log(str.replace(/olá/i, 'Adeus'));
+// Output: Adeus, Mundo! Olá, JS!
+
+console.log(str.replace(/olá/ig, 'Adeus'));
+// Output: Adeus, Mundo! Adeus, JS!
+```
+
+Na segunda impressão, além do modificador `i`, há também o modificador `g`, que fazer com que todas as ocorrências do padrão sejam substituídas pela string "Adeus".
+
+### Método `test()`
+
+É utilizado para testar se uma string corresponde a um padrão, retornando `true` ou `false`.
+
+``` js
+let str = 'Olá, Mundo!';
+console.log(/mundo/i.test(str)); // Output: true
+```
+
+### Método `exec()`
+
+Retorna um array caso a string passada corresponda ao padrão, ou `null` caso contrário.
+
+``` js
+let str = '5126739840';
+
+console.log(/[0-9]/i.exec(str));
+// Output: [ '5', index: 0, input: '5126739840', groups: undefined ]
+
+console.log(/[a-z]/i.exec(str));
+// Output: null
+```
+
+### Padrões
+
+Todos os caracteres colocados dentro de uma chave serão procurados individualmente dentro do texto.
+
+``` js
+let str = '5126739840';
+console.log(/[59]/i.test(str)); // Output: true
+console.log(/59/i.test(str));   // Output: false
+```
+
+Intervalos como de uma letra à outra e um número a outro podem ser definidos assim:
+
+``` js
+/[0-9]/i;
+```
+
+Entre parênteses, é possível utilizar `|`, que corresponderá caso encontrar a sequência de um lado ou de outro.
+
+``` js
+let str = '5126739840';
+console.log(str.search(/(2|9)/i)); // Output: 2
+```
+
+### Quantificadores
+
+* **`+`**: Corresponde a qualquer string que contenha pelo menos uma ocorrência do padrão.
+
+    ``` js
+    let str = 'Olá, Mundo!';
+    let resultado = /o+/i.test(str);
+    console.log(resultado); // Output: true
+    ```
+
+* **'`*`'**: Corresponde a qualquer string que contenha zero ou mais occorências do padrão.
+
+    ``` js
+    let str = 'Olá, Mundo!';
+    let resultado = /o*/i.test(str);
+    console.log(resultado); // Output: true
+    ```
+
+* **'`?`'**: Corresponde a qualquer string que contenha uma ou nenhuma ocorrência do padrão.
+
+    ``` js
+    let str = 'Olá, Mundo!';
+    let resultado = /o?/i.test(str);
+    console.log(resultado); // Output: true
+    ```
+
+## Operações em Bitwise
+
+São operações realizadas em nível de bits, ou seja, em valores binários.
+
+Os operadores são:
+
+* **'`&`' (AND)**: Retorna 1 se ambos os valores forem 1.
+
+    ``` js
+    let x = 10; // 1010
+    let y = 9;  // 1001
+
+    let resultado = x & y;
+    console.log(resultado.toString(2)); // Output: 1000
+    ```
+
+* **'`|`' (OR)**: Retorna 1 se pelo menos um dos valores for 1.
+
+    ``` js
+    let x = 10; // 1010
+    let y = 9;  // 1001
+
+    let resultado = x | y;
+    console.log(resultado.toString(2)); // Output: 1011
+    ```
+
+* **'`^`' (XOR)**: Retorna 1 se apenas um dos valores for 1, ou seja, se ambos os valores forem 1, irá retornar 0.
+
+    ``` js
+    let x = 10; // 1010
+    let y = 9;  // 1001
+
+    let resultado = x ^ y;
+    console.log(resultado.toString(2)); // Output: 11
+    ```
+
+* **'`~`' (NOT)**: Inverte todos os bits, ou seja, 0s se tornarão 1 e 1s se tornarão 0.
+
+    ``` js
+    let x = 10; // 1010
+    let resultado = ~ x;
+    console.log(resultado.toString(2)); // Output: -1011
+    ```
+
+* **'`<<`' (Deslocamento à Esquerda)**: Desloca um número para a esquerda n vezes.
+
+    ``` js
+    let resultado = 10 << 2;
+    console.log(resultado); // Output: 101000
+    ```
+
+* **'`>>`' (Deslocamento à Direita com Preenchimento de Sinal)**: Desloca um número para a direita n vezes tratando o número com sinal.
+
+    ``` js
+    let resultado = 10 >> 2;
+    console.log(resultado.toString(2)); // Output: 10
+    ```
+
+* **'`>>>`'(Deslocamento à Direita sem Sinal)**: Desloca um número para a direita n vezes tratando o número sem sinal.
+
+    ``` js
+    let resultado = 10 >>> 2;
+    console.log(resultado.toString(2)); // Output: 10
+    ```
+
+## Tratamento de Erros
+
+Uma estrutura de tratamento de erros pode ser composta por quatro declarações: `try`, `catch`, `finally` e `throw`.
+
+* **'`try`'**: Recebe o bloco com possibilidade de erro.
+* **'`catch`'**: Recebe o bloco que lida com o erro capturado no bloco `try`.
+* **'`finally`'**: Recebe o bloco que será executado independentemente de ter ocorrido ou não um erro.
+* **'`throw`'**: Usado para lançar exceções manualmente, como erros personalizados.
+
+Exemplo:
+
+``` js
+let num = 'Olá';
+try {
+    console.log(num.toPrecision(3));
+} catch (err) {
+    console.log(err.name); // Output: TypeError
+    num = 500;
+    console.log(num.toPrecision()); // Output: 500
+}
+
+```
+
+## Modo Estrito
+
+Para ativar o modo estrito, deve ser executado **`'use strict';`** no código. Pode ser escrito dentro de funções ou no início do script, o que define seu escopo.
+
+No modo estrito, variáveis não podem ser usadas sem ser declaradas antes, ou seja, são válidas apenas variáveis declaradas com `var` e `let`, e também constantes `const`.
+
+## Classes
+
+São criadas a partir da palavra-chave **`class`**. A sintaxe é a seguinte:
+
+``` js
+class NomeClasse {
+    // Conteúdo do Objeto
+}
+
+```
+
+Exemplo:
+
+``` js
+class MyClass {
+    olaMundo() {
+        return 'Olá, Mundo!';
+    }
+}
+
+let obj = new MyClass;
+console.log(obj.olaMundo());
+// Output: Olá, Mundo!
+
+```
+
+Objetos são criados a partir de uma classe utilizando a palavra-chave **`new`**, como visto acima.
+
+### Método Construtor
+
+Em JavaScript, métodos são declarados a como funções, porém sem a palavra-chave `function`.
+
+O método construtor inicializa assim que uma instância é criada, e por isso é utilizada para atribuir às propriedades o valores dos argumentos passados.
+
+Exemplo:
+
+``` js
+class MyClass {
+    constructor(nome) {
+        this.nome = nome;
+    }
+
+    saudacao() {
+        console.log(`Olá, ${this.nome}!`);
+    }
+}
+
+let obj1 = new MyClass('Mundo');
+let obj2 = new MyClass('JS');
+
+obj1.saudacao(); // Output: Olá, Mundo!
+obj2.saudacao(); // Output: Olá, JS!
+```
+
+No exemplo acima, o método construtor atribui à propriedade **`nome`** o valor do parâmetro `nome`. Na mesma classe, existe também o método `saudacao()`, que imprime no console uma mensagem de saudação utilizando o nome passado como argumento ao criar um objeto a partir da classe.
+
+A palavra-chave **`this`**, no contexto de classes, se refere à própria classe, e é utilizada para criar propriedades dessa classe.
+
+### Herança
+
+A palavra-chave **`extends`** cria uma herança entre uma classes.
+
+A classe que herda possui todos os métodos da classe pai, podendo utilizar todas as propriedades e métodos públicos ou protegidos (só não os privados).
+
+Exemplos:
+
+``` js
+class ClassPai {
+    constructor() {
+        this.str = 'Mundo';
+    }
+
+    mensagem() {
+        console.log(`Olá, ${this.str}!`);
+    }
+}
+
+class ClasseFilha extends ClassPai {
+    mostrarPropriedade() {
+        console.log(this.str);
+    }
+}
+
+let obj = new ClasseFilha;
+obj.mostrarPropriedade();   // Output: Mundo
+obj.mensagem();             // Output: Olá, Mundo!
+```
+
+Ao utilizar a função **`super()`** no método construtor em uma classe filha, é chamado o método construtor da classe pai.
+
+``` js
+class ClassPai {
+    constructor() {
+        console.log('Olá, Mundo!');
+    }
+}
+
+class ClasseFilha extends ClassPai {
+    constructor() {
+        super();
+        console.log('Olá, JS!');
+    }
+}
+
+let obj = new ClasseFilha;
+/* Output:
+Olá, Mundo!
+Olá, JS!
+*/
+```
+
+### Getters e Setters
+
+São métodos criados para ler ou definir/alterar os valores de propriedades.
+
+São criados a partir das palavras-chave **`get`** e **`set`**.
+
+``` js
+class MyClass {
+    constructor() {
+        this.msg = 'Olá, Mundo!';
+    }
+
+    get mensagem() {
+        return this.msg;
+    }
+
+    set mensagem(nova_mensagem) {
+        this.msg = nova_mensagem;
+    }
+}
+
+let obj = new MyClass();
+console.log(obj.mensagem);
+
+obj.mensagem = 'Olá, JS!';
+console.log(obj.mensagem);
+```
