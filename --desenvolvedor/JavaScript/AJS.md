@@ -3215,7 +3215,7 @@ A palavra-chave **`this`**, no contexto de classes, se refere à própria classe
 
 A palavra-chave **`extends`** cria uma herança entre uma classes.
 
-A classe que herda possui todos os métodos da classe pai, podendo utilizar todas as propriedades e métodos públicos ou protegidos (só não os privados).
+A classe que herda possui todos os métodos da classe pai, podendo utilizar todas as propriedades e métodos.
 
 Exemplos:
 
@@ -3291,3 +3291,181 @@ console.log(obj.mensagem);
 obj.mensagem = 'Olá, JS!';
 console.log(obj.mensagem);
 ```
+
+### Métodos Estáticos
+
+São criados a partir da palavra-chave `static`.
+
+``` js
+class MyClass {
+    static mostrar_mensagem() {
+        console.log('Olá, Mundo!');
+    }
+}
+
+MyClass.mostrar_mensagem();
+// Output: Olá, Mundo!
+```
+
+## Módulos
+
+Podem ser exportados por nome:
+
+``` js
+const num1 = 5;
+const num2 = 2;
+
+export {num1, num2};
+
+// Ou
+
+/*
+export let num1 = 5;
+export let num2 = 2;
+*/
+```
+
+E também é possível exportar de forma padrão.
+
+``` js
+const mensagem = 'Olá, JS!';
+export default mensagem;
+```
+
+Para importar:
+
+``` js
+import { num1, num2 } from "./modulo1.mjs";
+console.log(num1 + num2); // Output: 7
+
+import mensagem from "./modulo2.mjs";
+console.log(mensagem); // Output: Olá, JS!
+```
+
+É importante que exista o arquivo `packege.json` com a seguinte configuração:
+
+``` json
+{
+    "type": "module"
+}
+```
+
+Além disso, como visto acima, todos os arquivos devem possuir a extensão **`.mjs`**.
+
+## JSON
+
+O objeto **`JSON`** permite fazer conversões de JSON para objetos em JavaScript e vice-versa.
+
+### Método `JSON.parse()`
+
+Converte uma string JSON em um objeto.
+
+``` js
+let myJSON = JSON.parse('{"nome": "João", "idade": 23}');
+console.log(myJSON.nome);   // Output: João
+console.log(myJSON.idade);  // Output: 23
+```
+
+Caso o argumento de `parse()` seja um array em string, será convertido em um array JavaScript.
+
+``` js
+let text = '["valor1", "valor2", "valor3"]';
+let myJSON = JSON.parse(text);
+
+console.log(myJSON);
+// Output: [ 'valor1', 'valor2', 'valor3' ]
+
+console.log(myJSON[0]); // Output: valor1
+console.log(myJSON[1]); // Output: valor2
+console.log(myJSON[2]); // Output: valor3
+```
+
+### Método `JSON.stringify()`
+
+Converte um objeto JavaScript em um JSON.
+
+``` js
+let myJSON = JSON.stringify({nome: "João", idade: 23});
+console.log(myJSON);
+// Output: {"nome":"João","idade":23}
+```
+
+Passar um array JavaScript como argumento resultará no mesmo array, porém formatado em JSON.
+
+``` js
+let myArray = ['valor1', 'valor2', 'valor3'];
+let myJSON = JSON.stringify(myArray);
+
+console.log(myJSON);
+// Output: ["valor1","valor2","valor3"]
+
+console.log(myArray[0]); // Output: valor1
+console.log(myArray[1]); // Output: valor2
+console.log(myArray[2]); // Output: valor3
+```
+
+### Armazenamento Local
+
+O objeto **`localStorage`** permite armazenar localmente os dados do cliente no navegador (e apenas no navegador).
+
+Exemplo:
+
+``` js
+let myJSON = JSON.stringify({"nome": "João", "idade": 23});
+localStorage.setItem('json1', myJSON);
+
+let text = localStorage.getItem('json1');
+let parsedJSON = JSON.parse(text);
+
+parsedJSON['nome'];     // -> João
+parsedJSON['idade'];    // -> 23
+```
+
+#### Propriedade `length`
+
+A propriedade **`length`** retorna o número de elementos armazenados no `localStorage`.
+
+``` js
+localStorage.setItem('chave1', 'valor1');
+localStorage.setItem('chave2', 'valor2');
+localStorage.setItem('chave3', 'valor3');
+
+localStorage.length; // -> 3
+```
+
+#### Métodos de `localStorage`
+
+* **'`setItem()`'**: Adiciona ou atualiza um item no `localStorage`.
+
+    Recebe dois argumentos:
+
+    1. Chave: String que vai referenciar o valor armazenado
+    1. Valor: Valor a ser armazenado
+
+    ``` js
+    localStorage.setItem('chave', 'valor');
+    ```
+
+* **'`getItem()`'**: Recupera o valor associado a uma chave específica.
+
+    ``` js
+    localStorage.getItem('chave');
+    ```
+
+* **'`removeItem()`'**: Remove um item do `localStorage`.
+
+    ``` js
+    localStorage.removeItem('chave');
+    ```
+
+* **'`clear()`'**: Remove todos os itens armazenados no `localStorage`.
+
+    ``` js
+    localStorage.clear();
+    ```
+
+* **'`key()`'**: Retorna a chave de um item com base em seu índice.
+
+    ``` js
+    const chave1 = localStorage.key(0);
+    ```
