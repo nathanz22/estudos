@@ -538,6 +538,15 @@ my_array[1] # => 22
 my_array[2] # => 13
 ```
 
+Índices negativos referenciam os elementos da direita para a esquerda.
+
+``` rb
+my_array = [2, 22, 13]
+my_array[-1] # => 13
+my_array[-2] # => 22
+my_array[-3] # => 2
+```
+
 ### Array Multidimensional
 
 Assim é chamado um array que tem como elementos internos outros arrays. Por exemplo:
@@ -558,41 +567,27 @@ my_array[1][1] # => 5
 my_array[2][2] # => 9
 ```
 
-### Iterando Sobre um Array
+### Array de Palavras
 
-Com o método `each`, é possível iterar sobre um array. Deve ser passado um nome para referência de cada item dentro do array.
+Um array composto apenas de palavras pode ser escrito com `%w` ou `%W`, podendo ser omitidos as aspas e as vírgulas.
 
-``` Ruby
-my_array = ['a', 'b', 'c', 'd', 'e']
-my_array.each { |i| puts i }
-# Imprime cada valor do array
+Sendo assim, o array:
+
+``` rb
+my_array = ['Ruby', 'JavaScript', 'Python', 'PHP', 'Go']
 ```
 
-No exemplo acima, `i` faz referência a cada elemento dentro do array.
+Pode ser escrito:
 
-### Ordenando um Array
-
-O método **`sort`** permite ordenar um array em ordem alfabética ou numérica.
-
-No caso de número:
-
-``` Ruby
-my_array = [5, 6, 2, 3, 1, 4, 7, 9, 8]
-my_array.sort!
-# => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+``` rb
+my_array = %w[Ruby JavaScript Python PHP Go]
 ```
 
-No caso de strings:
-
-``` Ruby
-my_array = ['e', 'u', 'o', 'a', 'i']
-my_array.sort!
-# => ["a", "e", "i", "o", "u"]
-```
-
-> Se em um mesmo array exista números e strings, ocorrerá um erro (**`ArgumentError`**) ao aplicar o método `sort`.
+Ambos os exemplos acima correspondem ao mesmo array.
 
 ### Métodos de Array
+
+#### Adicionar/Remover Elementos
 
 * **`push`**: Adiciona um ou mais elementos ao final do array.
 
@@ -626,6 +621,79 @@ my_array.sort!
   # [2, 3, 4, 5]
   ```
 
+* **'`delete_at`'**: Exclui o elemento de um índice específico e o retorna.
+
+  ``` rb
+  my_array = %w[A B C D E]
+  my_array.delete_at 2 # => C
+  my_array # => ["A", "B", "D", "E"]
+  ```
+
+* **'`delete`'**: Exclui todas as ocorrências de um elemento específico.
+
+  ``` rb
+  my_array = [3, 2, 5, 1, 5, 6]
+  my_array.delete 5 # => 5
+  my_array # => [3, 2, 1, 6]
+  ```
+
+* **'`delete_if`'**: Exclui todos os elementos do array que testarem verdadeiro para uma expressão.
+
+  ``` rb
+  my_array = [1, 2, 3, 4, 5]
+  my_array.delete_if(&:even?)
+  my_array # => [1, 3, 5]
+  ```
+
+* **'`keep_if`'**: Mantém no array apenas os elementos que testarem verdadeiro para uma expressão.
+
+  ``` rb
+  my_array = [1, 2, 3, 4, 5]
+  my_array.keep_if(&:even?) # => [2, 4]
+  ```
+
+* **'`insert`'**: Adiciona um ou mais elementos a partir de um índice específico do array.
+
+  ``` rb
+  my_array = [3, 5]
+  my_array.insert 1, 7, 9, 11
+  my_array # => [3, 1, 7, 9, 11, 5]
+  ```
+
+  O primeiro argumento (`1`) é o índice o qual os elementos irão ser adicionados.
+
+> Todos esses métodos alteram o array original.
+
+#### Captura de Elementos
+
+* **'`first`'**: Retorna o primeiro elemento do array (como `array[0]`).
+
+  ``` rb
+  my_array = [2, 3, 4, 5, 6, 7]
+  my_array.first # => 2
+  ```
+
+* **'`last`'**: Retorna o último elemento do array (como `array[-1]`).
+
+  ``` rb
+  my_array = [2, 3, 4, 5, 6, 7]
+  my_array.last # => 7
+  ```
+
+* **'`take`'**: Retorna um array com os primeiros n elementos.
+
+  ``` rb
+  my_array = [5, 10, 15, 20, 25]
+  my_array.take 3 # => [5, 10, 15]
+  ```
+
+* **'`drop`'**: Retorna um array com todos os elementos, menos os n primeiros.
+
+  ``` rb
+  my_array = [5, 10, 15, 20, 25]
+  my_array.drop 3 # => [20, 25]
+  ```
+
 * **`concat`**, **`+`**: Concatena dois ou mais arrays e um novo array.
 
   ``` Ruby
@@ -643,6 +711,8 @@ my_array.sort!
   array3 = array1 + array2
   # => [1, 2, 3, "a", "b", "c"]
   ```
+
+#### Pesquisa de Elementos
 
 * **`include?`**: Verifica se um elemento está presente dentro do array. Se presente, retorna `true`, em caso contrário, retorna `false`.
 
@@ -667,11 +737,48 @@ my_array.sort!
   my_array.count 2 # => 3
   ```
 
+#### Organização de Elementos
+
 * **`uniq`**: Retorna um array com elementos únicos.
 
   ``` Ruby
   my_array = [1, 2, 2, 3, 3, 1]
   my_array.uniq # => [1, 2, 3]
+  ```
+
+* **'`sort`'**: Retorna um array organizado em ordem alfabética ou numérica.
+
+  No caso de número:
+
+  ``` Ruby
+  my_array = [5, 6, 2, 3, 1, 4, 7, 9, 8]
+  my_array.sort
+  # => [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  ```
+
+  No caso de strings:
+
+  ``` Ruby
+  my_array = %w[e u o a i]
+  my_array.sort
+  # => ["a", "e", "i", "o", "u"]
+  ```
+
+  > Se no array que foi aplicado o método `sort` exista strings e números ocorrerá o erro (**`ArgumentError`**).
+
+#### Iteradores de Array
+
+* **'`each`'**: Itera sobre cada elemento do array.
+
+  ``` rb
+  my_array = [1, 2, 3, 4, 5]
+  my_array.each { |e| puts e * 2 }
+  # Output:
+  # 2
+  # 4
+  # 6
+  # 8
+  # 10
   ```
 
 * **`collect`**, **`map`**: Aplica a expressão de um bloco a cada elemento de um array.
@@ -681,6 +788,8 @@ my_array.sort!
   array.collect { |i| i * 2 }
   # => [2, 4, 6, 8, 10]
   ```
+
+#### Seleção de Elementos
 
 * **`select`**: Cria um novo array apenas com os elementos que testam verdadeiro para uma expressão.
 
@@ -695,6 +804,14 @@ my_array.sort!
   ``` Ruby
   my_array = [1, 2, 3, 4, 5]
   my_array.select(&:odd?)
+  # => [1, 3, 5]
+  ```
+
+* **'`reject`'**: Cria um novo array apenas com os elementos que testam falso para uma expressão.
+
+  ``` rb
+  my_array = [1, 2, 3, 4, 5]
+  my_array.reject(&:even?)
   # => [1, 3, 5]
   ```
 
