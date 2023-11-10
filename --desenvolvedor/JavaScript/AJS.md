@@ -2679,6 +2679,132 @@ Sobre as Arrow Functions:
 * Elas não são ideais para métodos de objetos
 * Elas mantém o valor do `this` do contexto em que foram definidas
 
+### Método `call()`
+
+Permite chamar o método de um objeto em outro objeto.
+
+``` js
+const soma = {
+    somar: function() {
+        return this.valor1 + this.valor2;
+    }
+}
+
+const valores = {
+    valor1: 5,
+    valor2: 2
+}
+
+console.log(soma.somar.call(valores));
+// Output: 7
+```
+
+O método `call()` também pode aceitar argumentos:
+
+``` js
+const soma = {
+    somar: function(num1, num2) {
+        return this.valor1 + this.valor2 + num1 + num2;
+    }
+}
+
+const valores = {
+    valor1: 5,
+    valor2: 2
+}
+
+console.log(soma.somar.call(valores, 3, 3));
+// Output: 13
+```
+
+### Método `apply()`
+
+O mesmo que o método `call()`, porém organiza os argumentos em um array.
+
+``` js
+const soma = {
+    somar: function() {
+        return this.valor1 + this.valor2;
+    }
+}
+
+const valores = {
+    valor1: 5,
+    valor2: 2
+}
+
+console.log(soma.somar.apply(valores));
+// Output: 7
+```
+
+Permite argumentos em um array.
+
+``` js
+const soma = {
+    somar: function(num1, num2) {
+        return this.valor1 + this.valor2 + num1 + num2;
+    }
+}
+
+const valores = {
+    valor1: 5,
+    valor2: 2
+}
+
+console.log(soma.somar.apply(valores, [3, 3]));
+// Output: 13
+```
+
+Como pode ver no exemplo acima, o array passado como argumento deixa de ser um array ao chegar na função, se tornando os argumentos.
+
+### Método `bind()`
+
+Empresta o método de um objeto para o outro.
+
+``` js
+const soma = {
+    valor1: 2,
+    valor2: 1,
+    somar: function() {
+        return this.valor1 + this.valor2;
+    }
+}
+
+const valores = {
+    valor1: 5,
+    valor2: 2
+}
+
+soma.somar.bind(valores);
+```
+
+### Closures
+
+São funções que mantém guardam valores mesmo após seu encerramento.
+
+``` js
+function criarContador() {
+    let contador = 0;
+    return {
+        add: function() {
+            ++contador;
+        },
+
+        valor: function() {
+            return contador;
+        }
+    }
+}
+
+const contador = criarContador();
+contador.add();
+contador.add();
+contador.add();
+
+console.log(contador.valor());
+// Output: 3
+```
+
 ## Sets
 
 São como arrays, porém um valor específico só pode ocorrer uma vez dentro do set.
@@ -3352,6 +3478,182 @@ console.log(mensagem); // Output: Olá, JS!
 
 Além disso, como visto acima, todos os arquivos devem possuir a extensão **`.mjs`**.
 
+## Callbacks
+
+São funções passadas como argumentos para outras funções (geralmente métodos).
+
+Exemplo:
+
+``` js
+function mostrarValor(valor) {
+    console.log(valor);
+}
+
+function sqrt(num, myCallback) {
+    let sqrt = num ** 0.5;
+    myCallback(sqrt);
+}
+
+sqrt(25, mostrarValor);
+// Output: 5
+```
+
+No exemplo acima, a função `sqrt()` calcula a raiz quadrada de um número e depois executa alguma função passada como argumento (callback), no caso, a função `mostrarValor()`, que mostra o resultado da raiz quadrada do número passado.
+
+> Deve ser passado o nome da função sem os parênteses como argumento.
+
+## Funções Assíncronas
+
+São funções que executam ao mesmo tempo que outras.
+
+### Função `setTimeout()`
+
+Recebe como argumento uma função de callback e um valor em milissegundos.
+
+Esta função executa a função assim que o tempo em milissegundos terminar.
+
+``` js
+setTimeout(function() { console.log('Olá, Mundo!') }, 3000);
+// Imprime "Olá, Mundo!" após 3 segundos
+```
+
+### Função `setInterval()`
+
+Recebe como argumentos uma função para callback e o intervalo em milissegundos.
+
+A função é executada a cada intervalo, se encerrando apenas quando chamada a função `clearInterval()` dentro da função.
+
+``` js
+let c = 10;
+const myInterval = setInterval(function() {
+    console.log(c);
+    if (c > 0) {
+        c--;
+    } else {
+        clearInterval(myInterval); // Para o intervalo
+    }
+}, 1000);
+// Faz uma contagem regressiva de 10 a 0
+```
+
+No exemplo acima, o intervalo `myInterval` executa uma função que faz uma contagem regressiva de 10 até 0, e foi encerrado quando a função `clearInterval` foi chamada (quando a contagem chegou a 0).
+
+## Promises
+
+Uma promise é um objeto que representa a eventual conclusão/falha de uma operação assíncrona.
+
+> Uma operação assíncrona é uma operação que ocorre em paralelo a outras operações. Ou seja, o programa não espera ela o resultado dela para prosseguir.
+
+Uma promise espera a conclusão de uma operação assíncrona e quando ela é resolvida com sucesso ou rejeitada (por conta de um erro) e, para cada um dos casos, é executado uma função de retorno.
+
+Em uma promise, há três estados:
+
+1. **pending**: O estado inicial, antes que ela seja resolvida com sucesso ou rejeitada.
+
+1. **fulfilled**: A promise é resolvida com sucesso, e assim é retornado uma função.
+
+1. **rejected**: A promise foi rejeitada devido a um erro, executando assim uma função.
+
+Sintaxe:
+
+``` js
+let myPromise = new Promise(function(resolve, reject) {
+    // Código que pode levar um tempo
+
+    resolve();  // Quando resolvida com sucesso.
+    reject();   // Quando rejeitada (erro).
+});
+
+// Espera a conclusão da promise
+myPromise.then(
+    function(valor) { /* Código em caso de sucesso */ },
+    function(erro) { /* Código em caso de erro */ }
+)
+```
+
+O retorno da promise é acessado por meio do método **`then`**, que pode receber dois callbacks como argumentos, um para o `resolve` e o outro para o `reject`(ambos opcionais).
+
+Exemplo:
+
+``` js
+let myPromise = new Promise((resolve, reject) => {
+    let x = 13;
+
+    if (x === 13) {
+        resolve('OK!');
+    } else {
+        reject('ERRO!');
+    }
+});
+
+myPromise.then(
+    function(valor) { console.log(valor); },
+    function(erro) { console.log(erro); }
+);
+```
+
+No exemplo acima, será retornado "OK!" sempre que `x` for igual a 13, caso contrário, será retornado "ERRO!".
+
+Exemplo com `setTimeout()`:
+
+``` js
+let myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => { resolve('Olá, JS!'); }, 2000);
+});
+
+myPromise.then((valor) => {
+    console.log(valor);
+});
+
+console.log('Olá, Mundo!');
+
+/* Output:
+Olá, Mundo!
+Olá, JS!
+*/
+```
+
+No exemplo acima, há primeiro a saída "Olá, Mundo!" e depois "Olá, JS!", isso acontece porquê o código da promise retorna a mensagem em 2 segundos, enquanto a mensagem "Olá, Mundo!" é impressa imediatamente.
+
+### `async` e `await`
+
+Ambas são palavras-chave adicionadas ao início da declaração de uma função.
+
+* **'`async`'**: Faz a função retornar uma promise.
+* **'`await`'**: Faz a função esperar uma promise.
+
+Exemplo de `async`:
+
+``` js
+async function myFunction() {
+    return 'Olá, Mundo!';
+}
+
+// É o mesmo que:
+
+function myFunction() {
+    return Promise.resolve('Olá, Mundo!');
+}
+```
+
+Exemplo de `await`:
+
+``` js
+async function myFunction() {
+    let myPromise = new Promise((resolve, reject) => {
+        setTimeout(() => { resolve('Olá, JS!'); }, 2000);
+    });
+    console.log(await myPromise);
+}
+
+myFunction();
+console.log('Olá, Mundo!');
+/* Output:
+Olá, Mundo!
+Olá, JS!
+*/
+```
+
 ## JSON
 
 O objeto **`JSON`** permite fazer conversões de JSON para objetos em JavaScript e vice-versa.
@@ -3469,3 +3771,88 @@ localStorage.length; // -> 3
     ``` js
     const chave1 = localStorage.key(0);
     ```
+
+## JavaScript DOM
+
+DOM é um acrônimo para Document Object Model, e é utilizado para acessar e alterar todos os elementos de um documento HTML.
+
+Todos os elementos de uma página pertencem ao objeto `document`, que possui também métodos e propriedades.
+
+### Métodos e Propriedades DOM
+
+Todos os elementos HTML são definidos como objetos, e por isso, podem ter seus valores alterados ou definidos por **propriedades**.
+
+Já os métodos são ações para os elementos HTML, como criar ou excluir elementos.
+
+Exemplo:
+
+``` html
+<body>
+    <p id="paragrafo">Olá, Mundo!</p>
+    <script>
+        document.getElementById('paragrafo').innerHTML = 'Olá, JS!';
+    </script>
+</body>
+```
+
+No exemplo acima, `innerHTML` é uma propriedade, e `getElementById()` é um método.
+
+* `getElementById()` seleciona o elemento "paragrafo".
+* `innerHTML` altera o valor do elemento selecionado.
+
+### Métodos de Encontrar Elementos
+
+* **'`getElementById()`'**: Encontra um elemento pelo nome de id (`id`).
+
+* **'`getElementsByClassName()`'**: Retorna uma coleção com todos os elementos com um nome de classe específico (`class`).
+
+* **'`getElementsByTagName()`'**: Retorna uma coleção com todos os elementos que possuem um tag name específico.
+
+* **'`querySelectorAll`'**: Retorna uma coleção com todos os elementos que correspondem a um seletor CSS específico.
+
+### Alterar/Definir Elementos
+
+* **'`innerHTML`'**: Dá um novo valor a um elemento.
+* **'`attribute`'**: Altera o valor de um elemento.
+* **'`style`'**: Altera o estilo de um elemento.
+
+Todas essas propriedades devem ser aplicadas a um elemento.
+
+* **'`setAttribute()`'**: Este método altera o valor do atributo de um elemento. Seus argumentos são: `attribute` e `value`.
+
+### Adicionar/Excluir Elementos
+
+* **'`createElement()`'**: Cria um novo elemento.
+* **'`appendChild()`'**: Adicionar um novo elemento.
+* **'`removeChild()`'**: Exclui um elemento.
+* **'`replaceChild()`'**: Substitui um elemento.
+* **'`write()`'**: Mostra um texto na página.
+
+### Eventos
+
+Eventos pode ser qualquer coisa que o usuário ou o navegador faz.
+
+Não é necessariamente o mesmo que o DOM, porém estão intimamente relacionados.
+
+O atributo `onclick` permite realizar uma ação para quando houver um clique sobre o elemento.
+
+``` html
+<body>
+    <button onclick="myFunction()">Clica em mim!</button>
+    <div id="element"></div>
+    <script>
+        function myFunction() {
+            document.getElementById('element').innerHTML = '<p>Olá, Mundo!</p>';
+        }
+    </script>
+</body>
+```
+
+Os eventos mais comuns são:
+
+* **'`onclick`'**: Quando o usuário clica no elemento.
+* **'`onchange`'**: Quando o elemento é alterado.
+* **'`onmouseover`'**: Quando o usuário move o mouse sobre o elemento.
+* **'`onmouseout`'**: Quando o usuário afasta o mouse do elemento.
+* **'`onload`'**: Quando o navegador termina de carregar a página.
+* **'`onkeydown`'**: Quando o usuário pressiona uma tecla no teclado.
