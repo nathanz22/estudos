@@ -1254,6 +1254,79 @@ int main() {
 }
 ```
 
+## Fluxos Padrão
+
+Existem três fluxos padrão:
+
+* **`stdin`**: Entrada padrão.
+* **'`stdout`'**: Saída padrão.
+* **'`stderr`'**: Saída de erro padrão.
+
+### `stdin`
+
+É o fluxo de entrada padrão, normalmente está associado ao teclado. Funções como `scanf()` e `getchar()` são usadas para ler dados de `stdin`.
+
+``` c
+int main() {
+    int num;
+    scanf("%d", &num);
+
+    return 0;
+}
+```
+
+### `stdout`
+
+É o fluxo de saída padrão associado ao console ou terminal. Funções como `printf()` e `putchar()` são usadas para imprimir dados em `stdout`.
+
+``` c
+#include <stdio.h>
+
+int main() {
+    int num = 5;
+    printf("Número: %d\n", num);
+    // Output: Número: 5
+
+    return 0;
+}
+```
+
+### `stderr`
+
+É o fluxo de saída de erro padrão associado ao console ou terminal. Frequentemente usado pela função `fprintf()`.
+
+``` c
+#include <stdio.h>
+
+int main() {
+    fprintf(stderr, "Erro: Teste de erro.\n");
+    // Output: Erro: Teste de erro.
+
+    return 0;
+}
+```
+
+### Redirecionamento de Fluxos
+
+É possível redirecionar os fluxos padrão para apontar para arquivos em vez do console.
+
+``` c
+#include <stdio.h>
+
+int main() {
+    freopen("text.txt", "a", stdout);
+    printf("Hello, World!\n");
+
+    return 0;
+}
+```
+
+No exemplo acima, o arquivo `text.txt` será:
+
+``` txt
+Hello, World!
+```
+
 ## Estruturas Condicionais
 
 São `if`, `else` e `else if`.
@@ -1571,7 +1644,7 @@ int main() {
 }
 ```
 
-> É uma boa prática indicar o número de caracteres da variável menos 1 para garantir que `\0` ao fim da string.
+> É uma boa prática indicar o número de caracteres da variável menos 1 para garantir que haja o caractere nulo (`\0`) ao fim da string.
 
 A importância de especificar o tamanho máximo de caracteres que a string pode conter se deve a prevenção de estouro de buffer.
 
@@ -2717,7 +2790,7 @@ Ao declarar uma função, o tipo de dado que vem antes do nome é o tipo de dado
 
 // Função que retorna o resultado de 2 + 2
 int doisMaisDois() {
-    return 2 * 2;
+    return 2 + 2;
 }
 
 int main() {
@@ -3392,6 +3465,131 @@ int main() {
 }
 ```
 
+#### Ponteiros para Funções
+
+Permitem armazenar e manipular endereços de funções. É útil quando necessário passar funções como argumentos para outras funções ou retornar funções de outras funções.
+
+**Sintaxe:**
+
+``` c
+tipo_de_retorno (*nome_ponteiro)(tipo_param1, tipo_param2, ...);
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+int soma(int x, int y) {
+    return x + y;
+}
+
+int (*ponteiroFuncao)(int, int) = soma;
+
+int main() {
+    int resultado = ponteiroFuncao(2, 5);
+    printf("Resultado: %d\n", resultado);
+    // Output: Resultado: 7
+
+    return 0;
+}
+```
+
+No exemplo acima, é atribuido ao ponteiro o endereço da função `soma()` (não é necessário usar `&`). No `main()` é imprimido o valor que a função retorna.
+
+##### Funções como Argumentos
+
+É possível passar ponteiros de funções como argumentos de outra função.
+
+``` c
+#include <stdio.h>
+
+int soma(int x, int y) {
+    return x + y;
+}
+
+int (*ponteiroFuncao)(int, int) = soma;
+
+void mostrarResultado(int (*funcao)(int, int), int x, int y) {
+    int resultado = funcao(x, y);
+    printf("Resultado: %d\n", resultado);
+}
+
+int main() {
+    mostrarResultado(soma, 5, 2);
+    // Output: Resultado: 7
+
+    return 0;
+}
+```
+
+No exemplo acima, a função `mostrarResultado()` imprime uma string com o retorno da função `soma()`. Note os argumentos do ponteiro da função não são passados junto à ela, mas sim a seguir como outros argumentos.
+
+##### Funções como Retorno
+
+``` c
+#include <stdio.h>
+
+// Soma dois valores
+int soma(int x, int y) {
+    return x + y;
+}
+
+// Subtrai um valor pelo outro
+int subtracao(int x, int y) {
+    return x - y;
+}
+
+// Multiplica dois valores
+int mult(int x, int y) {
+    return x * y;
+}
+
+// Divide um valor pelo outro
+int divisao(int x, int y) {
+    return x / y;
+}
+
+// Ponteiro de função
+int (*selecionarFuncao(const char op))(int, int) {
+    switch (op) {
+        case '+':
+            return soma;
+            break;
+        case '-':
+            return subtracao;
+            break;
+        case '*':
+            return mult;
+            break;
+        case '/':
+            return divisao;
+            break;
+        default:
+            return NULL;
+    }
+}
+
+int main() {
+    // Definição de operador
+    char operador = '*';
+
+    // Ponteiro para a função
+    int (*funcao)(int, int) = selecionarFuncao(operador);
+
+    // Imprime o resultado
+    if (funcao != NULL) {
+        int resultado = funcao(5, 2);
+        printf("Resultado: %d\n", resultado);
+        // Output: Resultado: 7
+    } else {
+        printf("Operador inválido.\n");
+    }
+
+    return 0;
+}
+```
+
 ### Alocação de Memória
 
 Alocar memória é reservar uma região específica da memória do computador para armazenar dados.
@@ -3710,7 +3908,270 @@ int main() {
 
 ##### Alocação de Matrizes Dinâmicas
 
-<!-- Não demore a escrever, por favor :) -->
+Uma matriz dinâmica é um array de arrays que contém linhas e colunas, e seus valores são definidos ao decorrer do programa, o que significa que em diferentes execuções essa matriz pode possuir diferentes tamanhos.
+
+Para alocar dinamicamente uma matriz dinâmica, é necessário seguir alguns passos.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// Aloca dinamicamente as linhas e as colunas de uma matriz
+int **linhasColunasMatriz(int linhas, int colunas) {
+    // Aloca dinamicamente as linhas da matriz
+    int **matriz = (int**)calloc(linhas, sizeof(int*));
+
+    // Verifica se a alocação das linhas foi bem-sucedida
+    if (matriz == NULL) {
+        fprintf(stderr, "ERRO | Falha ao alocar as linhas.\n");
+
+        // Libera a memória antes encerrar
+        for (int x = linhas - 1; x >= 0; x--) {
+            free(matriz[x]);
+        }
+        free(matriz);
+
+        // Encerra o programa
+        exit(EXIT_FAILURE);
+    }
+
+    // Aloca dinamicamente as colunas da matriz
+    for (int j = 0; j < linhas; j++) {
+        matriz[j] = (int*)calloc(colunas, sizeof(int*));
+
+        // Verifica se a alocação das colunas foi bem-sucedida
+        if (matriz[j] == NULL) {
+            fprintf(stderr, "ERRO | Falha ao alocar as colunas.\n");
+
+            // Libera a memória antes de encerrar
+            for (int x = linhas - 1; x >= 0; x--) {
+                free(matriz[x]);
+            }
+            free(matriz);
+
+            // Encerra o programa
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Retorna a matriz
+    return matriz;
+}
+```
+
+**Analisando o código acima:**
+
+1. Primeiramente, foi criada a função `linhasColunasMatriz()` que aloca dinamicamente uma matriz dinâmica. Essa função têm `linhas` e `colunas` como parâmetros, o que significa que em diferentes execuções a matriz poderá ter diferentes tamanhos.
+
+1. Dentro da função `linhasColunasMatriz()`, é feita a alocação de uma matriz de tamanho personalizado utilizando a função `calloc()`.
+
+1. O ponteiro `**matriz` é um ponteiro para ponteiros, o que significa que seus valores também são ponteiros, e por isso há `**`.
+
+1. Em caso de erro na alocação das linhas da matriz, é feita a liberação da mesma. Primeiro são liberadas linha por linha, e em seguida a matriz inteira. Basicamente, a liberação deve ser feita em ordem inversa de alocação.
+
+1. Em seguida, é feita a alocação das colunas da matriz utilizando um loop `for`, que aloca dinamicamente cada coluna da matriz. Perceba que essa alocação é feita dentro do ponteiro da matriz, ou seja, é um ponteiro do array que também é um ponteiro.
+
+1. Novamente é feita a liberação de memória em caso de erro ao alocar a memória. É feita da mesma maneira que para as linhas.
+
+1. Ao final, é retornado a matriz, que é um ponteiro para ponteiros. Os ponteiros internos representam as colunas, e o ponteiro externo representa as linhas.
+
+###### Atribuindo Valores à Matriz
+
+Utilizando o mesmo código anterior, podemos atribuir os valores a uma matriz com um loop `for` que percorrerá sobre as linhas, e um loop `for` interno que percorrerá sobre as colunas.
+
+``` c
+// Recebe um valor inteiro do usuário
+int inputValor(char msg[]) {
+    int userInt;
+    while (true) {
+        // Imprime a mensagem de input
+        printf("%s", msg);
+
+        // Captura a entrada do usuário
+        if (scanf("%d", &userInt)) {
+            return userInt;
+        } else {
+            fprintf(stderr, "ERRO | Valor digitado deve ser um número inteiro.\n");
+        }
+
+        // Limpa o buffer do teclado
+        int c;
+        while (c = getchar() != '\n' && c != EOF);
+    }
+}
+
+// Atribui os valores à matriz
+void definirValores(int **matriz, int linhas, int colunas) {
+    int userNum;
+    char msg[50];
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            sprintf(msg, "Valor %dx%d: ", i + 1, j + 1);
+            userNum = inputValor(msg);
+            matriz[i][j] = userNum;
+        }
+    }
+}
+```
+
+**Analise do código acima:**
+
+1. Há a função `inputValor()`, que possui o objetivo de capturar a entrada de um número inteiro do usuário.
+
+1. A função `definirValores()` tem o objetivo de definir valores inteiros a cada posição na matriz. Ela recebe como argumentos a matriz que será preenchida, e a quantidade de linhas e colunas da matriz.
+
+1. Dentro da função `definirValores()` há dois loops `for`, um percorre sobre as linhas e o outro sobre as colunas. Dentro do loop mais interno são feitas as atribuições dos valores que o usuário digitar utilizando os índices das respectivas posições da matriz.
+
+**Exemplo de uso:**
+
+``` c
+// Crie uma matriz bidimensional dinamicamente. Permita que o usuário especifique o número de linhas e colunas. Preencha a matriz com dados e exiba-a.
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+// Limpa o buffer do teclado
+void limparBuffer() {
+    int c;
+    while (c = getchar() != '\n' && c != EOF);
+}
+
+// Pede quantidade de linhas/colunas ao usuário
+int inputIJ(char msg[]) {
+    int userInt;
+    while (true) {
+        // Imprime a mensagem de input
+        printf("%s", msg);
+
+        // Captura entrada do usuário
+        if (scanf("%d", &userInt) && userInt > 0 && userInt <= 5) { // Caso o valor passado seja um inteiro
+            return userInt;
+        } else { // Caso o valor passado seja inválido
+            fprintf(stderr, "ERRO | Valor digitado deve ser um número inteiro maior que 0 e menor ou igual a 5.\n");
+        }
+
+        // Limpa o buffer do teclado
+        limparBuffer();
+    }
+}
+
+// Recebe um valor inteiro do usuário
+int inputValor(char msg[]) {
+    int userInt;
+    while (true) {
+        // Imprime a mensagem de input
+        printf("%s", msg);
+
+        // Captura a entrada do usuário
+        if (scanf("%d", &userInt)) {
+            return userInt;
+        } else {
+            fprintf(stderr, "ERRO | Valor digitado deve ser um número inteiro.\n");
+        }
+
+        // Limpa o buffer do teclado
+        limparBuffer();
+    }
+}
+
+// Libera a memória da matriz
+void liberarMemoria(int **matriz, int linhas) {
+    for (int x = linhas - 1; x >= 0; x--) {
+        free(matriz[x]);
+    }
+    free(matriz);
+}
+
+// Aloca dinamicamente as linhas e as colunas de uma matriz
+int **linhasColunasMatriz(int linhas, int colunas) {
+    // Aloca dinamicamente as linhas da matriz
+    int **matriz = (int**)calloc(linhas, sizeof(int*));
+
+    // Verifica se a alocação das linhas foi bem-sucedida
+    if (matriz == NULL) {
+        fprintf(stderr, "ERRO | Falha ao alocar as linhas.\n");
+
+        // Libera a memória antes encerrar
+        liberarMemoria(matriz, linhas);
+
+        // Encerra o programa
+        exit(EXIT_FAILURE);
+    }
+
+    // Aloca dinamicamente as colunas da matriz
+    for (int j = 0; j < linhas; j++) {
+        matriz[j] = (int*)calloc(colunas, sizeof(int*));
+
+        // Verifica se a alocação das colunas foi bem-sucedida
+        if (matriz[j] == NULL) {
+            fprintf(stderr, "ERRO | Falha ao alocar as colunas.\n");
+
+            // Libera a memória antes de encerrar
+            liberarMemoria(matriz, linhas);
+
+            // Encerra o programa
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Retorna a matriz
+    return matriz;
+}
+
+// Atribui os valores à matriz
+void definirValores(int **matriz, int linhas, int colunas) {
+    int userNum;
+    char msg[50];
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            sprintf(msg, "Valor %dx%d: ", i + 1, j + 1);
+            userNum = inputValor(msg);
+            matriz[i][j] = userNum;
+        }
+    }
+}
+
+// Imprime a matriz
+void mostrarMatriz(int **matriz, int linhas, int colunas) {
+    for (int i = 0; i < linhas; i++) {
+        printf("|\t");
+        for (int j = 0; j < colunas; j++) {
+            printf("%d\t", matriz[i][j]);
+            if (j == colunas - 1) {
+                printf("|\n");
+            }
+        }
+    }
+}
+
+int main() {
+    // Input de linhas e colunas da matriz
+    int linhas = inputIJ("Digite o número de linhas da matriz: ");
+    int colunas = inputIJ("Digite o número de colunas da matriz: ");
+
+    // Aloca dinamicamente a matriz
+    int **matriz = linhasColunasMatriz(linhas, colunas);
+
+    // Atribui os valores à matriz
+    definirValores(matriz, linhas, colunas);
+
+    // Imprime a matriz
+    mostrarMatriz(matriz, linhas, colunas);
+
+    // Libera a memória
+    liberarMemoria(matriz, linhas);
+
+    return 0;
+}
+```
+
+O código acima possui algumas funções adicionais, como `mostrarMatriz()` e `liberarMemoria()`, ambas com nomes auto-explicativos.
+
+> **NOTA:** Ao terminar de usar a matriz, lembre-se de liberar a memória da mesma maneira vista no código acima.
 
 ### Vazamento de Memória
 
@@ -3729,7 +4190,7 @@ Uma estrutura pode ser criada com a palavra-chave **`struct`**, e as variáveis 
 **Exemplo:**
 
 ``` c
-struct myStructure {
+struct MyStructure {
     int num1;       // Membro int
     float num2;     // Membro float
     char letter;    // Membro char
@@ -3743,14 +4204,14 @@ Para acessar uma estrutura, é necessário criar uma variável para ela.
 ``` c
 #include <stdio.h>
 
-struct myStructure {
+struct MyStructure {
     int num1;       // Membro int
     float num2;     // Membro float
     char letter;    // Membro char
 };
 
 int main() {
-    struct myStructure structure1;
+    struct MyStructure structure1;
     return 0;
 }
 ```
@@ -3760,8 +4221,8 @@ E para acessar os membros dessa estrutura, é usado a sintaxe de ponto '`.`'.
 ``` c
 #include <stdio.h>
 
-// Cria a estrutura `myStructure`
-struct myStructure {
+// Cria a estrutura `MyStructure`
+struct MyStructure {
     int num1;       // Membro int
     float num2;     // Membro float
     char letter;    // Membro char
@@ -3769,7 +4230,7 @@ struct myStructure {
 
 int main() {
     // Nova variável de estrutura que se chama `structure1`
-    struct myStructure structure1;
+    struct MyStructure structure1;
 
     // Atribuição de valores aos membros de `structure1`
     structure1.num1 = 13;
@@ -3791,6 +4252,56 @@ int main() {
 }
 ```
 
+### Arrays em Estruturas
+
+É possível atribuir um array como membro de uma estrutura.
+
+**Sintaxe:**
+
+``` c
+struct NomeEstrutura {
+    tipoArray nomeArray[5];
+};
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+
+// Estrutura
+struct Numeros {
+    int inteiros[5];
+};
+
+int main() {
+    // Variável de estrutura
+    size_t numeroDeElementos = 5;
+    struct Numeros valores;
+
+    // Definindo os elementos do array dentro da estrutura
+    size_t i;
+    for (i = 0; i < numeroDeElementos; i++) {
+        valores.inteiros[i] = i + 1;
+    }
+
+    // Imprime o array
+    printf("{ ");
+    for (i = 0; i < numeroDeElementos; i++) {
+        printf("%d", valores.inteiros[i]);
+        if (i != numeroDeElementos - 1) {
+            printf(", ");
+        }
+    }
+    printf(" }\n");
+
+    // Output: { 1, 2, 3, 4, 5 }
+
+    return 0;
+}
+```
+
 ### Strings em Estruturas
 
 Não é possível atribuir uma string a um membro da mesma maneira que outros tipos de dados. Então para isso, é necessário usar a função **`strcpy()`** da biblioteca padrão `string.h`.
@@ -3799,14 +4310,14 @@ Não é possível atribuir uma string a um membro da mesma maneira que outros ti
 #include <stdio.h>
 #include <string.h>
 
-// Cria a estrutura `myStructure`
-struct myStructure {
+// Cria a estrutura `MyStructure`
+struct MyStructure {
     char myStr[20];
 };
 
 int main() {
     // Nova variável de estrutura que se chama `structure1`
-    struct myStructure structure1;
+    struct MyStructure structure1;
 
     // Atribuição de string ao membro `myStr`
     strcpy(structure1.myStr, "Hello, World!");
@@ -3825,8 +4336,8 @@ int main() {
 ``` c
 #include <stdio.h>
 
-// Cria a estrutura `myStructure`
-struct myStructure {
+// Cria a estrutura `MyStructure`
+struct MyStructure {
     int myInt;
     float myFloat;
     char myStr[20];
@@ -3834,7 +4345,7 @@ struct myStructure {
 
 int main() {
     // Nova variável de estrutura que se chama `structure1`
-    struct myStructure structure1 = { 13, 2.2, "Hello, World!" };
+    struct MyStructure structure1 = { 13, 2.2, "Hello, World!" };
 
     // Impressão de valores.
     printf("%d\n", structure1.myInt);   // Output: 13
@@ -3846,6 +4357,544 @@ int main() {
 ```
 
 > Atribuir valores aos membros desta maneira, torna desnecessário usar a função `strcpy()` para atribuir valores à membros strings.
+
+#### Inicialização com Designadores
+
+Os valores são atribuídos aos membros da estrutura no momento de declaração da variável da estrutura utilizando `{}` e `.`.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+// Estrutura
+struct Estrutura {
+    int x;
+    int y;
+};
+
+int main() {
+    struct Estrutura estrutura = { .y = 5, .x = 2 };
+
+    return 0;
+}
+```
+
+Dessa maneira, é possível definir os valores dos membros em uma ordem diferente das quais eles estão declarados.
+
+### Tamanho de Estruturas
+
+Com o operador `sizeof`, é possível ver a quantidade de bytes que uma estrutura ou instância de estrutura possui.
+
+``` c
+#include <stdio.h>
+
+struct MyStructure {
+    int myInt;
+    char myLetter;
+    char myStr[20];
+};
+
+int main() {
+    size_t size = sizeof(struct MyStructure);
+    printf("Tamaho da estrutura: %zu bytes\n", size);
+    // Output: 28 bytes
+
+    return 0;
+}
+```
+
+### Estruturas Aninhadas
+
+Aninhar estruturas permite criar tipos de dados mais complexos.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+
+// Estrutura interna
+struct Data {
+    int dia;
+    int mes;
+    int ano;
+};
+
+// Estrutura externa
+struct Pessoa {
+    char nome[50];
+    int idade;
+    struct Data dataNascimento;
+};
+
+int main() {
+    // Variável para `Pessoa`
+    struct Pessoa pessoa1;
+
+    // Atribuindo valores aos membros de `pessoa1`
+    strcpy(pessoa1.nome, "Lucas");
+    pessoa1.idade = 22;
+    pessoa1.dataNascimento.dia = 6;
+    pessoa1.dataNascimento.mes = 12;
+    pessoa1.dataNascimento.ano = 2001;
+
+    // Mostrando informações
+    printf("Nome: %s\n", pessoa1.nome);
+    printf("Idade: %d\n", pessoa1. idade);
+    printf("Data de Nascimento: %d/%d/%d\n", pessoa1.dataNascimento.dia, pessoa1.dataNascimento.mes, pessoa1.dataNascimento.ano);
+
+    /* Output:
+    Nome: Lucas
+    Idade: 22
+    Data de Nascimento: 6/12/2001
+    */
+
+    return 0;
+}
+```
+
+No exemplo acima, a estrutura `Pessoa` possui como membro a estrutura `Data`.
+
+#### Atribuição de Estruturas Aninhadas
+
+Para atribuir valores aos membros de estruturas aninhadas, pode-se usar **`{}`**. Seus membros podem ser definidos com ou sem designadores.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+// Estrutura
+struct Estrutura {
+    int x;
+    int y;
+};
+
+// Estrutura Externa
+struct EstruturaExterna {
+    struct Estrutura primeiraEstrutura;
+    struct Estrutura segundaEstrutura;
+};
+
+int main() {
+    struct EstruturaExterna estrututura = {
+        .primeiraEstrutura = { .x = 5, .y = 3 },
+        .segundaEstrutura = { .x = 10, .y = 15 }
+    };
+
+    return 0;
+}
+```
+
+### Estruturas Dentro de Arrays
+
+É possível armazenar estruturas dentro de um array. Para isso, é necessário especificar o tipo do array como o mesmo da estrutura.
+
+**Sintaxe:**
+
+``` c
+struct Estrutura arrayDeEstruturas[numeroDeEstruturas];
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+
+// Estrutura
+struct Pessoa {
+    char nome[50];
+    int idade;
+};
+
+int main() {
+    // Array de estruturas
+    size_t numPessoas = 3; // Número de pessoas que o array armazenará
+    struct Pessoa pessoas[numPessoas];
+
+    // Definindo elementos do array
+    strcpy(pessoas[0].nome, "Lucas");
+    pessoas[0].idade = 23;
+
+    strcpy(pessoas[1].nome, "Maria");
+    pessoas[1].idade = 18;
+
+    strcpy(pessoas[2].nome, "Luana");
+    pessoas[2].idade = 31;
+
+    // Imprime os valores
+    size_t i;
+    for (i = 0; i < numPessoas; i++) {
+        printf("\nNome: %s\n", pessoas[i].nome);
+        printf("Idade: %d\n", pessoas[i].idade);
+    }
+
+    /* Output:
+    Nome: Lucas
+    Idade: 23
+
+    Nome: Maria
+    Idade: 18
+
+    Nome: Luana
+    Idade: 31
+    */
+
+    return 0;
+}
+```
+
+### Ponteiro para Estruturas
+
+Permitem manipular dados de estruturas de forma dinâmica e eficiente.
+
+**Sintaxe:**
+
+``` c
+struct Estrutura *ponteiroEstrutura;
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+
+// Estrutura
+struct Pessoa {
+    char nome[50];
+    int idade;
+};
+
+int main() {
+    // Declaração de variável de estrutura e ponteiro
+    struct Pessoa pessoa1;
+    struct Pessoa *ptrPessoa;
+
+    // Inicializando o ponteiro
+    ptrPessoa = &pessoa1; // Ponteiro aponta para `pessoa1`
+
+    // Acesso aos membros da estrutura pelo ponteiro
+    strcpy(ptrPessoa->nome, "Lucas");
+    ptrPessoa->idade = 23;
+
+    // Imprime os dados
+    printf("\nNome: %s\n", ptrPessoa->nome);
+    printf("Idade: %d\n", ptrPessoa->idade);
+
+    /* Output:
+    Nome: Lucas
+    Idade: 23
+    */
+
+    return 0;
+}
+```
+
+Ao invés de notação de ponto, é utilizado **`->`** para acessar os membros de uma estrutura a partir de um ponteiro.
+
+### Alocação Dinâmica de Estruturas
+
+**Sintaxe:**
+
+``` c
+struct Estrutura *ptrEstrutura = (struct Estrutura*)malloc(sizeof(struct Estrutura));
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// Estrutura
+struct Pessoa {
+    char nome[50];
+    int idade;
+};
+
+int main() {
+    // Aloca dinamicamente um espaço para uma estrutura
+    struct Pessoa *pessoa1 = (struct Pessoa*)malloc(sizeof(struct Pessoa));
+
+    // Verifica se a alocação foi bem-sucedida
+    if (pessoa1 == NULL) {
+        fprintf(stderr, "Falha na alocação de memória.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    // Define os valores dos membros da estrutura
+    strcpy(pessoa1->nome, "Lucas");
+    pessoa1->idade = 23;
+
+    // Imprime os valores dos membros da estrutura
+    printf("Nome: %s\n", pessoa1->nome);
+    printf("Idade: %d\n", pessoa1->idade);
+
+    // Libera a memória alocada
+    free(pessoa1);
+
+    /* Output:
+    Nome: Lucas
+    Idade: 23
+    */
+
+    return 0;
+}
+```
+
+### Estruturas e Funções
+
+É possível passar estruturas como argumentos de funções.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+// Definição da estrutura (com alias)
+struct MyStructure {
+    int x;
+    int y;
+};
+
+// Função que soma os membros da estrutura
+void somaMembros(struct MyStructure s) {
+    printf("A soma entre %d e %d é %d\n", s.x, s.y, s.x + s.y);
+}
+
+int main() {
+    // Variável para a estrutura
+    struct MyStructure structure1;
+
+    // Define os valores da variável da estrutura
+    structure1.x = 2;
+    structure1.y = 5;
+
+    // Imprime a estrutura
+    somaMembros(structure1);
+    // Output: A soma entre 2 e 5 é 7
+
+    return 0;
+}
+```
+
+Uma função que recebe uma estrutura como argumento pode acessar e manipular os valores dessa estrutura. No exemplo acima, a função `somaMembros()` imprime a soma entre os membros da estrutura.
+
+#### Ponteiros para Funções como Membros
+
+É possível ter ponteiros para funções como membros de estruturas. Isso pode ser útil em situações em que se deseja armazenar referências para diferentes funções em uma estrutura e, posteriormente, chamar essas funções dinamicamente.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+// Tipo de função que recebe dois inteiros e retorna um inteiro
+
+typedef int (*Operacao)(int, int);
+
+// Estrutura que contém um ponteiro para uma função
+struct Calculadora {
+    Operacao somar;
+};
+
+// Função de soma
+int soma(int x, int y) {
+    return x + y;
+}
+
+int main() {
+    // Instância de estrutura
+    struct Calculadora calc;
+
+    // Inicializando ponteiro para a função
+    calc.somar = soma;
+
+    // Chamando o ponteiro para chamar a função
+    int resultado = calc.somar(5, 2);
+
+    // Imprime o resultado
+    printf("Resultado: %d\n", resultado);
+    // Output: Resultado: 7
+
+    return 0;
+}
+```
+
+No exemplo acima, a estrutura `Calculadora` contém um ponteiro para a função `somar`. Esse ponteiro é inicializado e em seguida, é possível usar esse ponteiro para chamar a função associada.
+
+### Listas Encadeadas
+
+São estruturas de dados no qual os elementos de dados, chamados de **nós**, estão ligados uns aos outros por meio de ponteiros.
+
+Cada nó contém um dado e um ponteiro que aponta para o próximo nó na sequência. A última célula geralmente tem um ponteiro nulo para indicar o final da lista.
+
+**Sintaxe:**
+
+``` c
+struct Node {
+    int data;           // Dado armazenado pelo nó
+    struct Node* next;  // Ponteiro para o próximo nó
+}
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura de nó
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Função que imprime os elementos da lista encadeada
+void printList(struct Node* head) {
+    while (head != NULL) {
+        printf("Valor %d\n", head->data); // Imprime o dado do nó
+        head = head->next; // Torna `head` o próximo nó
+    }
+}
+
+int main() {
+    // Criando três nós
+    struct Node* first = malloc(sizeof(struct Node));
+    struct Node* second = malloc(sizeof(struct Node));
+    struct Node* third = malloc(sizeof(struct Node));
+
+    // Atribuindo valores aos nós
+    first->data = 1;
+    first->next = second; // Faz com que o próximo nó seja `second`
+
+    second->data = 2;
+    second->next = third; // Faz com que o próximo nó seja `third`
+
+    third->data = 3;
+    third->next = NULL; // Último nó deve apontar para NULL
+
+    // Imprime a lista encadeada
+    printList(first);
+
+    // Libera a memória alocada
+    free(first);
+    free(second);
+    free(third);
+
+    /* Output:
+    Valor 1
+    Valor 2
+    Valor 3
+    */
+
+    return 0;
+}
+```
+
+> **LEMBRE-SE.:** A memória dos nós deve ser liberada quando os mesmos não forem mais necessários.
+
+#### Referência Circular
+
+Se refere a uma situação onde os nós nunca chegam no fim, fazendo com que eles se referenciem infinitamente, podendo levar a problemas como vazamento de memória se não gerenciado adequedamente.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura de nó
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int main() {
+    // Criando três nós
+    struct Node* first = malloc(sizeof(struct Node));
+    struct Node* second = malloc(sizeof(struct Node));
+    struct Node* third = malloc(sizeof(struct Node));
+
+    // Atribuindo valores aos nós
+    first->data = 1;
+    first->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = first; // O próximo será o primeiro novamente
+
+    // Libera a memória alocada
+    free(first);
+    free(second);
+    free(third);
+
+    return 0;
+}
+```
+
+No exemplo acima, não há fim na referência, é retornado ao início sempre que chega ao fim.
+
+Para evitar problemas, é fundamental indicar `NULL` para a próxima referência de um nó considerado o último.
+
+``` c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Estrutura de nó
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+int main() {
+    // Criando três nós
+    struct Node* first = malloc(sizeof(struct Node));
+    struct Node* second = malloc(sizeof(struct Node));
+    struct Node* third = malloc(sizeof(struct Node));
+
+    // Atribuindo valores aos nós
+    first->data = 1;
+    first->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = NULL; // Último nó
+
+    // Libera a memória alocada
+    free(first);
+    free(second);
+    free(third);
+
+    return 0;
+}
+```
+
+### Membros Bitfields
+
+Membros bitfields permitem especificar o número exato de bits que eles vão ocupar na memória.
+
+Para definí-los, basta que ao fim da declaração do membro você especifique o número de bits após **`:`**;
+
+**Exemplo:**
+
+``` c
+struct Flags {
+    unsigned int flag1 : 1;
+    unsigned int flag2 : 2;
+    unsigned int flag3 : 3;
+};
+```
+
+No exemplo acima, `flag1` ocupa 1 bit, `flag2` ocupa 2 bits e `flag3` ocupa 3 bits.
 
 ## Enums
 
@@ -3955,15 +5004,15 @@ enum DiasDaSemana {
 };
 ```
 
-## `typedef`
+## Palavra-chave `typedef`
 
 A palavra-chave **`typedef`** é usada para criar um alias de um tipo de dado.
 
 > Um alias é um nome altenativo para identificar ou se referir ao mesmo objeto de dados.
 
-São usados para tornar o código mais legível para para facilitar a manutenção futuramente, pois não haverá a necessidade de alterar o tipo de dado de diversos dados com o mesmo tipo um por um.
+Frequentemente, são usados para criar nomes alternativos para tipos de dados existentes, o que torna o código mais legível e com mais abstração. Além disso, pode ser útil para manutenção futura caso haja necessidade de alterar vários dados do mesmo tipo.
 
-A sintaxe é a seguinte:
+**Sintaxe:**
 
 ``` c
 typedef tipo_original novo_nome;
@@ -3990,37 +5039,51 @@ int main() {
 }
 ```
 
+No exemploa acima, `Inteiro` é um alias para o tipo `int`.
+
 ### Estruturas e `typedef`
 
 Frequentemente é utilizado `typedef` junto a estruturas para criar nomes mais legíveis e expressivos para tipos de dados complexos.
 
+**Sintaxe:**
+
+``` c
+typedef struct {
+    // membros da estrutura
+    tipo1 nome1;
+    tipo2 nome2;
+    // ...
+} NomeDaEstruturaAlias;
+```
+
+**Exemplo:**
+
 ``` c
 #include <stdio.h>
 
-// Declarando uma estrutura
-struct myStructure {
-    int num1;
-    int num2;
-};
-
-// Criando um alias para a estrutura `myStructure`
-typedef struct myStructure Numeros;
+// Definição da estrutura (com alias)
+typedef struct {
+    int x;
+    int y;
+} MyStructure;
 
 int main() {
-    // Atribuindo valores à estrutura
-    Numeros structure1 = {13, 22};
+    // Variável para a estrutura
+    MyStructure structure1;
 
-    // Imprimindo os valores
-    printf("%d\n", structure1.num1); // Output: 13
-    printf("%d\n", structure1.num2); // Output: 22
+    // Define os valores da variável da estrutura
+    structure1.x = 2;
+    structure1.y = 5;
+
+    // Imprime a estrutura
+    printf("A soma entre %d e %d é %d\n", structure1.x, structure1.y, structure1.x + structure1.y);
+    // Output: A soma entre 2 e 5 é 7
 
     return 0;
 }
 ```
 
-### Ocultar Detalhes de Implementação
-
-Usar `typedef` permite ocultar detalhes de implementação, o ajuda a criar uma interface mais limpa, isolando os detalhes internos de uma implementação específica.
+No exemplo acima, `MyStructure` é um alias para a estrutura que possui os membros `x` e `y`. Perceba que ao declarar uma variável de estrutura, não é necessário indicar `struct` ao início.
 
 ## Arquivos
 
