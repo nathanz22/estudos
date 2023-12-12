@@ -323,7 +323,7 @@ São os números que possuem casas decimais.
 
 ``` php
 <?php
-$num = 22.13
+$num = 22.13;
 ```
 
 ##### Funções de Float
@@ -351,8 +351,8 @@ São os valores **`true`**(verdadeiro) e **`false`**(falso).
 
 ``` php
 <?php
-$v = true
-$f = false
+$v = true;
+$f = false;
 ```
 
 ### Array
@@ -361,7 +361,7 @@ Um array armazena múltiplos valores em uma única variável.
 
 ``` php
 <?php
-$my_array = array(5, 'Olá', 3.2, true)
+$my_array = array(5, 'Olá', 3.2, true);
 ```
 
 ### Object

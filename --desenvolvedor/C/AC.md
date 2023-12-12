@@ -2972,29 +2972,118 @@ int main() {
 
 > **Observação:** Funções aninhadas podem não ser suportadas por todos os compiladores, sendo comum a prática de manter as funções separadas.
 
-### Boas Práticas Para Funções
+### Funções Variádicas
 
-Em C, é uma boa prática declarar as funções antes de `main()` e as definições dessas funções abaixo de `main()`.
+São funções que aceitam um número variável de argumentos. São implementadas usando a biblioteca padrão **`stdarg.h`**.
+
+A função `printf()` é o exemplo mais comum de função variádica, pois a mesma recebe um argumento obrigatório e os demais variam de acordo com a quantidade de formatos.
+
+Em `stdarg.h`, são definidos quatro macros:
+
+* **`va_list`**: Armazena informações sobre os argumentos variádicos.
+
+* **`va_start`**: Inicializa a lista de argumentos variádicos. Deve ser chamada antes de acessar os argumentos.
+
+* **`va_arg`**: Retorna o primeiro argumento na lista, com base no tipo especificado.
+
+* **`va_end`**: Finaliza o uso da lista de argumentos variádicos.
+
+**Exemplo:**
 
 ``` c
 #include <stdio.h>
+#include <stdarg.h>
 
-// Declaração de função
-int soma(int valor1, int valor2);
+int calcularSoma(int num, ...) {
+    va_list args;
+    va_start(args, num);
+
+    int soma = 0;
+
+    for (int i = 0; i < num; i++) {
+        soma += va_arg(args, int);
+    }
+
+    va_end(args);
+
+    return soma;
+}
 
 int main() {
-    printf("%d\n", soma(2, 3)); // Output: 5
-    printf("%d\n", soma(5, 2)); // Output: 7
-    printf("%d\n", soma(1, 0)); // Output: 1
-
-    return 0;
-}
-
-// Definição de função
-int soma(int valor1, int valor2) {
-    return (valor1 + valor2);
+    int soma = calcularSoma(5, 1, 2, 3, 4, 5);
+    printf("Soma: %d\n", soma); // Output: Soma: 15
 }
 ```
+
+**Análise do Exemplo:**
+
+1. Importação de bibliotecas:
+
+    ``` c
+    #include <stdio.h>
+    #include <stdarg.h>
+    ```
+
+    Aqui, são importadas as bibliotecas `stdio.h`, para a função `printf()`, e `stdarg.h`, para trabalhar com funções variádicas.
+
+1. Declaração da função `calcularSoma()`
+
+    ``` c
+    int calcularSoma(int num, ...)
+    ```
+
+    Essa função retorna a soma de vários números inteiros. O primeiro argumento deve ser a quantidade de argumentos que serão passados a seguir.
+
+1. Acesso aos argumentos
+
+    ``` c
+    va_list args;
+    va_start(args, num);
+    ```
+
+    Primeiro, é criado uma variável do tipo `va_list` chamada `args`. Após isso, essa variável é inicializada como uma lista que armazena os argumentos passados (com exceção do primeiro, que representa a quantidade de argumentos).
+
+1. Cálculo da soma
+
+    ``` c
+    int soma = 0;
+    for (int i = 0; i < num; i++) {
+        soma += va_arg(args, int);
+    }
+    ```
+
+    Aqui, há uma variável `soma`, que tem como função armazenar a soma dos argumentos passados.
+
+    Após isso, há um loop que acessa os argumentos e calcula a soma entre eles.
+
+    A função `va_arg()` é usada para acessar cada argumento na lista com base no tipo de valor do argumento a ser acessado.
+
+1. Finalizar o uso da lista de argumentos
+
+    ``` c
+    va_end(args);
+    ```
+
+    A função `va_end()` é usada para finalizar o uso da lista de argumentos variádicos. Isso garante a liberação de quaisquer recursos associados à lista.
+
+1. Retorno da soma
+
+    ``` c
+    return soma;
+    ```
+
+    Aqui, é retornado a soma de todos os argumentos variádicos passados.
+
+1. Exemplo de uso no `main()`
+
+    ``` c
+    int main() {
+        int soma = calcularSoma(5, 1, 2, 3, 4, 5);
+        printf("Soma: %d\n", soma); // Output: Soma: 15
+    }
+    ```
+
+    Aqui é mostrado uma exemplo de uso da função `calcularSoma()`.
 
 ## Math
 
@@ -4179,6 +4268,163 @@ Vazamento de memória, ou "memory leaks", é um problema em programas onde a apl
 
 Em C, vazamentos de memória são comuns devido à natureza manual do gerenciamento de memória.
 
+## Classes de Armazenamento
+
+Refere-se a características associadas às variáveis em termos de alocação de memória e escopo. Existem quatro classes de armazenamento principais:
+
+* Automática
+* Estática
+* Externa
+* Registradora
+
+### Automática (auto)
+
+Variáveis automáticas são aquelas cuja vida útil está limitada ao escopo em que são declaradas. Essas variáveis são destruídas assim que o bloco no qual elas foram declaradas for concluído.
+
+Essas variáveis são armazenadas na pilha de execução do programa.
+
+A única coisa necessário para que uma variável seja automática, é que ela seja declarada dentro de um bloco.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+int main() {
+    int x = 5; // Variável automática
+
+    return 0;
+}
+
+```
+
+### Estática (static)
+
+São declaradas usando a palavra-chave **`static`**, e podem ser usadas em dois contextos principais: dentro de uma função e fora de qualquer função (escopo global).
+
+#### Variáveis Estáticas em Funções
+
+Dentro de uma função, uma variável estática mantém seu valor entre chamadas da função. Isso significa que a variável não é destruída ao fim da função, para que assim, na próxima chamada da função, ela possuir ainda o mesmo valor.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+void myFunction() {
+    static int contador = 0;
+    contador++;
+    printf("Contador: %d\n", contador);
+}
+
+int main() {
+    myFunction(); // Output: Contador: 1
+    myFunction(); // Output: Contador: 2
+    myFunction(); // Output: Contador: 3
+
+    return 0;
+}
+```
+
+> **OBS.:** É uma boa prática inicializar variáveis estáticas ao declará-las. Em funções, a inicialização ocorre apenas na primeira chamada da função e persiste nas chamadas subsequentes.
+
+#### Variáveis Estáticas No Escopo Global
+
+Equivalem a variáveis comuns, podendo ser acessadas em qualquer lugar dentro do arquivo em que foram declaradas.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+static int contador = 0;
+
+void add() {
+    contador++;
+    printf("Contador: %d\n", contador);
+}
+
+int main() {
+    add(); // Output: Contador: 1
+    add(); // Output: Contador: 2
+    add(); // Output: Contador: 3
+
+    return 0;
+}
+```
+
+**Seria o mesmo que:**
+
+``` c
+#include <stdio.h>
+
+int contador = 0;
+
+void add() {
+    contador++;
+    printf("Contador: %d\n", contador);
+}
+
+int main() {
+    add(); // Output: Contador: 1
+    add(); // Output: Contador: 2
+    add(); // Output: Contador: 3
+
+    return 0;
+}
+```
+
+### Externa (extern)
+
+Variáveis externas são usadas para compartilhar variáveis entre diferentes arquivos de código-fonte. Elas permitem que uma variável declarada em um arquivo seja acessada em outros arquivos.
+
+São declaradas a partir da palavra-chave **`extern`**.
+
+**Exemplo:**
+
+``` c
+// arquivo1.c
+#include <stdio.h>
+
+int x = 20;
+```
+
+``` c
+// arquivo2.c
+#include <stdio.h>
+
+extern int x;
+
+int main() {
+    printf("Variável externa: %d\n", x);
+    // Output: Variável externa: 20
+
+    return 0;
+}
+```
+
+Em resumo, a palavra-chave `extern` diz ao compilador que a variável existe em algum lugar, mas não necessariamente no mesmo arquivo. Assim, quando dois ou mais arquivos são compilados ao mesmo tempo, as variáveis `extern` são usadas para acessar as variáveis com o mesmo nome declaradas em outros arquivos.
+
+### Registradora (register)
+
+Ao declarar uma variável com **`register`**, sugere-se ao compilador que a aloque em um registrador na CPU, se possível.
+
+Essa sugestão pode resultar em um desempenho aprimorado, no entanto, os compiladores modernos geralmente ignoram essa recomendação, pois são altamente eficientes em determinar quais variáveis devem ser armazenadas em registradores.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+int main() {
+    register int x; // Sugestão para alocar x em um registrador
+
+    return 0;
+}
+```
+
+Devido à eficiência dos compiladores modernos na otimização de código, o uso de `register` perdeu sua relevância e pode ser considerado obsoleto na maioria dos casos.
+
 ## Estruturas
 
 Estruturas possibilitam agrupar diversas variáveis relacionadas em um único lugar.
@@ -5085,6 +5331,127 @@ int main() {
 
 No exemplo acima, `MyStructure` é um alias para a estrutura que possui os membros `x` e `y`. Perceba que ao declarar uma variável de estrutura, não é necessário indicar `struct` ao início.
 
+## Uniões
+
+Permitem armazenar vários dados de diferentes tipos em uma única estrutura, bem parecido com `struct`s, porém, cada membro de uma união tem seu próprio espaço. Em uma união, todos os membros compartilham o mesmo espaço de memória.
+
+**Sintaxe:**
+
+``` c
+union NomeUniao {
+    tipo membro1;
+    tipo membro2;
+    // ...
+}
+```
+
+O tamanho de uma união é igual ao tamanho do maior membro presente nela.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+union MyUnion {
+    int intNum;
+    float floatNum;
+    char caractere;
+};
+
+int main() {
+    // Cria uma instância da união
+    union MyUnion uniao;
+
+    // Atribui e imprime os valores da união
+    uniao.intNum = 5;
+    printf("Inteiro: %d\n", uniao.intNum);
+    // Inteiro: 5
+
+    uniao.floatNum = 10.2;
+    printf("Float: %.1f\n", uniao.floatNum);
+    // Float: 10.2
+
+    uniao.caractere = 'C';
+    printf("Char: %c\n", uniao.caractere);
+    // Char: C
+
+    return 0;
+}
+```
+
+Todos os membros compartilham o mesmo espaço de memória, e a alteração de um membro pode afetar o valor dos outros membros. Por isso, é preciso ter cuidado ao usar uniões para garantir que os valores sejam interpretados corretamente.
+
+## Macros
+
+Macros são pedaços de código que são substituídos pelo pré-processador antes da compilação.
+
+São criados a partir da palavra-chave **`#define`**.
+
+**Sintaxe Básica:**
+
+``` c
+#define NOME_MACRO valor
+```
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+#define PI 3.14159
+
+int main() {
+    printf("PI = %.2f\n", PI);
+    // Output: PI = 3.14
+
+    return 0;
+}
+```
+
+No exemplo acima, o macro `PI` simboliza uma constante, e seria o mesmo que `const PI = 3.14159;`.
+
+### Macros como Funções
+
+Macros podem ser usados para criar atalhos para blocos de código, funcionando como funções inline.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+#define SOMA(x, y) ((x) + (y))
+
+int main() {
+    int resultado = SOMA(5, 2);
+    printf("Resultado: %d\n", resultado);
+    // Output: Resultado: 7
+
+    return 0;
+}
+```
+
+No exemplo acima, o macro `SOMA` age como uma função que recebe dois argumentos e retorna a soma entre eles.
+
+### Boas Práticas e Precauções para Macros
+
+* Use parênteses em torno dos argumentos para evitar problemas com precedência de operadores.
+
+* O uso excessivo de macros pode tornar o código menos legível.
+
+* Macros não têm conhecimento de escopo. Eles são substituídos globalmente no arquivo.
+
+* Macros não têm checagem de tipo, podendo a levar a erros difícieis de diagnosticar.
+
+### Macros Variádicas
+
+São macros que aceitam um número variável de argumentos. Para isso, é utilizado **`...`**.
+
+**Exemplo:**
+
+``` c
+// Já vem!
+```
+
 ## Arquivos
 
 Para criar, abrir, ler ou escrever em arquivos, é necessário declarar um ponteiro do tipo **`FILE`** e usar a função `fopen()`.
@@ -5289,6 +5656,129 @@ int main() {
 
     // Fecha o arquivo
     fclose(file_ptr); // Fecha o arquivo
+
+    return 0;
+}
+```
+
+## Bases Numéricas
+
+Em C, as bases numéricas mais comuns são a decimal (base 10), a octal (base 8), a hexadecimal (base 16) e a base binária (base 2).
+
+* **Decimal**: É o sistema numérico padrão, representados normalmente como no dia a dia.
+
+    ``` c
+    int decimal = 23;
+    ```
+
+* **Octal**: São representados com um zero à frente do número.
+
+    ``` c
+    int octal = 027; // 23 em decimal
+    ```
+
+* **Hexadecimal**: São representados com `0x` à frente do número.
+
+    ``` c
+    int hexadecimal = 0x17; // 23 em decimal
+    ```
+
+* **Binário**: Representado, geralmente, por `0b` à frente do número.
+
+    ``` c
+    int binario = 0b10111; // 23 em decimal
+    ```
+
+## Filas
+
+Uma fila é uma estrutura de dados que segue o princípio FIFO (*First In*, *First Out*), ou "Primeira a entrar, primeiro a sair". Isso significa que o primeiro elemento adicionado à fila será o primeiro a ser removido.
+
+Em C, a abordagem mais comum para implementar uma fila é utilizndo um array ou uma lista encadeada.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+
+#define MAX_ELEMENTOS 5
+
+// Estrutura que representa uma fila
+typedef struct {
+    int elementos[MAX_ELEMENTOS];
+    int frente; // Primeiro da fila
+    int tras; // Último da fila
+} Fila;
+
+// Inicializa a fila
+void inicializarFila(Fila *fila) {
+    fila->frente = -1;
+    fila->tras = -1;
+}
+
+// Verifica se a fila está cheia
+int filaCheia(Fila *fila) {
+    return ((fila->tras + 1) % MAX_ELEMENTOS == fila->frente);
+}
+
+// Veririca se a fila está vazia
+int filaVazia(Fila *fila) {
+    return (fila->frente == -1 && fila->tras == -1);
+}
+
+// Adiciona um elemento à fila
+void adicionar(Fila *fila, int valor) {
+    // Verifica se a fila está cheia
+    if (filaCheia(fila)) {
+        printf("Lista está cheia. Não é possível adicionar novos elementos.\n");
+        return;
+    }
+
+    // Verifica se a fila está vazia
+    if (filaVazia(fila)) {
+        fila->frente = 0;
+        fila->tras = 0;
+    } else {
+        fila->tras = (fila->tras + 1) % MAX_ELEMENTOS;
+    }
+
+    // Adiciona o valor à fila
+    fila->elementos[fila->tras] = valor;
+}
+
+// Remove um elemento da lista
+int remover(Fila *fila) {
+    // Verifica se a lista está vazia
+    if (filaVazia(fila)) {
+        printf("Lista está vazia. Não é possível remover elementos.\n");
+        return -1;
+    }
+
+    int valor = fila->elementos[fila->frente];
+
+    if (fila->frente == fila->tras) {
+        // Último elemento na fila
+        inicializarFila(fila);
+    } else {
+        fila->frente = (fila->frente + 1) % MAX_ELEMENTOS;
+    }
+
+    return valor;
+}
+
+int main() {
+    Fila minhaFila;
+    inicializarFila(&minhaFila);
+
+    adicionar(&minhaFila, 1);
+    adicionar(&minhaFila, 2);
+    adicionar(&minhaFila, 3);
+
+    printf("Item removido: %d\n", remover(&minhaFila)); // Output: Item removido: 1
+    printf("Item removido: %d\n", remover(&minhaFila)); // Output: Item removido: 2
+
+    adicionar(&minhaFila, 4);
+
+    printf("Item removido: %d\n", remover(&minhaFila)); // Output: Item removido: 3
 
     return 0;
 }
