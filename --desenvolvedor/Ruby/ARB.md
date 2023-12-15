@@ -1,5 +1,7 @@
 # Ruby
 
+Ruby é uma linguagem de programação dinâmica, de alto nível e orientada a objetos. Foi criada no Japão por Yukihiro "Matz" Matsumoto na década de 1990, com o objetivo de combinar a simplicidade com a praticidade do Perl com a orientação a objetos do Smalltalk.
+
 ## Impressão de Valores
 
 As funções `puts`, `print`, `printf` e `p` permitem imprimir algum valor no terminal.
@@ -66,7 +68,7 @@ Em Ruby, os tipos primitivos são:
 * **`Boolean`**: Valores verdadeiro e falso.
 * **`Nil`**: Representa nulo ou a ausência de um valor.
 
-### `String`
+### Tipo `String`
 
 Em Ruby, tudo entre aspas simples ou duplas são considerados strings.
 
@@ -129,134 +131,134 @@ str2 = "Olá, Mundo!'
 
 * **`strip`**: Remove os espaços em branco no início e no fim da string.
 
-    ``` rb
-    str = '     Olá, Mundo!     '
-    str.strip
-    # => "Olá, Mundo!"
-    ```
+  ``` rb
+  str = '     Olá, Mundo!     '
+  str.strip
+  # => "Olá, Mundo!"
+  ```
 
 * **`concat`**, **`+`**: Concatena duas ou mais strings.
 
-    ``` rb
-    str1 = 'Olá, '
-    str2 = 'Mundo!'
+  ``` rb
+  str1 = 'Olá, '
+  str2 = 'Mundo!'
 
-    str1.concat str2
-    # => "Olá, Mundo!"
-    ```
+  str1.concat str2
+  # => "Olá, Mundo!"
+  ```
 
     Ou:
 
-    ``` rb
-    str1 = 'Olá, '
-    str2 = 'Mundo!'
+  ``` rb
+  str1 = 'Olá, '
+  str2 = 'Mundo!'
 
-    str1 + str2
-    # => "Olá, Mundo!"
-    ```
+  str1 + str2
+  # => "Olá, Mundo!"
+  ```
 
 * **`index`**: Retorna a posição da primeira ocorrência de uma substring.
 
-    ``` rb
-    str = 'Olá, Mundo!'
-    str.index 'Mundo!'
-    # => 5
-    ```
+  ``` rb
+  str = 'Olá, Mundo!'
+  str.index 'Mundo!'
+  # => 5
+  ```
 
 * **`count`**: Retorna quantas vezes uma substring ocorreu na string.
 
-    ``` rb
-    str = 'Olá, Mundo! Olá, Todos!'
-    str.count 'O' # => 2
-    str.count 'o' # => 3
-    ```
+  ``` rb
+  str = 'Olá, Mundo! Olá, Todos!'
+  str.count 'O' # => 2
+  str.count 'o' # => 3
+  ```
 
 * **`sub`**: Substitui a primeira ocorrência de uma substring por outra.
 
-    ``` rb
-    str = 'Adeus, Mundo!'
-    str.sub 'Adeus', 'Olá'
-    # => "Olá, MUndo!"
-    ```
+  ``` rb
+  str = 'Adeus, Mundo!'
+  str.sub 'Adeus', 'Olá'
+  # => "Olá, MUndo!"
+  ```
 
 * **`gsub`**: Substitui todas as ocorrências de uma substring por outra.
 
-    ``` rb
-    str = 'dias e dias'
-    str.gsub 'dias', 'noites'
-    # => noites e noites
-    ```
+  ``` rb
+  str = 'dias e dias'
+  str.gsub 'dias', 'noites'
+  # => noites e noites
+  ```
 
 * **`include?`**: Retorna `true` ou `false` se uma substring existir ou não, respectivamente, dentro da string.
 
-    ``` rb
-    str = '1, 2, 3, 4, 5, 6, 7, 8'
-    str.include? '5' => true
-    str.include? '9' => false
-    ```
+  ``` rb
+  str = '1, 2, 3, 4, 5, 6, 7, 8'
+  str.include? '5' => true
+  str.include? '9' => false
+  ```
 
 * **`chomp`**: Remove a quebra de linha ao final da string.
 
-    ``` rb
-    str = "Olá, Mundo!\n"
-    str.chomp
-    # => "Olá, Mundo!"
-    ```
+  ``` rb
+  str = "Olá, Mundo!\n"
+  str.chomp
+  # => "Olá, Mundo!"
+  ```
 
 * **`split`**: Divide a string em um array com base em um delimitador.
 
-    ``` rb
-    str = '1, 2, 3, 4, 5, 6, 7, 8'
-    str.split ', '
-    # => ["1", "2", "3", "4", "5", "6", "7", "8"]
-    ```
+  ``` rb
+  str = '1, 2, 3, 4, 5, 6, 7, 8'
+  str.split ', '
+  # => ["1", "2", "3", "4", "5", "6", "7", "8"]
+  ```
 
 * **`slice`**, **`[]`**: Formam uma nova string a partir de um índice e, se especificada, quantidade de caracteres contando com esses índices.
 
-    ``` rb
-    str = 'Olá, Mundo!'
-    str.slice 5, 6
-    # => "Mundo!"
+  ``` rb
+  str = 'Olá, Mundo!'
+  str.slice 5, 6
+  # => "Mundo!"
 
-    # Ou
+  # Ou
 
-    str[5, 6]
-    # => "Mundo!"
-    ```
+  str[5, 6]
+  # => "Mundo!"
+  ```
 
   É possível utilizar também com intervalo de índices, que retorna uma substring que começa no índice de início e vai até o índice de fim.
 
-    ``` rb
-    str = 'Olá, Mundo!'
-    str.slice 5..10
-    # => "Mundo!"
+  ``` rb
+  str = 'Olá, Mundo!'
+  str.slice 5..10
+  # => "Mundo!"
 
-    # Ou
+  # Ou
 
-    str[5..10]
-    # => "Mundo!"
-    ```
+  str[5..10]
+  # => "Mundo!"
+  ```
 
-    Neste caso, é possível omitir o índice de fim, já que vai do índice `5` até o fim da string, ficando `5..`.
-    Índices negativos contam da direita para a esquerda, ou seja, `-1` é igual ao último caractere da string.
+  Neste caso, é possível omitir o índice de fim, já que vai do índice `5` até o fim da string, ficando `5..`.
+  Índices negativos contam da direita para a esquerda, ou seja, `-1` é igual ao último caractere da string.
 
 * **`delete`**: Remove um trecho da string.
 
-    ``` rb
-    str = 'Olá, Mundo!'
-    str.delete 'Olá, '
-    # => "Mundo!"
-    ```
+  ``` rb
+  str = 'Olá, Mundo!'
+  str.delete 'Olá, '
+  # => "Mundo!"
+  ```
 
 * **`casecmp`**: Retorna `-1` caso a primeira string seja menor que a segunda(a primeira string vem antes da segunda em ordem alfabética), `0` se as duas strings forem iguais em termos de ordenação (desconsidera diferenças de maiúsculas e minúsculas), ou `1` se a primeira string for maior que a segunda string(a primeira string vem depois da segunda na ordem alfabética).
 
-    ``` rb
-    str = 'Olá'
-    str.casecmp 'oLÁ' # =>  1
-    str.casecmp 'Olá' # =>  0
-    str.casecmp 'olá' # =>  0
-    str.casecmp 'álo' # => -1
-    ```
+  ``` rb
+  str = 'Olá'
+  str.casecmp 'oLÁ' # =>  1
+  str.casecmp 'Olá' # =>  0
+  str.casecmp 'olá' # =>  0
+  str.casecmp 'álo' # => -1
+  ```
 
 #### Interpolação
 
@@ -271,7 +273,7 @@ str = "A soma entre #{n1} e #{n2} é #{n1 + n2}."
 # => "A soma entre 13 e 5 é 18."
 ```
 
-### `Integer`
+### Tipo `Integer`
 
 São números inteiros, e com eles é possível fazer operações matemáticas simples.
 
@@ -281,9 +283,216 @@ inteiro2 = -5
 inteiro3 = 0
 ```
 
-### `Float`
+#### Operações Matemáticas
 
-### `Symbol`
+São feitas utilizando os operadores aritméticos.
+
+* **'`+`'**: Soma.
+* **'`-`'**: Subtração.
+* **'`*`'**: Multiplicação.
+* **'`/`'**: Divisão.
+* **'`%`'**: Resto da Divisão.
+* **'`**`'**: Exponenciação.
+
+**Exemplo:**
+
+``` rb
+5 + 2     # => 7
+5 - 2     # => 3
+5 * 2     # => 10
+5 / 2     # => 2
+5 % 2     # => 1
+5 ** 2    # => 25
+```
+
+Perceba que a divisão entre 5 e 2 resulta em 2 ao invés de 2.5. Isso acontece porque a operação é feita com dois inteiros, dando a entender que o resultado também deve ser um número inteiro. Para resolver isso, você pode tornar um dos operandos um número real (de ponto flutuante).
+
+**Exemplo:**
+
+``` rb
+5 / 2.0    # => 2.5
+15.0 / 2   # => 7.5
+```
+
+#### Métodos para Inteiros
+
+* **'`abs`'**: Retorna o número valor absoludo do número.
+
+  ``` rb
+  5.abs      # => 5
+  -51.abs    # => 51
+  0.abs      # => 0
+  ```
+
+* **'`chr`'**: Retorna uma string contendo o caractere que tal número corresponde.
+
+  ``` rb
+  puts 82.chr   # => R
+  puts 117.chr  # => u
+  puts 98.chr   # => b
+  puts 121.chr  # => y
+  ```
+
+  É possível especificar o *enconding* como argumento.
+
+* **'`digits`'**: Retorna um array contendo os algarismos da conversão do número inteiro para uma base específica.
+
+  ``` rb
+  10.digits 2   # => [0, 1, 0, 1]
+  10.digits 8   # => [2, 1]
+  10.digits 16  # => [10]
+  ```
+
+  No exemplo acima, o número 10 é convertido para a base 2, 8 e 16, e para cada uma das conversões é gerado um array que armazena cada algarismo do valor já na base convertida.
+
+* **'`div`'**: Retorna o resultado da divisão inteira do número inteiro por um número passado como argumento.
+
+  ``` rb
+  10.div 2    # => 5
+  22.div 11   # => 2
+  5.div 2     # => 2
+  ```
+
+* **'`fdiv`'**: Retorna o resultado da divisão real do número inteiro pelo número passado como argumento.
+
+  ``` rb
+  puts 10.fdiv 2    # => 5.0
+  puts 22.fdiv 11   # => 2.0
+  puts 5.fdiv 2     # => 2.5
+  ```
+
+* **'`remainder`'**: Retorna o resto da divisão do inteiro com o número passado como argumento.
+
+  ``` rb
+  5.remainder 2    # => 1
+  25.remainder 7   # => 4
+  2.remainder 1    # => 0
+  ```
+
+* **'`divmod`'**: Retorna um array que contém o resultado da divisão e o resto da divisão do número inteiro pelo número passado como argumento.
+
+  ``` rb
+  10.divmod 2    # => [5, 0]
+  22.divmod 11   # => [2, 0]
+  5.divmod 2     # => [2, 1]
+  ```
+
+  O primeiro elemento do array é o resultado da divisão inteira, e o segundo é o resto da divisão.
+
+* **'`pow`'**: Eleva o inteiro pelo número passado como argumento.
+
+  ``` rb
+  5.pow 2     # => 25
+  2.pow 3     # => 8
+  7.pow 1     # => 7
+  3.pow 0     # => 1
+  ```
+
+* **'`pred`'**: Retorna o predecessor do número.
+
+  ``` rb
+  5.pred   # => 4
+  10.pred  # => 9
+  7.pred   # => 6
+  ```
+
+* **'`succ`', '`next`'**: Retorna o sucessor do número.
+
+  ``` rb
+  # Com `succ`
+  5.succ   # => 6
+  10.succ  # => 11
+  7.succ   # => 8
+
+  # Com `next`
+  5.next   # => 6
+  10.next  # => 11
+  7.next   # => 8
+  ```
+
+* **'`gcd`'**: Retorna o maior divisor comum de dois inteiros.
+
+  ``` rb
+  25.gcd 60    # => 5
+  21.gcd 84    # => 21
+  92.gcd 6     # => 2
+  ```
+
+  O resultado é sempre o valor absoluto, e por isso é sempre positivo.
+
+* **'`lcm`'**: Retorna o menor múltiplo comum de dois inteiros.
+
+  ``` rb
+  25.lcm 60    # => 300
+  21.lcm 84    # => 84
+  92.lcm 6     # => 276
+  ```
+
+* **'`gcdlcm`'**: Retorna um array de dois elementos:
+
+  1. O maior divisor comum dos dois inteiros.
+  1. O menor múltiplo comum dos dois inteiros.
+
+  ``` rb
+  25.gcdlcm 60    # => [5, 300]
+  21.gcdlcm 84    # => [21, 84]
+  92.gcdlcm 6     # => [2, 276]
+  ```
+
+* **'`even?`'**: Retorna verdadeiro se o número for par.
+
+  ``` rb
+  20.even?    # => true
+  31.even?    # => false
+  0.even?     # => true
+  ```
+
+* **'`odd?`'**: Retorna verdadeiro se o número for ímpar.
+
+  ``` rb
+  15.odd?    # => true
+  22.odd?    # => false
+  0.odd?     # => false
+  ```
+
+* **'`zero?`'**: Retorna verdadeiro se o número for igual a zero.
+
+  ``` rb
+  0.zero?   # => true
+  21.zero?  # => false
+  13.zero?  # => false
+  ```
+
+* **'`size`'**: Retorna a quantidade de bytes que o número ocupa na memória.
+
+  ``` rb
+  15.size
+  (-221**3).size
+  (210**10).size
+  ```
+
+  O resultado pode variar, mas normalmente ocupa 4 ou 8 bytes.
+
+##### Métodos de `Integer`
+
+* **'`Integer.sqrt`'**: Retorna a raiz quadrada de um número inteiro.
+
+  ``` rb
+  Integer.sqrt 25  # => 5
+  Integer.sqrt 100 # => 10
+  ```
+
+* **'`Integer.try_convert`'**: Se o argumento recebido for um inteiro, retorna o próprio objeto. Se não for um inteiro, tenta fazer a conversão com `to_int`, e se a conversão for bem-sucedida, retorna o resultado da conversão, caso contrário, retorna `nil`.
+
+  ``` rb
+  Integer.try_convert 5    # => 5
+  Integer.try_convert 2.4  # => 2
+  Integer.try_convert 'A'  # => nil
+  ```
+
+### Tipo `Float`
+
+### Tipo `Symbol`
 
 Símbolos são identificadores imutáveis, geralmente utilizados para representar chaves em hashes.
 
@@ -309,9 +518,9 @@ my_hash = {
 
 Perceba que não é mais necessário `=>` para atribuir o valor à chave, pois o mesmo é substituído por `:` ao fim do nome.
 
-### Boolean
+### Tipo `boolean`
 
-### Nil
+### Tipo `nil`
 
 ### Conversão de Tipos
 
@@ -378,9 +587,9 @@ Em Ruby, são: `if` / `unless`, `else` e `elsif`.
 **Sintaxe:**
 
 ``` rb
-if (condicao1)
+if condicao1
   # Bloco a ser executado caso a condição seja verdadeira
-elsif (condicao2)
+elsif condicao2
   # Bloco a ser executado caso a condição seja verdadeira
 else
   # Bloco a ser executado se nenhuma condição acima for verdadeira
@@ -415,6 +624,59 @@ end
 
 > OBS.: Não pode haver nenhum `elsif` em estruturas `unless`.
 
+### Declaração `case`
+
+Permite executar um bloco específico de acordo com o valor de uma variável ou expressão. Estruturas `case` são compostas de **`when`**, que definem o bloco que será executado de acordo com um valor, e um `else` no fim, que executa quando nenhum `when` corresponde ao valor da variável/expressão. O bloco `else` é opcional.
+
+**Sintaxe:**
+
+``` rb
+case expressao
+when valor1
+  # Bloco que executa se `expressao` for igual a `valor1`
+when valor1
+  # Bloco que executa se `expressao` for igual a `valor2`
+...
+when valor10
+  # Bloco que executa se `expressao` for igual a `valor10`
+else
+  # Bloco que executa quando nenhum `when` executar
+end
+```
+
+**Exemplo:**
+
+``` rb
+print 'Escolha uma opção entre 1 e 3: '
+escolha = Integer(gets.chomp)
+
+case escolha
+when 1
+  puts 'Você escolheu 1!'
+when 2
+  puts 'Você escolheu 2!'
+when 3
+  puts 'Você escolheu 3!'
+else
+  puts 'Escolha inválida!'
+end
+```
+
+#### Palavra-chave `then`
+
+Permite escrever uma declaração `when` em apenas uma linha.
+
+**Exemplo:**
+
+``` rb
+case valor
+when 1 then puts 'Número 1'
+when 2 then puts 'Número 2'
+when 3 then puts 'Número 3'
+else puts 'Valor diferente de 1, 2 e 3'
+end
+```
+
 ## Operadores
 
 Em Ruby, os principais operadores são:
@@ -424,7 +686,7 @@ Em Ruby, os principais operadores são:
 * Operadores Lógicos
 * Operador Ternário
 * Operadores de Atribuição
-* Operador de Concatenação
+* Operadores de Concatenação
 * Operadores Bitwise
 
 ### Operadores Aritméticos
@@ -448,11 +710,11 @@ A ordem de precedência dos operadores aritméticos é feita na seguinte ordem:
 
 ### Operadores de Comparação
 
-* **`>`**:      Maior.
-* **`<`**:      Menor.
-* **`==`**:     Igual.
-* **`>=`**:     Maior ou igual.
-* **`<=`**:     Menor ou igual.
+* **`>`**: Maior.
+* **`<`**: Menor.
+* **`==`**: Igual.
+* **`>=`**: Maior ou igual.
+* **`<=`**: Menor ou igual.
 
 #### Operador de Comparação Combinada
 
@@ -487,6 +749,192 @@ puts condicao ? 'Verdadeiro' : 'Falso'
 ```
 
 Primeiro o valor **booleano**, em seguida, **`?`** para `if` e **`:`** para `else`.
+
+### Operadores de Atribuição
+
+São usados para atribuir um valor a uma variável.
+
+* **'`=`'**: Atribui um valor a uma variável.
+
+  ``` rb
+  x = 10
+  ```
+
+* **'`+=`'**: Soma à variável.
+
+  ``` rb
+  x = 10
+  x += 5 # Mesmo que `x = x + 5`
+  # => 15
+  ```
+
+* **'`-=`'**: Subtrai à variável.
+
+  ``` rb
+  x = 10
+  x -= 5 # Mesmo que `x = x - 5`
+  # => 5
+  ```
+
+* **'`*=`'**: Multiplica à variável.
+
+  ``` rb
+  x = 10
+  x *= 5 # Mesmo que `x = x * 5`
+  # => 50
+  ```
+
+* **'`/=`'**: Divide à variável.
+
+  ``` rb
+  x = 10
+  x /= 5 # Mesmo que `x = x / 5`
+  # => 2
+  ```
+
+* **'`%=`'**: Atribui à variável o valor do resto da divisão dela por um outro valor.
+
+  ``` rb
+  x = 10
+  x %= 5 # Mesmo que `x = x % 5`
+  # => 0
+  ```
+
+* **'`**=`'**: Eleva o valor da variável a um outro valor.
+
+  ``` rb
+  x = 10
+  x **= 5 # Mesmo que `x = x ** 5`
+  # => 100000
+  ```
+
+* **'`&=`'**: Realiza a operação bit a bit AND e atribui o resultado à variável da esquerda.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  y = 3 # 0011 em binário
+
+  x & y # 1
+  ```
+
+* **'`|=`'**: Realiza a operação bit a bit OR e atribui o resultado à variável da esquerda.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  y = 3 # 0011 em binário
+
+  x |= y # => 7
+  ```
+
+* **'`^=`'**: Realiza a operação bit a bit XOR e atribui o resultado à variável da esquerda.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  y = 3 # 0011 em binário
+
+  x ^= y # => 6
+  ```
+
+* **'`<<=`'**: Realiza uma operação de deslocamento à esquerda e atribui o resultado à variável.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  puts x <<= 2 # => 10100
+  ```
+
+* **'`>>=`'**: Realiza uma operação de deslocamento à direita e atribui o resultado à variável.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  x >>= 2 # => 0001
+  ```
+
+* **'``'**:
+
+### Operadores de Concatenação
+
+Há dois operadores de concatenação, um geralmente usado para strings e outro para arrays.
+
+* **'`+`'**: Quando ambos os operandos são strings, é feita a concatenação ao invés da soma.
+
+  ``` rb
+  str1 = 'Olá, '
+  str2 = 'Mundo!'
+  resultado = str1 + str2
+  # => Olá, Mundo!
+  ```
+
+* **'`<<`'**: Concatena duas strings. Se algum dos operandos for um número inteiro, será tratado como uma concatenação normal, não havendo conversão automática para caracteres ASCII.
+
+  ``` rb
+  str1 = 'Olá, '
+  str2 = 'Mundo!'
+  resultado = str1 << str2
+  # => Olá, Mundo!
+  ```
+
+  O mesmo também pode ser usado para adicionar um elemento ao fim de um array:
+
+  ``` rb
+  my_array = [1, 2, 3]  # => [1, 2, 3]
+  my_array << 4         # => [1, 2, 3, 4]
+  ```
+
+  No caso de arrays, este operador funciona da mesma maneira que o método `push`.
+
+### Operadores Bitwise
+
+São utilizados para realizar operações a nível de bits em números inteiros. Os operadores bitwise atuam em cada bit individual de dois números e executam operações como deslocamento, AND, OR, XOR, entre outros.
+
+**Os principais operadores bitwise são:**
+
+* **'`&`' (AND)**: Retorna 1 para cada posição de bit em que ambos os operadores têm o bit 1.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  y = 3 # 0011 em binário
+
+  x & y # 0001 (1 em decimal)
+  ```
+
+* **'`|`' (OR)**: Retorna 1 para cada posição de bit em que pelo menos um dos operandos tem o bit 1.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  y = 3 # 0011 em binário
+
+  x | y # 0111 (7 em decimal)
+  ```
+
+* **'`^`' (XOR)**: Retorna 1 para cada posição de bit em que apenas um dos operandos tem um bit 1.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  y = 3 # 0011 em binário
+
+  x ^ y # 0110 (6 em decimal)
+  ```
+
+* **'`~`' (NOT)**: Inverte cada bit de um número.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  ~x # 1010 (-6 em decimal) ou -110
+  ```
+
+* **'`<<`' (Deslocamento à Esquerda)**: Move os bits dos números para a esquerda.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  x << 2 # 10100 (20 em decimal)
+  ```
+
+* **'`>>`' (Deslocamento à Direita)**: Move os bits dos números para a direta.
+
+  ``` rb
+  x = 5 # 0101 em binário
+  x >> 2 # 0001 (1 em decimal)
+  ```
 
 ## Arrays
 
@@ -799,6 +1247,278 @@ Ambos os exemplos acima correspondem ao mesmo array.
   # => [1, 3, 5]
   ```
 
+## Ranges
+
+Um range representa uma coleção de valores entre dois valores específicos.
+
+São representados com **`..`** (range inclusivo) e **`...`** (range exclusivo).
+
+* **Range inclusivo**: Inclui o último valor.
+* **Range exclusivo**: Exclui o último valor.
+
+**Exemplo:**
+
+``` rb
+# Range inclusivo
+(1..5).to_a   # => [1, 2, 3, 4, 5]
+
+# Range exclusivo
+(1...5).to_a  # => [1, 2, 3, 4]
+```
+
+Além de números, podem ser criados ranges com letras.
+
+**Exemplo:**
+
+``` rb
+# Range inclusivo
+('a'..'f').to_a   # => ["a", "b", "c", "d", "e", "f"]
+
+# Range exclusivo
+('a'...'f').to_a  # => ["a", "b", "c", "d", "e"]
+```
+
+### Ranges sem Início ou Fim
+
+São ranges em que o valor de início ou fim são iguais a `nil`.
+
+#### Ranges sem Início
+
+É possível declarar ranges sem um valor de início. Quando não especificado, o valor de início é `nil`.
+
+**Declaração:**
+
+``` rb
+my_range = (nil..5)
+# Ou
+my_range = (..5)
+```
+
+Ranges sem início são compostos de todos os valores até o valor final. São geralmente usados para fatiar arrays.
+
+**Exemplo:**
+
+``` rb
+# Array que será fatiado
+my_array = [1, 2, 3, 4, 5]
+
+# Range
+r = (...3)
+
+# Fatia o array
+my_array[r] # => [1, 2, 3]
+```
+
+> **OBS.:** É lançada uma exceção se aplicado o método `each`.
+
+#### Ranges sem Fim
+
+São ranges que possuem o valor final igual a `nil`.
+
+**Exemplo:**
+
+``` rb
+my_range = (1..)
+# Ou
+my_range = (1..nil)
+```
+
+Ranges sem fim são ranges infinitos que iniciam a partir de um valor específico. É geralmente usado para capturar um intervalo de números até um certo limite.
+
+**Exemplo:**
+
+``` rb
+my_array = []
+(1..).each do |num|
+  my_array << num
+
+  # Para quando o array se tornar [1, 2, 3, 4, 5]
+  break if num > 5
+end
+
+my_array # => [1, 2, 3, 4, 5]
+```
+
+### Métodos para Ranges
+
+#### Métodos de Pesquisa
+
+* **'`begin`'**: Retorna o primeiro valor do range.
+
+  ``` rb
+  r = (1..5)
+  r.begin # => 1
+  ```
+
+* **'`end`'**: Retorna o último valor do range.
+
+  ``` rb
+  r = (1..5)
+  r.end # => 5
+  ```
+
+* **'`bsearch`'**: Realiza uma busca binária em um array ordenado ou range. A busca binária é um algoritmo eficiente para encontrar um valor específico em uma coleção ordenada, reduzindo pela metade o espaço de busca a cada iteração.
+
+  ``` rb
+  # Range inclusivo 1-10
+  r = (1..10)
+
+  # Busca por valores dentro do range
+  r.bsearch { |x| x == 5 }   # => 5
+  r.bsearch { |x| x == 11 }  # => nil
+  ```
+
+* **'`count`'**: Retorna o número de elementos dentro do range.
+
+  ``` rb
+  r = (1..10)
+  r.count # => 10
+  ```
+
+* **'`first`'**: Retorna o primeiro elemento do range.
+
+  ``` rb
+  r = (1..10)
+  r.first # => 1
+  ```
+
+* **'`last`'** Retorna o último elemento do range.
+
+  ``` rb
+  r = (1..10)
+  r.last # => 10
+  ```
+
+* **'`exclude_end?`'**: Retorna verdadeiro se o range é exclusivo.
+
+  ``` rb
+  # Range inclusivo
+  inclusive_range = (1..10)
+  inclusive_range.exclude_end? # => false
+
+  # Range exclusivo
+  exclusive_range = (1...10)
+  exclusive_range.exclude_end? # => true
+  ```
+
+* **'`max`'**: Retorna o elemento com maior valor do range.
+
+  ``` rb
+  # Range inclusivo
+  inclusive_range = (1..10)
+  inclusive_range.max # => 10
+
+  # Range exclusivo
+  exclusive_range = (1...10)
+  exclusive_range.max # => 9
+  ```
+
+* **'`min`'**: Retorna o elemento com menor valor do range.
+
+  ``` rb
+  r = (1..10)
+  r.min # => 1
+  ```
+
+* **'`minmax`'**: Retorna um array com os elementos de valor mínimo e máximo do range.
+
+  ``` rb
+  # Range inclusivo
+  inclusive_range = (1..10)
+  print inclusive_range.minmax # => [1, 10]
+
+  # Range exclusivo
+  exclusive_range = (1...10)
+  print exclusive_range.minmax # => [1, 9]
+  ```
+
+* **'`size`'**: Retorna o tamanho do range.
+
+  ``` rb
+  # Range inclusivo
+  inclusive_range = (1..10)
+  inclusive_range.size # => 10
+
+  # Range exclusivo
+  exclusive_range = (1...10)
+  exclusive_range.size # => 9
+  ```
+
+#### Métodos de Comparação
+
+* **'`cover?`', '`===`', '`include?`', '`member?`'**: Retorna verdadeiro se um dado está dentro do range.
+
+  ``` rb
+  # Range
+  r = (1..10)
+
+  # Com `cover?`
+  r.cover? 5      # => true
+  r.cover? 11     # => false
+
+  # Com `===`
+  r === 5         # => true
+  r === 11        # => false
+
+  # Com `include?`
+  r.include? 5    # => true
+  r.include? 11   # => false
+
+  # Com `member?`
+  r.member? 5     # => true
+  r.member? 11    # => false
+  ```
+
+* **'`eql?`', '`==`'**: Retorna verdadeiro se um dado objeto é igual ao range.
+
+  ``` rb
+  # Range
+  r = (1..10)
+
+  # Com `eql?`
+  r.eql? 1..10    # => true
+  r.eql? 5..10    # => false
+
+  # Ou com `==`
+  r == (1..10)      # => true
+  r == (5..10)      # => false
+  ```
+
+#### Métodos para Iteração
+
+* **'`each`'**: Chama um bloco para cada elemento dentro do range.
+
+  ``` rb
+  # Range
+  r = (1..10)
+
+  # Array para armazenar os valores pares
+  even_values = []
+
+  # Itera sobre o range e preenche o array
+  r.each { |num| even_values << num if num.even? }
+
+  print even_values # => [2, 4, 6, 8, 10]
+  ```
+
+* **'`step`'**: Itera sobre os valores do range com base em um intervalo específico. Se não passado um argumento, o mesmo será 1.
+
+  ``` rb
+  # Range
+  r = (1..5)
+
+  # Intervalo 1
+  elements = []
+  r.step { |num| elements << num }
+  print elements # => [1, 2, 3, 4, 5]
+  puts
+
+  # Intervalo 2
+  elements = []
+  r.step(2) { |num| elements << num }
+  print elements # => [1, 3, 5]
+  ```
+
 ## Estruturas de Repetição e Iteradores
 
 ### `for`
@@ -932,7 +1652,7 @@ Este método retorna a quantidade de repetições.
 
 #### `upto` e `downto`
 
-Permitem iterar sobre valores específicos em um sequência, sendo `upto` para iterar de forma crescente e `downto` para decrescente.
+Permitem iterar sobre valores específicos em um sequência, sendo `upto` para iterar de forma crescente e `downto` de forma decrescente.
 
 ``` rb
 50.upto(55) { |n| puts n }
@@ -1253,14 +1973,18 @@ oi.call
 
 Usando o nome de um método e adicionando **`:`** ao início, fará com que se torne um símbolo. Adicionar **`&`** antes desse símbolo, fará com que se torne um bloco. Então fica: **`&:metodo`**.
 
+**Exemplo:**
+
 ``` rb
 array = ['1', '2', '3']
+
 array.map!(&:to_i)
 # => [1, 2, 3]
 
-# Forma simplificada comparada com:
+# O mesmo porém sem símbolos:
 
 array.map! { |e| e.to_i }
+# => [1, 2, 3]
 ```
 
 ## Tratamento de Erros
@@ -1353,9 +2077,11 @@ end
 
 ### Método `initialize`
 
-Este método é executado sempre que uma nova instância de uma class for criada usando o método **`new`**. Geralmente, é onde são dafinidas as variáveis de instância. **O método `initialize` é opcional**.
+Este método é executado sempre que uma nova instância de uma class for criada usando o método **`new`**. Geralmente, é onde são definidas as variáveis de instância. **O método `initialize` é opcional**.
 
 Os parâmetros deste método devem ser recebidos assim que criada uma nova instância de uma classe.
+
+**Exemplo:**
 
 ``` rb
 class Pessoa
@@ -1365,7 +2091,7 @@ class Pessoa
 end
 
 Pessoa.new 'Mundo'
-# Imprime "Olá, Mundo!"
+# Output: "Olá, Mundo!"
 ```
 
 ### Variáveis de Instância
@@ -1672,4 +2398,121 @@ end
 
 NomeClasse.metodo_de_classe
 # => "Eu sou um método de classe!"
+```
+
+## Método `respond.to?`
+
+Verifica se algum método pode ser usado com um objeto específico, retornando verdadeiro caso possa ser usado, ou falso em caso contrário.
+
+**Exemplo:**
+
+``` rb
+num = 22
+
+num.respond_to? :next     # => true
+num.respond_to? :length   # => false
+```
+
+O método deve ser escrito em forma de símbolo, ou seja, '`:next`' ao invés de '`.next`'.
+
+## Bases Numéricas
+
+Para representar as principais bases numéricas em Ruby, é usado um prefixo específico para cada uma delas, com exceção da base 10 (decimal), que é a base padrão.
+
+* **Decimal**: É a base padrão.
+
+  ``` rb
+  x = 23
+  ```
+
+* **Binário**: Números na base 2 são representados com o prefixo **`0b`**.
+
+  ``` rb
+  x = 0b10111 # 23 em decimal
+  ```
+
+* **Octal**: Números na base 8 são representados com o prefixo **`0o`**.
+
+  ``` rb
+  x = 0o27 # 23 em decimal
+  ```
+
+* **Hexadecimal**: Números na base 16 são representados com o prefixo **`0x`**.
+
+  ``` rb
+  x = 0x17 # 23 em decimal
+  ```
+
+### Conversão entre Bases
+
+Para converter números entre as bases, é usado o método **`to_s`**, que converte um valor para uma string. Neste método, deve ser passado como argumento a base de conversão.
+
+**Conversão para Decimal:**
+
+``` rb
+# 45 (decimal) em outras bases
+bin = 0b101101
+oct = 0o55
+hex = 0x2D
+
+# Conversão para decimal
+bin.to_s 10 # => 45
+oct.to_s 10 # => 45
+hex.to_s 10 # => 45
+```
+
+Outra forma de converter outras bases para decimal, é utilizando o método **`to_i`**, e passando como argumento a base em que o número que será convertido está.
+
+``` rb
+# 45 (decimal) em outras bases
+bin = '0b101101'
+oct = '0o55'
+hex = '0x2D'
+
+# Conversão para decimal
+bin.to_i 2  # => 45
+oct.to_i 8  # => 45
+hex.to_i 16 # => 45
+```
+
+**Conversão para Binário:**
+
+``` rb
+# 11001 (binário) em outras bases
+dec = 25
+oct = 0o31
+hex = 0x19
+
+# Conversão para binário
+dec.to_s 2 # => 11001
+oct.to_s 2 # => 11001
+hex.to_s 2 # => 11001
+```
+
+**Conversão para Octal**:
+
+``` rb
+# 73 (octal) em outras bases
+dec = 59
+bin = 0b111011
+hex = 0x3B
+
+# Conversão para octal
+dec.to_s 8 # => 73
+bin.to_s 8 # => 73
+hex.to_s 8 # => 73
+```
+
+**Conversão para Hexadecimal**:
+
+``` rb
+# 2C (hexadecimal) em outras bases
+dec = 44
+bin = 0b101100
+oct = 0o54
+
+# Conversão para hexadecimal
+puts dec.to_s 16 # => 2C
+puts bin.to_s 16 # => 2C
+puts oct.to_s 16 # => 2C
 ```

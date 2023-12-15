@@ -2295,6 +2295,164 @@ No exemplo acima:
 
 * Uma observação é que essa função **modifica a string original**.
 
+### Remover Espaços no Início e Fim de uma String
+
+Para remover espaços desnecessário no início e no fim de uma string, podemos fazer o seguinte:
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+// Função que remove os espaços em branco no início e fim da string
+void removerEspacos(char *str) {
+    int inicio = 0;
+    int fim = strlen(str) - 1;
+
+    // Conta os espaços em branco do início
+    while (isspace((unsigned char)str[inicio])) {
+        inicio++;
+    }
+
+    // Conta os espaços em branco do fim
+    while (fim > inicio && isspace((unsigned char)str[fim])) {
+        fim--;
+    }
+
+    // Copia a string sem espaços para a string original
+    int i, j = 0;
+    for (i = inicio; i <= fim; i++) {
+        str[j++] = str[i];
+    }
+
+    // Adiciona o caracter nulo no final da string
+    str[j] = '\0';
+}
+
+int main() {
+    char str[] = "   Hello, World!   ";
+    printf("String original: \"%s\"\n", str);
+
+    removerEspacos(str);
+    printf("Nova string: \"%s\"\n", str);
+
+    return 0;
+}
+```
+
+**Análise do Exemplo:**
+
+1. Importação das bibliotecas.
+
+    ``` c
+    #include <stdio.h>
+    #include <string.h>
+    #include <ctype.h>
+    ```
+
+    * **'`stdio.h`'**: Para usar `printf()`.
+    * **'`string.h`'**: Para usar `strlen()`.
+    * **'`ctype.h`'**: Para usar `isspace()`, que é uma função que retorna verdadeiro quando seu argumento é um espaço em branco.
+
+1. Declaração de função.
+
+    ``` c
+    void removerEspacos(char *str)
+    ```
+
+    Aqui, é declarada uma função que altera uma string existente, excluindo os espaços em branco no início e no fim da string.
+
+    Recebe como argumento um ponteiro para uma string.
+
+1. Declaração de variáveis para início e fim.
+
+    ``` c
+    int inicio = 0;
+    int fim = strlen(str) - 1;
+    ```
+
+    Aqui, são declaradas as variáveis `inicio` e `fim`, que representam os índices inicial e final da string após a remoção dos espaços em branco.
+
+1. Verificar espaços no início.
+
+    ``` c
+    while (isspace((unsigned char)str[inicio])) {
+        inicio++;
+    }
+    ```
+
+    Aqui, há um loop que verifica se o caractere inicial da string é um espaço em branco, e se for, incrementa sobre a variável `inicio`, continuando a verificar até o caractere não ser um espaço em branco.
+
+    O cast para `unsigned char` dentro da função `isspace()` é uma prática comum e é feito para garantir que o argumento fornecido seja um valor dentro do intervalo representável pela tabela ASCII, sem o risco de comportamento indefinido.
+
+1. Verifica espaços no fim.
+
+    ``` c
+    while (fim > inicio && isspace((unsigned char)str[fim])) {
+        fim--;
+    }
+    ```
+
+    É usado um loop `while` para verificar duas coisas: se a variável `fim` é maior `inicio`, e se o caractere que corresponde ao fim é um espaço em branco. Se ambas as condições forem verdadeiras, será decrementado da variável `fim` até que o último caractere não seja um espaço em branco.
+
+1. Remove os espaços em branco do início e fim da string.
+
+    ``` c
+    int i, j = 0;
+    for (i = inicio; i <= fim; i++) {
+        str[j++] = str[i];
+    }
+    ```
+
+    Aqui, há um loop `for` que move os caracteres para a esquerda usando as variáveis `inicio` e `fim`. Basicamente, o loop passa por toda a string, com exceção dos caracteres em branco no início e fim da string.
+
+1. Caractere nulo.
+
+    ``` c
+    str[j] = '\0';
+    ```
+
+    Por fim, a string é encerrada com o caractere nulo.
+
+### Remover Quebras de Linha em Strings
+
+Para remover quebras de linhas em strings, é necessário procurar e remover o caractere `\n` dentro da string.
+
+**Exemplo:**
+
+``` c
+#include <stdio.h>
+#include <string.h>
+
+void removerQuebraDeLinha(char *str) {
+    // Comprimento da string
+    int comprimento = strlen(str);
+
+    // Procura e exclui quebras de linha na string
+    int i, j;
+    for (i = j = 0; i < comprimento; i++) {
+        if (str[i] != '\n') {
+            str[j++] = str[i];
+        }
+    }
+
+    // Adiciona o caractere nulo para indicar o final da nova string
+    str[j] = '\0';
+}
+
+int main() {
+    char str[] = "Hello,\n World!";
+    printf("String original: %s\n", str);
+
+    removerQuebraDeLinha(str);
+    printf("Nova string: %s\n", str);
+
+    return 0;
+}
+```
+
 ### Funções de String
 
 Para usar as funções de string, deve primeiro ser importado **`<string.h>`**.
@@ -2978,7 +3136,7 @@ São funções que aceitam um número variável de argumentos. São implementada
 
 A função `printf()` é o exemplo mais comum de função variádica, pois a mesma recebe um argumento obrigatório e os demais variam de acordo com a quantidade de formatos.
 
-Em `stdarg.h`, são definidos quatro macros:
+Em `stdarg.h`, são definidas quatro macros:
 
 * **`va_list`**: Armazena informações sobre os argumentos variádicos.
 
@@ -5408,11 +5566,11 @@ int main() {
 }
 ```
 
-No exemplo acima, o macro `PI` simboliza uma constante, e seria o mesmo que `const PI = 3.14159;`.
+No exemplo acima, a macro `PI` simboliza uma constante, e seria o mesmo que `const PI = 3.14159;`.
 
 ### Macros como Funções
 
-Macros podem ser usados para criar atalhos para blocos de código, funcionando como funções inline.
+Macros podem ser usadas para criar atalhos para blocos de código, funcionando como funções inline.
 
 **Exemplo:**
 
@@ -5430,7 +5588,7 @@ int main() {
 }
 ```
 
-No exemplo acima, o macro `SOMA` age como uma função que recebe dois argumentos e retorna a soma entre eles.
+No exemplo acima, a macro `SOMA` age como uma função que recebe dois argumentos e retorna a soma entre eles.
 
 ### Boas Práticas e Precauções para Macros
 
@@ -5442,15 +5600,165 @@ No exemplo acima, o macro `SOMA` age como uma função que recebe dois argumento
 
 * Macros não têm checagem de tipo, podendo a levar a erros difícieis de diagnosticar.
 
-### Macros Variádicas
+### Desfazer Definição de Macro
 
-São macros que aceitam um número variável de argumentos. Para isso, é utilizado **`...`**.
+A diretiva **`undef`** é usada para desfazer a definição de uma macro.
+
+**Sintaxe:**
+
+``` c
+#undef MACRO
+```
 
 **Exemplo:**
 
 ``` c
-// Já vem!
+#include <stdio.h>
+
+#define VALOR 5
+
+int main() {
+    printf("Macro: %d\n", VALOR);
+    // Output: Macro: 5
+
+    #undef VALOR
+
+    // A partir daqui, `VALOR` não é mais uma macro
+
+    return 0;
+}
 ```
+
+### Inclusão Condicional com Macros
+
+Permitem condicionar a compilação de partes do código fonte com base em expressões ou definições específicas. São usados **`#ifdef`**, **`ifndef`**, **`#else`** e **`endif`**.
+
+* **'`#ifdef`'**: O bloco entre `ifdef` e `endif` é incluído na compilação apenas se a macro passada como condição estiver definida, caso contrário, o bloco é ignorado.
+
+    ``` c
+    #include <stdio.h>
+
+    #define MACRO
+
+    int main() {
+        #ifdef MACRO
+            printf("Macro definida.\n");
+        #else
+            printf("Macro não definida.\n");
+        #endif
+            printf("Código padrão.\n");
+
+        return 0;
+    }
+
+    /* Output:
+    Macro definida.
+    Código padrão.
+    */
+    ```
+
+* **'`ifndef`'**: É o oposto de `ifdef`, incluindo seu código na compilação apenas se a macro passado não estiver definida.
+
+    ``` c
+    #include <stdio.h>
+
+    #define MACRO
+
+    int main() {
+        #ifndef MACRO
+            printf("Macro definida.\n");
+        #else
+            printf("Macro não definida.\n");
+        #endif
+            printf("Código padrão.\n");
+
+        return 0;
+    }
+
+    /* Output:
+    Macro não definida.
+    Código padrão.
+    */
+    ```
+
+* **'`#else`'**: O bloco desta diretiva é compilado apenas quando as diretivas acima desta não são compiladas.
+
+* **'`#elif`'**: Exatamente como um `else if`, só que como uma diretiva.
+
+    ``` c
+    #include <stdio.h>
+
+    #define MACRO 2
+
+    int main() {
+        #if MACRO == 1
+            printf("Macro definida como 1.\n");
+        #elif MACRO == 2
+            printf("Macro definida como 2.\n");
+        #elif MACRO == 3
+            printf("Macro definida como 3.\n");
+        #else
+            printf("Macro diferente de 1, 2 e 3, ou não definida.\n");
+        #endif
+            printf("Código padrão.\n");
+
+        return 0;
+    }
+
+    /* Output:
+    Macro definida como 2.
+    Código padrão.
+    */
+    ```
+
+* **'`#endif`'**: Como visto nas diretivas anteriores, encerra a estrura de condições.
+
+### Diretiva `#pragma`
+
+Fornece instruções específicas para o compilador, o linker ou outras ferramentas de construção durante a compilação do código. Essas diretivas são geralmente usadas para otimizações, controle de warning, alinhamento de memória e outras configurações específicas da implementação da plataforma.
+
+**Sintaxe:**
+
+``` c
+#pragma diretiva
+```
+
+A diretiva pode variar de acordo com o compilador e a plataforma. As diretivas mais comuns são:
+
+* **'`#pragma once`'**: Garante que um arquivo de cabeçalho seja incluído apenas uma vez durante a compilação, prevenindo inclusões duplicadas.
+
+    ``` c
+    #pragma once
+    ```
+
+* **'`#pragma warning`'**: Controla as mensagens de aviso geradas pelo compilador.
+
+    ``` c
+    #pragma warning(disable: codigo_de_aviso)
+    ```
+
+* **'`#pragma pack`'**: Controla o alinhamento de memória para estruturas.
+
+    ``` c
+    #pragma pack(n)
+    // Define o alinhamento de memória para n bytes
+    ```
+
+* **'`#pragma comment`'**: Inclui informações adicionais no arquivo executável, como bibliotecas a serem vinculadas.
+
+    ``` c
+    #pragma comment(lib, "nome_biblioteca.lib")
+    ```
+
+* **'`#pragma optimize`'**: Controla o nível de otimização.
+
+    ``` c
+    #pragma optimize("02")
+    ```
+
+Por não se um padrão C, as diretivas `#pragma` podem variar entre compiladores.
+
+O uso excessivo de `#pragma` pode tornar o código menos portátil entre diferentes ambientes de compilação.
 
 ## Arquivos
 
