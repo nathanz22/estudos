@@ -2,6 +2,12 @@
 
 Ruby é uma linguagem de programação dinâmica, de alto nível e orientada a objetos. Foi criada no Japão por Yukihiro "Matz" Matsumoto na década de 1990, com o objetivo de combinar a simplicidade com a praticidade do Perl com a orientação a objetos do Smalltalk.
 
+Ruby é uma linguagem interpretada, o que significa que o código é executado pelo interpretador Ruby, em vez de ser compilado para código de máquina. Isso torna Ruby mais rápido para aprender e usar, mas também significa que o código Ruby é mais lento do que o código compilado.
+
+Ruby é uma linguagem popular, usada para desenvolver uma variedade de aplicações, incluindo aplicações web, móveis, de servidor e de desktop.
+
+Além disso, Ruby possui diversas gems, que são bibliotecas de código reutilizáveis que podem ser adicionados ao código.
+
 ## Impressão de Valores
 
 As funções `puts`, `print`, `printf` e `p` permitem imprimir algum valor no terminal.
@@ -40,11 +46,14 @@ Assim como a função `print`, a função `printf` não cria uma quebra de linha
 
 ### `p`
 
-Imprime e ao mesmo tempo retorna o valor imprimido.
+Imprime e ao mesmo tempo retorna o valor imprimido como uma string.
 
 ``` rb
-p 22
-# => 22
+str = p "Olá, Mundo!\n"
+puts str
+# Output:
+# "Olá, Mundo!\n"
+# Olá, Mundo!
 ```
 
 ## Variáveis
@@ -463,6 +472,30 @@ Perceba que a divisão entre 5 e 2 resulta em 2 ao invés de 2.5. Isso acontece 
   13.zero?  # => false
   ```
 
+* **'`positive?`'**: Retorna verdadeiro se o número for positivo.
+
+  ``` rb
+  x = 5
+  y = -3
+  z = 0
+
+  x.positive?  # => true
+  y.positive?  # => false
+  z.positive?  # => false
+  ```
+
+* **'`negative?`'**: Retorna verdadeiro se o número for negativo.
+
+  ``` rb
+  x = 5
+  y = -3
+  z = 0
+
+  x.negative?  # => false
+  y.negative?  # => true
+  z.negative?  # => false
+  ```
+
 * **'`size`'**: Retorna a quantidade de bytes que o número ocupa na memória.
 
   ``` rb
@@ -492,6 +525,350 @@ Perceba que a divisão entre 5 e 2 resulta em 2 ao invés de 2.5. Isso acontece 
 
 ### Tipo `Float`
 
+Representa números de reais (de ponto flutuante), e permite realizar operações matemáticas simples.
+
+**Exemplo:**
+
+``` rb
+x = 5.1
+y = -1.0
+z = 4.91
+```
+
+#### Operações Matemáticas com Float
+
+Para realizar operações matemáticas são utilizados os operadores aritméticos.
+
+**Exemplo:**
+
+``` rb
+12151.21.5 + 3        # => 24.5
+42.1 - 21.9     # => 20.200000000000003
+30 * 2.1        # => 63.0
+99.4 / 21.3     # => 4.666666666666667
+9 % 2.0         # => 1.0
+22.99 ** 3      # => 12151.136898999997
+```
+
+#### Métodos para Números Reais
+
+* **`zero?`**: Retorna verdadeiro se o número for igual a zero.
+
+  ``` rb
+  x = 5.23
+  y = 0.0
+  z = 0.1
+
+  x.zero?  # => false
+  y.zero?  # => true
+  z.zero?  # => false
+  ```
+
+* **'`positive?`'**: Retorna verdadeiro se o número for positivo.
+
+  ``` rb
+  x = 5.3
+  y = -21.4
+  z = 0
+
+  x.positive?  # => true
+  y.positive?  # => false
+  z.positive?  # => false
+  ```
+
+* **'`negative?`'** Retorna verdadeiro se o número for negativo.
+
+  ``` rb
+  x = 5.3
+  y = -21.4
+  z = 0
+
+  x.negative?  # => false
+  y.negative?  # => true
+  z.negative?  # => false
+  ```
+
+* **'`finite?`'**: Retorna verdadeiro se o número for finito.
+
+  ``` rb
+  x = 21.5
+  y = Float::INFINITY
+
+  x.finite?    # => true
+  y.finite?    # => false
+  ```
+
+* **'`infinity?`'**: Retorna `1` se o número for infinito, `-1` se o número for infinito negativo e `nil` se o número não for infinito.
+
+  ``` rb
+  x = Float::INFINITY
+  y = -Float::INFINITY
+  z = 123.20183912
+
+  x.infinite?    # => true
+  y.infinite?    # => false
+  z.infinite?    # => nil
+  ```
+
+* **'`nan?`'**: Retorna verdadeiro se o número for `NaN` (Not-a-Number).
+
+  ``` rb
+  x = 0.0 / 0.0
+  y = Float::NAN
+  z = 45.23
+
+  x.nan?    # => true
+  y.nan?    # => true
+  z.nan?    # => false
+  ```
+
+* **'`abs`'**: Retorna o valor absoluto do número.
+
+  ``` rb
+  x = 21.3
+  y = -4.4
+  z = 0.3
+
+  x.abs  # => 21.3
+  y.abs  # => 4.4
+  z.abs  # => 0.3
+  ```
+
+* **'`eql`', `==`, `===`**: Retorna verdadeiro se o valor for igual ao outro.
+
+  ``` rb
+  x = 1.2
+  y = 5.2
+  z = 3.3
+
+  # Com `eql?`
+  x.eql? 1.2   # => true
+  y.eql? 5.22  # => false
+  z.eql? 3     # => false
+
+  # Com `==`
+  x == 1.2     # => true
+  y == 5.22    # => false
+  z == 3       # => false
+
+  # Com `===`
+  x === 1.2    # => true
+  y === 5.22   # => false
+  z === 3      # => false
+  ```
+
+  > **OBS.:** Comparação entre valores de ponto flutuantes não é confiável, podendo ser imprecisa.
+
+* **'`ceil`'**: Arredonda para cima.
+
+  ``` rb
+  x = 5.2
+  y = 7.5
+  z = 9.7
+
+  x.ceil  # => 6
+  y.ceil  # => 8
+  z.ceil  # => 10
+  ```
+
+* **'`floor`'**: Arredonda o número para baixo.
+
+  ``` rb
+  x = 5.2
+  y = 7.5
+  z = 9.7
+
+  x.floor  # => 5
+  y.floor  # => 7
+  z.floor  # => 9
+  ```
+
+* **'`round`'**: Arredonda para o número inteiro mais próximo.
+
+  ``` rb
+  x = 5.2
+  y = 7.5
+  z = 9.7
+
+  x.round  # => 5
+  y.round  # => 8
+  z.round  # => 10
+  ```
+
+* **'`truncate`'**: Trunca o número pelo valor fornecido.
+
+  ``` rb
+  x = 21.52135
+  y = 9.213215123
+  z = 357.9902133
+
+  x.truncate 2  # => 21.52
+  y.truncate 3  # => 9.213
+  z.truncate 4  # => 357.9902
+  ```
+
+* **'`coerce`'**: Retorna um array que contém um dado valor convertido para Float e o número em que este método foi aplicado.
+
+  ``` rb
+  x = 7.1
+  y = 9.23
+  z = 4.56
+
+  x.coerce 2                 # => [2.0, 7.1]
+  y.coerce '21.3'            # => [21.3, 9.23]
+  z.coerce Float::INFINITY   # => [Infinity, 4.56]
+  ```
+
+* **'`fdiv`'**: Divide o número por um dado valor.
+
+  ``` rb
+  x = 7.5
+  y = 21.3
+  z = 45.5
+
+  x.fdiv 2    # => 3.75
+  y.fdiv 3    # => 7.1000000000000005
+  z.fdiv 22   # => 2.0681818181818183
+  ```
+
+* **'`divmod`'**: Retorna um array que contém o resultado da divisão e resto da divisão entre o número em que este método foi aplicado e um dado valor.
+
+  ``` rb
+  x = 7.5
+  y = 77.0
+  z = 21.5
+
+  x.divmod 2    # => [3, 1.5]
+  y.divmod 11   # => [7, 0.0]
+  z.divmod 3    # => [7. 0.5]
+  ```
+
+* **'`quo`'**: Retorna o quociente da divisão do número em que este método foi aplicado pelo valor fornecido.
+
+  ``` rb
+  x = 5.0
+  y = 6.3
+  z = 25.5
+
+  x.quo 2   # => 2.5
+  y.quo 3   # => 2.1
+  z.quo 5   # => 5.1
+  ```
+
+  Se aplicado em um inteiro, será retornado um número racional.
+
+  ``` rb
+  x = 5
+  y = 6
+  z = 25
+
+  x.quo 2   # => 5/2
+  y.quo 3   # => 2/1
+  z.quo 5   # => 5/1
+  ```
+
+* **'`next_float`'**: Retorna o próximo Float representável.
+
+  ``` rb
+  x = 30.1
+  y = 23.92
+  z = 12.003
+
+  x.next_float # => 30.100000000000005
+  y.next_float # => 23.920000000000005
+  z.next_float # => 12.003000000000002
+  ```
+
+* **'`prev_float`'**: Retorna o Float representável anterior.
+
+  ``` rb
+  x = 30.1
+  y = 23.92
+  z = 12.003
+
+  x.prev_float # => 30.099999999999998
+  y.prev_float # => 23.919999999999998
+  z.prev_float # => 12.002999999999998
+  ```
+
+#### Constantes de Float
+
+* **'`DIG`'**: O número mínimo de dígitos decimais significativos em um ponto flutuante de precisão dupla.
+
+  ``` rb
+  Float::DIG  # => 15
+  ```
+
+* **'EPSILON`'**: A diferença entre 1 e o maior ponto flutuante de precisão dupla maior que 1.
+
+  ``` rb
+  Float::EPSILON  # => 2.220446049250313e-16
+  ```
+
+* **'`INFINITY`'**: Representa um positivo ou negativo infinito
+
+  ``` rb
+  # Positivo infinito
+  Float::INFINITY # => Infinity
+
+  # Negativo Infinito
+  -Float::INFINITY  # => -Infinity
+  ```
+
+* **'`MANT_DIG`'**: O número de dígitos base para o tipo de dados duplo.
+
+  ``` rb
+  Float::MANT_DIG # => 53
+  ```
+
+* **'`MAX`'**: O maior número inteiro possível em dupla precisão.
+
+  ``` rb
+  Float::MAX  # => 1.7976931348623157e+308
+  ```
+
+* **'`MAX_EXP`'**: O maior valor de expoente possível em um ponto flutuante de precisão dupla.
+
+  ``` rb
+  Float::MAX_EXP  # => 1024
+  ```
+
+* **'`MAX_10_EXP`'**: O maior valor de expoente positivo em um ponto flutuante de precisão dupla, onde 10 elevado a esta potência menos 1.
+
+  ``` rb
+  Float::MAX_10_EXP # => 308
+  ```
+
+* **'`MIN`'**: O menor número inteiro possível em dupla precisão.
+
+  ``` rb
+  Float::MIN  # => 2.2250738585072014e-308
+  ```
+
+* **'`MIN_EXP`'**: O menor valor de expoente possível em um ponto flutuante de precisão dupla.
+
+  ``` rb
+  Float::MIN_EXP  # => -1021
+  ```
+
+* **'`MIN_10_EXP`'**: O menor valor de expoente positivo em um ponto flutuante de precisão dupla, onde 10 elevado a esta potência menos 1.
+
+  ``` rb
+  Float::MIN_10_EXP # => -307
+  ```
+
+* **'`NAN`'**: Representa um valor "Not-a-Number".
+
+  ``` rb
+  Float::NAN  # => NaN
+  ```
+
+* **'`RADIX`'**: A base do ponto flutuante ou número de dígitos exclusivos usados ​​para representar o número.
+
+  ``` rb
+  Float::RADIX  # => 2
+  ```
+
 ### Tipo `Symbol`
 
 Símbolos são identificadores imutáveis, geralmente utilizados para representar chaves em hashes.
@@ -518,9 +895,166 @@ my_hash = {
 
 Perceba que não é mais necessário `=>` para atribuir o valor à chave, pois o mesmo é substituído por `:` ao fim do nome.
 
-### Tipo `boolean`
+#### Métodos para Símbolos
+
+* **'`capitalize`'**: Torna a primeira letra maiúscula e o resto minúsculas.
+
+  ``` rb
+  sym = :ruby
+  sym.capitalize # => :Ruby
+  ```
+
+* **'`downcase`'**: Todos os caracteres do símbolo são convertidos para minúsculo.
+
+  ``` rb
+  sym = :RUBY
+  sym.downcase  # => :ruby
+  ```
+
+* **'`upcase`'**: Todos os caracteres do símbolo são convertidos para maiúsculo.
+
+  ``` rb
+  sym = :ruby
+  sym.upcase  # => :RUBY
+  ```
+
+* **'`name`'**: Retorna uma string congelada que corresponde ao símbolo.
+
+  ``` rb
+  sym = :ruby
+  sym.name  # => "ruby"
+  ```
+
+* **'`succ`', '`next`'**: Retorna o símbolo sucessor do símbolo.
+
+  ``` rb
+  sym = :ruby
+
+  # Com `succ`
+  sym.succ # => :rubz
+
+  # Com `next`
+  sym.next # => :rubz
+  ```
+
+* **'`swapcase`'**: Retorna o símbolo com as letras maiúsculas em minúsculas e vice-versa.
+
+  ``` rb
+  sym = :rUbY
+  sym.swapcase  # => :RuBy
+  ```
+
+* **'`slice`', '`[]`'**: Retorna uma substring a partir de um fatiamento.
+
+  ``` rb
+  sym = :olamundo
+
+  # Com `slice`
+  sym.slice 0, 3  # => "ola"
+
+  # Com `[]`
+  sym[0, 3]       # => "ola"
+  ```
+
+* **'`length`', '`size`'**: Retorna o número de caracteres do símbolo.
+
+  ``` rb
+  sym = :ruby
+
+  # Com `length`
+  sym.length  # => 4
+
+  # Com `size`
+  sym.size    # => 4
+  ```
+
+* **'`start_with?`'**: Retorna verdadeiro se o símbolo se inicia com a string fornecida.
+
+  ``` rb
+  sym = :ruby
+
+  sym.start_with? 'ru'  # => true
+  sym.start_with? 'py'  # => false
+  ```
+
+* **'`end_with`'**: Retorna verdadeiro se o símbolo termina com a string fornecida.
+
+  ``` rb
+  sym = :ruby
+
+  sym.end_with? 'by'  # => true
+  sym.end_with? 'on'  # => false
+  ```
+
+### Tipos Booleanos
+
+Não há uma classe para representar valores booleanos, porém há classes para representar os valores `true` (`TrueClass`) e `false`(`FalseClass`).
+
+Os valores **`true`** e **`false`** são valores lógicos utilizados em expressões booleanas.
+
+**Exemplo com `true`:**
+
+``` rb
+var = true
+
+if var
+  puts 'Olá, Mundo!'
+else
+  puts 'Olá, Ruby!'
+end
+
+# Output: "Olá, Mundo!"
+```
+
+**Exemplo com `false`:**
+
+``` rb
+var = false
+
+if var
+  puts 'Olá, Mundo!'
+else
+  puts 'Olá, Ruby!'
+end
+
+# Output: "Olá, Ruby!"
+```
 
 ### Tipo `nil`
+
+Representa a ausência de um valor ou nulo, e quando utilizado em condições equivale a `false`.
+
+**Exemplo:**
+
+``` rb
+var = nil
+
+if var
+  puts 'Olá, Mundo!'
+else
+  puts 'Olá, Ruby!'
+end
+
+# Output: "Olá, Ruby!"
+```
+
+#### Método `nil?`
+
+Este método retorna verdadeiro se o objeto em o foi aplicada for `nil`.
+
+**Exemplo:**
+
+``` rb
+var = nil
+
+if var.nil?
+  puts 'Olá, Mundo!'
+else
+  puts 'Olá, Ruby!'
+end
+
+# Output: "Olá, Mundo!"
+```
 
 ### Conversão de Tipos
 
@@ -849,7 +1383,19 @@ São usados para atribuir um valor a uma variável.
   x >>= 2 # => 0001
   ```
 
-* **'``'**:
+* **'`||=`'**: Faz a atribuição apenas se o valor for nulo ou falso.
+
+  ``` rb
+  valor = nil
+  valor ||= 5 # => 5
+  ```
+
+* **'`&&=`'**: Faz a atribuição apenas se o valor não for nulo ou falso.
+
+  ``` rb
+  valor = 2
+  valor &&= 5 # => 5
+  ```
 
 ### Operadores de Concatenação
 
@@ -1003,13 +1549,13 @@ my_array[2][2] # => 9
 
 Um array composto apenas de palavras pode ser escrito com `%w` ou `%W`, podendo ser omitidos as aspas e as vírgulas.
 
-Sendo assim, o array:
+**Este array:**
 
 ``` rb
 my_array = ['Ruby', 'JavaScript', 'Python', 'PHP', 'Go']
 ```
 
-Pode ser escrito:
+**Pode ser declarado assim:**
 
 ``` rb
 my_array = %w[Ruby JavaScript Python PHP Go]
@@ -1019,7 +1565,7 @@ Ambos os exemplos acima correspondem ao mesmo array.
 
 ### Métodos de Array
 
-#### Adicionar/Remover Elementos
+#### Adicionar/Remover Elementos Array
 
 * **`push`**: Adiciona um ou mais elementos ao final do array.
 
@@ -1096,7 +1642,7 @@ Ambos os exemplos acima correspondem ao mesmo array.
 
 > Todos esses métodos alteram o array original.
 
-#### Captura de Elementos
+#### Captura de Elementos Array
 
 * **'`first`'**: Retorna o primeiro elemento do array (como `array[0]`).
 
@@ -1144,7 +1690,7 @@ Ambos os exemplos acima correspondem ao mesmo array.
   # => [1, 2, 3, "a", "b", "c"]
   ```
 
-#### Pesquisa de Elementos
+#### Pesquisa de Elementos Array
 
 * **`include?`**: Verifica se um elemento está presente dentro do array. Se presente, retorna `true`, em caso contrário, retorna `false`.
 
@@ -1169,7 +1715,7 @@ Ambos os exemplos acima correspondem ao mesmo array.
   my_array.count 2 # => 3
   ```
 
-#### Organização de Elementos
+#### Organização de Elementos Array
 
 * **`uniq`**: Retorna um array com elementos únicos.
 
@@ -1444,7 +1990,7 @@ my_array # => [1, 2, 3, 4, 5]
   exclusive_range.size # => 9
   ```
 
-#### Métodos de Comparação
+#### Métodos de Comparação Range
 
 * **'`cover?`', '`===`', '`include?`', '`member?`'**: Retorna verdadeiro se um dado está dentro do range.
 
@@ -1771,7 +2317,7 @@ my_hash = {
   'idade' => 18,
   'sexo' => 'masculino'
 }
-# => => {"nome"=>"João", "idade"=>18, "sexo"=>"masculino"}
+# => {"nome"=>"João", "idade"=>18, "sexo"=>"masculino"}
 ```
 
 Em um hash, existem as chaves(*keys*) e os valores(*values*).
@@ -2239,7 +2785,7 @@ end
 
 Os métodos privados só podem ser chamados de dentro da própria classe em que foram definidos ou em subclasses (classes que herdam de uma outra classe).
 
-Um método se torna privado ao definir ‘private’ uma linha antes de definir o método.
+Um método se torna privado ao definir `private` uma linha antes de definir o método.
 
 ``` rb
 # Classe
@@ -2264,9 +2810,59 @@ Será lançado uma exceção quando é chamado um método privado.
 
 ``` rb
 obj = MinhaClasse.new
-obg.metodo_privado
+obj.metodo_privado
 # Ocorrerá um erro
 ```
+
+É possível passar todos os métodos que serão privados em qualquer lugar da classe, escrevendo-os com `private` em forma de símbolos.
+
+**Exemplo:**
+
+``` rb
+# Classe
+class MinhaClasse
+  private :ola_mundo, :ola_ruby
+
+  def ola_mundo
+    puts 'Olá, Mundo!'
+  end
+
+  def ola_ruby
+    puts 'Olá, Ruby!'
+  end
+end
+```
+
+No exemplo acima, os métodos `ola_mundo` e `ola_ruby` são privados e não podem ser acessados de fora da classe em que foram definidos.
+
+#### *Protected Methods*
+
+Métodos protegidos são como métodos privados, porém eles podem ser acessados normalmente por classes filhas.
+
+**Exemplo:**
+
+``` rb
+# Classe pai
+class ClassePai
+  protected
+
+  def ola_mundo
+    'Olá, Mundo!'
+  end
+end
+
+# Classe filha
+class ClasseFilha < ClassePai
+  def print_ola_mundo
+    puts ola_mundo
+  end
+end
+
+obj = ClasseFilha.new
+obj.print_ola_mundo # Output: "Olá, Mundo!"
+```
+
+> **OBS.:** Atualmente, métodos privados podem ser acessados por subclasses como métodos protegidos, o que significa que não há diferença entre métodos privados e protegidos. É importante lembrar que isso vale apenas para versões recentes, e versões como 2.7.0 ou inferior não suportaria métodos privados em subclasses.
 
 ### Métodos de Atributo
 
@@ -2400,9 +2996,82 @@ NomeClasse.metodo_de_classe
 # => "Eu sou um método de classe!"
 ```
 
+## Métodos `instance_of?` e `is_a?`
+
+Ambos retornam verdadeiro se `self` for uma instância de um objeto específico.
+
+**Exemplo `instance_of?`:**
+
+``` rb
+class MeuObjeto; end
+
+int = 23
+str = 'Olá, Mundo!'
+obj = MeuObjeto.new
+
+int.instance_of? Integer    # => true
+str.instance_of? String     # => true
+obj.instance_of? MeuObjeto  # => true
+```
+
+**Exemplo `is_a?`:**
+
+``` rb
+class MeuObjeto; end
+
+int = 23
+str = 'Olá, Mundo!'
+obj = MeuObjeto.new
+
+puts int.is_a? Integer    # => true
+puts str.is_a? String     # => true
+puts obj.is_a? MeuObjeto  # => true
+```
+
+### `instance_of?` vs. `is_a?`
+
+Há uma diferença entre eles: **`instance_of?`** retorna verdadeiro apenas se `self` for uma instância exata da classe, sem considerar heranças.
+
+**Exemplo:**
+
+``` rb
+class ClassePai; end
+class ClasseFilha < ClassePai; end
+
+obj = ClasseFilha.new
+obj.instance_of? ClasseFilha   # => true
+obj.instance_of? ClassePai     # => false
+```
+
+Por outro lado, o método **`is_a?`** retorna verdadeiro mesmo se a classe passada for a classe pai da exata.
+
+``` rb
+class ClassePai; end
+class ClasseFilha < ClassePai; end
+
+obj = ClasseFilha.new
+obj.is_a? ClasseFilha   # => true
+obj.is_a? ClassePai     # => true
+```
+
+#### Método `kind_of?`
+
+O método **`kind_of`** é um alias para `is_a?`.
+
+**Exemplo:**
+
+``` rb
+class ClassePai; end
+class ClasseFilha < ClassePai; end
+
+obj = ClasseFilha.new
+obj.kind_of? ClasseFilha   # => true
+obj.kind_of? ClassePai     # => true
+```
+
 ## Método `respond.to?`
 
-Verifica se algum método pode ser usado com um objeto específico, retornando verdadeiro caso possa ser usado, ou falso em caso contrário.
+Retorna verdadeiro se o método passado como argumento puder ser aplicado em `self`.
 
 **Exemplo:**
 
@@ -2414,6 +3083,214 @@ num.respond_to? :length   # => false
 ```
 
 O método deve ser escrito em forma de símbolo, ou seja, '`:next`' ao invés de '`.next`'.
+
+## Módulos
+
+É uma estrutura usada para agrupar métodos, classes e constantes. São semelhantes às classes, mas eles não podem ser instanciados.
+
+São usados principalmente para encapsular funcionalidades e fornecer reutilização de código.
+
+**Exemplo:**
+
+``` rb
+module MeuModulo
+  # Método que soma dois valores
+  def self.somar(num1, num2)
+    num1 + num2
+  end
+
+  # Método que retorna a raiz quadrada de dois valores
+  def self.raiz_quadrada(num)
+    num ** 0.5
+  end
+
+  # Classe
+  class Pessoa
+    def initialize(nome)
+      @nome = nome
+    end
+
+    # Imprime uma mensagem de saudacao
+    def saudacao
+      puts "Olá, #{@nome}!"
+    end
+  end
+end
+
+# Uso dos métodos
+MeuModulo.somar 5, 2        # => 7
+MeuModulo.raiz_quadrada 25  # => 5.0
+
+# Uso da classe
+obj = MeuModulo::Pessoa.new 'Mundo'
+obj.saudacao  # => Output: "Olá, Mundo!"
+```
+
+### Inclusão de Módulo à Classe
+
+É possível incluir módulos a uma classe para que essa classe possa utilizar as ferramentas desse módulo. Para isso, é utilizada a palavra-chave **`include`** seguida do nome do módulo.
+
+**Sintaxe:**
+
+``` rb
+class Classe
+  include NomeModulo
+  # ...
+end
+```
+
+**Exemplo:**
+
+``` rb
+module MeuModulo
+  def self.ola_mundo
+    puts 'Olá, Mundo!'
+  end
+end
+
+class MinhaClasse
+  # Inclui o módulo `MeuModulo`
+  include MeuModulo
+
+  # Imprime "Olá, Mundo!" assim que criada uma instância
+  def initialize
+    MeuModulo.ola_mundo
+  end
+end
+
+MinhaClasse.new   # => Output: "Olá, Mundo!"
+```
+
+### Extensão de Objetos
+
+O método **`extend`** permite extender classes ou uma instância de uma classe com os recursos de módulos.
+
+**Extendendo uma Instância:**
+
+``` rb
+# Módulo que contém um método
+module ModuloExemplo
+  #  Método que imprime "Olá, Mundo!"
+  def ola_mundo
+    puts 'Olá, Mundo!'
+  end
+end
+
+# Classe que não possui métodos
+class ClasseExemplo; end
+
+# Extendendo a instância da classe
+obj = ClasseExemplo.new
+obj.extend ModuloExemplo
+
+obj.ola_mundo # Output: "Olá, Mundo!"
+```
+
+**Extendendo uma Classe:**
+
+``` rb
+# Módulo que contém um método
+module ModuloExemplo
+  #  Método que imprime "Olá, Mundo!"
+  def ola_mundo
+    puts 'Olá, Mundo!'
+  end
+end
+
+# Classe que não possui métodos
+class ClasseExemplo; end
+
+# Extendendo a classe
+ClasseExemplo.extend ModuloExemplo
+
+ClasseExemplo.ola_mundo # Output: "Olá, Mundo!"
+```
+
+#### Extender Objetos Padrão
+
+É possível extender classes já existentes, como `String` e `Integer` com novos métodos. Para isso, é necessário declarar essas funções com os métodos desejados.
+
+**Exemplo:**
+
+``` rb
+# Adicionando um método à classe `String`
+class String
+  def sub_o
+    self.gsub! 'o', '0'
+    self.gsub 'O', '0'
+  end
+end
+
+# Adicionando um método à classe `Integer`
+class Integer
+  def mais_10
+    self + 10
+  end
+end
+
+# Exemplos de uso
+str = 'Olá, Mundo!'
+num = 12
+
+str.sub_o    # => "0lá, Mund0!"
+num.mais_10  # => 22
+```
+
+## Carregamento de Recursos
+
+### Palavra-chave `require`
+
+A palavra-chave **`require`** é usada para importar bibliotecas, importar arquivos locais ou remotos, e importar gems.
+
+**Sintaxe:**
+
+``` rb
+require 'arquivo/biblioteca'
+```
+
+Resumindo, a palavra-chave `require` permite usar no arquivo atual todo o conteúdo de outro arquivo.
+
+#### Importar Bibliotecas
+
+Para importar bibliotecas, deve ser especificado o nome da biblioteca entre aspas.
+
+**Sintaxe:**
+
+``` rb
+require 'nome_biblioteca'
+```
+
+**Exemplo:**
+
+``` rb
+require 'net/http'
+require 'open_uri'
+require 'socket'
+```
+
+#### Importar Arquivos Locais
+
+Para importar arquivos, é necessário especificar o diretório do arquivo entre aspas, e se o diretório for o mesmo do arquivo que importará, deve ser usado **`require_relative`**.
+
+**Exemplo:**
+
+``` rb
+# Arquivo que contém o módulo
+module ExemploModulo
+  def self.ola_mundo
+    puts 'Olá, Mundo!'
+  end
+end
+```
+
+``` rb
+# Arquivo principal
+require_relative 'modulo'
+
+ExemploModulo.ola_mundo   # => Output: "Olá, Mundo!"
+```
+
+No exemplo acima, o módulo do arquivo `modulo.rb` é importado no arquivo principal, permitindo-o usar o módulo normalmente.
 
 ## Bases Numéricas
 
