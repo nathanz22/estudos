@@ -1,0 +1,22 @@
+1. Expressões Algébricas
+2. Equações Lineares e Inequações
+3. Sistemas Lineares
+4. Polinômios
+5. Equações Quadráticas
+6. Funções e Suas Propriedades
+7. Inequações Polinominais e Racionais
+8. Teoria dos Conjuntos
+9. Números Complexos
+10. Fórmulas e Identidades Algébricas
+11. Funções Inversas
+
+1. Binômio de Newton
+2. Teoria dos Números
+3. Desigualdades
+4. Sequências de Séries
+5. Probabilidade e Estatística Básica
+6. Álgebra Booleana
+7. Transformações Lineares (Álgebra Linear)
+8. Inequações Racionais
+9. Sistemas de Coordenadas e Gráficos
+10. Teoria dos Grupos (Álgebra Abstrata)

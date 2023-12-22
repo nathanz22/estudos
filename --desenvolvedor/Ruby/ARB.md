@@ -68,7 +68,7 @@ nome_variavel = valor_variavel
 
 ## Tipos Primitivos
 
-Em Ruby, os tipos primitivos são:
+Em Ruby, os principais tipos primitivos são:
 
 * **`String`**: Caracteres.
 * **`Integer`**: Números inteiros.
@@ -79,14 +79,21 @@ Em Ruby, os tipos primitivos são:
 
 ### Tipo `String`
 
-Em Ruby, tudo entre aspas simples ou duplas são considerados strings.
+Strings podem ser declaradas de duas maneiras:
 
-**Exemplo:**
+* **String literal:**
 
-``` c
-str1 = 'Olá, Mundo!'
-str2 = "Olá, Mundo!'
-```
+  ``` rb
+  str1 = 'Olá, Mundo!'
+  str2 = 'Olá, Ruby!'
+  ```
+
+* **Com `String.new`:**
+
+  ``` rb
+  str1 = String.new 'Olá, Mundo!'
+  str2 = String.new 'Olá, Ruby!'
+  ```
 
 #### Métodos de String
 
@@ -791,6 +798,18 @@ Para realizar operações matemáticas são utilizados os operadores aritmético
   z.prev_float # => 12.002999999999998
   ```
 
+* **'`rationalize`'**: Retorna `self` como um número racional.
+
+  ``` rb
+  f1 = 3.14
+  f2 = 5.0
+  f3 = 5.231
+
+  f1.rationalize # => (157/50)
+  f2.rationalize # => (5/1)
+  f3.rationalize # => (5231/1000)
+  ```
+
 #### Constantes de Float
 
 * **'`DIG`'**: O número mínimo de dígitos decimais significativos em um ponto flutuante de precisão dupla.
@@ -1056,9 +1075,154 @@ end
 # Output: "Olá, Mundo!"
 ```
 
+### `Rational`
+
+Representa números racionais. Um número racional é um número que pode ser expresso como uma fração de dois números, onde o denominador é diferente de zero.
+
+A classe `Rational` não utiliza `new` para criar instâncias, funcionando ela mesma como uma função geradora de racionais.
+
+**Para criar um racional:**
+
+``` rb
+# Com classe `Rational`
+Rational numerador, denominador
+
+# Declaração literal
+numerador/denominadorr
+```
+
+**Exemplo:**
+
+``` rb
+# Com classe `Rational`
+Rational 1, 2 # => (1/2)
+Rational 5    # => (5/1)
+Rational 0, 1 # => (0/1)
+
+# Declaração literal
+1/2r # => (1/2)
+5r   # => (5/1)
+0/1r # => (0/1)
+```
+
+**Pode ser usado o método **`rationalize`** em números para convertê-los para racional.**
+
+``` rb
+x = 3.14
+y = 5
+z = 5.231
+
+x.rationalize # => (157/50)
+y.rationalize # => (5/1)
+z.rationalize # => (5231/1000)
+```
+
+**Operações matemáticas com racionais:**
+
+``` rb
+r1 = Rational 5 / 1
+r2 = Rational 4 / 2
+
+r1 + r2  # => (7/1)
+r1 - r2  # => (3/1)
+r1 * r2  # => (10/1)
+r1 / r2  # => (5/2)
+r1 % r2  # => (1/1)
+r1 ** r2 # => (25/1)
+```
+
+#### Métodos para Racionais
+
+* **'`abs`'**: Retorna o valor absoluto de `self`.
+
+  ``` rb
+  (1/2r).abs   # => (1/2)
+  (-1/2r).abs  # => (1/2)
+  ```
+
+* **'`numerator`'**: Retorna o numerador de `self`.
+
+  ``` rb
+  (5/2r).numerator # => 5
+  (2/3r).numerator # => 2
+  (7/5r).numerator # => 7
+  ```
+
+* **'`denominator`'**: Retorna o denominador de `self`.
+
+  ``` rb
+  (5/2r).denominator # => 2
+  (2/3r).denominator # => 3
+  (7/5r).denominator # => 5
+  ```
+
+* **'`ceil`'**: Retorna o maior inteiro mais próximo de `self`.
+
+  ``` rb
+  (3/4r).ceil # => 1
+  (5/2r).ceil # => 3
+  (1/3r).ceil # => 1
+  ```
+
+* **'`floor`'**: Retorna o menor inteiro mais próximo de `self`.
+
+  ``` rb
+  (3/4r).floor # => 0
+  (5/2r).floor # => 2
+  (1/3r).floor # => 0
+  ```
+
+* **'`round`'**: Retorna o inteiro mais próximo de `self`.
+
+  ``` rb
+  (3/4r).round # => 1
+  (5/2r).round # => 3
+  (1/3r).round # => 0
+  ```
+
+* **'`truncate`'**: Trunca `self` por um dado valor e retorna o resultado.
+
+  ``` rb
+  (1/2r).truncate 1 # => (1/2)
+  (2/3r).truncate 2 # => (33/50)
+  (3/5r).truncate 3 # => (3/5)
+  ```
+
+* **'`positive?`'**: Retorna `true` se `self` for positivo, ou `false` caso contrário.
+
+  ``` rb
+  (2/5r).positive?  # => true
+  (-1/7r).positive? # => false
+  (3/6r).positive?  # => true
+  ```
+
+* **'`negative?`'**: Retorna `true` se `self` for negativo, ou `false` caso contrário.
+
+  ``` rb
+  (-3/5r).negative?  # => true
+  (-4/2r).negative?  # => true
+  (3/9r).negative?   # => false
+  ```
+
+* **'`quo`'**: Retorna o resultado da divisão entre `self` e um dado valor. O resultado será um número racional.
+
+  ``` rb
+  (10/5r).quo 1  # => (2/1)
+  (4/3r).quo 2   # => (2/3)
+  (-3/9r).quo 3  # => (-1/9)
+  ```
+
+* **'`fdiv`'**: Retorna o resultado da divisão entre `self` e um dado valor. O resultado será um número de ponto flutuante.
+
+  ``` rb
+  (10/5r).fdiv 1  # => 2.0
+  (4/3r).fdiv 2   # => 0.6666666666666666
+  (-3/9r).fdiv 3  # => -0.1111111111111111
+  ```
+
 ### Conversão de Tipos
 
-Primeiramente, devemos saber como verificar o tipo de um objeto específico. Para isso, existe o método `.class`.
+Primeiramente, devemos saber como verificar o tipo de um objeto específico. Para isso, existe o método **`class`**.
 
 ``` rb
 str = 'Olá, Mundo!'
@@ -1074,14 +1238,15 @@ sym.class   # => Symbol
 
 #### Conversões
 
-* **`to_i`**, **`.to_int`**: Converte para `Integer`.
-* **`to_f`**: Converte para `Float`.
-* **`to_s`**: Converte para `String`.
-* **`to_sym`**, **`.intern`**: Converte para `Symbol`.
-* **`to_c`**: Converte para `Complex`.
-* **`to_enum`**: Converte para `Enumerator`.
-* **`to_a`**: Converte para `Array`.
-* **`to_h`**: Converte para `Hash`
+* **'`to_i`'**, **`.to_int`**: Converte para `Integer`.
+* **'`to_f`'**: Converte para `Float`.
+* **'`to_s`'**: Converte para `String`.
+* **'`to_sym`'**, **`.intern`**: Converte para `Symbol`.
+* **'`to_c`'**: Converte para `Complex`.
+* **'`to_enum`'**: Converte para `Enumerator`.
+* **'`to_a`'**: Converte para `Array`.
+* **'`to_h`'**: Converte para `Hash`
+* **'`to_r`'**: Converte para `Rational`.
 
 ## Atribuição de Método à Variável
 
@@ -1094,6 +1259,66 @@ puts str # Output: OLÁ, MUNDO!
 ```
 
 > OBS.: Dessa forma o objeto original é substituído.
+
+## Módulo `Math`
+
+`Math` é um módulo que fornece métodos básicos para trigonometria, extração de raízes e outros.
+
+### Constantes de `Math`
+
+* **'`PI`'**: Valor de pi.
+
+  ``` rb
+  Math::PI # => 3.141592653589793
+  ```
+
+* **'`E`'**: Número de Euler.
+
+  ``` rb
+  Math::E # => 2.718281828459045
+  ```
+
+### Métodos de `Math`
+
+* **'`sin`'**: Retorna o seno de um dado valor em radianos.
+
+  ``` rb
+  angulo_em_radianos = 30 * Math::PI / 180
+  Math.sin angulo_em_radianos
+  # => 0.49999999999999994
+  ```
+
+* **'`cos`'**: Retorna o cosseno de um dado valor em radianos.
+
+  ``` rb
+  angulo_em_radianos = 30 * Math::PI / 180
+  Math.cos angulo_em_radianos
+  # => 0.8660254037844387
+  ```
+
+* **'`tan`'**: Retorna a tangente de um dado valor em radianos.
+
+  ``` rb
+  angulo_em_radianos = 30 * Math::PI / 180
+  Math.tan angulo_em_radianos
+  # => 0.5773502691896257
+  ```
+
+* **'`sqrt`'**: Retorna a raíz quadrada de um dado valor.
+
+  ``` rb
+  Math.sqrt 4    # => 2.0
+  Math.sqrt 25   # => 5.0
+  Math.sqrt 100  # => 10.0
+  ```
+
+* **'`cbrt`'**: Retorna a raíz cúbica de um dado valor.
+
+  ``` rb
+  puts Math.sqrt 4    # => 2.0
+  puts Math.sqrt 25   # => 5.0
+  puts Math.sqrt 100  # => 10.0
+  ```
 
 ## Entrada do Usuário
 
@@ -1225,12 +1450,12 @@ Em Ruby, os principais operadores são:
 
 ### Operadores Aritméticos
 
-* **`+`**: Operador de adição.
-* **`-`**: Operador de subtração.
-* **`*`**: Operador de multiplicação.
-* **`/`**: Operador de divisão.
-* **`%`**: Operador de divisão inteira.
-* **`**`**: Operador de potencia.
+* **'`+`'**: Operador de adição.
+* **'`-`'**: Operador de subtração.
+* **'`*`'**: Operador de multiplicação.
+* **'`/`'**: Operador de divisão.
+* **'`%`'**: Operador de divisão inteira.
+* **'`**`'**: Operador de potencia.
 
 #### Precedência Aritmética
 
@@ -1894,7 +2119,7 @@ my_array # => [1, 2, 3, 4, 5]
 
 ### Métodos para Ranges
 
-#### Métodos de Pesquisa
+#### Métodos de Pesquisa em Ranges
 
 * **'`begin`'**: Retorna o primeiro valor do range.
 
@@ -1997,7 +2222,7 @@ my_array # => [1, 2, 3, 4, 5]
   exclusive_range.size # => 9
   ```
 
-#### Métodos de Comparação Range
+#### Métodos de Comparação Range em Ranges
 
 * **'`cover?`', '`===`', '`include?`', '`member?`'**: Retorna verdadeiro se um dado está dentro do range.
 
@@ -2037,7 +2262,7 @@ my_array # => [1, 2, 3, 4, 5]
   r == (5..10)      # => false
   ```
 
-#### Métodos para Iteração
+#### Métodos para Iteração em Ranges
 
 * **'`each`'**: Chama um bloco para cada elemento dentro do range.
 
@@ -2076,7 +2301,9 @@ my_array # => [1, 2, 3, 4, 5]
 
 ### `for`
 
-Repete um bloco em uma quantidade específica de vezes, baseado em um intervalo.
+Repete um bloco em uma quantidade específica de vezes, baseado em um intervalo ou coleção.
+
+**Baseando-se em um range:**
 
 ``` rb
 for num in 0...10
@@ -2085,15 +2312,14 @@ end
 # Imprime de 0 a 9
 ```
 
-Este é um intervalo exclusivo, onde é considerado o primeiro valor (0) e desconsiderado o último (10).
-
-Para um intervalo inclusivo, ou seja, considerando o último valor, use **`..`** ao invés de `...`.
+**Baseando-se em um array:**
 
 ``` rb
-for num in 0..10
-  puts num
+my_array = ['a', 'b', 'c', 'd', 'e']
+for elemento in my_array
+  puts elemento
 end
-# Imprime de 0 a 10
+# Imprimirá todos os elementos do array
 ```
 
 ### `while`
@@ -4203,4 +4429,161 @@ Se a necessidade for apenas ler o arquivo e fechá-lo, você pode usar o método
 File.foreach 'arquivo.txt', 'r', encoding: 'UTF-8' do |line|
   puts line
 end
+```
+
+## Data e Tempo
+
+Há três classes para representar data e tempo:
+
+* **`Date`**: Usada para representar datas específicas sem levar em consideração a hora do dia.
+
+* **`Time`**: Usada para representar pontos específicos no tempo.
+
+* **`DateTime`**: É a junção de **`Date`** e **`Time`**. Oferece funcionalidades para representar tanto a data quanto a hora com maior precisão que `Date`. É descontinuada, e por isso é recomendado o uso de `Time` ao invés de `DateTime`.
+
+### Classe `Date`
+
+Usada para representar datas de calendário. Normalmente, é necessário importar `Date` com `require`.
+
+**Declarando uma data:**
+
+``` rb
+require 'date'
+
+#        Ano/Mês/Dia
+Date.new 2005, 2, 7
+# => #<Date: 2005-02-07 ((2453409j,0s,0n),+0s,2299161j)>
+```
+
+#### Métodos de `Date`
+
+* **'`today`'**: Retorna a data atual.
+
+  ``` rb
+  Date.today # Retorna a data de hoje
+  ```
+
+* **'`jd`'**: Retorna o dia referente a um valor Julian Day.
+
+  ``` rb
+  Date.jd 2453507
+  # => #<Date: 2005-05-16 ((2453507j,0s,0n),+0s,2299161j)>
+  ```
+
+* **'`ordinal`'**: Retorna uma data a partir do ano e dia ordinal.
+
+  ``` rb
+  Date.ordinal 2005, 136
+  # => #<Date: 2005-05-16 ((2453507j,0s,0n),+0s,2299161j)>
+  ```
+
+* **'`commercial`'**: Retorna uma data a partir de uma data comercial (ano, semana, dia da semana).
+
+  ``` rb
+  Date.commercial 2005, 20, 1
+  # => #<Date: 2005-05-16 ((2453507j,0s,0n),+0s,2299161j)>
+  ```
+
+* **'`parse`'**: Retorna uma data a partir de uma dada string.
+
+  ``` rb
+  Date.parse '2005-05-16'
+  # => #<Date: 2005-05-16 ((2453507j,0s,0n),+0s,2299161j)>
+  ```
+
+* **'`strptime`'**:Retorna uma data a partir de uma dada string e formato de string.
+
+  ``` rb
+  Date.strptime '2005-05-16', '%Y-%m-%d'
+  # => #<Date: 2005-05-16 ((2453507j,0s,0n),+0s,2299161j)>
+  ```
+
+#### Constantes de `Date`
+
+* **'`ABBR_DAYNAMES`'**: Array com as abreviações dos nomes dos dias em inglês.
+
+  ``` rb
+  Date::ABBR_DAYNAMES
+  # => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  ```
+
+* **'`ABBR_MONTHNAMES`'**: Array com as abreviações dos nomes dos dias em inglês.
+
+  ``` rb
+  Date::ABBR_MONTHNAMES
+  # => [nil, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  ```
+
+* **'`DAYNAMES`'**: Um array com os nomes completos dos dias em inglês.
+
+  ``` rb
+  Date::DAYNAMES
+  # => ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  ```
+
+* **'`MONTHNAMES`'**: Um array com os nomes completos dos meses em inglês.
+
+  ``` rb
+  Date::MONTHNAMES
+  # => [nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  ```
+
+* **'`GREGORIAN`'**: O número do Julian Day da reforma do calendário para o calendário gregoriano proléptico.
+
+  ``` rb
+  Date::GREGORIAN
+  # => -Infinity
+  ```
+
+* **'`JULIAN`'**: O número do Julian Day da reforma do calendário juliano proléptico.
+
+  ``` rb
+  Date::JULIAN
+  # => Infinity
+  ```
+
+* **'`ITALY`'**: O número do Julian Day do dia da reforma do calendário para a Itália e alguns países católicos.
+
+  ``` rb
+  Date::ITALY
+  # => 2299161
+  ```
+
+* **'`ENGLAND`'**: O número do Julian Day do dia da reforma do calendário para a Inglaterra e suas colônias.
+
+  ``` rb
+  Date::ENGLAND
+  # => 2361222
+  ```
+
+### Classe `Time`
+
+Usada para representar data e horário. É usado um objeto **`Time`** junto de **`new`**. `Time.new` recebe os seguintes argumentos:
+
+1. Ano
+1. Mês
+1. Dia
+1. Horas
+1. Minutos
+1. Segundos
+1. Fuso horário
+
+``` rb
+#        Ano  Mês Dia Hor Min Sec
+Time.new 2005, 5, 13, 12, 30, 35
+# => 2005-05-13 12:30:35 -0300
+```
+
+Se todos os parâmetros forem omitidos, será gerada a **data e horário atual**:
+
+``` rb
+Time.new
+# Retorna a data e o horário atual
+```
+
+Se não passado horas, minutos ou segundos eles serão `0`. Se não passado mês ou dia, eles serão `1`.
+
+``` rb
+Time.new 2000
+# => 2000-01-01 00:00:00 -0300
 ```
