@@ -132,3 +132,53 @@ Quando a base for negativa, observe o seu expoente, pois:
 \((-3)^3 = (-3)*(-3)*(-3) = -27\)
 
 Aqui está uma equação em destaque:
+
+## Naturais
+
+O conjunto dos números naturais, representado por **\(\mathbb{N} \)**, inclui qualquer número inteiro não negativo, ou seja, se estende do zero até o infinito.
+
+Operações matemáticas básicas, como adição e multiplicação, são fechadas no conjunto dos números naturais. Isso significa que a soma ou o produto de dois números naturais é sempre outro número natural.
+
+## Números Reais
+
+O conjunto dos números reais é representado por **\(\mathbb{R}\)**. Os números reais são os números que possuem casas decimais, e podem ser racionais ou irracionais.
+
+### Racionais
+
+Números racionais são aqueles que podem ser expressos como uma fração, onde:
+
+* O numerador e o denominador são números inteiros.
+
+* O denominador não é zero.
+
+Números inteiros também são racionais.
+
+> **Conjunto:** O conjunto dos números racionais é representado por \(\mathbb{Q}\).
+
+**Exemplos:**
+
+\(\frac{21}{7}\), \(\frac{5}{1}\)
+
+### Irracionais
+
+Números irracionais são aqueles que não podem ser expressos como fração.
+
+Exemplos são **\(\pi\)** e **\(\sqrt(2)\)**.
+
+## Expressões Numéricas
+
+São expressões que possuem apenas números e operadores.
+
+**Exemplo:**
+
+\(5 + 2 * (3 + 3) - 4 = 13\)
+\(5* (2 - 1) + 5 / 1 = 10\)
+
+**A ordem das operações é a seguinte:**
+
+1. ()
+1. []
+1. {}
+1. Potência
+1. \(*, /\) (qual aperecer primeiro)
+1. \(+, -\) (qual aparecer primeiro)
