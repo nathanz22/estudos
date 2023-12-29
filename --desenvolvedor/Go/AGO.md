@@ -571,6 +571,36 @@ func main() {
 }
 ```
 
+### Função `Sprintf()`
+
+Formata um texto igual a função `Printf()`, mas ao invés de imprimir o texto, a função **`Sprintf()`** retorna o texto.
+
+**Sintaxe:**
+
+``` go
+variavelParaOTexto := fmt.Sprintf(stringParaFormatar, formatador1, formatador2, ..., formatadorN)
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Variáveis que serão formatadas
+    x := 10
+    y := 3
+
+    // Formata o texto e o armazena em uma variável
+    texto := fmt.Sprintf("A soma entre %d e %d é %d", x, y, x + y)
+
+    // Imprime o texto formatado
+    fmt.Println(texto) // Output => A soma entre 10 e 3 é 13
+}
+```
+
 ## Tipos Primitivos
 
 Em Go, os tipos primitivos básicos são:
@@ -895,7 +925,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
     }
     ```
 
-* **'`Split()`'**: Dada uma string e um separador, separa a string em um slice de strings.
+* **'`Split()`'**: Dada uma string e um separador, separa a string em uma slice de strings.
 
     ``` go
     package main
@@ -987,10 +1017,6 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         fmt.Println(strings.Compare("def", "abc")) // Output => 1
     }
     ```
-
-#### Formatação de Strings
-
-<!-- Já vai! -->
 
 ### Booleanos
 
@@ -1160,7 +1186,7 @@ func main() {
 
 São similares a arrays, porém são mais frexíveis e úteis. Slices podem aumentar dinamicamente em tempo de execução.
 
-Para declarar um slice, basta declarar um array sem especificar um tamanho fixo, deixando os colchetes vazios.
+Para declarar uma slice, basta declarar um array sem especificar um tamanho fixo, deixando os colchetes vazios.
 
 **Sintaxe:**
 
@@ -1188,11 +1214,11 @@ func main() {
 }
 ```
 
-Como observado no exemplo acima, o comprimento de um slice é determinado pela quantidade de elementos que ele armazena, ao contrário dos arrays, que têm um tamanho fixo.
+Como observado no exemplo acima, o comprimento de uma slice é determinado pela quantidade de elementos que ela armazena, ao contrário dos arrays, que têm um tamanho fixo.
 
 ### Criação de Slices
 
-A função **`make()`** pode ser usada para criar um slice.
+A função **`make()`** pode ser usada para criar uma slice.
 
 **Sintaxe:**
 
@@ -1229,7 +1255,7 @@ func main() {
 
 ### Comprimento e Capacidade de Slices
 
-A função **`len()`**, quando especificado um slice, retorna a quantidade de elementos dentro desse slice (comprimento do slice).
+A função **`len()`**, quando especificado uma slice, retorna a quantidade de elementos dentro dessa slice (comprimento da slice).
 
 **Exemplo:**
 
@@ -1251,7 +1277,7 @@ func main() {
 }
 ```
 
-A função **`cap()`** retorna a capacidade de um slice, que é o número de elementos que o slice pode aumentar.
+A função **`cap()`** retorna a capacidade de uma slice, que é o número de elementos que a slice pode aumentar.
 
 ``` go
 package main
@@ -1259,7 +1285,7 @@ package main
 import "fmt"
 
 func main() {
-    // Criando um slice
+    // Criando uma slice
     mySlice1 := make([]int, 5, 10)
     mySlice2 := make([]int, 2)
     mySlice3 := make([]int, 3, 4)
@@ -1273,7 +1299,7 @@ func main() {
 
 ### Fatiamento de Slices
 
-O termo *"slicing"* é usado para a ação de extrair partes de um slice. É feito utilizando **`:`**.
+O termo *"slicing"* é usado para a ação de extrair partes de uma slice. É feito utilizando **`:`**.
 
 **Sintaxe:**
 
@@ -1291,7 +1317,7 @@ package main
 import "fmt"
 
 func main() {
-    // Criando um slice
+    // Criando uma slice
     mySlice := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 
     // Criando uma fatia
@@ -1314,13 +1340,13 @@ func main() {
 
 > **OBS.:** Não especificar o início, será o mesmo que especificar o primeiro elemento. Não especificar o fim, é o mesmo que especificar o último elemento.
 
-### Adicionar Elementos a um Slice
+### Adicionar Elementos a uma Slice
 
-A função **`append()`** é usada para adicionar elementos a um slice.
+A função **`append()`** é usada para adicionar elementos a uma slice.
 
-O primeiro argumento é slice que será adicionado, e os próximos argumentos são os elementos a serem adicionados a esse slice.
+O primeiro argumento é a slice que será adicionada, e os próximos argumentos são os elementos a serem adicionados a esse slice.
 
-É retornado um novo slice contendo os elementos adicionados.
+É retornado uma nova slice contendo os elementos adicionados.
 
 **Exemplo:**
 
@@ -1330,19 +1356,19 @@ package main
 import "fmt"
 
 func main() {
-    // Criando um slice
+    // Criando uma slice
     mySlice := []int{1, 2, 3, 4}
 
-    // Novo slice com os elementos do anterior e um a mais
+    // Nova slice com os elementos do anterior e um a mais
     novoSlice := append(mySlice[:], 5)
 
-    // Imprime o slice antigo e o novo
+    // Imprime a slice antigo e o novo
     fmt.Println(mySlice)    // Output => [1 2 3 4]
     fmt.Println(novoSlice)  // Output => [1 2 3 4 5]
 }
 ```
 
-Geralmente é usado simplesmente para adicionar elementos a um slice.
+Geralmente é usado simplesmente para adicionar elementos a uma slice.
 
 **Exemplo:**
 
@@ -1352,18 +1378,18 @@ package main
 import "fmt"
 
 func main() {
-    // Criando um slice
+    // Criando uma slice
     mySlice := []int{1, 2, 3, 4}
 
-    // Adicionando elementos ao slice
+    // Adicionando elementos à slice
     mySlice = append(mySlice[:], 5, 6, 7)
 
-    // Imprime o slice
+    // Imprime a slice
     fmt.Println(mySlice) // Output => [1 2 3 4 5 6 7]
 }
 ```
 
-Se ao invés de elementos for adicionado outro slice, é necessário definir **`...`** ao fim do slice.
+Se ao invés de elementos for adicionada outra slice, é necessário definir **`...`** ao fim da slice.
 
 ``` go
 package main
@@ -1383,9 +1409,11 @@ func main() {
 }
 ```
 
-### Remover Elementos de um Slice
+### Remover Elementos de uma Slice
 
-É usada a função **`append()`** junto a técnica "slicing" para criar um novo slice que exclui os elementos desejados.
+#### Remover Elemento por Índice
+
+É usada a função **`append()`** junto a técnica "slicing" para remover um elemento por índice em um slice.
 
 **Exemplo:**
 
@@ -1395,23 +1423,23 @@ package main
 import "fmt"
 
 func main() {
-    // Criando um slice
+    // Criando uma slice
     mySlice := []int{1, 2, 3, 4, 5}
 
     // Índice do elemento a ser removido
     indexToRemove := 2
 
-    // Remove o elemento do slice
+    // Remove o elemento da slice
     mySlice = append(mySlice[:indexToRemove], mySlice[indexToRemove + 1:]...)
 
-    // Imprime o novo slice
+    // Imprime a nova slice
     fmt.Println(mySlice) // Output => [1 2 4 5]
 }
 ```
 
-### Cópia entre Slices
+#### Remover Elemento por Valor
 
-A função **`copy()`** copia os elementos de um slice para um outro slice e retorna a quantidade de elementos copiados.
+É feito criando uma nova slice e incluindo todos os elementos que não sejam o elemento a ser removido. Para isso, é usado um loop junto com **`append()`**.
 
 **Exemplo:**
 
@@ -1421,7 +1449,38 @@ package main
 import "fmt"
 
 func main() {
-    // Criando um slice
+    // Slice de exemplo
+    mySlice := []int{1, 2, 3, 2, 4, 2, 5}
+
+    // Elemento que será removido
+    element := 2
+
+    // Cria uma nova slice sem os elementos `2`
+    var newSlice []int
+    for _, v := range mySlice {
+        if v != element {
+            newSlice = append(newSlice, v)
+        }
+    }
+
+    // Imprime a nova slice
+    fmt.Println(newSlice) // Output => [1 3 4 5]
+}
+```
+
+### Cópia entre Slices
+
+A função **`copy()`** copia os elementos de uma slice para uma outra slice e retorna a quantidade de elementos copiados.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Criando uma slice
     mySlice := []int{1, 2, 3, 4, 5}
 
     // Slice que será a cópia
@@ -1431,13 +1490,70 @@ func main() {
     // Imprime os slices
     fmt.Printf("Slice original: %v\n", mySlice)
     fmt.Printf("Elementos copiados: %d\n", numElements)
-    fmt.Printf("Cópia do slice: %v\n", newSlice)
+    fmt.Printf("Cópia da slice: %v\n", newSlice)
 
     /* Output =>
     Slice original: [1 2 3 4 5]
     Elementos copiados: 5
-    Cópia do slice: [1 2 3 4 5 0]
+    Cópia da slice: [1 2 3 4 5 0]
     */
+}
+```
+
+### Slices Multidimensionais
+
+Slices multidimensionais são basicamente slices de slices.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Cria uma matriz bidimensional 3x3
+    matriz := [][]int{
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9},
+    }
+
+    // Imprime a matriz
+    fmt.Println(matriz)
+    // Output => [[1 2 3] [4 5 6] [7 8 9]]
+}
+```
+
+Além disso, é possível criar uma slice multidimensional vazia e preenchê-la depois.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Cria uma matriz bidimensional 3x3
+    matriz := make([][]int, 3) // Linhas da matriz
+
+    for i := 0; i < len(matriz); i++ {
+        matriz[i] = make([]int, 3) // Colunas da matriz
+    }
+
+    // Preenche a matriz
+    cont := 0
+    for i := 0; i < len(matriz); i++ {
+        for j := 0; j < cap(matriz); j++ {
+            cont++
+            matriz[i][j] = cont
+        }
+    }
+
+    // Imprime a matriz
+    fmt.Println(matriz)
+    // Output => [[1 2 3] [4 5 6] [7 8 9]]
 }
 ```
 
@@ -1445,7 +1561,7 @@ func main() {
 
 O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
 
-* **'`Ints()`'**: Ordena um slice de inteiros.
+* **'`Ints()`'**: Ordena uma slice de inteiros.
 
     ``` go
     package main
@@ -1456,18 +1572,18 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
     )
 
     func main() {
-        // Criando um slice
+        // Criando uma slice
         myIntSlice := []int{5, 2, 1, 3, 4}
 
-        // Ordenando o slice
+        // Ordenando a slice
         sort.Ints(myIntSlice)
 
-        // Imprime o slice ordenado
+        // Imprime a slice ordenada
         fmt.Println(myIntSlice) // Output => [1 2 3 4 5]
     }
     ```
 
-* **'`Float64s`'**: Ordena um slice de `float64`.
+* **'`Float64s`'**: Ordena uma slice de `float64`.
 
     ``` go
     package main
@@ -1478,18 +1594,18 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
     )
 
     func main() {
-        // Criando um slice
+        // Criando uma slice
         myFloatSlice := []float64{5.4, 5.2, 5.1, 5.5, 5.3}
 
-        // Ordenando o slice
+        // Ordenando a slice
         sort.Float64s(myFloatSlice)
 
-        // Imprime o slice ordenado
+        // Imprime a slice ordenada
         fmt.Println(myFloatSlice) // Output => [5.1 5.2 5.3 5.4 5.5]
     }
     ```
 
-* **'`Strings`'**: Ordena um slice de strings.
+* **'`Strings`'**: Ordena uma slice de strings.
 
     ``` go
     package main
@@ -1500,18 +1616,18 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
     )
 
     func main() {
-        // Criando um slice
+        // Criando uma slice
         myStrSlice := []string{"Go", "Python", "Ruby", "C++"}
 
-        // Ordenando o slice
+        // Ordenando a slice
         sort.Strings(myStrSlice)
 
-        // Imprime o slice ordenado
+        // Imprime a slice ordenada
         fmt.Println(myStrSlice) // Output => [C++ Go Python Ruby]
     }
     ```
 
-* **'`IntsAreSorted()`'**: Retorna verdadeiro se um dado slice de inteiros estiver ordenado.
+* **'`IntsAreSorted()`'**: Retorna verdadeiro se uma dada slice de inteiros estiver ordenada.
 
     ``` go
     package main
@@ -1522,17 +1638,17 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
     )
 
     func main() {
-        // Criando um slice
+        // Criando uma slice
         myIntSlice := []int{1, 2, 3, 4, 5}
 
-        // Verifica se o slice está ordenado
+        // Verifica se a slice está ordenada
         ordenado := sort.IntsAreSorted(myIntSlice)
 
         fmt.Println(ordenado) // Output => true
     }
     ```
 
-* **'`Float64AreSorted()`'**: Retorna verdadeiro se um dado slice do tipo `float64` estiver ordenado.
+* **'`Float64AreSorted()`'**: Retorna verdadeiro se uma dada slice do tipo `float64` estiver ordenada.
 
     ``` go
     package main
@@ -1543,17 +1659,17 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
     )
 
     func main() {
-        // Criando um slice
+        // Criando uma slice
         myFloatSlice := []float64{5.1, 5.2, 5.3, 5.4, 5.5}
 
-        // Verifica se o slice está ordenado
+        // Verifica se a slice está ordenada
         ordenado := sort.Float64sAreSorted(myFloatSlice)
 
         fmt.Println(ordenado) // Output => true
     }
     ```
 
-* **'`StringAreSorted()`'**: Retorna verdadeiro se um dado slice de strings estiver ordenado.
+* **'`StringAreSorted()`'**: Retorna verdadeiro se um dada slice de strings estiver ordenada.
 
     ``` go
     package main
@@ -1564,10 +1680,10 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
     )
 
     func main() {
-        // Criando um slice
+        // Criando uma slice
         myStrSlice := []string{"C++", "Go", "Python", "Ruby"}
 
-        // Verifica se o slice está ordenado
+        // Verifica se a slice está ordenada
         ordenado := sort.StringsAreSorted(myStrSlice)
 
         fmt.Println(ordenado) // Output => true
@@ -2025,3 +2141,349 @@ São utilizados para realizar operações a nível de bits em números inteiros.
         fmt.Println(resultado) // Output => 1
     }
   ```
+
+### Operadores de Atribuição
+
+O operador de atribuição mais comum é **`=`**, mas também há outros operadores que realizam uma operação e armazenam o resultado na variável.
+
+**Os operadores de atribuição são:**
+
+* **'`=`'**: Atribui o valor à variavel.
+* **'`+=`'**: Soma um valor à variável.
+* **'`-=`'**: Subtrai um valor da variável.
+* **'`*=`'**: Multiplica a variável por um valor.
+* **'`/=`'**: Divide a variável por um valor.
+* **'`%=`'**: Calcula o resto da divisão da variável pelo valor e atribui o resultado à variável.
+* **'`&=`'**: Realiza a operação bit a bit AND com a variável e o valor, e então atribui o resultado à variável.
+* **'`|=`'**: Realiza a operação bit a bit OR com a variável e o valor, e então atribui o resultado à variável.
+* **'`^=`'**: Realiza a operação bit a bit XOR com a variável e o valor, e então atribui o resultado à variável.
+* **'`<<=`'**: Desloca os bits da variável para a esquerda na mesma quantidade de vezes do valor.
+* **'`>>=`'**: Desloca os bits da variável para a direita na mesma quantidade do valor.
+
+## Estruturas de Repetição
+
+Em Go, **`for`** é o único loop, podendo ser usado para diferentes casos.
+
+**Sintaxe:**
+
+``` go
+for variavelInicial; condicao; incremento
+```
+
+* **'`variavelInicial`'**: Inicia uma variável.
+* **'`condicao`'**: É analisada em toda iteração do loop, encerrando o loop quando se torna falsa.
+* **'`incremento`'**: Incrementa a variável iniciada a cada iteração do loop.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 5; i++ {
+        fmt.Printf("%d ", i)
+    }
+    // Output => 0 1 2 3 4
+}
+```
+
+### Palavra-chave `break`
+
+A palavra-chave **`break`** sai de um loop imediatamente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 10; i++ {
+        if i == 5 { break }
+        fmt.Printf("%d ", i)
+    }
+    // Output => 0 1 2 3 4
+}
+```
+
+No exemplo acima, o loop é encerrado quando a variável de inicialização se torna 5.
+
+### Palavra-chave `continue`
+
+A palavra-chave **`continue`** pula para a próxima iteração do loop.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i < 10; i++ {
+        if i % 2 != 0 { continue }
+        fmt.Printf("%d ", i)
+    }
+    // Output => 0 2 4 6 8
+}
+```
+
+No exemplo acima, é pulado para a príxima iteração toda vez que a variável de inicialização for ímpar.
+
+### Loop apenas com Condição
+
+Um loop **`for`** com apenas condições executa até que a condição se torne falsa ou o loop seja interrompido com `break`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    cont := 0
+    for cont < 5 {
+        fmt.Printf("%d ", cont)
+        cont++
+    }
+    // Output => 0 1 2 3 4
+}
+```
+
+### Loop Infinito
+
+Declarar **`for`** sem mais outras declarações, resultará em um loop infinito que só se encerrará com `break`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    cont := 0
+    for {
+        fmt.Printf("%d ", cont)
+        cont++
+        if cont == 5 { break }
+    }
+    // Output => 0 1 2 3 4
+}
+```
+
+### Loop com `range`
+
+Para iterar sobre strings, arrays, slices, maps ou canais, são declaradas variáveis de índice e valor junto à declaração `for`.
+
+**Sintaxe:**
+
+``` go
+for indice, valor := range array {
+    // Bloco de código
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    mySlice := []int{1, 2, 3, 4, 5}
+    for i, v := range mySlice {
+        fmt.Printf("Índice: %d | Valor: %v\n", i, v)
+    }
+    /* Output:
+    Índice: 0 | Valor: 1
+    Índice: 1 | Valor: 2
+    Índice: 2 | Valor: 3
+    Índice: 3 | Valor: 4
+    Índice: 4 | Valor: 5
+    */
+}
+```
+
+Quando o índice não for necessário para a lógica do código, deve ser definido **`_`** (underline) ao invés do nome para a variável de índice.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    mySlice := []int{1, 2, 3, 4, 5}
+    for _, v := range mySlice {
+        fmt.Printf("Valor: %v\n", v)
+    }
+    /* Output:
+    Valor: 1
+    Valor: 2
+    Valor: 3
+    Valor: 4
+    Valor: 5
+    */
+}
+```
+
+## Estruturas Condicionais
+
+### Estruturas `if`, `else` e `else if`
+
+#### Declaração `if`
+
+Uma estrutura condicional é iniciada com a declaração **`if`**, e após ele uma condição e um bloco de código. O bloco de código só irá executar se a condição for verdadeira.
+
+**Sintaxe:**
+
+``` go
+if condicao {
+    // Bloco que executa quando a `condicao` for `true`
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := true
+    if x {
+        fmt.Println("Olá, Mundo!")
+    }
+    // Output => Olá, Mundo!
+}
+```
+
+#### Declaração `else`
+
+Além de `if`, há também a declaração **`else`**, que executa quando o `if` não é verdadeiro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := false
+    if x {
+        fmt.Println("Olá, Mundo!")
+    } else {
+        fmt.Println("Olá, Go!")
+    }
+    // Output => Olá, Go!
+}
+```
+
+> **OBS.:** Em uma estrutura condicinal só pode haver um `else`.
+
+#### Declaralção `else if`
+
+E por fim, há a declaração **`else if`**, que funciona como o `if`, mas só é verificada se as condições acima dela forem falsas.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 2
+    if x == 1 {
+        fmt.Println("Olá, Mundo!")
+    } else if x == 2 {
+        fmt.Println("Olá, Go!")
+    } else {
+        fmt.Println("Valor diferente de 1 e 2")
+    }
+    // Output => Olá, Go!
+}
+```
+
+> **OBS.:** Em uma estrutura condicional pode haver vários `else if`.
+
+### Estrutura `switch`
+
+Executa um bloco dentre vários, baseando-se no valor de uma dada variável ou expressão.
+
+Para cada possível valor de uma expressão, é criado um **`case`**, e no fim é criado um **`default`** caso nenhum `case` seja executado.
+
+**Sintaxe:**
+
+``` go
+switch expressao {
+case opcao1:
+    // Executa caso o valor de `expressao` seja `opcao1`
+case opcao2:
+    // Executa caso o valor de `expressao` seja `opcao2`
+...
+case opcaoN:
+    // Executa caso o valor de `expressao` seja `opcaoN`
+default:
+    // Executa quando nenhum caso acima é executado
+}
+```
+
+> **OBS.:** O valor de cada `case` deve ser do mesmo tipo da expressão, ou será lançado um erro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 3
+
+    switch x {
+    case 1:
+        fmt.Println("x é igual a 1")
+    case 2:
+        fmt.Println("x é igual a 2")
+    case 3:
+        fmt.Println("x é igual a 3")
+    default:
+        fmt.Println("x é diferente de 1, 2 e 3")
+    }
+    // Output => x é igual a 3
+}
+```
+
+#### Múltiplos Valores para `case`
+
+Um `case` pode receber mais de um valor, e assim, permitindo executar um único bloco para diferentes valores, sem a necessidade de duplicar blocos.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 3
+
+    switch x {
+    case 1, 2, 3:
+        fmt.Println("x é igual a 1, 2 ou 3")
+    default:
+        fmt.Println("x não é igual a 1, 2 e 3")
+    }
+    // Output => x é igual a 3
+}
+```
