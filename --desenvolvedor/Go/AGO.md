@@ -2487,3 +2487,309 @@ func main() {
     // Output => x é igual a 3
 }
 ```
+
+## Funções
+
+São criadas a partir da palavra-chave **`func`**, seguida de parênteses e um bloco de código.
+
+**Sintaxe:**
+
+``` go
+func NomeFuncao() {
+    // Bloco da função
+}
+```
+
+Para **chamar uma função**, basta escrever o nome dela com os parênteses.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func OlaMundo() {
+    fmt.Println("Olá, Mundo!")
+}
+
+func main() {
+    OlaMundo() // Chama a função
+    // Output => Olá, Mundo!
+}
+```
+
+A função acima imprime "Olá, Mundo!".
+
+### Regras para Nomes de Funções
+
+* São case-sensitive.
+* Devem se iniciar com um letra.
+* Podem conter apenas caracteres alfanuméricos e `_`.
+* Geralmente são escritas em PascalCase.
+
+### Parâmetros e Argumentos
+
+**Sintaxe:**
+
+``` go
+func NomeFuncao(param1 tipo, param2 tipo, ..., paramN tipo) {
+    // Bloco da função
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func DigaOla(nome string) {
+    fmt.Printf("Olá, %s!\n", nome)
+}
+
+func main() {
+    DigaOla("Mundo") // Chama a função
+    // Output => Olá, Mundo!
+}
+```
+
+**Exemplo com múltiplos parâmetros:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func Soma(x int, y int) {
+    fmt.Printf("A soma entre %d e %d é %d\n", x, y, x + y)
+}
+
+func main() {
+    Soma(5, 2) // Chama a função
+    // Output => A soma entre 5 e 2 é 7
+}
+```
+
+> **NOTA:** Ao chamar uma função, ela deve receber o mesmo número de argumentos em relação aos parâmetros.
+
+### Retorno de Valores
+
+Funções que retornam valores devem ser declaradas com o tipo de valor que elas retornam. Para retornar valores, é usada a palavra-chave **`return`**.
+
+**Sintaxe:**
+
+``` go
+func NomeFuncao() tipoRetorno {
+    // Bloco de código
+    return valor
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func Multiplicar(x int, y int) int {
+    return x * y
+}
+
+func main() {
+    resultado := Multiplicar(5, 2) // Chama a função
+    fmt.Printf("Resultado da multiplicação: %d\n", resultado)
+    // Output => Resultado da multiplicação: 10
+}
+```
+
+#### Nomear Valores de Retorno
+
+É possível nomear valores de retorno.
+
+**Sintaxe:**
+
+``` go
+func NomeFuncao() (nomeValorRetorno tipo) {
+    // Bloco da função
+    return
+}
+```
+
+Basicamente, `nomeValorRetorno` é uma variável do tipo especificado que será retornada quando chamado `return`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func Multiplicar(x int, y int) (resultado int) {
+    resultado = x * y
+    return resultado
+}
+
+func main() {
+    resultado := Multiplicar(5, 2) // Chama a função
+    fmt.Printf("Resultado da multiplicação: %d\n", resultado)
+    // Output => Resultado da multiplicação: 10
+}
+```
+
+Mesmo que haja o retorno nomeado em uma função, é possível retornar valores que não sejam esse retorno nomeado.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func Multiplicar(x int, y int) (resultado int) {
+    resultado = x * y
+    return x + y
+}
+
+func main() {
+    resultado := Multiplicar(5, 2) // Chama a função
+    fmt.Printf("Resultado da multiplicação: %d\n", resultado)
+    // Output => Resultado da multiplicação: 7
+}
+```
+
+No exemplo acima, mesmo que a função multiplique `x` e `y`, ela retorna a soma deles.
+
+#### Retono Múltiplo de Valores
+
+Para retornar mais de um valor, é necessário que esses valores sejam nomeados previamente.
+
+**Sintaxe:**
+
+``` go
+func NomeFuncao() (valor1 tipo, valor2 tipo) {
+    // Bloco da função
+    return
+}
+```
+
+Para utilizá-los, é necessário declarar duas variáveis.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func SomarEMultiplicar(x int, y int) (soma int, mult int) {
+    soma = x + y
+    mult = x * y
+    return
+}
+
+func main() {
+    resultadoSoma, ResultadoMult := SomarEMultiplicar(5, 2) // Chama a função
+
+    // Imprime os resultados
+    fmt.Printf("Resultado da soma: %d\n", resultadoSoma)
+    fmt.Printf("Resultado da multiplicação: %d\n", ResultadoMult)
+    /* Output
+    Resultado da soma: 7
+    Resultado da multiplicação: 10
+    */
+}
+```
+
+Se não for necessário o uso dos dois valores, você pode substituir a variável desse respectivo valor por **`_`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func SomarEMultiplicar(x int, y int) (soma int, mult int) {
+    soma = x + y
+    mult = x * y
+    return
+}
+
+func main() {
+    _, ResultadoMult := SomarEMultiplicar(5, 2) // Chama a função
+
+    // Imprime o resultado da multiplicação
+    fmt.Printf("Resultado da multiplicação: %d\n", ResultadoMult)
+    // Output => Resultado da multiplicação: 10
+}
+```
+
+### Funções de Recursão
+
+Uma função de recursão é uma função que chama ela mesma até atingir um ponto de parada (condição).
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+// Declaração de função
+func SomarEMultiplicar(x int, y int) (soma int, mult int) {
+    soma = x + y
+    mult = x * y
+    return
+}
+
+func main() {
+    _, ResultadoMult := SomarEMultiplicar(5, 2) // Chama a função
+
+    // Imprime o resultado da multiplicação
+    fmt.Printf("Resultado da multiplicação: %d\n", ResultadoMult)
+    // Output => Resultado da multiplicação: 10
+}
+```
+
+O exemplo acima imprime "Olá, Mundo!" na mesma quantidade definida no argumento da função quando chamada.
+
+**Exemplo de cálculo de fatorial:**
+
+``` go
+package main
+
+import "fmt"
+
+// Função que calcula o fatorial
+func Fatorial(valor int) (resultado int) {
+    if valor > 0 {
+        resultado = valor * Fatorial(valor - 1)
+    } else {
+        resultado = 1
+    }
+
+    return
+}
+
+func main() {
+    valor := 5
+    resultado := Fatorial(5) // Chama a função
+    fmt.Printf("%d! = %d\n", valor, resultado)
+    // Output => 5! = 120
+}
+```
+
+No exeplo acima, a função `Fatorial` é uma função de recursão que percorre do valor dado até 1, e então retorna o resultado acumulado de todas as "iterações".
+
+> **OBS.:** Chamadas excessivas de funções recursivas pode levar a uma redução de desempenho, podendo ser mais útil utilizar um loop nessas situações.
