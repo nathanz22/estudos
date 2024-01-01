@@ -2793,3 +2793,438 @@ func main() {
 No exeplo acima, a função `Fatorial` é uma função de recursão que percorre do valor dado até 1, e então retorna o resultado acumulado de todas as "iterações".
 
 > **OBS.:** Chamadas excessivas de funções recursivas pode levar a uma redução de desempenho, podendo ser mais útil utilizar um loop nessas situações.
+
+## Structs
+
+Estruturas são usadas para criar uma coleção de membros que pode ser composta por diferentes tipos de dados.
+
+Diferente de arrays, que armazenam múltiplos dados do mesmo tipo em uma única variável, structs permitem armazenar vários tipos de dados em uma única variável.
+
+Estruturas são declaradas com as palavra-chave **'`type`'** e **`struct`**. Nas estruturas, os identificadores dos valores são chamados de membros, e ao definí-los, deve ser especificado o tipo de dado que cada um deve receber.
+
+**Sintaxe:**
+
+``` go
+type NomeEstrutura struct {
+    membro1 tipoDeDado
+    membro2 tipoDeDado
+    membro3 tipoDeDado
+    ...
+    membroN tipoDeDado
+}
+```
+
+Membros de estruturas são acessados por meio de notação de ponto, tanto para atribuição quanto para leitura.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+type Pessoa struct {
+    nome string
+    idade int
+}
+
+func main() {
+    // Variável de estrutura
+    var pessoa1 Pessoa
+
+    // Atribuição de valores aos membros da estrutura
+    pessoa1.nome = "João"
+    pessoa1.idade = 23
+
+    // Imprime os valores
+    fmt.Printf("Nome: %s\n", pessoa1.nome)
+    fmt.Printf("Idade: %d\n", pessoa1.idade)
+
+    /* Output:
+    Nome: João
+    Idade: 23
+    */
+}
+```
+
+Também é possível declarar uma variável de estrutura de maneira inferida com **`:=`**. Dessa forma, devem ser passados os valores para os membros dentro de um bloco.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+type Pessoa struct {
+    nome string
+    idade int
+}
+
+func main() {
+    // Variável de estrutura
+    pessoa1 := Pessoa {
+        nome: "João",
+        idade: 23,
+    }
+
+    // Imprime os valores
+    fmt.Printf("Nome: %s\n", pessoa1.nome)
+    fmt.Printf("Idade: %d\n", pessoa1.idade)
+
+    /* Output:
+    Nome: João
+    Idade: 23
+    */
+}
+```
+
+### Structs Anônimas
+
+Também chamadas de "tipos embutidos", as estruturas anônimas são estruturas que não possui um nome explicitamente declarado. Em vez disso, ela é incorporada diretamente em outra estrutura ou tipo de dado.
+
+**Sintaxe:**
+
+``` go
+func main() {
+    nomeVariavel := struct {
+        membro1 tipo
+        membro2 tipo
+        ...
+        membroN tipo
+    }{
+        membro1: valor,
+        membro2: valor,
+        ...
+        membroN: valor,
+    }
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Estrutura anônima
+    pessoa := struct {
+        nome string
+        idade int
+    }{
+        nome: "João",
+        idade: 23,
+    }
+
+    // Imprime os valores
+    fmt.Printf("Nome: %s\n", pessoa.nome)
+    fmt.Printf("Idade: %d\n", pessoa.idade)
+
+    /* Output:
+    Nome: João
+    Idade: 23
+    */
+}
+```
+
+**Struct dentro de uma struct anônima:**
+
+``` go
+package main
+
+import "fmt"
+
+type Pessoa struct {
+    nome string
+    idade int
+}
+
+func main() {
+    // Estrutura anônima
+    pessoa := struct {
+        Pessoa
+        msg string
+
+    }{
+        Pessoa: Pessoa {
+            nome: "João",
+            idade: 23,
+        },
+        msg: "Olá, Mundo!",
+    }
+
+    // Imprime os valores
+    fmt.Printf("Nome: %s\n", pessoa.nome)
+    fmt.Printf("Idade: %d\n", pessoa.idade)
+    fmt.Printf("Mensagem: %s\n", pessoa.msg)
+
+    /* Output:
+    Nome: João
+    Idade: 23
+    Mensagem: Olá, Mundo!
+    */
+}
+```
+
+Structs anônimas são específicas ao escopo em que são declaradas, ou seja, elas são usadas localmente me funções ou como parte de outras structs, e não são declaradas globalmente.
+
+## Maps
+
+Armazenam dados em pares chave-valor. Maps são mutáveis e não permitem duplicidade de chaves.
+
+Há algumas formas de criar um map:
+
+**Com `var`:**
+
+``` go
+var nomeMap = map[tipoChave]tipoValor{
+    chave1: valor1,
+    chave2: valor2,
+    ...,
+    chaveN: valorN,
+}
+```
+
+**Com `:=`:**
+
+``` go
+nomeMap := map[tipoChave]tipoValor{
+    chave1: valor1,
+    chave2: valor2,
+    ...,
+    chaveN: valorN,
+}
+```
+
+**Com `make()`:**
+
+``` go
+var nomeMap = make(map[tipoChave]tipoValor)
+
+// Ou
+
+nomeMap := make(map[tipoChave]tipoValor)
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var myMap = map[string]string{
+        "z": "Exemplo1",
+        "a": "Exemplo2",
+        "c": "Exemplo3",
+    }
+
+    fmt.Println(myMap)
+    // Output => map[a:Exemplo2 c:Exemplo3 z:Exemplo1]
+
+}
+```
+
+Perceba que na saída os elementos são ordenados alfabeticamente.
+
+Elementos em maps são acessados por meios de suas chaves, especificando-as com notação de colchetes.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara um map vazio
+    myMap := make(map[string]string)
+
+    // Atribui elementos ao map
+    myMap["nome"] = "João"
+    myMap["idade"] = "16"
+
+    // Imprime os valores do map
+    fmt.Printf("Nome: %s\n", myMap["nome"])
+    fmt.Printf("Idade: %s\n", myMap["idade"])
+    /* Output:
+    Nome: João
+    Idade: 16
+    */
+}
+```
+
+### Exclusão de Elementos em Maps
+
+Um elemento de um map pode ser excluído a partir de sua chave com a função **`delete()`**.
+
+**Sintaxe:**
+
+``` go
+delete(nomeMap, chave)
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara um map com três elementos
+    myMap := map[string]int{
+        "num1": 5,
+        "num2": 7,
+        "num3": 9,
+    }
+
+    // Excluindo o elemento "num2"
+    delete(myMap, "num2")
+
+    // Imprime o map
+    fmt.Println(myMap)
+    // Output => map[num1:5 num3:9]
+}
+```
+
+### Verificar se Chave Existe
+
+Para verificar se uma chave existe dentro de um map, é feito o seguinte:
+
+**Sintaxe:**
+
+``` go
+val, ok := nomeMap[chave]
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara um map com três elementos
+    myMap := map[string]int{
+        "num1": 5,
+        "num2": 7,
+        "num3": 9,
+    }
+
+    // Verifica a existência de algumas chaves
+    val1, exist1 := myMap["num1"]
+    val2, exist2 := myMap["num2"]
+    val3, exist3 := myMap["num3"]
+    val4, exist4 := myMap["num4"]
+
+    // Imprime os resultados
+    fmt.Println(val1, exist1) // Output => 5 true
+    fmt.Println(val2, exist2) // Output => 7 true
+    fmt.Println(val3, exist3) // Output => 9 true
+    fmt.Println(val4, exist4) // Output => 0 false
+}
+```
+
+Se não houver a necessidade do valor, pode substituir por **`_`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara um map com três elementos
+    myMap := map[string]int{
+        "num1": 5,
+        "num2": 7,
+        "num3": 9,
+    }
+
+    // Verifica a existência de algumas chaves
+    _, exist1 := myMap["num1"]
+    _, exist2 := myMap["num2"]
+    _, exist3 := myMap["num3"]
+    _, exist4 := myMap["num4"]
+
+    // Imprime os resultados
+    fmt.Println(exist1) // Output => true
+    fmt.Println(exist2) // Output => true
+    fmt.Println(exist3) // Output => true
+    fmt.Println(exist4) // Output => false
+}
+```
+
+### Cópia entre Maps
+
+Não é possível copiar um map apenas atribuindo-o a uma outra variável.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara um map com três elementos
+    map1 := map[string]int{
+        "num1": 5,
+        "num2": 7,
+        "num3": 9,
+    }
+
+    // Declaração do segundo map
+    map2 := map1
+
+    // Substituindo um elemento
+    map2["num1"] = 11
+
+    // Imprime os maps
+    fmt.Println(map1) // Output => map[num1:11 num2:7 num3:9]
+    fmt.Println(map2) // Output => map[num1:11 num2:7 num3:9]
+}
+```
+
+Como visto no exemplo acima, a "cópia" teve um elemento modificado, o map original também sofreu a alteração. Isso acontece porque maps são referências de hash tables, e dessa meneira, ambos os maps são referências de um mesmo hash table.
+
+Para realmente copiar um map, pode-se iterar sobre ele e atribuir chave à chave para um novo map.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara um map com três elementos
+    myMap := map[string]int{
+        "num1": 5,
+        "num2": 7,
+        "num3": 9,
+    }
+
+    // Declaração do segundo map
+    copyMap := map[string]int{}
+
+    // Itera sobre o map original
+    for k, v := range myMap {
+        // Copia os elementos do map original para a cópia
+        copyMap[k] = v
+    }
+
+    // Substitui um elemento de `copyMap`
+    copyMap["num1"] = 11
+
+    // Imprime os maps
+    fmt.Println(myMap)   // Output => map[num1:5 num2:7 num3:9]
+    fmt.Println(copyMap) // Output => map[num1:11 num2:7 num3:9]
+}
+```
