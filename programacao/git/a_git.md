@@ -250,3 +250,5 @@ O comando **`git merge`** mescla uma branch à branch atual.
 ``` bash
 git merge nome_da_branch
 ```
+
+## Repositório Remoto
