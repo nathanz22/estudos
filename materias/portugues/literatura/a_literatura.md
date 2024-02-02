@@ -24,6 +24,8 @@ A história da literatura pode ser dividida em períodos, e cada período contri
 
 A Antiguidade Clássica é um perírio histórico que abrange aproximadamente os séculos VIII a.C. a V d.C., abrangendo culturas da Grécia Antiga e da Roma Antiga. Durante este período, a literatura floresceu, produzindo algumas das obras mais importantes da literatura ocidental.
 
+Muitas obras refletem a relação entre humanos e divindades, explorando mitos e crenças religiosas.
+
 A literatura da Antiguidade Clássica pode ser dividia em três períodos principais:
 
 * **Período Homérico (VIII a.C. a VII a.C.)**: Marcado pelas obras de Homero, o maior poeta da Grécia Antiga. Suas obras, a Illíada e a Odisseia, são épicas que contam histórias da Guerra de Troia e das aventuras de Ulisses, respectivamente.
@@ -45,6 +47,98 @@ A literatura medieval pode ser dividida em três principais gêneros:
 * Poesia lírica
 * Poesia épica
 * Teatro
+
+#### Literatura Anglo-Saxônica
+
+Refere-se à produção literária em inglês antigo durante o período que compreende os séculos V ao XI. Este período é marcado por mudanças culturais significativas na Inglaterra, começando com as invasões dos anglo-saxões após a retirada dos romanos. A literatura anglo-saxônica abrange uma variedade de gêneros, incluindo poesia épica, poesia lírica, crônicas históricas e prosa religiosa.
+
+**Beowulf** é considerada a obra-prima da literatura anglo-saxônica, "Beowulf" é um poema épico anônimo que narra as aventuras do herói Beowulf. Escrito em inglês antigo, o poema é uma mistura de elementos históricos e lendários.
+
+#### Invasões Viking e Normandas
+
+As invasões vikings e normandas no final do período anglo-saxônico impactaram significativamente na literatura e na cultura.
+
+**Invasões vikings:**
+
+Os vikings invadiram partes significativas da Inglaterra durante os séculos VIII a XI, causando destruição e deslocamento de comunidades. Isso teve impacto direto na produção e preservação de textos literários.
+
+Apesar da violência associada às invasões vikings, houve também um intercâmbio cultural. Algumas histórias, mitos e tradições escandinavas podem ter influenciado a literatura inglese da época.
+
+Algumas obras literárias anglo-saxônicas, escritas após as invasões vikings, podem refletir uma mistura de elementos culturais anglo-saxões e escandinavos.
+
+**Invasões normandas:**
+
+A invasão normanda em 1066, liderada por Guilherme, o Conquistador, teve um impacto profundo na estrutura política e social da Inglaterra. Isso também influenciou a literatura, uma vez que os normandos introduziram uma nova elite governante e uma nova língua administrativa (o francês).
+
+O francês se tornou a língua literária e administrativa da Inglaterra pós-conquistada, substituindo o inglês antigo em muitos contextos formais. No entanto, o inglês antigo continuou a ser usado na literatura vernácula, refletindo a coexistência de ambas as tradições.
+
+A influência normanda também se refletiu na temática e no estilo literário. A literatura anglo-normanda, escrita em francês, muitas vezes abordava temas corteses e românticos, diferindo em certa medida das tradições literárias anglo-saxônicas.
+
+A conquista normanda marcou o início da Literatura Média Inglesa, uma fase na qual o inglês evoluiu e começou a incorporar elementos do francês. Esta transição é evidente em obras como "Sir Gawain e o Cavaleiro Verde", que combina elementos anglo-saxônicicos e normandos.
+
+#### Literatura Céltica e Galesa
+
+A literatura céltica e galesa referem-se à rica tradição literária das culturas celtas e galesas, que têm raízes em várias religiões da Europa, incluindo Irlanda, Escócia, País de Gales, Bretanha(região na França) e partes da Espanha. A literatura céltica é caracterizada por sua conexão profunda com a mitologia, a natureza e a tradição oral.
+
+##### Mitologia Irlandesa e Galesa
+
+Narrativas míticas desempenham um papel crucial na literatura céltica. Mitos irlandeses, como os do Ciclo de Ulster eo Ciclo Feniano, e mitos galeses, como os encontrados no Mabinogion, oferecem relatos ricos e complexos de deidades, heróis e aventuras.
+
+##### Épica Irlandesa
+
+O épico "Táin Bó Cúailnge" (A Roubada do Gado de Cooley) faz parte do Ciclo de Ulster e conta a história de uma guerra pela posse de um touro. É uma das obras mais importantes da literatura épica irlandesa.
+
+##### Bardos e Poesia Galesa
+
+Os bardos galeses desempenharam um papel crucial na preservação e divulgação da tradição literária através da poesia. A métrica complexa e a rima aliterativa são características marcantes da poesia galesa.
+
+##### Mabinogion
+
+É uma coleção de histórias galesas que inclui narrativas que abrangem motilogia, contos de fadas, romance e aventuras. Essas histórias foram preservadas principalmente em manuscritos do século XIV, mas suas origens remontam a tradições orais mais antigas.
+
+##### Ciclos Irlandeses e Galeses
+
+**Ciclos Irlandeses:**
+
+Além do Ciclo de Ulster e do Ciclo Feniano, existem outros ciclos literários, como o Ciclo Mitológico e o Ciclo Histórico, que abrangem diferentes períodos e aspectos da mitologia e histórias irlandesas.
+
+**Ciclos Galeses:**
+
+Além do Mobinogion, há o Ciclo de Morte e Renascimento de Llywelyn, que explora temas de morte e ressurreição.
+
+##### Influências Romano-Celtas
+
+A literatura céltica foi influenciada pelas interações com os romanos, refletindo-se em adaptações e assimilações de mitos e tradições.
+
+##### Cristianismo Céltico
+
+O Cristianismo Céltico, também conhecido como Cristianismo Insular, refere-se à forma de cristianismo que se desenvolveu nas ilhas britânicas e na Irlanda durante os primeiros séculos da era cristã. Esta tradição teve características distintas, influenciadas pela cultura e tradições celta pré-cristãs.
+
+A chegada do cristianismo à região céltica trouxe uma fusão de tradições pagãs e cristãs, visível em obras como a "Vida de São Patrício".
+
+##### Línguas Celtas
+
+O irlandês, o galês e o bretão são as principais línguas nas quais as obras literárias célticas foram compostas.
+
+#### Literatura Medieval Latina
+
+#### Literatura Carolíngia
+
+#### Literatura Medieval Francesa
+
+#### Literatura Alemã Medieval
+
+#### Literatura Italiana Medieval
+
+#### Literatura Espanhola Medieval
+
+#### Literatura Escandinava Medieval
+
+#### Desenvolvimento da Poesia Lírica
+
+#### Declínio da Idade Média
+
+#### Transição para a Renascença
 
 ### Renascimento
 

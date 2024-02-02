@@ -1063,4 +1063,609 @@ No exemplo acima, é pulada para a próxima repetição sempre que `c` for ímpa
 
 ## Dicionários
 
-<!-- Já vai! -->
+Os dicionários são estruturas compostas de pares chave-valor. Cada par chave-valor é um item dentro de um dicionário. Os dicionários permitem como qualquer tipo como valor, tornando-os flexíveis.
+
+**Há duas maneiras de declarar um dicionário:**
+
+``` py
+# Com `dict()`
+dicionario = dict()
+
+# Com `{}`
+dicionario = {}
+```
+
+Acima, as duas maneiras declaram um dicionário vazio.
+
+> **OBS.:** É preferível declarar um dicionário vazio com `{}` para facilitar a leitura.
+
+**Sintaxe:**
+
+``` py
+dicionario = {
+    chave1: valor1,
+    chave2: valor2,
+    ...
+    chaveN: valorN
+}
+```
+
+**Exemplo:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Imprime os itens do dicionário
+print(dicionario['nome'])   # Output => Luana
+print(dicionario['idade'])  # Output => 22
+```
+
+Como visto no exemplo acima, os valores são acessados por meio de suas chaves.
+
+### Alterar e Criar Chaves
+
+Para **alterar o valor de uma chave**, basta atribuir um novo valor com o operador `=`.
+
+**Exemplo:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Altera os valores das chaves
+dicionario['nome'] = 'John'
+dicionario['idade'] = 32
+
+# Imprime o dicionário
+print(dicionario) # Output => {'nome': 'John', 'idade': 32}
+```
+
+Para **criar uma nova chave**, basta selecioná-la como se ela já existesse e atribuir um valor a ela.
+
+**Exemplo:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Cria a chave `sexo`
+dicionario['sexo'] = 'feminino'
+
+# Imprime o dicionário
+print(dicionario) # Output => {'nome': 'Luana', 'idade': 22, 'sexo': 'feminino'}
+```
+
+### Excluir Itens
+
+Para excluir itens em um dicionário, é usado o operador **`del`**, seguido do dicionário e a chave do item por notação de colchetes.
+
+**Exemplo:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Exclui o item `idade`
+del dicionario['idade']
+
+# Imprime o dicionário
+print(dicionario) # Output => {'nome': 'Luana'}
+```
+
+### Iterarão Sobre Dicionários
+
+Com os métodos **`keys()`**, **`values()`** e **`items()`** é possível iterar sobre dicionário com base nas chaves, nos valores e nos itens, respectivamente.
+
+Essas iterações são feitas utilzando o loop **`for`** e o operador **`in`**.
+
+**Exemplo com `keys()`:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Imprime as chaves do dicionário
+n = 0
+for k in dicionario.keys():
+    n += 1
+    print(f'Chave {n}: {k}')
+
+# Output:
+# Chave 1: nome
+# Chave 2: idade
+```
+
+**Exemplo com `values()`:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Imprime as chaves do dicionário
+n = 0
+for v in dicionario.values():
+    n += 1
+    print(f'Valor {n}: {v}')
+
+# Output:
+# Valor 1: Luana
+# Valor 2: 22
+```
+
+**Exemplo com `items()`:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Imprime as chaves do dicionário
+n = 0
+for k, v in dicionario.items():
+    n += 1
+    print(f'{k}: {v}')
+
+# Output:
+# nome: Luana
+# idade: 22
+```
+
+### Métodos para Dicionários
+
+* **'`copy()`'**: Retorna uma cópia de `self`.
+
+    ``` py
+    # Dicionario que contém 2 itens
+    dicionario = {
+        'nome': 'Luana',
+        'idade': 22
+    }
+
+    # Cria uma cópia do dicionário
+    copiaDicionario = dicionario.copy()
+
+    # Altera os valores das chaves
+    copiaDicionario['nome'] = 'John'
+    copiaDicionario['idade'] = '32'
+
+    # Imprime os dicionários
+    print(dicionario)       # Output => {'nome': 'Luana', 'idade': 22}
+    print(copiaDicionario)  # Output => {'nome': 'John', 'idade': '32'}
+    ```
+
+* **'`clear()`'**: Limpa `self`, tornando-o um dicionário vazio.
+
+    ``` py
+    # Dicionario que contém 2 itens
+    dicionario = {
+        'nome': 'Luana',
+        'idade': 22
+    }
+
+    # Limpa o dicionário
+    dicionario.clear()
+
+    # Imprime o dicionário
+    print(dicionario) # Output => {}
+    ```
+
+* **'`keys()`'**: Retorna as chaves de `self`. Geralmente é usado para iterar sobre as chaves.
+
+    ``` py
+    # Dicionario que contém 2 itens
+    dicionario = {
+        'nome': 'Luana',
+        'idade': 22
+    }
+
+    # Chaves do dicionário
+    chaves = dicionario.keys()
+
+    # Imprime as chaves do dicionário
+    print(chaves) # Output => dict_keys(['nome', 'idade'])
+    ```
+
+* **'`values()`'**: Retorna os valores de `self`. Geralmente é usado para iterar sobre os valores.
+
+    ``` py
+    # Dicionario que contém 2 itens
+    dicionario = {
+        'nome': 'Luana',
+        'idade': 22
+    }
+
+    # Valores do dicionário
+    valores = dicionario.values()
+
+    # Imprime as chaves do dicionário
+    print(valores) # Output => dict_values(['Luana', 22])
+    ```
+
+* **'`items()`'**: Retorna as chaves e os valores de `self`. Geralmente é usado para iterar sobre as chaves e os valores.
+
+    ``` py
+    # Dicionario que contém 2 itens
+    dicionario = {
+        'nome': 'Luana',
+        'idade': 22
+    }
+
+    # Itens do dicionário
+    itens = dicionario.items()
+
+    # Imprime as chaves do dicionário
+    print(itens) # Output => dict_items([('nome', 'Luana'), ('idade', 22)])
+    ```
+
+## Funções
+
+Funções são declaradas a partir da palavra-chave **`def`**, seguida do nome da função, parênteses com os parâmetros e `:` no final.
+
+**Sintaxe:**
+
+``` py
+def nome_funcao(param1, param2, ..., paramN):
+    # Bloco da função
+```
+
+> **NOTA:** Em Python, é uma convenção usar snake_case para nomes de funções.
+
+**Exemplo:**
+
+``` py
+# Função que imprime "Olá, Mundo!"
+def ola_mundo():
+    print('Olá, Mundo!')
+
+# Chama a função
+ola_mundo() # Output => Olá, Mundo!
+```
+
+**Exemplo com parâmetros:**
+
+``` py
+# Função que imprime uma saudação
+def saudacao(nome):
+    print(f'Olá, {nome}!')
+
+# Chama a função
+saudacao('Mundo') # Output => Olá, Mundo!
+```
+
+No exemplo acima, `nome` é um parâmetro da função `saudacao()`, enquanto a string `'Mundo'` passada para a função, é chamada de argumento.
+
+> **NOTA:** Parâmetros podem ser de qualquer tipo de valor. Por causa disso, deve-se tomar cuidado para evitar erros ao passar um valor que não é válido.
+
+É possível passar os argumentos numa ordem diferente na qual os parâmetros foram definidos, para isso, deve ser especificado qual o parâmetro irá receber o argumento, utilizando com `=`.
+
+**Exemplo:**
+
+``` py
+# Função que imprime a soma entre dois valores
+def soma(x, y):
+    print(x + y)
+
+# Chama a função várias vezes com diferentes argumentos
+soma(y=2, x=5) # Output => 7
+soma(x=1, y=5) # Output => 6
+soma(2, y=3)   # Output => 5
+```
+
+### Empacotar Argumentos
+
+Empacotar refere-se aos parâmetros que pode receber um ou mais argumentos. Esses parâmetros possuem **`*`** no início do nome, e cada função pode ter apenas um, e ele deve ser o último parâmetro definido.
+
+**Sintaxe:**
+
+``` py
+def nome_funcao(param1, param2, *args):
+    # Bloco da função
+```
+
+> **NOTA:** É uma comum nomear o parâmetro que recebe argumentos variádicos como **`args`**.
+
+Esses parâmetros se tornam listas com os valores passados.
+
+**Exemplo:**
+
+``` py
+# Função variádica que imprime a soma de valores
+def soma(*args):
+    soma = 0
+    for i in args:
+        soma += i
+    print(f'Soma: {soma}')
+
+# Chama a função várias vezes com diferentes argumentos
+soma(2, 4)          # Output => 6
+soma(5)             # Output => 5
+soma(1, 2, 3, 4, 5) # Output => 15
+```
+
+Como dito anteriormente, se a função tiver mais de um parâmetro, o parâmetro variádico (que empacota) deve ser o último.
+
+**Exemplo:**
+
+``` py
+# Função que imprime a soma da multiplicação de um valor por outros
+def mult(x, *args):
+    soma = 0
+    for i in args:
+        soma += x * i
+    print(f'Soma: {soma}')
+
+# Chama a função várias vezes com diferentes argumentos
+mult(5, 2, 4)           # Output => 30
+mult(2, 5)              # Output => 10
+mult(0, 1, 2, 3, 4, 5)  # Output => 0
+```
+
+### Valor Padrão para Parâmetros
+
+É possível definir um valor padrão para um parâmetro incluindo `=` e o valor padrão ao definir o parâmetro.
+
+**Sintaxe:**
+
+``` py
+def nome_funcao(param = valor_padrao):
+    # Bloco da função
+```
+
+**Exemplo:**
+
+``` py
+# Função que imprime a soma entre dois valores
+def soma(x, y=5):
+    print(x + y)
+
+# Chama a função várias vezes com diferentes argumentos
+soma(5, 2)  # Output => 7
+soma(3)     # Output => 8
+soma(0)     # Output => 5
+```
+
+### Retorno de Valores
+
+A palavra-chave **`return`** é usada para retornar valores em funções, podendo esses valores serem de qualquer tipo.
+
+**Sintaxe:**
+
+``` py
+def funcao(param1, param2, ..., paramN):
+    return valor
+```
+
+**Exemplo:**
+
+``` py
+# Função que calcula o dobro de um valor
+def dobro(x):
+    return x * 2
+
+# Armazena o resultado da função em uma variável
+resultado = dobro(5)
+
+# Imprime o resultado
+print(resultado) # Output => 10
+```
+
+> **NOTA:** Uma função pode ter várias declarações `return`, e assim que alcança uma deles a função retorna o valor definido por ela e se encerra.
+
+### Escopo de Variáveis
+
+As variáveis declaradas dentro das funções têm **escopo local**. Variáveis de escopo local funcionam apenas dentro do escopo da função em que foram declaradas.
+
+**Exemplo:**
+
+``` py
+def minha_funcao():
+    variavel_local = 'Olá, Mundo!'
+
+print(variavel_local) # Não pode acessar a variável
+```
+
+Por outro lado, **variáveis globais** funcionam em todo o escopo do código, podendo ser acessadas dentro e fora de qualquer função. Por padrão, todas as variáveis declaradas fora de qualquer função ou classe é global.
+
+``` py
+# Variável global
+variavel_global = 'Olá, Mundo!'
+
+# Função que acessa e imprime a variável global
+def minha_funcao():
+    # Imprime a variável global
+    print(variavel_global)
+
+# Chama a função
+minha_funcao() # Output => Olá, Mundo!
+```
+
+É possível **declarar uma variável global dentro de uma função** utilizando a palavra-chave **`global`**, seguido do nome da variável (deve ser feito antes de declarar a variável).
+
+**Exemplo:**
+
+``` py
+# Função que declara uma variável global
+def minha_funcao():
+    global variavel_global
+    variavel_global = 'Olá, Mundo!'
+
+# Chama a função
+minha_funcao()
+
+# Imprime a variável global
+print(variavel_global)
+```
+
+> **NOTA:** É necessário chamar a função que declara a variável global antes de utilizá-la, afinal, ela não existirá se não for declarada.
+
+## Tratamento de Erros
+
+Os erros são chamados de exceções, e podem ocorrer de inúmeras maneiras, como erro de sintaxe, erro de valor - como passar uma string para uma função que aceita apenas valores inteiros - e diversos outros.
+
+Exceções são tratadas a partir das estruturas **`try`**, **`except`**, **`else`** e **`finally`**.
+
+* **'`try`'**: Recebe o bloco com potencial de erro(s).
+* **'`except`'**: Se a exceção definida no `except` ocorrer no bloco `try`, é executado o bloco definido.
+* **'`else`'**: Executa o bloco caso não tenha ocorrido nenhuma exceção (opcional).
+* **'`finally`'**: Será executado independentemente de ter ou não ocorrido alguma exceção (opcional).
+
+**Exemplo:**
+
+``` py
+# Função que calcula a raíz quadrada de um valor
+def raiz_quadrada(x):
+    try:
+        resultado = x ** 0.5
+    except Exception as erro:
+        # Aqui, `erro` é um alias para a exceção ocorrida
+        return erro.__class__
+    else:
+        return resultado
+
+# Imprime o resultado
+print(raiz_quadrada(25))  # Output => 5.0
+print(raiz_quadrada(0))   # Output => 0.0
+print(raiz_quadrada('4')) # Output => <class 'TypeError'>
+```
+
+No exemplo acima, há a função `raiz_quadrada()` que calcula a raíz quadrada do valor passado como argumento. Se não houver exceções, irá retornar normalmente a raíz quadrada do valor, mas se houver, irá retornar a classe do erro que ocorreu.
+
+É possível tratar cada erro com **`except`**.
+
+**Exemplo:**
+
+``` py
+# Função que divide `x` por `y`
+def divisao(x, y):
+    try:
+        resultado = x / y
+    except ZeroDivisionError: # Caso `y` seja 0
+        return 'ERRO: Não é possível dividir por 0'
+    except TypeError: # Caso algum valor passado não seja um número
+        return 'ERRO: Valor passado é inválido'
+    else:
+        return resultado
+
+# Imprime os resultados
+print(divisao(5, 2))  # Output => 2.5
+print(divisao(3, 0))  # Output => ERRO: Não é possível dividir por 0
+print(divisao(9, -1)) # Output => -9.0
+```
+
+## Estilo de Texto no Terminal
+
+Para imprimir mensagens coloridas no terminal é utilizao um código ANSI.
+
+**Sintaxe:**
+
+``` py
+'\033[estilo;cor;cor_de_fundo'm'
+```
+
+**Estilo:**
+
+Refere-se ao estilo da letra.
+
+* **'`0`'**: Padrão
+* **'`1`'**: Negrito
+* **'`3`'**: Itálico
+* **'`4`'**: Sublinhado
+* **'`7`'**: Inverte as cores de fundo e texto uma com a outra
+* **'`8`'**: Invisível
+* **'`9`'**: Riscado
+
+**Cor:**
+
+Refere-se às cores do texto.
+
+* **'`30`', '`90`'**: Cinza escuro
+* **'`31`', '`91`'**: Vermelho
+* **'`32`', '`92`'**: Verde
+* **'`33`', '`93`'**: Amarelo
+* **'`34`', '`94`'**: Azul
+* **'`35`', '`95`'**: Roxo
+* **'`36`', '`96`'**: Ciano
+* **'`37`', '`97`'**: Branco
+* **'`98`'**: Cinza
+
+**Fundo:**
+
+* **'`41`'**: Vermelho
+* **'`42`'**: Verde
+* **'`43`'**: Amarelo
+* **'`44`'**: Azul
+* **'`45`'**: Roxo
+* **'`46`'**: Ciano
+* **'`47`'**: Branco
+
+**Voltar ao padrão:**
+
+Para redefinir o texto ao padrão:
+
+``` py
+'\033[0m'
+```
+
+**Exemplo:**
+
+``` py
+# Todas as cores em negrito
+print("\033[1;30;40mOlá, Mundo!\033[m")
+print("\033[1;31;41mOlá, Mundo!\033[m")
+print("\033[1;32;42mOlá, Mundo!\033[m")
+print("\033[1;33;43mOlá, Mundo!\033[m")
+print("\033[1;34;44mOlá, Mundo!\033[m")
+print("\033[1;35;45mOlá, Mundo!\033[m")
+print("\033[1;36;46mOlá, Mundo!\033[m")
+print("\033[1;37;47mOlá, Mundo!\033[m")
+
+# Todas as cores com itálico
+print()
+print("\033[3;30;40mOlá, Mundo!\033[m")
+print("\033[3;31;41mOlá, Mundo!\033[m")
+print("\033[3;32;42mOlá, Mundo!\033[m")
+print("\033[3;33;43mOlá, Mundo!\033[m")
+print("\033[3;34;44mOlá, Mundo!\033[m")
+print("\033[3;35;45mOlá, Mundo!\033[m")
+print("\033[3;36;46mOlá, Mundo!\033[m")
+print("\033[3;37;47mOlá, Mundo!\033[m")
+
+# Todas as cores com sublinhado
+print()
+print("\033[4;30;40mOlá, Mundo!\033[m")
+print("\033[4;31;41mOlá, Mundo!\033[m")
+print("\033[4;32;42mOlá, Mundo!\033[m")
+print("\033[4;33;43mOlá, Mundo!\033[m")
+print("\033[4;34;44mOlá, Mundo!\033[m")
+print("\033[4;35;45mOlá, Mundo!\033[m")
+print("\033[4;36;46mOlá, Mundo!\033[m")
+print("\033[4;37;47mOlá, Mundo!\033[m")
+```
+
+**Além disso, é possível combinar estilos:**
+
+``` py
+# Negrito, itálico, sublinhado e vermelho
+print('\033[1;3;4;31mOlá, Mundo!\033[m')
+```

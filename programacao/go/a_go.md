@@ -4684,11 +4684,123 @@ func main() {
 
 ## Expressões Regulares
 
-As expressões regulares são implementas no pacote **`regexp`**. Este pacote fornece funções para compilar e usar padrões de expressões regulares.
+As expressões regulares são implementas no pacote padrão **`regexp`**. Este pacote fornece funções para compilar e usar padrões de expressões regulares.
 
-**Compilar uma RegExp:**
+### Sintaxe de Expressões Regulares
 
-Expressões regulares são escritas entre crases.
+#### Correspondência Literal
+
+**Exemplo:**
+
+``` go
+// Corresponde à sequência literal "abc" na string "abcdef"
+regexp.MatchString("abc", "abcdef")
+```
+
+#### Meta-caracteres
+
+* **'`.`'**: Corresponde a qualquer caractere entre os dois caracteres que cercam o `.`.
+
+    ``` go
+    // Corresponde a qualquer caractere entre "a" e "c"
+    regexp.MatchString("a.c", "abc")
+    ```
+
+* **'`*`'**: Corresponde a zero ou mais ocorrências do elemento anterior.
+
+    ``` go
+    // Corresponde a "ac", "abc", "abbc", etc
+    regexp.MatchString("ab*c", "ac")
+    ```
+
+* **'`+`'**: Corresponde a uma ou mais ocorrências do elemento anterior.
+
+    ``` go
+    // Corresponde a "abc", "abbc", "abbbc", "etc
+    regexp.MatchString("ab+c", "abbc")
+    ```
+
+* **'`?`'**: Torna o elemento anterior opcional (zero ou uma ocorrência).
+
+    ``` go
+    // Corresponde a "ac" ou "abc"
+    regexp.MatchString("ab?c", "ac")
+    ```
+
+#### Classes de Caracteres
+
+* **'`[abc]`'**: Corresponde a "a", "b" ou "c".
+* **'`[^abc]`'**: Corresponde a qualquer caractere que não seja "a", "b" ou "c".
+* **'`[a-z]`'**: Corresponde a qualquer caractere de  "a" a "z". O mesmo funciona para caracteres em maiúsculo (`[A-Z]`) e para números (`[0-9]`) .
+
+#### Quantificadores
+
+* **'`{n}`'**: Corresponde se houver n ocorrências do caractere anterior.
+
+    ``` go
+    // Corresponde a "aaa"
+    regexp.MatchString("a{3}", "aaa")
+    ```
+
+* **'`{n,}`'**: Corresponde se houver pelo menos n ocorrências do caractere anterior.
+
+    ``` go
+    // Corresponde a "aaa", "aaaa", "aaaaa", etc
+    regexp.MatchString("a{3,}", "aaaaa")
+    ```
+
+* **'`{n, m}`'**: Corresponde se o caractere anterior se repetir entre n e m.
+
+    ``` go
+    // Corresponde a "aa", "aaa", "aaaa" e "aaaaa"
+    regexp.MatchString("a{2, 5}", "aaaaa")
+    ```
+
+#### Âncoras
+
+* **'`^`'**: Corresponde se o padrão estiver no início da string.
+
+    ``` go
+    // Corresponde se a string se iniciar com "a"
+    regexp.MatchString("^a", "abc")
+    ```
+
+* **'`$`'**: Corresponde se o padrão estiver no final da string.
+
+    ``` go
+    // Corresponde a qualquer string que terminar com "c"
+    regexp.MatchString("c$", "abc")
+    ```
+
+#### Caracteces de Escape em RegExp
+
+* **'`\`'**: Corresponde a um caractere de escape literal.
+
+    ``` go
+    regexp.MatchString("\\.", ".abc")
+    ```
+
+* **'`\b`'**: Corresponde à posição entre um caractere de palavra (como letras e números) e um caractere que não é uma palavra.
+
+    ``` go
+    // Corresponde a "Olá, Mundo!"
+    regexp.MatchString(`\bMundo\b`, "Olá, Mundo!")
+    ```
+
+#### Grupos de Captura
+
+* **'`()`'**: Agrupa caracteres, fazendo-os agir como se fosse um.
+
+    ``` go
+    // Corresponde a "abc", "abcabc", "abcabcabc", etc
+    regexp.MatchString("(abc)+", "abcabcabc")
+    ```
+
+### Compilação de Expressões Regulares
+
+Para começar a trabalhar com exmpressões regulares, é necessário compilar o padrão de expressão regular usando a função **`Compile()`**. Essa função retorna um objeto `*Regexp`, que pode ser usado para realizar operações de correspondência em strings.
+
+**Exemplo:**
 
 ``` go
 package main
@@ -4714,4 +4826,216 @@ func main() {
 }
 ```
 
-No exemplo acima, `regex` é um objeto `*Regexp` que posteriormente é usado para verificar se há letras em uma string com **`MatchString()`**.
+No exemplo acima, `regex` é um objeto `*Regexp` que posteriormente é usado para verificar se há letras em uma string com o método **`MatchString()`**.
+
+> **NOTA:** Sempre que possível, reutilize objetos `*Regexp` para melhorar o desempenho, especialmente em cenários de alto uso.
+
+Se houver a certeza de que a expressão regular está correta, você pode usar a função **`MustCompile()`** para compilar. Essa função assume que a expressão está correta e não retorna um erro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex := regexp.MustCompile(`[a-zA-Z]`)
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // Output => true
+}
+```
+
+#### `CompilePOSIX()`
+
+É possível também compilar com a função **`CompilePOSIX()`**, que usa uma interpretação mais restrita, seguindo o padrão POSIX (Portable Operating System Interface). É considerada geralmente quando há requisitos específicos em relação a compatibilidade com POSIX ou precise de um conjunto de recursos mais restrito.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex, err := regexp.CompilePOSIX(`[a-zA-Z]`)
+
+    // Em caso de erro na compilação da expressão regular
+    if err != nil {
+        fmt.Println("Erro ao compilar a regexp:", err)
+        return
+    }
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // Output => true
+}
+```
+
+Assim como `MustCompile()`, há também a função **`MustCompilePOSIX()`** que não retorna um erro, pois assume que a expressão regular está correta.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex := regexp.MustCompilePOSIX(`[a-zA-Z]`)
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // Output => true
+}
+```
+
+### Principais Métodos de `*Regexp`
+
+* **'`MatchString()`'**: Verifica se a expressão regular corresponde a uma dada string.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular que verifica se a primeira letra é maiúcula
+        regex, err := regexp.Compile(`[A-Z]`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde duas strings
+        fmt.Println(regex.MatchString("Olá")) // Output => true
+        fmt.Println(regex.MatchString("olá")) // Output => false
+    }
+    ```
+
+* **'`FindString()`'**: Retorna a primeira correspondência da expressão regular na string fornecida.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular que verifica há a palavra "Mundo"
+        regex, err := regexp.Compile(`Mundo`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde a uma string
+        str := "Olá, Mundo!"
+        match := regex.FindString(str)
+        fmt.Println(match) // Output => Mundo
+    }
+    ```
+
+* **'`FindAllString()`'**: Retorna todas as correspondências da expressão regular na string fornecida em um slice. Aceita um segundo argumento, que deve ser um valor inteiro relativo ao máximo de correspondências.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular
+        regex, err := regexp.Compile(`lang`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde duas strings
+        str := "Golang! Clang!"
+        matches := regex.FindAllString(str, len(str))
+        fmt.Println(matches) // Output => [lang lang]
+    }
+    ```
+
+* **'`FindStringIndex()`'**: Retorna um slice de inteiros que contém os índices de início e fim da primeira ocorrência da expressão regular na string fornecida.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular
+        regex, err := regexp.Compile(`lang`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde a uma string
+        str := "Golang!"
+        index := regex.FindStringIndex(str)
+        fmt.Println(index) // Output => [2 6]
+    }
+    ```
+
+* **'`ReplaceAllString()`'**: Substitui todas as correspondências da expressão regular na string fornecida pela segunda string fornecida.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular
+        regex, err := regexp.Compile(`Mundo`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Substitui uma palavra na string
+        str := "Olá, Mundo!"
+        replace := regex.ReplaceAllString(str, "Go")
+        fmt.Println(replace) // Output => Olá, Go!
+    }
+    ```
