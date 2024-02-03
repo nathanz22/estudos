@@ -1,68 +1,57 @@
 # Roadmap Gramática
 
-## Nível Básico: Fundamentos Gramaticais
+1. Fonética e fonologia
 
-1. Nomes (Substantivos e Pronomes):
+* Vogais e consoantes
+* Dígrafos
+* Sílabas e Encontros consonantais
 
-* Aprenda a diferença entre substantivos e pronomes.
-* Compreenda os gêneros (masculino/feminino) e números (singular/plural) dos substantivos.
+2. Morfologia
 
-2. Verbos:
+* Classes de palavras
+* Formação de palavras
+* Praticar a flexão de palavras (conjugação, declinaçãom, etc)
 
-* Conheça os tempos verbais básicos (presente, passado, futuro).
-* Aprenda a conjugação de verbos regulares e irregulares.
+3. Sintaxe
 
-3. Adjetivos e Advérbios:
+* Estrutura das frases e as funções sintáticas das palavras
+* Tipos de orações e períodos
+* Praticar a análise sintática de frases e períodos
 
-* Saiba como os adjetivos modificam substantivos e os advérbios modificam verbos, adjetivos e outros advérbios.
+4. Semântica
 
-4. Preposições:
+* Tipos de sentido (denotativo, conotativo, etc)
+* Praticar a análise semântica de textos
 
-* Compreenda o uso de preposições para indicar relações espaciais e temporais.
+5. Pragmática
 
-5. Conjunções:
+* Tipos de atos de fala (informar, questionar, ordenar, etc)
+* Praticar a análise pragmática de textos
 
-* Aprenda a usar conjunções para conectar palavras, frases e orações.
+6. Estilística
 
-## Nível Intermediário: Estruturas Complexas
+* Recursos expressivos da língua portuguesa
+* Estilos de linguagem (formal, informal, etc)
+* Praticar a análise estilística de textos
 
-1. Frases Compostas:
+7. Gramática História
 
-* Entenda como combinar duas ou mais orações em uma frase composta.
-* Aprenda a usar corretamente as conjunções coordenativas e subordinativas.
+* Evolução da língua portuguesa ao longo do tempo
+* Fases da história da língua portuguesa
+* Praticar a análise de textos antigos
 
-2. Modo Subjuntivo:
 
-* Familiarize-se com o modo subjuntivo e seu uso em situações específicas, como dúvida, desejo, sugestão, etc.
 
-3. Voz Passiva:
 
-* Aprenda a converter frases da voz ativa para a voz passiva.
 
-4. Discurso Indireto:
 
-* Compreenda como relatar o discurso de outra pessoa indiretamente.
 
-## Nível Avançado: Refinamento e Estilo
 
-1. Construções Complexas:
 
-* Estude estruturas gramaticais mais avançadas, como orações condicionais, causais e concessivas.
 
-2. Uso Avançado de Verbos:
 
-* Explore verbos modais e suas aplicações.
-* Entenda o uso apropriado de tempos verbais mais complexos.
 
-3. Estilo e Tom:
 
-* Desenvolva um senso de estilo, escolhendo palavras e construções gramaticais apropriadas para o tom desejado.
 
-4. Revisão e Prática:
 
-* Leia regularmente materiais bem escritos.
-* Pratique escrevendo textos e revise-os para melhorar.
 
-5. Gramática Idiomática:
-
-* Esteja ciente de construções gramaticais específicas da língua, bem como expressões idiomáticas.

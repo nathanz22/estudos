@@ -171,7 +171,7 @@ São expressões que possuem apenas números e operadores.
 
 **Exemplo:**
 
-\(5 + 2 * (3 + 3) - 4 = 13\)
+\(5 + 2 *(3 + 3) - 4 = 13\)
 \(5* (2 - 1) + 5 / 1 = 10\)
 
 **A ordem das operações é a seguinte:**

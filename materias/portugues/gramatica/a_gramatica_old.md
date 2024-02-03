@@ -26,7 +26,7 @@ Os substantivos coletivos se referem a um conjunto de seres da mesma espécie, c
 ### Substantivos Primitivos e Derivados
 
 * **Primitivos**: Não derivam de outras palavras, como "pedra" e "água".
-* **Derivados**: Originam-se de outras palavras, como "pedregulho" e "aguaceiro"
+* **Derivados**: Originam-se de outras palavras, como "pedregulho" e "aguaceiro".
 
 ### Substantivos Animados e Inanimados
 
@@ -80,7 +80,7 @@ Esses pronomes são usados como sujeitos das frases.
 
 #### Pronomes Pessoais do Caso Oblíquo
 
-Os pronomes obíquos são usados como complementos verbais ou preposicionais. Eles variam de acordo com a função sintática na frase.
+Os pronomes oblíquos são usados como complementos verbais ou preposicionais. Eles variam de acordo com a função sintática na frase.
 
 **Os pronomes pessoais do caso oblíquos são:**
 
@@ -171,7 +171,7 @@ Os pronomes relativos têm a função de conectar a oração subordinada adjetiv
 
 ### Pronomes Reflexivos
 
-Os pronomes reflexivos refletem a ação de volta para o sujeito, ou seja, a ação é realizada pelo sujeito sobre si mesmo. ELes são formados a partir de pronomes pessoais oblíquos, acrescentando-se o prefixo "se" a eles.
+Os pronomes reflexivos refletem a ação de volta para o sujeito, ou seja, a ação é realizada pelo sujeito sobre si mesmo. Eles são formados a partir de pronomes pessoais oblíquos, acrescentando-se o prefixo "se" a eles.
 
 **Exemplos:**
 

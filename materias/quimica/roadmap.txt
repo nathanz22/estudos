@@ -1,0 +1,80 @@
+# Roadmap Química
+
+1. Básico
+
+* A Química e seu papel no mundo
+* Estrutura da matéria
+* Propriedades da matéria
+* Medidas e unidades
+
+2. Tabela Periódica
+
+* História e organização da Tabela Periódica
+* Propriedades periódicas dos elementos
+* Tendências e relações entre os elementos
+
+3. Ligações Químicas
+
+* Tipos de ligações químicas
+* Forças intermoleculares
+* Estrutura molecular e propriedades
+
+4. Reações Químicas
+
+* Conceitos básicos:  conceitos de reagente, produto, coeficiente estequiométrico e balanceamento de equações químicas
+* Tipos de reações químicas
+*  Leis Ponderais e Estequiometria
+
+5. Termoquímica
+
+* Conceitos básicos: energia, calor, trabalho, entalpia e entropia
+* Leis da Termodinâmica
+* Diagramas de energia
+
+6. Soluções
+
+* Conceitos básicos: soluto, solvente, concentração e propriedades de soluções
+* Tipos de soluções
+* Colisões e reações em soluções
+
+7. Equilíbrio Químico
+
+* Conceito de equilíbrio químico
+* Fatores que aferam o equilíbrio
+* Aplicação do equilíbrio químico
+
+8. Cinética Química
+
+* Conceitos básicos: velocidade de reação, ordem de reação e mecanismos de reação
+* Fatores que aferam a velocidade de reação
+* Leis de velocidade e mecanismos de reação
+
+9. Química Orgânica
+
+* Estrutura e propriedades de compostos orgânicos
+* Funções orgânicas
+* Reações orgânicas
+
+10. Bioquímica
+
+* Moléculas da vida
+* Processos metabólicos
+* Aplicações da bioquímica
+
+( O maior roadmap, para a disciplina que você mais tem problemas )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

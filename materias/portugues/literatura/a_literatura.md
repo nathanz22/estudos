@@ -122,6 +122,38 @@ O irlandês, o galês e o bretão são as principais línguas nas quais as obras
 
 #### Literatura Medieval Latina
 
+Se extende do século IV até o século XV. A literatura medieval latina se desenvolvou principalmente na Europa Ocidental durante a Idade Média, e suas obras foram produzidas em latim, a língua franca da época.
+
+A literatura medieval latina pode ser dividida em várias fases, cada uma caracterizada por diferentes estilos literários e influências culturais.
+
+##### Patrística
+
+* Séculos IV-VI
+
+A Patrística é o período da da filosofia cristã que se estendeu, aproximadamente, do século II ao século VII. O termo "Patrística" deriva da palavra latina "Pater", que significa "pai", e se refere aos Pais da Igreja, ou seja, aos líderes e pensadores cristãos dos primeiros séculos.
+
+A Patrística impactou significativamente o desenvolvimento da literatura cristã nos primeiros séculos da era cristã. Is escritos dos Padres da Igreja, muitos dos quais foram produzidos durante o período patrístico, contribuíram para a formação da literatura teológica, apologética e devocional.
+
+* **Apologias**: Muitos dos escritos patrísticos eram apologias, defesas racionais e argumentativas da fé cristã contra críticas e acusações. Figuras como Justino Mártir e Tertuliano escreveram apologias que visavam explicar e justificar o cristianismo perante a sociedade romana pagã.
+
+* **Tratados Teológicos**: Os Padres da Igreja produziram tratados teológicos para esclarecer doutrinas fundamentais do cristianismo. Agostinho de Hipona, por exemplo, escreveu extensivamente sobre temas como a Trindade, o pecado original e a graça divina em suas obras, contribuindo assim para a literatura teológica.
+
+* **Cartas e Sermonetes**: Alguns Padres da Igreja deixaram uma coleção de cartas e sermonetes que ofereciam orientações pastorais, conselhos espirituais e ensinamentos práticos para a comunidade cristã. São Jerônimo, por exemplo, escreveu cartas que lidavam com questões variadas e forneceu comentários sobre as Escrituras.
+
+* **Hinos e Poemas Devocionais**: Alguns Padres da Igreja contribuíram para a literatura cristã com hinos e poemas devocionais que expressavam louvor a Deus e exploravam temas espirituais. Ambrosio de Milão é conhecido por seus hinos litúrgicos, enquanto Gregório de Nazianzo também compôs poemas devocionais.
+
+* **Biografias e Escritos Hagiográficos**: A Patrística também viu a produção de biografias e escritos hagiográficos (sobre santos e mártires). Vidas de santos e mártires eram frequentemente escritas para inspirar e instruir os cristãos, destacando exemplos de fé e devoção.
+
+Esses escritos patrísticos não apenas moldaram o pensamento teológico, mas também influenciaram o desenvolvimento da linguagem e da retórica cristã. Eles formaram uma base literária importante para a tradição cristã, influenciando subsequentes gerações de escritores teólogos. Além disso, muitas das obras patrísticas continuam a ser estudadas e apreciadas na teologia e na história literária até os dias atuais.
+
+###### Alta Idade Média
+
+###### Escolástica
+
+###### Renascimento do Século XII
+
+###### Escolástica Tardia
+
 #### Literatura Carolíngia
 
 #### Literatura Medieval Francesa

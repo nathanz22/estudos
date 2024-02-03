@@ -1,0 +1,76 @@
+# Roadmap Trigonometria
+
+1. Revisão de conceitos fundamentais
+
+* Geometria plana, como ângulos, triângulos, retas e círculos
+* Terminologia trigonométrica: seno, cosseno, tangente, cotangente, secante, cossecante
+* Relação entre as razões trigonométricas e os lados de um triângulo retângulo
+* Problemas envolvendo triângulos retângulos utilizando o Teorema de Pitágoras e as razões trigonométricas
+
+2. Círculo Trigonométrico
+
+* Entenda o conceito de círculo trigonométrico e sua relação com as razões trigonométricas
+* Aprender a calcular as razões trigonométricas de qualquer ângulo usando o círculo trigonométrico
+* Relações entre as diferentes razões rigonométricas no círculo trigonométrico
+* Resolução de problemas que envolvem o cálculo de razões trigonométricas de ângulos específicos
+
+3. Identidades Trigonométricas
+
+* Principais identidades trigonométricas, como pitagórica, fundamental, adição e subtração de ângulos
+* A importância das identidades trigonométricas na simplificação de expressões e resolução de problemas
+* Praticar a manipulação de identidades trigonométricas para resolver problemas de forma mais eficiente
+
+4. Funções Trigonométricas
+
+* Propriedades básicas das funções seno, cosseno e tangente (continuidade, periodicidade, etc)
+* Construção de gráficos das funções trigonométricas e identificação de suas características
+* Comportamento das funções trigonométricas em diferentes intervalos
+* Praticar muito, mas muito as funções trigonométricas
+
+5. Equações Trigonométricas
+
+* Aprenda a resolver equações trigonométricas simples e compostas
+* Utilize as técnicas de fatoração, substituição e identidades trigonométricas para resolver equações
+* Compreenda as diferentes soluções possíveis para uma equação trigonométrica
+* Pratique a resolução de problemas que envolvem equações trigonométricas
+
+6 Aplicações da Trigonometria
+
+* Explore as aplicações da trigonometria em diferentes áreas, como física, engenharia, astronomia e navegação.
+* Resolva problemas práticos que envolvam o cálculo de distâncias, áreas, volumes e ângulos.
+* Compreenda a importância da trigonometria na modelagem de diversos fenômenos físicos.
+* Pratique a aplicação da trigonometria em diferentes contextos.
+
+7. Trigonometria Plana e Esférica:
+
+* Aprofunde seus conhecimentos em trigonometria plana, incluindo relações entre lados e ângulos de triângulos.
+* Estude trigonometria esférica, que se aplica a triângulos esféricos em superfícies como a esfera terrestre.
+* Compreenda as diferenças entre trigonometria plana e esférica e suas aplicações.
+* Pratique a resolução de problemas que envolvem trigonometria plana e esférica.
+
+8. Teorema de DeMoivre e Fórmulas de Euler:
+
+* Aprenda o Teorema de DeMoivre e as Fórmulas de Euler e suas aplicações em trigonometria.
+* Utilize essas ferramentas para calcular potências de números complexos e resolver equações trigonométricas complexas.
+* Compreenda a relação entre trigonometria e números complexos.
+* Pratique a aplicação do Teorema de DeMoivre e das Fórmulas de Euler em problemas específicos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

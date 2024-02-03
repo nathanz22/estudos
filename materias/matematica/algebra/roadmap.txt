@@ -1,0 +1,88 @@
+# Roadmap Álgebra
+
+1. Fundamentos
+
+* Números reais: operações básicas, propriedades, representação decimal, frações e porcentagens
+* Expressões algébricas: operações básicas, simplificação, fatoração e resolução de equações de primeiro grau
+* Inequações de primeiro grau: resolução e representação gráfica
+
+2. Equações e inequações de segundo grau
+
+* Fórmula de Bhaskara
+* Discriminante
+* Inequações de segundo grau
+
+3. Funções
+
+* Conceito de função, domínio, imagem, representação gráfica e tipos de funções (linear, quadrática, exponencial, etc)
+* Funções compostas: definição e operações
+* Funções inversas: definição e propriedades
+
+4. Sistema de equações
+
+* Métodos de resolução
+* Sistemas lineares e não lineares
+* Interpretação geométrica de sistemas de equações
+
+5. Logaritmos
+
+* Definição e propriedades de logaritmos
+* Mudança de base de logaritmos
+* Equações e inequações logarítmicas
+
+6. Exponenciação
+
+* Propriedades de exponenciação
+* Equações e inequações exponenciais
+* Logaritmos como expoentes
+
+7. Progressões aritméticas e geométricas
+
+* Definição, termos, soma e fórmula geral
+* Progressões infinitas e séries geométricas
+
+8. Binômio de Newton
+
+* Teorema do binômio de Newton
+* Triângulo de Pascal
+* Aplicações do binômio de Newton
+
+9. Números complexos
+
+* Definição, operações básicas e representação gráfica
+* Equações e inequações com números complexos
+* Formas polar e trigonométrica de números complexos
+
+10. Matrizes e determinantes
+
+* Definição, operações básicas e propriedades
+* Determinantes e sistemas lineares
+* Aplicações de matrizes e determinantes
+
+11. Polinômios
+
+* Definição, operações básicas e propriedades
+* Divisão de polinômios e teorema do resto
+* Fatores de um polinômio e raízes
+
+12. Vetores e geometria analítica
+
+* Operações com vetores
+* Produto escalar e vetorial
+* Geometria analítica plana e espacial
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
