@@ -1,6 +1,6 @@
 # Literatura
 
-Literatura é escrita. A literatura é definida como a arte da palavra ou da escrita. Os textos literários são caracterizados pelo uso da linguagem de uma forma estética, para criar um efeito emocional ou intelectual no leitor.
+A literatura é definida como a arte da palavra ou da escrita. Os textos literários são caracterizados pelo uso da linguagem de uma forma estética, para criar um efeito emocional ou intelectual no leitor.
 
 A literatura pode ser dividida em vários gêneros, entre eles:
 
@@ -9,6 +9,24 @@ A literatura pode ser dividida em vários gêneros, entre eles:
 * **Lírico**: Poemas que expressam emoções ou sentimentos.
 
 * **Dramático**: Obras teatrais que contam histórias por meio de diálogos e ações.
+
+## Importância da Literatura
+
+A literatura impacta na vida humana em diversos aspectos. Sua importância reside em suas múltiplas funções, que se entrelaçam e contribuem para o desenvolvimento individual e social.
+
+* **Desenvolvimnto da Imaginação e Criatividade**: A literatura nos permite vivenciar realidades alternativas e explorar possibilidades ilimitadas. Através da leitura, somos transportados para cenários fantásticos, embarcamos em aventuras épicas e mergulhamos em reflexões profundas. Essa imersão em diferentes universos estimula nossa capacidade de imaginar, criar e pensar de forma inovadora.
+
+* **Expansão de Vocabulário e Aprimoramento da Comunicação**: O contato com a literatura nos expõe a uma rica variedade de palavras e expressões, ampliando nosso vocabulário e aprimorando nossa capacidade de comunicação. Através da leitura de diferentes gêneros textuais, absorvemos novas terminologias, construções frasais e estilos de escrita, que podem ser utilizados em nossa própria produção textual, tanto na forma oral quanto escrita.
+
+* **Desenvolvimento de Empatia e Compreensão do Outro**: A literatura nos permite vivenciar diferentes realidades, perspectivas e culturas, promovendo a empatia e a compreensão do outro. Ao nos conectarmos com personagens e histórias, desenvolvemos a capacidade de nos colocar no lugar do outro, reconhecendo seus sentimentos, motivações e desafios.
+
+* **Reflexão Crítica sobre o Mundo**: A literatura nos convida a questionar o mundo ao nosso redor, analisar diferentes perspectivas e formular nosso próprio senso crítico.
+
+* **Preservação da Memória e da Cultura**: A literatura é um registro da história, da cultura e dos valores de diferentes sociedades. Através das obras literárias, podemos conhecer o passado, entender as raízes do presente e projetar o futuro. A literatura nos permite acessar a sabedoria acumulada pelas gerações anteriores, preservando a memória e a identidade cultural de um povo.
+
+* **Fonte de Entretenimento e Lazer**: A literatura proporciona momentos de lazer, descontração e escape da rotina. Através da leitura de histórias envolventes, podemos relaxar, aliviar o estresse e nos conectar com o mundo da fantasia. A literatura também pode ser uma fonte de inspiração e aprendizado, proporcionando novas perspectivas sobre a vida e o mundo.
+
+Em resumo, a literatura é uma ferramenta poderosa que contribui para o desenvolvimento individual e social em diversos aspectos. Ela enriquece nossa vida, amplia nossos horizontes e nos torna seres humanos mais completos.
 
 ## Origem da Literatura
 
@@ -147,6 +165,41 @@ A Patrística impactou significativamente o desenvolvimento da literatura crist�
 Esses escritos patrísticos não apenas moldaram o pensamento teológico, mas também influenciaram o desenvolvimento da linguagem e da retórica cristã. Eles formaram uma base literária importante para a tradição cristã, influenciando subsequentes gerações de escritores teólogos. Além disso, muitas das obras patrísticas continuam a ser estudadas e apreciadas na teologia e na história literária até os dias atuais.
 
 ###### Alta Idade Média
+
+A Alta Idade Média se estende do século V ao X, após a queda do Império Romano do Ocidente em 476 d.C.
+
+A literatura deste período é um reflexo da sociedade feudal e teocêntrica da época, era rica em temas religiosos, heróicos e amorosos. As obras, em sua maioria anônimas, eram transmitidas oralmente ou manuscritas em mosteiros.
+
+**Temas:**
+
+* **Religiosos**: Vidas de santos, milagras, visões do além.
+* **Heróicos:**: Feitos de cavaleiros, guerras e aventuras.
+* **Amorosos**: Canções de amor cortês, idealização da mulher.
+
+**Formas:**
+
+* **Poesia**: Cantigas de amigo, cantigas de amor, cantigas escárnio e cantigas maldizer.
+* **Prosa**: Hagiografias, crônicas, novelas de cavalaria.
+
+**Língua:**
+
+* **Latim**: Língua oficial da igreja e da cultura erudita.
+* **Línguas vernáculas**: Início do desenvolvimento das línguas românticas (português, espanhol, francês, italiano).
+
+**Oralidade:**
+
+Grande parte da literatura era transmitida oralmente por jograis e trovadores.
+
+**Autores e Obras Relevantes:**
+
+* Paio Soares de Taveirós: "Cantiga da Ribeirinha" (cantiga de amigo).
+* Dom Dinis: "Cantiga da Garvaia" (cantiga de amor).
+* Fernão Lopes: "Crónica de D.João I" (crónica).
+* Chrétien de Troyes: "Perceval, o Galês" (novela de cavalaria).
+
+**Influência:**
+
+A literatura da Alta Idade Média influenciou profundamente a literatura posterior, lançando as bases para a poesia trovadoresca, a literatura épica e a literatura religiosa.
 
 ###### Escolástica
 

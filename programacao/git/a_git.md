@@ -100,7 +100,7 @@ A mensagem deve respeitar as seguintes regras:
 * Possui 50 caracteres ou menos.
 * Suceder imediatamente o parâmetro `-m`.
 
-O parâmetro `--all` (ou `-a`) adiciona automaticamente todas as alterações já rastreadas (*tracked*) à Área de Preparação antes de fazer o commit.
+O parâmetro **`--all`** (ou **`-a`**) adiciona automaticamente todas as alterações já rastreadas (*tracked*) à Área de Preparação antes de fazer o commit.
 
 **Exemplo:**
 
@@ -112,7 +112,7 @@ git commit -a -m "Mensagem"
 
 ### `git log`
 
-O comando **`git log`** permite consultar versões anteriores do projeto. Todos os commits são armazenados em ordem cronológica no repositório, e o comando `git log` permite visualizá-los.
+O comando **`git log`** permite consultar versões anteriores do projeto. Todos os commits são armazenados em ordem cronológica no repositório, e o comando esse permite visualizá-los.
 
 **Sintaxe:**
 
@@ -169,7 +169,7 @@ git branch nome_branch
 
 **Ver branches:**
 
-Usar apenas `git branch` retorna uma lista com todas as branches.
+Usar apenas **`git branch`** retorna uma lista com todas as branches.
 
 ``` bash
 git branch
@@ -185,7 +185,7 @@ O comando **`git checkout`** permite alternar para outra branch.
 git checkout nome_branch
 ```
 
-Para criar uma branch e trocar para ela, use o parâmetro **`-b`**.
+Para criar uma branch e rapidamente trocar para ela, use o parâmetro **`-b`**.
 
 ``` bash
 git checkout -b nome_da_nova_branch
@@ -252,3 +252,41 @@ git merge nome_da_branch
 ```
 
 ## Repositório Remoto
+
+Para enviar o repositório local à um repositório remoto, é necessário criar um repositório remoto.
+
+**Sintaxe:**
+
+``` bash
+git remote add origin https://github.com/repositorio/remoto.git
+```
+
+Substitua "`https://github.com/repositorio/remoto.git`" pelo URL do seu repositório remoto.
+
+**Agora, para atualizar o repositório remoto:**
+
+``` bash
+git push -u origin main
+```
+
+> **NOTA:** Seria o mesmo que `git push --set-upstream origin main`, só que de maneira mais curta.
+
+Esse comando é necessário apenas na primeira vez que usar que atualizar o repositório remoto, após isso, use apenas **`git push`**.
+
+### `git fetch`
+
+### Merge com Repositório Remoto
+
+### `git pull`
+
+O **`git pull`** é oposto do `git push`, sendo usado para atualizar o repositório local pelo repositório remoto.
+
+**Sintaxe:**
+
+``` bash
+git pull https://repositorio/remoto.git main
+```
+
+Substitua "`https://repositorio/remoto.git`" pelo URL do seu repositório remoto.
+
+Após a primeira vez, apenas **`git pull`** basta.

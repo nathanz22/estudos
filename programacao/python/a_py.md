@@ -1,5 +1,75 @@
 # Python
 
+## Sintaxe Básica
+
+Uma declaração é terminada assim que acontece uma quebra de linha, ou por **`;`**.
+
+**Com quebra de linha:**
+
+``` py
+print('Olá, Mundo!')
+print('Olá, Python!')
+# Output:
+# Olá, Mundo!
+# Olá, Python!
+```
+
+**Com ponto e vírgula:**
+
+``` py
+print('Olá, Mundo!');print('Olá, Python!')
+# Output:
+# Olá, Mundo!
+# Olá, Python!
+```
+
+### Comentários
+
+Tudo após **`#`** é considerado comentário, e não será executado como código.
+
+**Exemplo:**
+
+``` py
+# Isso é um comentário
+```
+
+É especialmente útil para explicar partes do código.
+
+**Exemplo:**
+
+``` py
+print('Olá, Mundo!') # Imprime "Olá, Mundo!"
+```
+
+#### Comentários de Múltiplas Linhas
+
+Para comentar múltiplas linhas, você pode escrever `#` em cada uma delas, ou usar string multilinha.
+
+Uma string multilinha, quando não atribuída a uma variável, é ignorada pelo interpretador.
+
+**Exemplo:**
+
+``` py
+'''
+Isso
+é um
+Comentário
+Multilinha
+'''
+
+"""
+Isso também
+é um
+Comentário multilinha
+"""
+
+# Isso também
+# é um
+# Comentário multilinha
+```
+
+> **OBS.:** Strings podem ser escritas com aspas simples ou duplas, e o mesmo vale para strings multiplinha.
+
 ## Output de Valores
 
 Para imprimir valores, é usada a função **`print()`**.
@@ -26,6 +96,61 @@ nome_variavel = valor_variavel
 ``` py
 minha_variavel = 'Olá, Mundo!'
 ```
+
+### Atribuição Múltipla de Valores
+
+É possível atribuir valores às variáveis em uma única linha.
+
+**Exemplo:**
+
+``` py
+# Atribui valores às variáveis `x`, `y` e `z`
+x, y, z = 5, 'Olá, Mundo', 10.2
+
+# Imprime as variáveis
+print(x) # Output => 5
+print(y) # Output => Olá, Mundo!
+print(z) # Output => 10.2
+```
+
+**Para atribuir um único valor à várias variáveis:**
+
+``` py
+# Atribui o valor 10 para `x`, `y` e `z`
+x = y = z = 10
+
+# Imprime as variáveis
+print(x) # Output => 10
+print(y) # Output => 10
+print(z) # Output => 10
+```
+
+**Desempacotar:**
+
+É chamado **desempacotar** o processo de extrair valores de uma tupla ou lista para variáveis.
+
+**Exemplo:**
+
+``` py
+# Lista com nomes de linguagens
+linguagens = ['Python', 'C', 'JavaScript']
+
+# Atribui às variáveis `x`, `y` e `z` os elementos da lista
+x, y, z = linguagens
+
+# Impriem as variáveis
+print(x) # Output => Python
+print(y) # Output => C
+print(z) # Output => JavaScript
+```
+
+### Nomes de Variáveis
+
+* Devem começar com uma letra ou um `_`.
+* Podem conter apenas caracteres alfanuméricos e underscores (underline). Seria: (A-z, 0-9 e `_`).
+* Variáveis são case-sensitive, ou seja, `nome` é diferente de `NOME` e qualquer outra variação.
+* Não pode ter o mesmo nome que uma palavra-chave Python, como `while`, `for`, `if`, `def`, etc.
+* Normalmente, é usado snake_case para separar as palavras em nomes de variáveis. Em snake_case, as letras são todas escritas em minúsculo, e as palavras são separadas com underscore (Ex.: `nome_variavel`).
 
 ## Tipos Primitivos
 
@@ -80,6 +205,48 @@ str1 = "Olá, Mundo!"
 str2 = 'Olá, Python!'
 ```
 
+**Strings Multilinhas:**
+
+Strings multilinhas são escritas com três aspas (simples ou duplas).
+
+**Exemplo:**
+
+``` py
+str = '''Lorem ipsum dolor sit amet, consectetur
+adipiscing elit. Aenean in mi scelerisque, sodales
+turpis non, cursus odio.
+Integer posuere quis est sed malesuada'''
+
+# Imprime a string multilinha
+print(str)
+```
+
+Na impressão, as quebras de linhas são inseridas assim como definidas na string.
+
+> **NOTA:** Se não for atribuída a uma variável ou usada como argumento em uma função, será considerada um comentário multilinha.
+
+#### Concatenação de Strings
+
+O operador `+` pode ser usado para concatenar strings.
+
+**Exemplo:**
+
+``` py
+str1 = 'Olá'
+str2 = 'Mundo'
+print(str1 + ' ' + str2) # Output => Olá Mundo
+```
+
+O operador `+` é também o operador de adição, e se tentar somar um número e uma string, ocorrerá um erro.
+
+**Exemplo:**
+
+``` py
+x = 5
+y = 'Olá'
+print(x + y) # Ocorrerá um erro
+```
+
 #### Função `len()` para Strings
 
 A função **`len()`** pode ser usada em strings. Ela retorna a quantidade de caracteres de uma dada string.
@@ -102,6 +269,44 @@ O operador **`in`** pode ser usado para verificar se uma dada string existe dent
 str = 'Olá, Mundo!'
 analise = 'Mundo' in str
 print(analise) # Output => True
+```
+
+Para verificar se não existe, poderá usar **`not in`**.
+
+**Exemplo:**
+
+``` py
+str = 'Olá, Mundo!'
+analise = 'Mundo' not in str
+print(analise) # Output => False
+```
+
+#### Índices em Strings
+
+Cada caractere em uma string representa um índice, sendo o primeiro caractere o índice `0`, o segundo `1`, o terceiro `2` e assim por diante.
+
+> **NOTA:** Strings são arrays (listas) de caracteres, e por isso podem ter seus elementos (caracteres) acessados por índices.
+
+Esses índices são acessados por notação de colchete.
+
+**Exemplo:**
+
+``` py
+str = 'Olá'
+print(str[0]) # Output => O
+print(str[1]) # Output => l
+print(str[2]) # Output => á
+```
+
+**Índices negativos** representam os caracteres começando do final, ou seja, `-1` representa o último caractere, `-2` representa o penúltimo, e assim por diante.
+
+**Exemplo:**
+
+``` py
+str = 'Olá'
+print(str[-1]) # Output => á
+print(str[-2]) # Output => l
+print(str[-3]) # Output => O
 ```
 
 #### Fatiamentos em Strings
@@ -161,6 +366,17 @@ print("A soma entre {} e {} é {}".format(num1, num2, num1 + num2))
 # Output => A soma entre 5 e 2 é 7
 ```
 
+Definir índices numéricos entre as chaves na string fará com que os argumentos de **`format()`** sejam formatados de acordo.
+
+**Exemplo:**
+
+``` py
+num1 = 5
+num2 = 2
+print("A soma entre {1} e {0} é {2}".format(num2, num1, num1 + num2))
+# Output => A soma entre 5 e 2 é 7
+```
+
 **Exemplo com *F string*:**
 
 ``` py
@@ -195,6 +411,19 @@ print(f'{str:-^25}')
 ```
 
 Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que preenchem o espaço até a string inteira ocupar 25 caracteres.
+
+#### Caracteres de Escape
+
+* **'`\'`'**: Aspa simples.
+* **'`\"`'**: Aspa dupla.
+* **'`\\`'**: Barra invertida.
+* **'`\n`'**: Nova linha.
+* **'`\r`'**: Retorno.
+* **'`\t`'**: Tabulação.
+* **'`\b`'**: Retrocesso.
+* **'`\f`'**: Feed de formulário.
+* **'`\ooo`'**: Valor octal.
+* **'`\xhh`'**: Valor hex.
 
 #### Métodos para Strings
 
@@ -302,6 +531,71 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
 
     > **NOTA.:** A quantidade é relativa aos índices, ou seja, `0` será 1, `1` será 2, e assim por diante.
 
+### Valores Booleanos
+
+Os valores booleanos são **`True`** e **`False`**, que representam verdadeiro e falso, respectivamente.
+
+**Exemplo:**
+
+``` py
+x = True
+y = False
+```
+
+São usados principalmente como condições para estruturas condicionais, loops, ou como retorno de valores em funções.
+
+### Valor `None`
+
+Representa um valor vazio.
+
+``` py
+x = None
+```
+
+Geralmente é o que funções retornam em caso de erro, e em como condição, funciona como `False`.
+
+### Conversão de Valores
+
+Primeiramente, para verificar o tipo de um valor, você pode usar a função `type()` e passar o valor como argumento, ou você pode utilizar o método **`__class__`** diretamente no valor.
+
+**Exemplo com `type()`:**
+
+``` py
+x = 5
+y = 'Olá, Mundo!'
+z = 10.2
+
+print(type(x)) # Output => <class 'int'>
+print(type(y)) # Output => <class 'str'>
+print(type(z)) # Output => <class 'float'>
+```
+
+**Exemplo com `__class__`:**
+
+``` py
+x = 5
+y = 'Olá, Mundo!'
+z = 10.2
+
+print(x.__class__) # Output => <class 'int'>
+print(y.__class__) # Output => <class 'str'>
+print(z.__class__) # Output => <class 'float'>
+```
+
+Para converter um valor para outro tipo (*casting*), é usada a função do tipo para qual o valor será convertido, e passar o valor que será convertido como argumento.
+
+**Exemplo:**
+
+``` py
+x = str(5)
+y = int('2')
+z = float(10)
+
+print(type(x)) # <class 'str'>
+print(type(y)) # <class 'int'>
+print(type(z)) # <class 'float'>
+```
+
 ## Operadores
 
 Os principais operadores são:
@@ -309,6 +603,8 @@ Os principais operadores são:
 * Operadores aritméticos
 * Operadores de comparação
 * Operadores lógicos
+* Operadores de Identidade
+* Operadores de Afiliação
 * Operadores bitwise
 * Operadores de atribuição
 
@@ -414,6 +710,50 @@ print(x ** y)   # Output => 25
     ``` py
     print(not True)    # Output => False
     print(not False)   # Output => True
+    ```
+
+### Operadores de Identidade
+
+* **'`is`'**: Verdadeiro se ambos os valores corresponderem aos mesmo endereço de memória.
+
+    ``` py
+    x = 5
+    y = 5
+    print(x is y) # Output => True
+
+    x = [1, 2, 3]
+    y = [1, 2, 3]
+    print(x is y) # Output => False
+    ```
+
+* **'`is not`'**: Verdadeiro se ambos os valores não corresponderem ao mesmo endereço de memória.
+
+    ``` py
+    x = 5
+    y = 5
+    print(x is not y) # Output => False
+
+    x = [1, 2, 3]
+    y = [1, 2, 3]
+    print(x is not y) # Output => True
+    ```
+
+> **NOTA:** O Python otimiza o uso da memória e reutiliza objetos imutáveis como inteiros de pequeno valor. Isso é conhecido como *int caching* (memorização de inteiros). Para valores pequenos, como pequenos inteiros, o Python reutiliza o mesmo objeto na memória.
+
+### Operadores de Afiliação
+
+* **'`in`'**: Verdadeiro se o primeiro operando estiver dentro do segundo.
+
+    ``` py
+    lista = [1, 2, 3, 4, 5]
+    print(2 in lista) # Output => True
+    ```
+
+* **'`not in`'**: Verdadeiro se o primeiro operando não estiver dentro do segundo.
+
+    ``` py
+    lista = [1, 2, 3, 4, 5]
+    print(2 not in lista) # Output => False
     ```
 
 ### Operadores Bitwise
@@ -586,6 +926,24 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     print(x) # Output => 0
     ```
 
+### Precedência de Operadores
+
+1. **'`()`'**
+1. **'`**`'**
+1. **'`+x`', '`-x`', '`~x`'**
+1. **'`*`', '`/`', '`//`', '`%`'**
+1. **'`+`', '`-`'**
+1. **'`<<`', '`>>`'**
+1. **'`&`'**
+1. **'`^`'**
+1. **'`|`'**
+1. **'`==`', '`!=`', '`>`', '`>=`', '`<`', '`<=`', '`is`', '`is not`', '`in`', '`not in`'**
+1. **'`not`'**
+1. **'`and`'**
+1. **'`or`'**
+
+Se dois operadores têm a mesma precedência, a expressão executa quem vier primeiro.
+
 ## Tuplas
 
 Permitem armazenar vários elementos em uma única variável, sem permitir alteração desses elementos (tuplas são imutáveis).
@@ -595,6 +953,8 @@ Permitem armazenar vários elementos em uma única variável, sem permitir alter
 ``` py
 nomeTupla = (elemento1, elemento2, ..., elementoN)
 ```
+
+> **NOTA:** Os parênteses podem ser omitidos, mas é uma boa prática mantê-los para melhorar a legibilidade.
 
 **Exemplo:**
 
@@ -635,6 +995,17 @@ languages = ('JavaScript', 'PHP', 'Python')
 print(languages[0]) # Output => JavaScript
 print(languages[1]) # Output => PHP
 print(languages[2]) # Output => Python
+```
+
+Índices negativos correspondem aos elementos do final, por exemplo: `-1` corresponde ao último elemento, `-2`, corresponde ao penúltimo elemento, etc.
+
+**Exemplo:**
+
+``` py
+languages = ('JavaScript', 'PHP', 'Python')
+print(languages[-3]) # Output => JavaScript
+print(languages[-2]) # Output => PHP
+print(languages[-1]) # Output => Python
 ```
 
 ### Fatiamento de Tuplas
@@ -683,6 +1054,33 @@ letras = ('c', 'a', 'e', 'b', 'd')
 
 print(sorted(numeros, reverse=True)) # Output => [5, 4, 3, 2, 1]
 print(sorted(letras, reverse=True)) # Output => ['e', 'd', 'c', 'b', 'a']
+```
+
+### Desempacotar Tupla
+
+É chamado de ***unpacking*** a ação de atruibuir os elementos de uma tupla ou lista à variáveis.
+
+**Exemplo:**
+
+``` py
+languages = ('JavaScript', 'PHP', 'Python', 'Ruby')
+a, b, c, d = languages
+print(a) # Output => JavaScript
+print(b) # Output => PHP
+print(c) # Output => Python
+print(d) # Output => Ruby
+```
+
+Se definido **`*`** no início do nome de uma das variáveis, ela será uma lista com os elementos que não têm variáveis definidas.
+
+**Exemplo:**
+
+``` py
+languages = ('JavaScript', 'PHP', 'Python', 'Ruby')
+a, *b, c = languages
+print(a) # Output => JavaScript
+print(b) # Output => ['PHP', 'Python']
+print(c) # Output => Ruby
 ```
 
 ## Listas
@@ -736,6 +1134,17 @@ print(languages[1]) # Output => PHP
 print(languages[2]) # Output => Python
 ```
 
+Índices negativos, assim como em tuplas, referenciam os elementos do final da lista.
+
+**Exemplo:**
+
+``` py
+languages = ['JavaScript', 'PHP', 'Python']
+print(languages[-3]) # Output => JavaScript
+print(languages[-2]) # Output => PHP
+print(languages[-1]) # Output => Python
+```
+
 ### Operador `del` para Remover Elementos em Listas
 
 Com o operador **`del`** é possível remover um elemento de uma lista a partir de seu índice.
@@ -781,6 +1190,65 @@ Também é possível fatiar pulando elementos com `inicio:fim:saltos`.
 ``` py
 lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 print(lista[1:8:2]) # Output => [2, 4, 6, 8]
+```
+
+### Desempacotar Lista
+
+Assim como as tuplas, é possível atribuir os elementos de uma lista à variáveis.
+
+**Exemplo:**
+
+``` py
+languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
+a, b, c, d = languages
+print(a) # Output => JavaScript
+print(b) # Output => PHP
+print(c) # Output => Python
+print(d) # Output => Ruby
+```
+
+**Exemplo com `*`:**
+
+``` py
+languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
+a, *b, c = languages
+print(a) # Output => JavaScript
+print(b) # Output => ['PHP', 'Python']
+print(c) # Output => Ruby
+```
+
+### Compreensão de Lista
+
+Uma ***list comprehension*** oferece uma sintaxe curta quando a necessidade é criar uma nova lista baseada nos valores de uma lista já existente.
+
+**Exemplo:**
+
+``` py
+languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
+new_list = []
+
+for i in languages:
+    if "P" in i:
+        new_list.append(i)
+
+print(new_list) # Output => ['PHP', 'Python']
+```
+
+Com uma compreensão de lista, é possível fazer exatamente o mesmo que no exemplo acima, porém de maneira mais curta.
+
+**Exemplo:**
+
+``` py
+languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
+new_list = [i for i in languages if "P" in i]
+
+print(new_list) # Output => ['PHP', 'Python']
+```
+
+**A sintaxe é a seguinte:**
+
+``` py
+lista = [expressao for item in iterador if condicao]
 ```
 
 ### Métodos para Listas
@@ -886,6 +1354,16 @@ print(lista[1:8:2]) # Output => [2, 4, 6, 8]
     # Imprime as listas
     print(lista) # Output => [1, 2, 3, 4, 5]
     print(novaLista) # Output => [10, 2, 3, 4, 5]
+    ```
+
+* **'`extend()`'**: Atribui a `self` os elementos de uma dada lista ou tupla.
+
+    ``` py
+    lista1 = [1, 2, 3]
+    lista2 = [4, 5, 6]
+
+    lista1.extend(lista2)
+    print(lista1) # Output => [1, 2, 3, 4, 5, 6]
     ```
 
 ## Estruturas Condicionais
@@ -1004,6 +1482,22 @@ for i, v in enumerate(lista):
 # 5: JavaScript
 ```
 
+#### `else` no loop `for`
+
+O bloco **`else`** em conjunto com o loop `for` é executado quando o loop chega ao fim.
+
+**Exemplo:**
+
+``` py
+for c in range(6):
+    print(c, end=' ')
+else:
+    print('FIM!')
+# Output => 0 1 2 3 4 5 FIM!
+```
+
+> **NOTA:** Se o loop `for` for parado com `break`, o bloco `else` não irá executar.
+
 ### Loop `while`
 
 Repete um bloco até que uma dada condição se torne falsa.
@@ -1025,6 +1519,24 @@ while contador < 5:
 print()
 # Output => 1 2 3 4 5
 ```
+
+#### `else` no loop `while`
+
+O bloco **`else`** em conjunto com o loop `while` é executado quando o loop chega ao fim.
+
+**Exemplo:**
+
+``` py
+i = 0
+while i < 5:
+    i += 1
+    print(i, end=' ')
+else:
+    print('FIM!')
+# Output => 1 2 3 4 5 FIM!
+```
+
+> **NOTA:** Se o loop `while` for parado com `break`, o bloco `else` não irá executar.
 
 ### Controle de Fluxo
 
@@ -1060,6 +1572,194 @@ print()
 ```
 
 No exemplo acima, é pulada para a próxima repetição sempre que `c` for ímpar, imprimindo apenas os valores pares.
+
+## Conjuntos
+
+Os conjuntos são usados para armazenar múltiplos itens em uma única variável.
+
+Um conjunto é uma coleção não ordenada, não indexada e imutátal.
+
+**Sintaxe:**
+
+``` py
+my_set = {'item1', 'item2', 'item3'}
+```
+
+Em um conjunto, os itens não são ordenados (não há uma ordem definida), são imutáveis - o que significa que após a criação, não é possível alterar os itens - e não podem ser duplicados.
+
+Como não são permitidos itens duplicados, valores como `1` e `True` não são permitidos, já que ambos são tratados como o mesmo valor.
+
+**Exemplo:**
+
+``` py
+my_set = {'Olá', True, 3, 2.5, 1}
+print(my_set) # Output => {True, 2.5, 3, 'Olá'}
+```
+
+Perceba que o valor `1` não existe, já que antes dele foi declarado `True`.
+
+### Tipos de Dados em um Conjunto
+
+Um **set** permite qualquer tipo de dado, com exceção de tipos especiais, como listas, tuplas, dicionários e outros sets.
+
+### Comprimento de um Conjunto
+
+Para obter o comprimento de um conjunto, é usada a função **`len()`**.
+
+**Exemplo:**
+
+``` py
+my_set = {'Olá', 3, 2.5, True}
+print(len(my_set)) # Output => 4
+```
+
+### Acesso aos Elementos de um Conjunto
+
+Como dito anteriormente, não é possível acessar os elementos de um set por índices. Para acessar os elementos, é usado um loop.
+
+**Exemplo:**
+
+``` py
+my_set = {'Olá', 3, 2.5, True}
+
+for i in my_set:
+    print(i)
+
+# Output:
+# Olá
+# True
+# 2.5
+# 3
+```
+
+### Adicionar Itens a um Conjunto
+
+Quando um conjunto é criado, não é possível alterar seus itens, mas é possível adicionar novos itens.
+
+A adição de novos itens é feita com o método **`add()`**.
+
+**Exemplo:**
+
+``` py
+my_set = {'Olá', 3, 2.5, True}
+my_set.add('Olá, Python!')
+
+print(my_set)
+# Output => {True, 2.5, 3, 'Olá, Python!', 'Olá'}
+```
+
+Há também o método **`update()`**, que permite **atualizar um set com outro set, tupla ou lista**.
+
+**Exemplo:**
+
+``` py
+set1 = {3, 'Oi', False}
+set2 = {True, 2.5, 'Olá'}
+
+set1.update(set2)
+
+print(set1)
+# Output => {False, True, 2.5, 3, 'Olá', 'Oi'}
+```
+
+### Remover Itens de um Conjunto
+
+Para remover um itens de um set, é usado o método **`remove()`** ou **`discard()`**.
+
+**Exemplo:**
+
+``` py
+my_set = {3, 'Oi', False, 2.5, True}
+
+my_set.remove('Oi')
+my_set.discard(False)
+
+print(my_set)
+# Output => {True, 2.5, 3}
+```
+
+> **NOTA:** Será retornado um erro caso o argumento do método `remove()` não existir dentro do set. Por outro lado, o método `discard()` ignora caso o itens não exista dentro do set, prosseguindo como se tivesse excluído o item.
+
+O método **`pop()`** irá excluir um item aleatório. Já que sets não possuem uma ordem definida, não há como esperar qual item será excluído.
+
+**Exemplo:**
+
+``` py
+my_set = {'Oi', 3, False, 2.5, True}
+
+item = my_set.pop()
+
+print(item)   # Output => False
+print(my_set) # Output => {True, 2.5, 3, 'Oi'}
+```
+
+O método **`clear()`** irá excluir todos os itens do set.
+
+**Exemplo:**
+
+``` py
+my_set = {'Oi', 3, False, 2.5, True}
+
+my_set.clear()
+
+print(my_set) # Output => set()
+```
+
+A palavra-chave **`del`** exclui um set por completo.
+
+**Exemplo:**
+
+``` py
+my_set = {'Oi', 3, False, 2.5, True}
+
+del my_set
+
+# Ocorrerá um erro, já que `my_set` não existe mais
+print(my_set) # Output => set()
+```
+
+### Unir Coleções
+
+O método **`union()`** retorna um novo set, que é a junção de `self` com um dado set, lista ou tupla.
+
+**Exemplo:**
+
+``` py
+set1 = {'Oi', 3, 2.5, True}
+set2 = {5, 2, False, 'Olá'}
+set3 = set1.union(set2)
+
+print(set3)
+# Output => {False, True, 2.5, 3, 'Oi', 2, 5, 'Olá'}
+```
+
+### Itens Duplicados em um Conjunto
+
+O método **`intersection()`** retorna os itens que existem em ambos os sets.
+
+**Exemplo:**
+
+``` py
+set1 = {'Oi', 5, 3, 2.5, True}
+set2 = {5, 2, False, 'Olá', True}
+set3 = set1.intersection(set2)
+
+print(set3)
+# Output => {True, 5}
+```
+
+Para manter apenas os itens que não são duplicados, há o método **`symmetric_difference()`**.
+
+**Exemplo:**
+
+``` py
+set1 = {'Oi', 5, 3, 2.5, True}
+set2 = {5, 2, False, 'Olá', True}
+set3 = set1.symmetric_difference(set2)
+
+print(set3)
+# Output => {False, 2, 2.5, 3, 'Oi', 'Olá'}
+```
 
 ## Dicionários
 
@@ -1164,6 +1864,27 @@ del dicionario['idade']
 # Imprime o dicionário
 print(dicionario) # Output => {'nome': 'Luana'}
 ```
+
+Outra opção para excluir itens em um dicionário, é o método **`pop()`**, que recebe como argumento a chave do item que será excluído.
+
+**Exemplo:**
+
+``` py
+# Dicionario que contém 2 itens
+dicionario = {
+    'nome': 'Luana',
+    'idade': 22
+}
+
+# Exclui o item `nome`
+item_excluido = dicionario.pop('nome')
+
+# Imprime o dicionário
+print(item_excluido) # Output => Luana
+print(dicionario) # Output => {'idade': 22}
+```
+
+> **NOTA:** Há também o método **`popitem()`**, que exclui o último item do dicionário.
 
 ### Iterarão Sobre Dicionários
 
@@ -1372,6 +2093,45 @@ soma(x=1, y=5) # Output => 6
 soma(2, y=3)   # Output => 5
 ```
 
+Definir **`/`** como argumento impede essa atribuição por parâmetro para todos os parâmetros antes de `/`.
+
+**Exemplo:**
+
+``` py
+def soma(x, y, /):
+    print(x + y)
+
+soma(5, 2) # Output => 7
+```
+
+No exemplo acima, ocorrerá um erro se os argumentos forem passados por palavra-chave, como `soma(y = 2, x = 5)`.
+
+Por outro lado, definir **`*`** como parâmetro irá permitir apenas que os argumentos sejam passados por palavra-chave. Isso vale para todos os argumentos após `*`.
+
+**Exemplo:**
+
+``` py
+def soma(*, x, y):
+    print(x + y)
+
+soma(y = 5, x = 2) # Output => 7
+```
+
+No exemplo acima, ocorrerá um erro se os argumentos forem passados por posição, como `soma(5, 2)`.
+
+É possível combinar `*` e `/` em uma mesma função, definindo os parâmetros que receberão argumentos por posição e os parâmetros que receberão os argumentos por palavra-chave.
+
+**Exemplo:**
+
+``` py
+def soma(x, y, /, *, z):
+    print(x + y + z)
+
+soma(5, 2, z = 3) # Output => 10
+```
+
+No exemplo acima, os parâmetros `x` e `y` só podem receber argumentos por posição, enquanto o parâmetro `z` só pode receber argumento por palavra-chave.
+
 ### Empacotar Argumentos
 
 Empacotar refere-se aos parâmetros que pode receber um ou mais argumentos. Esses parâmetros possuem **`*`** no início do nome, e cada função pode ter apenas um, e ele deve ser o último parâmetro definido.
@@ -1420,6 +2180,22 @@ mult(5, 2, 4)           # Output => 30
 mult(2, 5)              # Output => 10
 mult(0, 1, 2, 3, 4, 5)  # Output => 0
 ```
+
+#### Argumentos de Palavras-chave
+
+Indicar dois asteriscos no início de um parâmetro, tornará ele um dicionário, e assim seus argumentos podem ser passados de maneira variádica.
+
+**Exemplo:**
+
+``` py
+def my_function(**kwargs):
+    print(kwargs)
+
+my_function(name='Luana', idade='23')
+# Output => {'name': 'Luana', 'idade': '23'}
+```
+
+> **NOTA:** Argumentos de Palavras-chaves arbitrárias são frequentemente abreviadas para **`**kwargs`**.
 
 ### Valor Padrão para Parâmetros
 
@@ -1519,6 +2295,32 @@ print(variavel_global)
 
 > **NOTA:** É necessário chamar a função que declara a variável global antes de utilizá-la, afinal, ela não existirá se não for declarada.
 
+### Função Recursiva
+
+Uma função recursiva é uma função que chama ela mesma.
+
+**Exemplo:**
+
+``` py
+def somar(num):
+    if num > 0:
+        result = num + somar(num - 1)
+        print(result)
+    else:
+        result = 0
+    return result
+
+somar(5)
+# Output:
+# 1
+# 3
+# 6
+# 10
+# 15
+```
+
+A função **`somar()`** no exemplo acima imprime a soma do valor dado pelo seus antecessores até chegar a 0.
+
 ## Tratamento de Erros
 
 Os erros são chamados de exceções, e podem ocorrer de inúmeras maneiras, como erro de sintaxe, erro de valor - como passar uma string para uma função que aceita apenas valores inteiros - e diversos outros.
@@ -1572,6 +2374,160 @@ print(divisao(5, 2))  # Output => 2.5
 print(divisao(3, 0))  # Output => ERRO: Não é possível dividir por 0
 print(divisao(9, -1)) # Output => -9.0
 ```
+
+## Manipulação de Arquivos
+
+Para manipular arquivos, existem três tipos de operações básicas: leitura, escrita e anexação.
+
+Ao terminar de usar o arquivo, é importante fechá-lo corretamente com o método `close()`, mas com o **`with`**, isso se torna desnecessário, já que ele fecha o arquivo no final.
+
+**Exemplo sem `with`:**
+
+``` py
+# Abre o arquivo no modo de leitura
+file = open('text.txt', 'r', encoding='UTF-8')
+
+# Lê o arquivo
+content = file.read()
+
+# Imprime o conteúdo do arquivo
+print(content)
+# Output:
+# Olá, Mundo!
+# Olá, Python!
+
+# Fecha o arquivo
+file.close()
+```
+
+**Exemplo com `with`:**
+
+``` py
+# Abre o arquivo no modo leitura
+with open('text.txt', 'r', encoding='UTF-8') as file:
+    # Lê o conteúdo do arquivo
+    content = file.read()
+
+    # Imprime o conteúdo do arquivo
+    print(content)
+
+# Output:
+# Olá, Mundo!
+# Olá, Python!
+```
+
+### Leitura de Arquivos
+
+Para ler arquivos, é usada a função **`open()`** no modo **`r`** para abrir o arquivo e **`read()`** para obter o conteúdo.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+Olá, Mundo!
+Olá, Python!
+```
+
+``` py
+with open('text.txt', 'r', encoding='UTF-8') as file:
+    content = file.read()
+    print(content)
+# Output:
+# Olá, Mundo!
+# Olá, Python!
+```
+
+O parâmetro **`encoding`** se refere ao formato, e nesse caso, ele é definido para `'UTF-8'` para ler corretamente os acentos nas letras.
+
+**Ler linhas do arquivo:**
+
+O método **`readlines()`** retorna uma lista onde cada elemento é uma linha do arquivo.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+Olá, Mundo!
+Olá, Python!
+```
+
+``` py
+with open('text.txt', 'r', encoding='UTF-8') as file:
+    content = file.readlines()
+    print(content) # Output: ['Olá, Mundo!\n', 'Olá, Python!']
+```
+
+**Iterar sobre as linhas:**
+
+É possível iterar sobre cada linha em um arquivo a partir do próprio arquivo em conjunto com o loop `for`.
+
+**Sintaxe:**
+
+``` py
+for linha in arquivo:
+    # Bloco de código
+```
+
+**Exemplo:**
+
+Arquivo de `text.txt`:
+
+``` txt
+Olá, Mundo!
+Olá, Python!
+```
+
+Arquivo `main.py`:
+
+``` py
+with open('text.txt', 'r', encoding='UTF-8') as file:
+    c = 0
+    for line in file:
+        c += 1
+        print(f'{c}: {line}')
+# Output:
+# 1: Olá, Mundo!
+
+# 2: Olá, Python!
+```
+
+### Escrita em Arquivos
+
+Para escrever em arquivos, é usado o modo **`w`** na função **`open()`**, e **`write()`** para escrever o conteúdo.
+
+**Exemplo:**
+
+``` py
+with open('text.txt', 'w', encoding='UTF-8') as file:
+    file.write("Olá, Mundo!")
+```
+
+> **NOTA:** Mesmo que não seja para leitura, é importante definir o formato para `'UTF-8'`, ou caracteres acentuados não serão escritos da maneira correta.
+
+Se o arquivo não existir, ele será criado. Se o arquivo existir, terá seu conteúdo sobrescrito pelo novo.
+
+### Anexar em Arquivos
+
+Para anexar em arquivos, ou seja, adicionar conteúdo a ele sem sobrescrever o anterior, é utilizada função **`open()`** com o modo **`a`**.
+
+**Exemplo:**
+
+Arquivo de `text.txt`:
+
+``` txt
+Olá, Mundo!
+```
+
+Arquivo `main.py`:
+
+``` py
+with open('text.txt', 'a', encoding='UTF-8') as file:
+    file.write("\nOlá, Python!")
+```
+
+O código acima adiciona uma nova linha ao arquivo de texto com o texto "Olá, Python!".
 
 ## Estilo de Texto no Terminal
 

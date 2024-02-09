@@ -70,9 +70,19 @@ SELECT DISTINCT coluna1, coluna2, ... FROM nome_tabela;
 
 Com `SELECT DISTINCT` serão retornados apenas um de cada valor.
 
+### `SELECT TOP`
+
+A cláusula **`SELECT TOP`** é usada para especificar o número de registros para retorno. É especialmente útil para tabelas longas com milhares de registros. Retorna muitos registros que podem impactar no desempenho.
+
+**Sintaxe:**
+
+``` sql
+SELECT TOP numeros_de_registros * FROM tabela;
+```
+
 ## Inserção de Registros
 
-A declaração **`INSERT INTO`** é usada para inserir novos registros em uma tabela.
+A declaração **`INSERT INTO`** é usada para inserir novos registros à uma tabela.
 
 **Há duas maneiras de declarar um `INSERT INTO`:**
 

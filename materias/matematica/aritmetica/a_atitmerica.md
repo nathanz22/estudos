@@ -1,4 +1,4 @@
-# Matemática
+# Aritmética
 
 ## Números Inteiros
 
