@@ -632,7 +632,7 @@ var inteiro64 int64
 
 #### Inteiros sem Sinal
 
-São inteiros que não têm sinal negativo, e assim como os tipos com sinal. Os tipos são **`uint8`**, **`uint16`**, **`uint32`** e **`uint64`**, e eles têm tamanhos específicos de 8, 16, 32 e 64 bits.
+São inteiros que não têm sinal negativo, representados pelos tipos **`uint8`**, **`uint16`**, **`uint32`** e **`uint64`**, que têm tamanhos específicos de 8, 16, 32 e 64 bits.
 
 ``` go
 var inteiroSemSinal8 uint8
@@ -642,6 +642,978 @@ var inteiroSemSinal64 uint64
 ```
 
 Há também o tipo **`uintptr`**, que é usado para armazenar valores inteiros não assinados suficientes para armazenar todos os bits de um ponteiro.
+
+#### `byte`
+
+É um alias para o tipo `uint8`, que equivale a 8 bits. É geralmente usado para representar caracteres ASCII.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "unsafe"
+)
+
+func main() {
+    var x byte = 2
+
+    fmt.Printf("Bytes: %d\n", unsafe.Sizeof(x))
+    fmt.Printf("Tipo: %T | Valor: %v\n", x, x)
+
+    /* Output:
+    Bytes: 1
+    Tipo: uint8 | Valor: 2
+    */
+}
+```
+
+A função `Sizeof()` do pacote `unsafe` é usada para verificar a quantidade de bytes de uma variável.
+
+##### Manipulação de Slice de Bytes
+
+Para manipular slice de bytes, são usadas as funções do pacote **`bytes`**, que pertence a biblioteca padrão.
+
+###### Cópia de Slice de Bytes
+
+Para copiar um slice de bytes, é usada a função **`bytes.Clone()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice com os caracteres "G" e "o"
+    slice := []byte{71, 111} // Caracteres "G" e "o"
+
+    // Cria uma cópia para o slice
+    copySlice := bytes.Clone(slice)
+
+    // Modifica somente o slice original
+    slice = append(slice, 33) // Adiciona "!" no final
+
+    // Imprime o slice original e sua cópia
+    fmt.Println(slice)      // Output => [71 111 33]
+    fmt.Println(copySlice)  // Output => [71 111]
+
+    // Imprime os elementos dos slices como caracteres
+    for _, v := range slice {
+        fmt.Print(string(v)) // Output => Go!
+    }
+    fmt.Println()
+
+    for _, v := range copySlice {
+        fmt.Print(string(v)) // Output => Go
+    }
+    fmt.Println()
+}
+```
+
+###### Slice de Bytes para Maiúscula ou Minúscula
+
+As funções **`bytes.ToLower()`** e **`bytes.ToUpper`** retornam um novo slice de bytes com todas as letras Unicode mapeadas para minúsculo e maiúsculo, respectivamente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Hello, World!")
+
+    // Slice minúsculo
+    lowerSlice := bytes.ToLower(slice)
+
+    // Slice maiúsculo
+    upperSlice := bytes.ToUpper(slice)
+
+    // Imprime os resultados
+    fmt.Printf("%s\n", lowerSlice)
+    fmt.Printf("%s\n", upperSlice)
+
+    /* Output:
+    hello, world!
+    HELLO, WORLD!
+    */
+}
+```
+
+###### Remover no Início/Final de Slices de Bytes
+
+A função **`bytes.Trim()`** retorna um novo slice de bytes sem uma dada string no início e fim.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("--Hello-World!--")
+
+    // Remove `-` no início e fim
+    newSlice := bytes.Trim(slice, "-")
+
+    // Imprime o resultado
+    fmt.Printf("%s\n", newSlice)
+
+    // Output => Hello-World!
+}
+```
+
+Para remover apenas no início ou apenas no fim, use **`bytes.TrimLeft()`** e **`bytes.TrimRight()`**, respectivamente.
+
+> **Whitespaces:** A função **`bytes.TrimSpace()`** retorna uma cópia do slice passado sem os caracteres de espaço em branco no início e no final. Então há mais sentido em usá-la ao invés de `bytes.Trim(s, " ")`.
+
+##### Buffer para Slice de Bytes
+
+O pacote `bytes` fornece o tipo **`Buffer`**, cujo variáveis com esse tipo se tornam um buffer temporário para armazenar bytes.
+
+**Declarar um `bytes.buffer`:**
+
+``` go
+var b bytes.Buffer
+```
+
+**Declaração com funções:**
+
+* **'`bytes.NewBuffer()`'**: Cria um buffer a partir de um slice de bytes.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        fmt.Println(b.String())
+        // Output => Hello, World!
+    }
+    ```
+
+* **'`bytes.NewBufferString()`'**: Cria um buffer a partir de uma string.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBufferString("Hello, World!")
+        fmt.Println(b)
+        // Output => Hello, World!
+    }
+    ```
+
+Essas funções são especialmente úteis quando a necessidade é criar um buffer já com um valor definido inicialmente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func ReverseString(s string) string {
+    // Buffer
+    var b bytes.Buffer
+
+    // Largura da string que será invertida
+    length := len(s)
+
+    // Itera sobre os caracteres da string de maneira inversa
+    for i := length - 1; i >= 0; i-- {
+        // Escreve cada caractere em ordem inversa
+        b.WriteByte(s[i])
+    }
+
+    // Retorna a string invertida
+    return b.String()
+}
+
+func main() {
+    str := "Hello, World!"
+    fmt.Println("Reversed:", ReverseString(str))
+}
+```
+
+No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caracteres da string passada - "Hello, World" no caso - usando um buffer de bytes, escrevendo os caracteres um a um por meio de um loop em ordem inversa. No fim, é retornado o buffer com `b.String()`, que converte o buffer em uma string.
+
+**Os principais métodos de `Buffer` são:**
+
+* **'`Bytes()`'**: Retorna o que está gravado no buffer como um slice de bytes.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        fmt.Println(b.Bytes())
+        // Output => [72 101 108 108 111 44 32 87 111 114 108 100 33]
+    }
+    ```
+
+* **'`String()`'**: Retorna o que está gravado no buffer como uma string.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        fmt.Println(b.String())
+        // Output => Hello, World!
+    }
+    ```
+
+* **'`Len()`'**: Retorna o número de bytes da parte não lida do buffer.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        fmt.Println(b.Len()) // Output => 13
+    }
+    ```
+
+* **'`Cap()`'**: Retorna o total de dados alocodos no buffer.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        fmt.Println(b.Cap()) // Output => 13
+    }
+    ```
+
+* **'`Grow()`'**: Aumenta a capacidade do buffer.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        var b bytes.Buffer
+        fmt.Println(b.Cap()) // Output => 0
+        b.Grow(64)
+        fmt.Println(b.Cap()) // Output => 64
+    }
+    ```
+
+    > **NOTA:** Se o buffer não puder aumentar, ele entrará em pânico com `ErrTooLarge`.
+
+* **'`Read()`'**: Lê a mesma largura de bytes definidos pela largura do slice de bytes passado como argumento.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        n, err := b.Read(b.Bytes())
+        if err != nil {
+            fmt.Println("Err:", err)
+        }
+
+        fmt.Println("Bytes lidos:", n)
+        // Output => Bytes lidos: 13
+    }
+    ```
+
+* **'`ReadByte()`'**: Lê e retorna o próximo byte do buffer.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        n, err := b.ReadByte()
+        if err != nil {
+            fmt.Println("Err:", err)
+        }
+
+        fmt.Println("Byte lido:", n)
+        // Output => Bytes lidos: 72
+
+        fmt.Println(b.String()) // Output => ello, World!
+    }
+    ```
+
+* **'`ReadBytes()`'**: Lê até a primeira ocorrência do byte especificado. Retorna um slice de bytes contendo todos os bytes lidos (inclui o byte que foi especificado).
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        n, err := b.ReadBytes('W')
+        if err != nil {
+            fmt.Println("Err:", err)
+        }
+
+        fmt.Println("Bytes lidos:", n)
+        // Output => Bytes lidos: [72 101 108 108 111 44 32 87]
+
+        fmt.Println(b.String()) // Output => orld!
+    }
+    ```
+
+* **'`ReadString()`'**: Lê até a prieira ocorrência do byte especificado. Retorna uma string contendo o que foi lido (inclui até o caractere que foi especificado).
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        n, err := b.ReadString('W')
+        if err != nil {
+            fmt.Println("Err:", err)
+        }
+
+        fmt.Println("Bytes lidos:", n)
+        // Output => Hello, W
+
+        fmt.Println(b.String()) // Output => orld!
+    }
+    ```
+
+* **'`Next()`'**: Retorna os próximos `n` bytes.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        for i := b.Len() / 2; i >= 0; i-- {
+            fmt.Printf("%s\n", b.Next(2))
+        }
+        /* Output:
+        He
+        ll
+        o,
+        W
+        or
+        ld
+        !
+        */
+    }
+    ```
+
+* **'`Reset()'**: Redefine o buffer, tornando-o vazio.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        b.Reset()
+
+        b.WriteString("Hello, Go!")
+        fmt.Println(b.String()) // Output => Hello, Go!
+    }
+    ```
+
+* **'`Truncate()`'**: Descarta todos os byte, com exceção dos `n` bytes não lidos.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        b := bytes.NewBuffer([]byte("Hello, World!"))
+        b.Truncate(5)
+        fmt.Println(b.String()) // Output => Hello
+    }
+    ```
+
+* **'`Write()`'**: Adiciona um slice de bytes ao buffer e retorna a quantidade de bytes escritos.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        var b bytes.Buffer
+        n, err := b.Write([]byte("Hello, World!"))
+        if err != nil {
+            fmt.Println("Err:", err)
+            return
+        }
+        fmt.Println("Bytes lidos:", n)
+        fmt.Println(b.String())
+        /* Output:
+        Bytes lidos: 13
+        Hello, World!
+        */
+    }
+    ```
+
+* **'`WriteByte()`'**: Adiciona um único byte ao buffer.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        var b bytes.Buffer
+        err := b.WriteByte('W')
+        if err != nil {
+            fmt.Println("Err:", err)
+            return
+        }
+        fmt.Println(b.String())
+        // Output => W
+    }
+    ```
+
+* **'`WriteString()`'**: Adiciona uma string ao buffer e retorna a quantidade de bytes escritos.
+
+    ``` go
+    package main
+
+    import (
+        "bytes"
+        "fmt"
+    )
+
+    func main() {
+        var b bytes.Buffer
+        n, err := b.WriteString("Hello, World!")
+        if err != nil {
+            fmt.Println("Err:", err)
+            return
+        }
+        fmt.Println("Bytes lidos:", n)
+        fmt.Println(b.String())
+        /* Output:
+        Bytes lidos: 13
+        Hello, World!
+        */
+    }
+    ```
+
+###### Comparação entre Slice de Bytes
+
+A comparação entre slice de bytes pode ser feita com a função `bytes.Compare()`, que compara dois slices de bytes lexicograficamente.
+
+Dependendo da comparação, é retornado:
+
+* **'`-1`'**: Caso o primeiro slice de bytes seja menor que o segundo.
+* **'`0`'**: Caso ambos os slices de bytes sejam iguais.
+* **'`1`'**: Caso o primeiro slice de bytes seja maior que o segundo.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice com os caracteres "G" e "o"
+    slice1 := []byte{71, 111}     // Caracteres "G" e "o"
+    slice2 := []byte{71, 111, 33} // Caracteres "G", "o" e "!"
+
+    result := bytes.Compare(slice1, slice2)
+    fmt.Println(result) // Output => -1
+}
+```
+
+###### Subslice em Slice de Bytes
+
+A função **`bytes.Contains()`** verifica se há um subslice de bytes dentro de um slice de bytes. Ela retorna `true` caso haja, e `false` caso não haja.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice e subslice
+    slice :=    []byte("Hello, World!")
+    subSlice := []byte("World")
+
+    // Verifica se o subslice está dentro do primeiro
+    result := bytes.Contains(slice, subSlice)
+    fmt.Println(result) // Output => true
+}
+```
+
+Há também a função **`bytes.ContainsAny()`**, que verifica se o dado caractere está presente no slice de bytes. Essa função analisa caracteres encodado em UTF-8.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Olá, Mundo!")
+
+    // Verifica se há o caractere "á" no slice
+    result := bytes.ContainsAny(slice, "á")
+    fmt.Println(result) // Output => true
+}
+```
+
+###### Caracteres por Índice em Slice de Bytes
+
+A função **`bytes.Index()`** retorna o índice correspondendo ao caractere passado dentro do slice de bytes.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Hello, World!")
+
+    // Encontra o índice do caractere "W"
+    index := bytes.Index(slice, []byte("W"))
+    fmt.Println(index) // Output => 6
+}
+```
+
+A função **`bytes.IndexAny()`** funciona de maneira semelhante, porém aceitando qualquer caractere UTF-8 para verificação.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Olá, Mundo!")
+
+    // Encontra o índice do caractere "W"
+    index := bytes.IndexAny(slice, "á")
+    fmt.Println(index) // Output => 2
+}
+```
+
+Para encontrar o índice de um determinado byte em si ao invés do caractere que o mesmo representa, há a função **`bytes.IndexByte()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Hello, World!")
+
+    // Verifica o índice do caractere "W" (byte 87)
+    result := bytes.IndexByte(slice, 87)
+    fmt.Println(result) // Output => 7
+}
+```
+
+As funções **`bytes.LastIndex()`**, **`bytes.LastIndexAny()`** e **`bytes.LastIndexByte()`** fazem a verificação começando pelo final do slice de bytes.
+
+###### Mapping em Slice de Bytes
+
+A função **`bytes.Map()`** mapeia um slice de bytes, aceitando uma função callback e permitindo a criação de um novo slice de bytes a partir desse callback.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Hello, World!")
+
+    // Função para mapping
+    mapping := func(r rune) rune {
+        switch {
+        case r >= 'A' && r <= 'Z':
+            return 'A'
+        case r >= 'a' && r <= 'z':
+            return 'a'
+        }
+        return r
+    }
+
+    // Mapeia o slice de bytes
+    newSlice := bytes.Map(mapping, slice)
+    fmt.Printf("%s\n", newSlice) // Output => Aaaaa, Aaaaa!
+}
+```
+
+###### Concatenação de Slice de Bytes
+
+A função **`bytes.Join()`** concatena dois slices de bytes, separando-as com um separador definido na chamada da função.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes multidimensional
+    slice := [][]byte{
+        []byte("H"),
+        []byte("e"),
+        []byte("l"),
+        []byte("l"),
+        []byte("o"),
+        []byte("!"),
+    }
+
+    // Imprime o slice multidimensional como um único slice
+    fmt.Printf("%s\n", bytes.Join(slice, []byte(" ")))
+    fmt.Printf("%s\n", bytes.Join(slice, []byte("")))
+
+    /* Output:
+    H e l l o !
+    Hello!
+    */
+}
+```
+
+###### Separar em Slice de Bytes
+
+A função **`bytes.Split()`** separa um slice de bytes a partir de um separador e, no fim, retorna um slice de bytes multidimensional.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Hello World")
+
+    // Separa as palavras no slice de bytes
+    newSlice := bytes.Split(slice, []byte(" "))
+
+    // Imprime o resultado
+    fmt.Printf("%s\n", newSlice)
+
+    // Output => [Hello World]
+}
+```
+
+Com a função **`bytes.SplitN()`** é possível especificar o número mínimo de slices internos.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("a,b,c,d,e,f,g")
+
+    // Separa as palavras no slice de bytes
+    newSlice := bytes.SplitN(slice, []byte(","), 5)
+
+    // Imprime o resultado
+    fmt.Printf("%s\n", newSlice)
+
+    // Output => [a b c d e,f,g]
+}
+```
+
+Para separar incluindo o separador, use a função **`bytes.SplitAfter()`** ou **`bytes.SplitAfterN()`** (para separar com um número mínimo de slices internos).
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("a,b,c,d,e,f,g")
+
+    // Separa as palavras no slice de bytes
+    newSlice := bytes.SplitAfter(slice, []byte(","))
+
+    // Imprime o resultado
+    fmt.Printf("%s\n", newSlice)
+
+    // Output => [a, b, c, d, e, f, g]
+}
+```
+
+###### Repetição de Slice de Bytes
+
+A função **`bytes.Repeat()`** retorna um novo slice, composto das repetições de um dado slice.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    // Slice de bytes
+    slice := []byte("Foo")
+
+    // Repete o slice 3 vezes
+    newSlice := bytes.Repeat(slice, 3)
+
+    // Imprime o novo slice
+    fmt.Println(newSlice)
+    fmt.Printf("%s\n", string(newSlice))
+
+    /* Output:
+    [70 111 111 70 111 111 70 111 111]
+    FooFooFoo
+    */
+}
+```
+
+###### Substituição em Slice de Bytes
+
+A função **`bytes.Replace()`** substitui a primeira ocorrência de um byte no slice de bytes. Essa função retorna um novo slice com as substituições e não altera o original.
+
+**Os parâmetros são:**
+
+1. **'`s`'**: Slice que ocorrerá a(s) substituição(ões)
+1. **'`old`'**: Byte que será substituído.
+1. **'`new`'**: Byte pelo qual `old` será substituído.
+1. **'`n`'**: Quantidade de ocorrências que serão substituídas.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    slice := []byte("Hello, World! Hello, Go!")
+    newSlice := bytes.Replace(
+        slice,
+        []byte("Hello"),
+        []byte("Hi"),
+        1,
+    )
+
+    // Imprime os slices
+    fmt.Printf("%s\n", slice)
+    fmt.Printf("%s\n", newSlice)
+
+    /* Output:
+    Hello, World! Hello, Go!
+    Hi, World! Hello, Go!
+    */
+}
+```
+
+Para substituir todas as ocorrências, use a função **`bytes.ReplaceAll()`**, que tem os mesmo parâmetros que `bytes.Replace()`, com exceção do último (`n`).
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "bytes"
+    "fmt"
+)
+
+func main() {
+    slice := []byte("Hello, World! Hello, Go!")
+    newSlice := bytes.ReplaceAll(
+        slice,
+        []byte("Hello"),
+        []byte("Hi"),
+    )
+
+    // Imprime os slices
+    fmt.Printf("%s\n", slice)
+    fmt.Printf("%s\n", newSlice)
+
+    /* Output:
+    Hello, World! Hello, Go!
+    Hi, World! Hi, Go!
+    */
+}
+```
+
+#### `rune`
+
+É um alias para `int32`, e é usado para representar um Unicode Code Point.
+
+Uma string é uma sequência de bytes, onde cada caractere UTF-8 pode ocupar mais de um byte. Assim, para trabalhar com caracteres individuais em uma string de forma consistente, é necessário usar `rune` para garantir que os caracteres sejam interpretados corretamente, independentemente de quantos bytes cada caractere ocupa na representação UTF-8.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // String com diferentes caracteres
+    x := "Hello, 界"
+
+    // Imprime a largura da string
+    fmt.Println(len(x)) // Output => 10
+
+    for _, char := range x {
+        // Imprime cada caractere da string
+        fmt.Printf("%c ", char) // Output => H e l l o ,   界
+    }
+}
+```
 
 ### Números de Ponto Flutuante
 
@@ -688,6 +1660,27 @@ Há dois tipos para representar números de ponto flutuante: **`float32`** e **`
         */
     }
     ```
+
+### Números Complexos
+
+São representados por **`complex64`** e **`complex128`**, sendo `complex128` o tipo de complexo padrão.
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var x complex64
+    var y complex128
+
+    x = 5 + 2i
+    y = 2 + 1i
+
+    fmt.Println(x)
+    fmt.Println(y)
+}
+```
 
 ### Strings
 
@@ -1051,9 +2044,9 @@ func main() {
 }
 ```
 
-## Conversão entre Tipos
+### Conversão entre Tipos
 
-### Conversão para Inteiro
+#### Conversão para Inteiro
 
 **Para converter um número de ponto flutuante para inteiro:**
 
@@ -1104,7 +2097,7 @@ func main() {
 }
 ```
 
-### Conversão para Float
+#### Conversão para Float
 
 **Para converter um inteiro para float:**
 
@@ -1158,7 +2151,7 @@ func main() {
 }
 ```
 
-### Conversão para String
+#### Conversão para String
 
 Para converter qualquer tipo para string, pode-se usar `fmt.Sprintf()`.
 
@@ -1190,7 +2183,7 @@ func main() {
 }
 ```
 
-### Conversão para Booleano
+#### Conversão para Booleano
 
 Pode ser feito de maneira explícita:
 
@@ -2748,9 +3741,7 @@ func main() {
 
 ### Estrutura `switch`
 
-Executa um bloco dentre vários, baseando-se no valor de uma dada variável ou expressão.
-
-Para cada possível valor de uma expressão, é criado um **`case`**, e no fim é criado um **`default`** caso nenhum `case` seja executado.
+Executa um bloco dentre vários, baseando-se no valor de uma dada variável ou expressão. Para cada possível valor de uma expressão, é criado um **`case`**, e no fim é criado um **`default`** caso nenhum `case` seja executado.
 
 **Sintaxe:**
 
@@ -2794,6 +3785,36 @@ func main() {
 }
 ```
 
+Para executar também o próximo `case`, você pode declarar **`fallthrough`** no fim de um bloco `case`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 1
+
+    switch x {
+    case 1:
+        fmt.Println("x é igual a 1")
+        fallthrough
+    case 2:
+        fmt.Println("x é igual a 2")
+    case 3:
+        fmt.Println("x é igual a 3")
+    default:
+        fmt.Println("x é diferente de 1, 2 e 3")
+    }
+    /* Output:
+    x é igual a 1
+    x é igual a 2
+    */
+}
+```
+
 #### Múltiplos Valores para `case`
 
 Um `case` pode receber mais de um valor, e assim, permitindo executar um único bloco para diferentes valores, sem a necessidade de duplicar blocos.
@@ -2817,6 +3838,34 @@ func main() {
     // Output => x é igual a 3
 }
 ```
+
+#### `switch` sem Expressão
+
+Se não definida uma expressão para `switch`, será executado o primeiro `case` que testar verdadeiro, ou `default`, caso nenhum seja verdadeiro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 10
+
+    switch {
+    case x > 0:
+        fmt.Printf("%d é MAIOR que 0\n", x)
+    case x < 0:
+        fmt.Printf("%d é MENOR que 0\n", x)
+    default:
+        fmt.Println("Valor é 0")
+    }
+    // Output => 10 é MAIOR que 0
+}
+```
+
+> **NOTA:** O compilador otimiza a execução do `switch`. especialmente quando há muitos `case`. Por esse motivo, o compilador pode gerar código mais eficiente usando uma instrução `switch` em vez de várias instruções `if`.
 
 ## Funções
 
@@ -3291,6 +4340,34 @@ func main() {
     // Output => A raiz quadrada de 25.0 é 5.0
 }
 ```
+
+## Instrução `goto`
+
+A declaração **`goto`** é usada para executar o código de uma label.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    i := 0
+
+    count:
+        fmt.Printf("%d ", i)
+        i++
+        if i <= 5 {
+            goto count
+        }
+    // Output => 0 1 2 3 4 5
+}
+```
+
+No exemplo acima, a etiqueta `count` é executada, e é analisado o código dela mesmo que não seja chamada como uma função.
+
+> **NOTA:** O uso da instrução `goto` deve ser feito de maneira consciente, pois pode dificultar a leitura do código, além de que na maioria das vezes ele não é realmente necessário, podendo ser usado funções, `switch`s, `if`, entre outras estruturas.
 
 ## Structs
 
@@ -3909,9 +4986,9 @@ func main() {
 
 > **PITFALLS:** O uso excessivo de interfaces vazias pode tornar o código menos seguro e legível, pois a verificação de tipos é adiada para tempo de execução. O uso consciente e apropriado são essenciais para evitar potenciais armadilhas.
 
-#### Reflexão (Reflection)
+#### Reflection
 
-Geralmente as interfaces vazias são usadas em conjunto com o pacote **`reflect`** para realizar operações de reflexão em tempo de execuçã, permitindo inspecionar tipos de valores de maneira dinâmica.
+Geralmente as interfaces vazias são usadas em conjunto com o pacote **`reflect`** para realizar operações de reflexão em tempo de execução, permitindo inspecionar tipos de valores de maneira dinâmica.
 
 **Exemplo:**
 
@@ -3935,7 +5012,70 @@ func main() {
 }
 ```
 
-No exemplo acima, a função `Tipo()` retorna o tipo de um valor.
+No exemplo acima, a função `Tipo()` retorna o tipo do argumento que for passado.
+
+### Type Assertions
+
+Afirmações de tipo se referem a ação de verificar se uma `interface{}` é de um determinado tipo.
+
+**Sintaxe:**
+
+``` go
+valor, ok := variavel.(tipo)
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var x interface{} = "Olá, Mundo!"
+    s, ok := x.(string)
+
+    fmt.Printf("%v | %v\n", s, ok)
+    // Output => Olá, Mundo! | true
+}
+```
+
+Além disso, se combinado com a estrutura **`switch`**, pode ser útil para verificar o tipo de uma interface.
+
+``` go
+package main
+
+import "fmt"
+
+func Foo(i interface{}) {
+    // Imprime uma mensagem dependendo do tipo da interface
+    switch v := i.(type) {
+    // Inteiros
+    case int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64:
+        fmt.Printf("O valor %d é um número inteiro.\n", v)
+    // Strings
+    case string:
+        fmt.Printf("\"%s\" é uma string.\n", v)
+    // Reais
+    case float32, float64:
+        fmt.Printf("O valor %.1f é um número real.\n", v)
+    // Booleanos
+    case bool:
+        fmt.Printf("O valor %v é booleano.\n", v)
+    // Qualquer outro tipo
+    default:
+        fmt.Printf("Desconheço o tipo %T.\n", v)
+    }
+}
+
+func main() {
+    Foo("Olá, Mundo!")          // Output => "Olá, Mundo!" é uma string.
+    Foo(10)                     // Output => O valor 10 é um número inteiro.
+    Foo(2.5)                    // Output => O valor 2.5 é um número real.
+    Foo(true)                   // Output => O valor true é booleano.
+    Foo([]int{0, 1, 2})         // Output => Desconheço o tipo []int.
+}
+```
 
 ## Ponteiros
 
@@ -4039,11 +5179,402 @@ func main() {
 }
 ```
 
-## Time
+## Manipulação de Erros
 
-O pacote **`time`** possui diversas funcionalidades para trabalhar com informações relacionadas ao tempo, como funções para representar e manipular datas, horários e durações.
+### Tipo `error`
 
-### Constantes de `time`
+Uma variável `error` representa qualquer valor que descreva um erro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Divisao(x, y float64) (float64, error) {
+    // Verifica se a divisão é por zero
+    if y == 0 {
+        // Cria uma mensagem de erro e a retorna
+        return 0, fmt.Errorf("Divisao por %g", y)
+    }
+
+    // Retorna o resultado da divisão. `nil` indica que não ocorreu nenhum erro
+    return x / y, nil
+}
+
+func main() {
+    // `x` é o resultado da divisão. `err` é o erro
+    x, err := Divisao(5, 0)
+
+    // Verifica se ocorreu algum erro
+    if err != nil {
+        fmt.Println("Erro:", err)
+        return // Encerra o programa
+    }
+
+    // Imprime o resultado da divisão
+    fmt.Println(x)
+}
+```
+
+No exemplo acima, há a função **`Errorf()`** do pacote `fmt`, que é usada para formatar mensagens de erro.
+
+### Erro Personalizado
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "errors"
+    "fmt"
+)
+
+// Erro personalizado
+type DivisionError struct {
+    x, y float64
+    msg  string
+}
+
+// Mensagem de erro personalizada
+func (e *DivisionError) Error() string {
+    return e.msg
+}
+
+// Divide um valor pelo outro
+func Division(x, y float64) (float64, error) {
+    // Caso a divisão seja por zero
+    if y == 0 {
+        return 0, &DivisionError{
+            msg: "ERRO: Não é possível dividir por 0",
+            x:   x,
+            y:   y,
+        }
+        /*
+        Aqui, `&DivisionError{}` é retornado como erro, que é uma struct com os valores da operação e a mensagem de erro.
+        */
+    }
+
+    // Retorna o resultado da divisão e não indica nenhum erro
+    return x / y, nil
+}
+
+func main() {
+    // Valores para a divisão
+    var num1 float64 = 5
+    var num2 float64 = 0
+
+    // Obtém o resultado da divisão e verifica se ocorreu algum erro
+    result, err := Division(num1, num2)
+
+    // Se tiver ocorrido algum erro, `err` será diferente de `nil`
+    if err != nil {
+        // Instância da estrutura de erro
+        var e *DivisionError
+
+        switch {
+        // Verifica se a mensagem de erro é igual à mensagem ocorrida
+        case errors.As(err, &e):
+            fmt.Printf("Não pode dividir %.1f por %.1f\n", e.x, e.y)
+        // Mensagem de erro genérica
+        default:
+            fmt.Println("Erro inesperado:", err)
+        }
+        // Encerra o programa
+        return
+    }
+
+    // Imprime o resultado da divisão (caso não haja erros)
+    fmt.Printf("%.1f / %.1f = %.1f\n", num1, num2, result)
+}
+```
+
+## Funções Adiadas
+
+Uma declaração **`defer`** adia a execução de uma função até que a função envolvente seja concluída. A função adiada é colocada em uma pilha e será executada por último, antes do retorno da função envolvente, garantindo a execução de determinadas operações de limpeza, como fechar arquivos ou liberar recursos.
+
+As funções adiadas são executadas em ordem reversa, ou seja, a última função adiada é a primeira a ser executada após a conclusão da função envolvente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    defer fmt.Println("Primeira chamada defer")
+    fmt.Println("Início da função")
+    defer fmt.Println("Segunda chamada defer")
+    fmt.Println("Fim da função")
+
+    /* Output:
+    Início da função
+    Fim da função
+    Segunda chamada defer
+    Primeira chamada defer
+    */
+}
+```
+
+A ação adiada irá considerar o valor que recebeu quando ela foi declarada, e não o valor final.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    i := 0
+    defer fmt.Println(i)
+    i++
+    // Output => 0
+}
+```
+
+Assim, seria possível até mesmo imprimir números de maneira regressiva com um loop `for`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i <= 5; i++ {
+        defer fmt.Printf("%d ", i)
+    }
+    // Output => 5 4 3 2 1 0
+}
+```
+
+A declaração `defer` é frequentemente usada para garantir a limpeza de recursos, como fechar arquivos, liberar mutexes, ou desalocar memória. Isso é útil para garantir que os recursos sejam liberados mesmo se ocorrerem erros ou exceções durante a execução da função.
+
+<!-- Exemplo com manipulação de arquivo -->
+
+## `panic()` e `recover()`
+
+A função **`panic()`** encerra a função e recebe como argumento uma mensagem que é impressa em forma de erro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Foo() {
+    for i := 0; i <= 10; i++ {
+        if i > 5 {
+            // Quebra de linha
+            fmt.Println()
+
+            // "Panica" mostrando uma mensagem e encerrando o programa
+            panic("Ultrapassou 5")
+        }
+        fmt.Printf("%d ", i)
+    }
+}
+
+func main() {
+    Foo()
+    /* Output:
+    0 1 2 3 4 5
+    panic: Ultrapassou 5
+    */
+}
+```
+
+Já a função **`recover()`**, é usada para recuperar a mensagem passada para `panic()`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Foo() {
+    for i := 0; i <= 10; i++ {
+        if i > 5 {
+            // Quebra de linha
+            fmt.Println()
+
+            // `panic` com o valor que ultrapassou 5
+            panic(fmt.Sprintf("%d", i))
+        }
+        fmt.Printf("%d ", i)
+    }
+}
+
+func main() {
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Printf("Valor recuperado: %s\n", r)
+        }
+    }()
+    Foo()
+    /* Output:
+    0 1 2 3 4 5
+    Valor recuperado: 6
+    */
+}
+```
+
+**Exemplo mais sofisticado:**
+
+``` go
+package main
+
+import "fmt"
+
+func Foo() {
+    // Recupera o valor de `panic`
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Println("Valor recuperado:", r)
+        }
+    }()
+
+    // Função recursiva
+    Bar(0)
+}
+
+func Bar(i int) {
+    // Executa `panic` quando `i` é maior que 5
+    if i > 5 {
+        // Quebra de linha
+        fmt.Println()
+
+        // "Panica" com o valor de `i` (no caso, esse valor é 6)
+        panic(fmt.Sprintf("%d", i))
+    }
+
+    // Imprime o valor de `i`
+    fmt.Printf("%d ", i)
+
+    // Chama a si mesma
+    Bar(i + 1)
+}
+
+func main() {
+    Foo()
+    /*Output:
+    0 1 2 3 4 5
+    Valor recuperado: 6
+    */
+}
+```
+
+## Pacotes
+
+Os pacotes são usados para reutilização de código, permitindo importar várias funcionalidades já definidas anteriormente.
+
+Os pacotes podem ser utilizados após importados, e para importá-los, é usada a palavra-chave **`import`**, seguida do nome do pacote entre aspas duplas.
+
+**Sintaxe:**
+
+``` go
+import "pacote"
+```
+
+**Para importar vários pacotes:**
+
+``` go
+import (
+    "pacote1"
+    "pacote2"
+    "pacote3"
+)
+```
+
+O uso de pacotes é útil por vários motivos, entre eles:
+
+* Menor chance de duplicidade de nomes.
+* Organização e reuso do código.
+* Ele acelera o compilador, exigindo apenas a recompilação de partes menores de um programa.
+
+### Criação de Pacotes
+
+Todos os pacotes são listados na pasta `~/go/src`, e se quiser criar um pacote, é lá onde você deve criá-lo.
+
+Ao criar um novo pacote, é recomendado que você crie uma pasta com o mesmo nome do pacote. Dentro dessa pasta, você pode escrever o arquivo com as funcionalidades do pacote.
+
+**Exemplo:**
+
+``` go
+// Pacote em ~\go\src\meupacote\main.go
+package olamundo
+
+import "fmt"
+
+func OlaMundo() {
+    fmt.Println("Olá, Mundo!")
+}
+```
+
+``` go
+// Arquivo principal
+package main
+
+import "olamundo"
+
+func main() {
+    olamundo.OlaMundo()
+    // Output => Olá, Mundo!
+}
+```
+
+É importante observar que o nome pelo qual o pacote é importado é o mesmo que foi definido após a palavra-chave package no início do arquivo.
+
+> **NOTA:** Se o pacote estiver em uma subpasta, você deve especificar o caminho completo ao importá-lo. Por exemplo: import "meuspacotes/pacote1". Isso garante que o compilador encontre o pacote corretamente.
+
+### Biblioteca Padrão
+
+#### Pacote `math/rand`
+
+O pacote **`math/rand`** faz parte da biblioteca padrão e é usado para gerar números pseudoaleatórios considerando uma semente.
+
+**As principais funções são:**
+
+* **'`Float64()`'**: Gera um número float aleatório no intervalo [0, 1).
+* **'`Int()`'**: Gera um número inteiro aleatório.
+* **'`Intn()`'**: Gera um número inteiro aleatório no intervalo [0, n).
+* **'`Seed()`'**: Inicializa a fonte de números aleatórios com um valor semente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "math/rand"
+)
+
+func main() {
+    // Números aleatórios
+    randomFloat := rand.Float64()
+    randomInt := rand.Intn(10)
+
+    // Imprime os resultados
+    fmt.Println(randomFloat)
+    fmt.Println(randomInt)
+}
+```
+
+> **OBS.:** Números gerados pelo pacote `math/rand` não são adequados em situações que exigem segurança, como criptografia. Nesses casos, use `crypto/rand`.
+
+#### Pacote `time`
+
+O pacote **`time`** faz parte da biblioteca padrão e possui diversas funcionalidades para trabalhar com informações relacionadas ao tempo, como funções para representar e manipular datas, horários e durações.
+
+##### Constantes de `time`
 
 **Constantes que representam tempo:**
 
@@ -4079,7 +5610,7 @@ O pacote **`time`** possui diversas funcionalidades para trabalhar com informaç
 * **'`November`'**: Representa novembro.
 * **'`December`'**: Representa dezembro.
 
-### Datas e Horários
+##### Datas e Horários
 
 Para representar uma datas e horários, são usadas funções.
 
@@ -4313,7 +5844,7 @@ Para representar uma datas e horários, são usadas funções.
     }
     ```
 
-#### Comparação entre Datas
+###### Comparação entre Datas
 
 As funções **`Equal()`**, **`Before()`** e **`After()`** verificam se `self` e igual, anterior ou posterior a uma dada data, retornando um valor booleano.
 
@@ -4343,7 +5874,7 @@ func main() {
 }
 ```
 
-### Duração
+##### Duração
 
 Com a função `Duration()` do pacote `time` é possível expressar durações para impressão ou como argumentos.
 
@@ -4364,7 +5895,7 @@ func main() {
 }
 ```
 
-### Espera na Execução
+##### Espera na Execução
 
 A função **`Sleep()`** do pacote `time` permite pausar a execução do programa por um determinado tempo.
 
@@ -4396,7 +5927,7 @@ func main() {
 }
 ```
 
-### Temporizadores
+##### Temporizadores
 
 Um *timer* é usado para agendar a execução de uma determinada ação após um certo período de tempo.
 
@@ -4421,7 +5952,7 @@ func main() {
 }
 ```
 
-### Tickers
+##### Tickers
 
 Um ticker é semelhante a um temporizador, mas ele dispara repetidamente em intervalos regulares até ser parado.
 
@@ -4455,6 +5986,448 @@ func main() {
 ```
 
 > **NOTA:** Lembre-se de parar o ticker quando não for mais necessário para evitar vazamentos de recursos. Para parar um ticker, use o método **`Stop()`** no ticker.
+
+#### Pacote `os`
+
+O pacote **`os`** possui ferramentas para executar funcionalidades do sistema.
+
+Há três pacotes em `os`:
+
+* **'`exec`'**: Executa comandos externos.
+* **'`signal`'**: Implementa acesso a sinais recebidos.
+* **'`user`'**: Permite pesquisas de contas de usuário por nome ou ID.
+
+**Funções:**
+
+* **'`Exit()`'**: Encerra o programa. Pode receber um inteiro como argumento, que simboliza o tipo de saída (`0` indica sucesso e não imprime o tipo de saída).
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "os"
+    )
+
+    func main() {
+        fmt.Println("Olá, Mundo!")
+        os.Exit(0) // Programa encerra aqui
+        fmt.Println("Olá, Go!")
+    }
+    ```
+
+* **'`Expand()`'**: Substitui `${var}` ou `$var` na string se baseando em uma função de mapeamento.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "os"
+    )
+
+    func main() {
+        x := func(substituirNome string) string {
+            switch substituirNome {
+            case "MSG1":
+                return "Olá"
+            case "MSG2":
+                return "Mundo"
+            }
+
+            return ""
+        }
+        fmt.Println(os.Expand("${MSG1}, $MSG2!", x))
+        // Output => Olá, Mundo!
+    }
+    ```
+
+* **'`Setenv()`'**: Define as chaves e valores no ambiente.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "os"
+    )
+
+    func main() {
+        os.Setenv("MSG1", "Olá")
+        os.Setenv("MSG2", "Mundo")
+    }
+    ```
+
+* **'`Getenv()`'**: Retorna o valor da chave especificada.
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    os.Setenv("MSG1", "Olá")
+    os.Setenv("MSG2", "Mundo")
+
+    fmt.Println(os.Getenv("MSG1")) // Output => Olá
+    fmt.Println(os.Getenv("MSG2")) // Output => Mundo
+}
+```
+
+* **'`ExpandEnv()`'**: Substitui `${var}` ou `$var` na string com base nos valores das chaves definidas no ambiente.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "os"
+    )
+
+    func main() {
+        os.Setenv("MSG1", "Olá")
+        os.Setenv("MSG2", "Mundo")
+
+        fmt.Println(os.ExpandEnv("${MSG1}, $MSG2!"))
+        // Output => Olá, Mundo!
+    }
+    ```
+
+##### Manipulação de Arquivos
+
+O pacote **`os`** oferece funcionalidades para trabalhar com arquivos.
+
+###### Criar Arquivos
+
+A função **`os.Create()`** recebe como argumento um caminho, criando-o caso não exista, e sobrescrevendo-o, caso exista.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Cria um arquivo chamado `file.txt`
+    file, err := os.Create("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+
+    // Imprime o nome do arquivo criado
+    fmt.Println(file.Name()) // Output => file.txt
+}
+```
+
+###### Excluir Arquivos
+
+A função **`os.Remove()`** é usada para excluir um arquivo ou pasta.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    // Exclui o arquivo `exemplo.txt` na pasta `caminho`
+    os.Remove("caminho/exemplo.txt")
+}
+```
+
+Para excluir todo o caminho, mesmo que seja uma pasta com outros arquivos, é usado **`os.RemoveAll()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    // Exclui a pasta `exemplo` junto de seus arquivos
+    os.RemoveAll("caminho/exemplo")
+}
+```
+
+###### Renomear (mover) Arquivos
+
+A função **`os.Rename()`** move um arquivo ou pasta para um outro diretório.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    // Move o arquivo `file.txt` para um novo caminho
+    os.Rename("file.txt", "novo/caminho/file.txt")
+}
+```
+
+###### Ler Arquivos
+
+Para ler arquivos, pode ser usada a função **`os.ReadFile()`**, que recebe o caminho do arquivo como argumento.
+
+**Exemplo:**
+
+``` txt
+Olá, Mundo!
+Olá, Go!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    data, err := os.ReadFile("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+
+    os.Stdout.Write(data)
+    /* Output:
+    Olá, Mundo!
+    Olá, Go!
+    */
+}
+```
+
+###### Escrever em Arquivos
+
+Para escrever em arquivos, é usada a função **`os.WriteFile()`**, que recebe como argumentos:
+
+1. **'`name`'**: Arquivo.
+1. **'`data`'**: Dados que serão escritos.
+1. **'`perm`'**: Permissão do arquivo.
+
+Antes de escrever no arquivo, ele é truncado, mas sem alterar as permissões.
+
+Se o arquivo não existir, ele será criado com as permissões definidas em `perm`.
+
+> **NOTA:** Se ocorrer algum erro durante a operação de escrita, o arquivo pode ficar em um estado parcialmente escrito.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    err := os.WriteFile("file.txt", []byte("Olá, Mundo!"), 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+
+    // Imprime o arquivo
+    data, err := os.ReadFile("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+    fmt.Printf("%s\n", string(data)) // Output => Olá, Mundo!
+}
+```
+
+###### Abrir Arquivos
+
+A função **`os.Open()`** abre o arquivo especificado para leitura. O arquivo aberto terá o modo **`O_RDONLY`**.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+Olá, Mundo!
+Olá, Go!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.Open("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Imprime o conteúdo do arquivo
+    data := make([]byte, 1024)
+    n, err := file.Read(data)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+
+    fmt.Printf("%s\n", data[:n])
+    /* Output:
+    Olá, Mundo!
+    Olá, Go!
+    */
+}
+```
+
+Como visto acima, é usado o método **`Read()`** para ler o conteúdo do arquivo.
+
+Outra maneira de abrir arquivos, é usando a função **`os.OpenFile()`**, que funciona como `os.Open()`, porém pede que especifique o flag e a permissão para abrir o arquivo.
+
+Os flags para abrir arquivos são representados por constantes:
+
+* **'`O_RDONLY`'**: Apenas leitura.
+* **'`O_WRONLY`'**: Apenas escrita.
+* **'`O_RDWR`'**: Leitura e escrita.
+* **'`O_APPEND`'**: Adicionar dados no arquivo quando escrever.
+* **'`O_CREATE`'**: Criar um novo arquivo se o nome não existir.
+* **'`O_TRUNC`'**: Truncar o arquivo ao abrí-lo.
+
+> **NOTA:** Ao abrir um arquivo, não se esqueça de fechá-lo com o método **`Close()`**. Para garantir o fechamento, é utilizado `defer`.
+
+O método **`Write()`** **escreve no arquivo**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.OpenFile("file.txt", os.O_APPEND, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Escreve "Olá, Go!" no arquivo
+    n, err := file.Write([]byte("\nOlá, Go!"))
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println("Bytes gravados:", n)
+}
+```
+
+O método **`os.WriteAt()`** é usado para escrever no arquivo a partir de um determinado byte.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+____, Mundo!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.OpenFile("file.txt", os.O_WRONLY, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Escreve substitui `____` por `Olá` no arquivo
+    n, err := file.WriteAt([]byte("Olá"), 0)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println("Bytes gravados:", n)
+}
+```
+
+O arquivo de texto será "Olá, Mundo!".
+
+Outro método para escrever em arquivos é `os.WriteString()`, que grava no arquivo a string especificada.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+Olá, Mundo!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.OpenFile("file.txt", os.O_APPEND, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Escreve "Olá, Go!" no arquivo
+    n, err := file.WriteString("\nOlá, Go!")
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println("Bytes gravados:", n)
+}
+```
+
+##### Pacote `os/exec`
+
+O pacote **`exec`** executa comandos externos.
+
+##### Pacote `os/signal`
+
+##### Pacote `os/user`
 
 ## Concorrência
 
@@ -4524,7 +6497,7 @@ func main() {
 
 Os canais são usados para a comunicação entre goroutines. Eles permitem que as goroutines enviem e recebam dados de forma segura e coordenada.
 
-Um canal é declarado usando **`make`** e a função **`chan`**. A comunicação é feita através do operador **`<-`**, que pode ser usado para enviar e receber dados no canal.
+Um canal é declarado usando **`make`** e a palavra-chave **`chan`**. A comunicação é feita através do operador **`<-`**, que pode ser usado para enviar e receber dados no canal.
 
 **Exemplo:**
 
@@ -4645,19 +6618,9 @@ func main() {
 
 No exemplo acima, a goroutine `ImprimirContagem()` imprime o valor do canal depois de verificar se o canal foi fechado por meio da variável `ok`, atribuída por meio do próprio canal junto do valor desse canal. Se não houver nenhuma resposta por 2 segundos, é executado o segundo caso.
 
-## Rand
+### Pacote `context`
 
-O pacote **`math/rand`** é usado para gerar números pseudoaleatórios considerando uma semente.
-
-**As principais funções são:**
-
-* **'`Float64()`'**: Gera um número float aleatório no intervalo [0, 1).
-
-* **'`Int()`'**: Gera um número inteiro aleatório.
-
-* **'`Intn()`'**: Gera um número inteiro aleatório no intervalo [0, n).
-
-* **'`Seed()`'**: Inicializa a fonte de números aleatórios com um valor semente.
+No pacote **`context`** é definido o tipo `Context`, que oferece funcionalidades para calcelamento de sinais, carregar prazos e outras.
 
 **Exemplo:**
 
@@ -4666,21 +6629,38 @@ package main
 
 import (
     "fmt"
-    "math/rand"
+    "context"
+    "time"
 )
 
 func main() {
-    // Números aleatórios
-    randomFloat := rand.Float64()
-    randomInt := rand.Intn(10)
+    // Contexto com cancelamento de 1 segundo
+    ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 
-    // Imprime os resultados
-    fmt.Println(randomFloat)
-    fmt.Println(randomInt)
+    // Garante que o cancelamento seja chamado para liberar recursos
+    defer cancel()
+
+    // Executa uma operação assíncrona
+    go func (ctx context.Context) {
+        // Simula uma operação que leva algum tempo
+        time.Sleep(2 * time.Second)
+
+        // Verifica se o contexto foi cancelado
+        select {
+        case <- ctx.Done():
+            fmt.Println("Operação cancelada:", ctx.Err())
+        default:
+            fmt.Println("Operação concluída com sucesso")
+        }
+    }(ctx)
+
+    // Arguarda o cancelamento do contexto ou a conclusão da goroutine
+    <-ctx.Done()
+
+    // Informa o término do programa
+    fmt.Println("Programa encerrado")
 }
 ```
-
-> **OBS.:** Números gerados pelo pacote `math/rand` não são adequados em situações que exigem segurança, como criptografia. Nesses casos, use `crypto/rand`.
 
 ## Expressões Regulares
 
@@ -5039,3 +7019,32 @@ func main() {
         fmt.Println(replace) // Output => Olá, Go!
     }
     ```
+
+## Módulos
+
+Um módulo é uma coleção de pacotes definidos no arquivo `god.mod`.
+
+O arquivo `go.mod` define o nome do módulo (geralmente o caminho do repositório Git), as versões das dependências usadas pelo módulo e quaisquer outras configurações relacionadas ao módulo.
+
+O arquivo **`go.sum`** é usado para registrar as sp,as de verificação de todos os módulos e suas dependências. Isso garante que, ao baixar dependências, seja buscadas exatamente as mesmas versões que foram usadas durante o desenvolvimento e evita a introdução de dependências não verificadas.
+
+Para **adicionar novas dependências**, é usado **`go get`** seguido do caminho do pacote ou módulo desejado. Isso atualizará automaticamente o arquivo `go.mod` com a nova dependência e seu número de versão.
+
+Os módulos suportam versionamento semântico, permitindo especificar intervalos de versões para as dependências no arquivo `go.mod`. Isso oferece flexibilidade para garantir o uso apenas de versões compatíveis com as dependências.
+
+***Vendoring*** é suportado, que é a prática de incluir todas as dependências diretamente no diretório do projeto, em vez de depender do sistema de arquivos global. Isso é útil para garantir a portabilidade e a reproducibilidade do código, especialmente em ambientes de implantação.
+
+### Criar um Módulo
+
+**As propriedades são:**
+
+* O caminho do diretório atual. Isso se refere a localização de onde o módulo pode ser baixado pelas ferramentas Go.
+* A versão mínima de Go necessária para o módulo atual.
+* A lista das versões mínimas dos outros módulos necessários para o módulo atual.
+* (Opcional) Instruções para substituir um módulo necessário com outra versão do módulo ou um diretório local, ou excluir uma versão específica de um módulo necessário.
+
+Para gerar o arquivo `go.mod`, execute:
+
+``` bash
+go mod init exemplo/modulo
+```

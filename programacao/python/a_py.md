@@ -2321,6 +2321,39 @@ somar(5)
 
 A função **`somar()`** no exemplo acima imprime a soma do valor dado pelo seus antecessores até chegar a 0.
 
+### Lambdas
+
+Uma lambda é uma função anônima pequena. Uma lambda pode receber vários argumentos, porém é escrita com apenas uma expressão.
+
+**Sintaxe:**
+
+``` py
+lambda argumentos : expressao
+```
+
+**Exemplo:**
+
+``` py
+my_lambda = lambda x, y : x + y
+print(my_lambda(5, 2))
+# Output => 7
+```
+
+Lambdas podem ser retornadas em funções.
+
+**Exemplo:**
+
+``` py
+def my_function(num):
+    return lambda x : x * num
+
+my_lambda = my_function(5)
+print(my_lambda(3))
+# Output => 15
+```
+
+No exemplo acima, a função `my_function()` retorna uma lambda que retorna um dado valor multiplicado por 5.
+
 ## Tratamento de Erros
 
 Os erros são chamados de exceções, e podem ocorrer de inúmeras maneiras, como erro de sintaxe, erro de valor - como passar uma string para uma função que aceita apenas valores inteiros - e diversos outros.
@@ -2373,6 +2406,146 @@ def divisao(x, y):
 print(divisao(5, 2))  # Output => 2.5
 print(divisao(3, 0))  # Output => ERRO: Não é possível dividir por 0
 print(divisao(9, -1)) # Output => -9.0
+```
+
+## Classes
+
+Uma classe é basicamente um modelo para um objeto.
+
+**Sintaxe:**
+
+``` py
+class MyClass:
+    # Declarações da classe
+```
+
+> **NOTA:** Para nomear as classes, geralmente é usado CamelCase.
+
+**Exemplo:**
+
+``` py
+class MyClass:
+    x = 5
+    y = 2
+
+obj = MyClass
+print(MyClass.x + MyClass.y)
+# Output => 7
+```
+
+No exemplo acima, `obj` é uma instância da classe `MyClass`. Essa instância tem acesso às variáveis `x` e `y` declaradas na classe, e acessa elas por meio de notação de ponto.
+
+### Métodos
+
+Métodos são funções que geralmente executam no contexto de uma classe.
+
+Para declarar um método, basta declarar uma função dentro de uma classe.
+
+**Exemplo:**
+
+``` py
+# Classe que possui métodos
+class MyClass:
+    # Método que retorna a soma de dois números
+    def sum(self, x, y):
+        return x + y
+
+    # Método que retorna o dobro de um número
+    def double(self, x):
+        return x * 2
+
+# Cria uma instância da classe
+my_instance = MyClass()
+
+# Imprime o resultado dos métodos
+print(my_instance.sum(5, 2)) # Output => 7
+print(my_instance.double(9)) # Output => 18
+```
+
+Como primeiro parâmetro, é definido `self`, que referência à própria classe.
+
+Se `self` não for definido como parâmetro, o método se torna **estático**, podendo ser acessado diretamente pela classe, e não por uma instância dela. Isso significa que o método não pode acessar os atributos da classe.
+
+**Exemplo:**
+
+``` py
+# Classe que possui métodos
+class MyClass:
+    # Método que retorna a soma de dois números
+    def sum(x, y):
+        return x + y
+
+    # Método que retorna o dobro de um número
+    def double(x):
+        return x * 2
+
+# Imprime o resultado dos métodos
+print(MyClass.sum(5, 2)) # Output => 7
+print(MyClass.double(9)) # Output => 18
+```
+
+Perceba que não há uma instância da classe. Os métodos são simplesmente acessados diretamente pela classe.
+
+## Atributos
+
+Atributos de um objeto são valores definidos assim que eles são criados. Esses valores são usados como argumentos em métodos da classe e podem inclusive, ser acessados de fora dela por meio de notação de ponto.
+
+os atributos são definidas assim que uma instância é criada quando o método especial **`__init()__`** está definido na classe.
+
+Quando **`__init__()`** é definido em uma classe, é obrigatório passar como argumentos os parâmetros desse método na criação de instâncias da classe.
+
+**Exemplo:**
+
+``` py
+# Classe que possui métodos
+class MyClass:
+    # Adquire os atributos
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    # Soma o valor dos atributos
+    def sum(self):
+        return self.x + self.y
+
+    # Multiplica o valor dos atributos
+    def mult(self):
+        return self.x * self.y
+
+# Instância da classe
+obj = MyClass(5, 2)
+
+# Imprime o resultado dos métodos
+print(obj.sum())    # Output => 7
+print(obj.mult())   # Output => 10
+```
+
+os atributos de uma classe podem ser alteradas.
+
+**Exemplo:**
+
+``` py
+# Classe que possui métodos
+class MyClass:
+    # Adquire os atributos
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+# Instância da classe
+obj = MyClass(5, 2)
+
+# Imprime os atributos antes de alterá-las
+print(obj.x) # Output => 5
+print(obj.y) # Output => 2
+
+# Altera os atributos
+obj.x = 10
+obj.y = 23
+
+# Imprime os atributos após as alterações
+print(obj.x) # Output => 10
+print(obj.y) # Output => 23
 ```
 
 ## Manipulação de Arquivos
