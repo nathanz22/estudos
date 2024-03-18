@@ -80,10 +80,10 @@ Variáveis são declaradas com a palavra-chave **`var`**, seguida do nome e tipo
 var nomeVariavel tipo = valor
 ```
 
-**Os tipos de variáveis são:**
+**Os principais tipos de variáveis são:**
 
 * **'`int`'**: Armazena úmeros inteiros.
-* **'`float32`'**: Armazena números de ponto flutuante.
+* **'`float64`'**: Armazena números de ponto flutuante.
 * **'`string`'**: Armazenam textos.
 * **'`bool`'**: Armazenam valores booleanos (`true` e `false`).
 
@@ -91,7 +91,7 @@ var nomeVariavel tipo = valor
 
 ``` go
 var myInt int = 5
-var myFloat float32 = 3.14
+var myFloat float64 = 3.14
 var myStr string = "Olá, Mundo!"
 var myBool bool = true
 ```
@@ -101,7 +101,7 @@ Não é necessariamente obrigatório inicializar uma variável assim que declar�
 ``` go
 // Declara as variáveis
 var myInt int
-var myFloat float32
+var myFloat float64
 var myStr string
 var myBool bool
 
@@ -124,7 +124,7 @@ nomeVariável := valor
 
 Perceba que não há necessidade de escrever `var` ao início da declaração.
 
-> **OBS.:** Ao usar a tipagem automática, é obrigatória inicializar a variável no mesmo momento da declaração.
+> **OBS.:** Ao usar a tipagem automática, é obrigatório inicializar a variável no mesmo momento da declaração.
 
 **Exemplo:**
 
@@ -1076,7 +1076,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
     }
     ```
 
-* **'`Reset()'**: Redefine o buffer, tornando-o vazio.
+* **'`Reset()`'**: Redefine o buffer, tornando-o vazio.
 
     ``` go
     package main
@@ -3601,7 +3601,7 @@ func main() {
 
 ### Loop com `range`
 
-Para iterar sobre strings, arrays, slices, maps ou canais, são declaradas variáveis de índice e valor junto à declaração `for`.
+Para iterar sobre strings, arrays, slices, map sou canais, são declaradas variáveis de índice e valor junto à declaração `for`.
 
 **Sintaxe:**
 
@@ -5876,7 +5876,7 @@ func main() {
 
 ##### Duração
 
-Com a função `Duration()` do pacote `time` é possível expressar durações para impressão ou como argumentos.
+Com a função **`Duration()`** do pacote **`time`** é possível expressar durações para impressão ou como argumentos.
 
 **Exemplo:**
 
@@ -6421,14 +6421,6 @@ func main() {
 }
 ```
 
-##### Pacote `os/exec`
-
-O pacote **`exec`** executa comandos externos.
-
-##### Pacote `os/signal`
-
-##### Pacote `os/user`
-
 ## Concorrência
 
 Concorrência refere-se à execução simultânea de tarefas ou processos independentes, onde a ordem de execução não é prioridade.
@@ -6618,9 +6610,46 @@ func main() {
 
 No exemplo acima, a goroutine `ImprimirContagem()` imprime o valor do canal depois de verificar se o canal foi fechado por meio da variável `ok`, atribuída por meio do próprio canal junto do valor desse canal. Se não houver nenhuma resposta por 2 segundos, é executado o segundo caso.
 
-### Pacote `context`
+### Context
 
-No pacote **`context`** é definido o tipo `Context`, que oferece funcionalidades para calcelamento de sinais, carregar prazos e outras.
+O pacote **`context`** fornece ferramentas para lidar cancelamento de operações e compartilhamento de valores entre goroutines.
+
+Um contexto permito passar sinais de cancelamento e prazos de execução para goroutines de maneira coordenada e segura, além de permitir transmitir valores específicos para uma árvore de chamadas de funções, como valores de autenticação, limites de tempo ou cancelamento, e outras informações de rastreamento.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "context"
+    "fmt"
+    "time"
+)
+
+func main() {
+    // Criando um contexto com cancelamento após 1 segundo
+    ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+    defer cancel() // Garante que o contexto seja cancelado quando a função main sair
+
+    // Executando uma operação em uma goroutine com o contexto criado
+    go func(ctx context.Context) {
+        select {
+        case <-time.After(2 * time.Second):
+            fmt.Println("Operação concluída com sucesso.")
+        case <-ctx.Done(): // Verifica se o contexto foi cancelado
+            fmt.Println("Operação cancelada:", ctx.Err())
+        }
+    }(ctx)
+
+    // Esperando alguns segundos para ver a saída
+    time.Sleep(3 * time.Second)
+}
+```
+
+### Data Races
+
+Uma data race é quando goroutines tentam acessar simultaneamente um mesmo dado, podendo uma alterar esse dado de forma com que a outra goroutine funcione de maneira inesperada.
 
 **Exemplo:**
 
@@ -6629,36 +6658,291 @@ package main
 
 import (
     "fmt"
-    "context"
     "time"
 )
 
+func IsEven(n int) bool {
+    return n % 2 == 0
+}
+
 func main() {
-    // Contexto com cancelamento de 1 segundo
-    ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+    n := 0
 
-    // Garante que o cancelamento seja chamado para liberar recursos
-    defer cancel()
-
-    // Executa uma operação assíncrona
-    go func (ctx context.Context) {
-        // Simula uma operação que leva algum tempo
-        time.Sleep(2 * time.Second)
-
-        // Verifica se o contexto foi cancelado
-        select {
-        case <- ctx.Done():
-            fmt.Println("Operação cancelada:", ctx.Err())
-        default:
-            fmt.Println("Operação concluída com sucesso")
+    // goroutine 1
+    go func() {
+        result := IsEven(n)
+        time.Sleep(5 * time.Millisecond)
+        if result {
+            fmt.Println(n, "é par")
+            return
         }
-    }(ctx)
+        fmt.Println(n, "é ímpar")
+    }()
 
-    // Arguarda o cancelamento do contexto ou a conclusão da goroutine
-    <-ctx.Done()
+    // goroutine 2
+    go func() {
+        n++
+    }()
 
-    // Informa o término do programa
-    fmt.Println("Programa encerrado")
+    time.Sleep(time.Second)
+}
+```
+
+**Analisando o código acima:**
+
+1. A primeira goroutine armazena na variável `result` se o valor de `n` - que é inicialmente 0 - é par.
+1. Após armazenar o resultado em `result`, é feita uma pausa com `time.Sleep()`.
+1. Durante essa pausa, a segunda goroutine executa, incrementando a variável `n`, tornando seu valor igual a 1.
+1. De volta à primeira goroutine, o tempo da pausa termina, e então é verificado o resultado da verificação.
+1. É impresso que "1 é par" porque ao imprimir a mensagem a variável `n` não possui o mesmo valor de antes da pausa, já que foi incrementada durante essa pausa.
+
+Basicamente, o resultado depende de qual das ações é executada primeiro.
+
+**Um exemplo mais simples:**
+
+``` go
+package main
+
+import "fmt"
+
+func Num() int {
+    var n int
+    go func() {
+        n = 13
+    }()
+
+    return n
+}
+
+func main() {
+    fmt.Println(Num())
+    // Output => 0
+}
+```
+
+#### Correção de Data Races
+
+Há mais de uma solução para data races, tendo todas elas em comum o acesso à variável e bloqueio caso seja escrito nela.
+
+**As soluções são:**
+
+* Bloqueio com Waitgroups
+* Bloqueio com canais
+* Com mutex
+
+##### Bloqueio com Waitgroups
+
+Bloqueia o acesso até que a operação de escrita tenha sido compleatada.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func Num() int {
+    // Valor que será retornado
+    var n int
+
+    // Variável waitgroup
+    var wg sync.WaitGroup
+    wg.Add(1)
+
+    go func() {
+        n = 13
+        // Indica o fim da escrita
+        wg.Done()
+    }()
+    // Espera a escrita ser concluída
+    wg.Wait()
+
+    // Retorna o valor
+    return n
+}
+
+func main() {
+    fmt.Println(Num())
+    // Output => 13
+}
+```
+
+##### Bloqueio com Canais
+
+É feito o uso de canais para bloquear a variável.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Num() int {
+    // Valor que será retornado
+    var n int
+
+    // Canal
+    done := make(chan struct{})
+
+    go func() {
+        n = 13
+        // Indica o fim da escrita
+        done <- struct{}{}
+    }()
+    // Espera a escrita ser concluída
+    <-done
+
+    // Retorna o valor
+    return n
+}
+
+func main() {
+    fmt.Println(Num())
+    // Output => 13
+}
+```
+
+**Outra possibilidade ao usar canais, é retornar o canal em si:**
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Num() chan int {
+    // Canal
+    c := make(chan int)
+
+    go func() {
+        // Atribui o valor ao canal
+        c <- 13
+    }()
+    // Retorna o canal
+    return c
+}
+
+func main() {
+    x := <- Num()
+    fmt.Println(x)
+    // Output => 13
+}
+```
+
+##### Mutex
+
+São eficazes quando é preciso garantir a exclusão simultânea para proteger dados compartilhados contra race conditions.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+type SafeNumber struct {
+    n           int
+    m           sync.Mutex
+    initialized bool
+}
+
+func (x *SafeNumber) Set(n int) {
+    x.m.Lock()
+    defer x.m.Unlock()
+    x.n = n
+    x.initialized = true
+}
+
+func (x *SafeNumber) Get() (int, bool) {
+    x.m.Lock()
+    defer x.m.Unlock()
+    if !x.initialized {
+        return 0, false
+    }
+    return x.n, true
+}
+
+func Num() int {
+    x := &SafeNumber{}
+
+    // Inicia a goroutine que define o valor de x
+    go x.Set(13)
+
+    // Aguarda até que o valor de x seja definido
+    for {
+        if n, ok := x.Get(); ok {
+            return n
+        }
+    }
+}
+
+func main() {
+    fmt.Println(Num())
+    // Saída esperada: 13
+}
+```
+
+## Once
+
+O pacote **`sync`** fornece o tipo **`Once`**, que é usado para executar uma função apenas uma vez, independentemente de quantas vezes ela for chamada após a primeira. Isso é feito por meio do método **`Do()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+    var once sync.Once
+
+    function := func() {
+        fmt.Println("Hello, World!")
+    }
+
+    once.Do(function) // Output => Hello, World!
+    once.Do(function) // Não imprime
+}
+```
+
+No exemplo acima, é impresso "Hello, World!" apenas uma vez, mesmo que seja chamado duas vezes a partir da instância do tipo `Once`.
+
+Mesmo se passado outra função em uma chamada posterior, ela não executada.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+    var once sync.Once
+
+    function1 := func() {
+        fmt.Println("Hello, World!")
+    }
+
+    function2 := func() {
+        fmt.Println("Hello, Go!")
+    }
+
+    once.Do(function1) // Output => Hello, World!
+    once.Do(function2) // Não imprime
 }
 ```
 
@@ -7048,3 +7332,110 @@ Para gerar o arquivo `go.mod`, execute:
 ``` bash
 go mod init exemplo/modulo
 ```
+
+## JSON
+
+Para trabalhar com JSON em Go, é usado o pacote **`encoding/json`**, que possui ferramentas para codificar e decodificar JSON.
+
+### Codificar JSON
+
+Para **codificar dados JSON**, é usada a função **`json.Marshal()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Foo struct {
+    Msg    string
+    Number int
+}
+
+func main() {
+    f := Foo{"Hello", 13}
+    b, err := json.Marshal(f)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(b)
+    fmt.Println(string(b))
+
+    /* Output:
+    [123 34 77 115 103 34 58 34 72 101 108 108 111 34 44 34 78 117 109 98 101 114 34 58 49 51 125]
+    {"Msg":"Hello","Number":13}
+    */
+}
+```
+
+No exemplo acima, uma instância (`f`) da estrutura `Foo` é criada com os valores "Hello", para `Msg` e 13 para `Number`, e com essa instâcia é feita uma codificação para JSON, sendo o resultado um slice de bytes.
+
+> **NOTA:** Os campos da estrutura só serão exportados corretamente se a primeira letra for maiúscula, assim como no exemplo anterior.
+
+### Decodificar JSON
+
+Para decodificar um JSON, é usada a função **`json.Unmarshal()`**, que recebe dois argumentos:
+
+1. JSON em bytes que será decodificado.
+1. Endereço de memória da instância da estrutura que receberá a decodificação.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Foo struct {
+    Msg    string
+    Number int
+}
+
+func main() {
+    var f Foo
+    b := `{"Msg":"Hello","Number":13}`
+    err := json.Unmarshal([]byte(b), &f)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(f.Msg)    // Output => "Hello"
+    fmt.Println(f.Number) // Output => 13
+}
+```
+
+#### Decodificação Arbitrária
+
+Quando não se tem conhecimento dos dados de um JSON, pode-se usar uma interface vazia para decodificar ele.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+func main() {
+    var f interface{}
+    b := `{"Msg":"Hello","Number":13}`
+    err := json.Unmarshal([]byte(b), &f)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(f) // Output => map[Msg:Hello Number:13]
+}
+```
+
+Nesse caso, é retornado um map ao invés de uma estrutura.
