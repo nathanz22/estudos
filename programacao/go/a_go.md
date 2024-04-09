@@ -4341,6 +4341,40 @@ func main() {
 }
 ```
 
+### Funções Genéricas
+
+São funções que podem receber argumentos genéricos, ou seja, de qualquer tipo. Nessas funções, o tipo genérico será definido em tempo de compilação, de acordo com o argumento passado.
+
+**Sintaxe:**
+
+``` go
+func Foo[T any](x T) {
+    // Bloco da função
+}
+```
+
+Aqui, `T` é do tipo `any`, que pode ser qualquer outro tipo, e por conta disso, o parâmetro `x` pode receber um argumento de qualquer tipo.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Tipo[T any](x T) string {
+    return fmt.Sprintf("%T", x)
+}
+
+func main() {
+    fmt.Println(Tipo("Hello"))        // Output => string
+    fmt.Println(Tipo(5))              // Output => int
+    fmt.Println(Tipo(23.7))           // Output => float64
+    fmt.Println(Tipo(true))           // Output => bool
+    fmt.Println(Tipo([]int{1, 2, 3})) // Output => []int
+}
+```
+
 ## Instrução `goto`
 
 A declaração **`goto`** é usada para executar o código de uma label.
@@ -7439,3 +7473,9 @@ func main() {
 ```
 
 Nesse caso, é retornado um map ao invés de uma estrutura.
+
+## CLIs
+
+Command line interfaces (CLIs), diferente de graphical user interfaces (GUIs), são apenas texto.
+
+CLIs permitem tempos de compilação rápidos para criar programas que iniciam rapidamente e rodam em qualquer sistema.
