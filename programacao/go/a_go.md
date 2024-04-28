@@ -2,77 +2,127 @@
 
 ## Sintaxe Básica
 
-Um arquivo Go é composto pelas seguintes partes:
+Um código Go possui três áreas principais.
 
-* Declaração de pacotes
-* Importação de Pacotes
-* Funções
-* Declarações e Expressões
+1. Declaração do pacote
+1. Importação de pacotes
+1. Funções
 
 **Exemplo:**
 
-``` go
+``` Go
 package main
 
 import "fmt"
 
 func main() {
-    fmt.Println("Olá, Mundo!")
+  fmt.Println("Hello, World!")
 }
 ```
 
-No exemplo acima:
+A função **`main()`** é chamada assim que o código é executado. Essa função só pode existir em um arquivo Go se o arquivo for declarado como parte do pacote `main`, ou ele simplesmente não irá executar.
 
-1. **'`package main`'**: A palavra-chave `package` é usada para definir o pacote do programa, no caso, no pacote `main`.
+Na função `main()` acima, é executado `fmt.Println("Hello, World!)`, que imprime "Hello, World!" utilizando a função `Println()`, que por sua vez pertence ao pacote **`fmt`**.
 
-1. **'`import "fmt"`'**: Importa o pacote `fmt`, no caso, usado para impressão.
+**Para rodar o código:**
 
-1. **'`func main() {}`'**: É uma função, e tudo entre as chaves faz parte dela. É uma função especial, pois todo seu conteúdo é executado assim que o programa for executado.
-
-1. **'`fmt.Println()`'**: Função do pacote `fmt`, usada para imprimir um texto. No caso, ela imprimiu "Olá, Mundo!".
-
-### Declarações
-
-As declarações são separadas por uma quebra de linha ou por um **`;`** (ponto e vírgula).
-
-Então, é possível fazer várias declarações em apenas uma linha:
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Olá, Mundo!"); fmt.Println("Olá, Go!")
-}
-/* Output =>
-Olá, Mundo!
-Olá, Go!
-*/
+``` bash
+go run diretorio_do_arquivo.go
 ```
+
+> **NOTA:** Se o arquivo de dependência (`.mod`) existir, é possível executar o código com **`go run .`** caso ele esteja no mesmo diretório.
 
 ### Comentários
 
-Em Go, comentários de uma única linha são representados por **`//`**, enquanto comentários de múltiplas linhas são representados por **`/* */`**.
+Há dois tipos de comentários:
+
+* **`//`**: Comentário de linha única.
+* **`/**/`**: Comentário de múltiplas linhas.
 
 **Exemplo:**
 
 ``` go
-// Comentário de uma linha
+// Isso é um comentário
 
-/*
-Comentário
-de
-Várias
-Linhas
-*/
+/* Isso também
+é um comentário */
+```
+
+### Declarações
+
+Uma declaração em Go é finalizada assim que há uma quebra de linha.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!") // Isso é uma declaração
+    fmt.Println("Hello, Go!")    // Isso é outra declaração
+}
+```
+
+Outra maneira de finalizar declarações é utilizando **`;`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Duas declarações em uma única linha
+    fmt.Println("Foo!"); fmt.Println("Bar!")
+}
 ```
 
 ## Variáveis
 
-Go é uma linguagem de programação com tipagem forte e estática, o que significa que os tipos das variáveis são verificados em tempo de compilação. Isso cria a necessidade de especificar o tipo da variável assim que ela for declarada.
+Variáveis com tipos definidos na declaração são declaradas com a palavra-chave **`var`**, seguida do nome e tipo da variável.
 
-Variáveis são declaradas com a palavra-chave **`var`**, seguida do nome e tipo da variável. O valor da variável é atribuído por meio do operador **`=`**.
+**Sintaxe:**
+
+``` go
+var nomeVariavel tipo
+```
+
+**Os principais tipos são:**
+
+* **'`int`'**: Representa valores inteiros.
+* **'`float32`'** e **`float64`**: Representam valores de ponto flutuante (reais).
+* **'`string`'**: Representa strings.
+* **'`bool`'**: Representa valores booleanos.
+
+Declarar uma variável significa reservar um espaço na memória para um valor que pode mudar durante a execução do programa, e para atribuir ou alterar o valor de uma variável, é usado o operador **`=`**.
+
+> **NOTA:** Ocorrerá um erro caso haja a tentativa de atribuir um valor de tipo diferente da variável. Por exemplo, tentar atribuir uma string a uma variável do tipo `int`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    // Declara a variável `msg` do tipo string
+    var msg string
+
+    // Atribui um valor à variável e a imprime
+    msg = "Hello, World!"
+    fmt.Println(msg) // -> Hello, World!
+
+    // Altera o valor da variável e a imprime
+    msg = "Hello, Go!"
+    fmt.Println(msg) // -> Hello, Go!
+}
+```
+
+É possível também atribuir um valor à variável no mesmo momento de declaração da mesma.
 
 **Sintaxe:**
 
@@ -80,225 +130,291 @@ Variáveis são declaradas com a palavra-chave **`var`**, seguida do nome e tipo
 var nomeVariavel tipo = valor
 ```
 
-**Os principais tipos de variáveis são:**
-
-* **'`int`'**: Armazena úmeros inteiros.
-* **'`float64`'**: Armazena números de ponto flutuante.
-* **'`string`'**: Armazenam textos.
-* **'`bool`'**: Armazenam valores booleanos (`true` e `false`).
-
 **Exemplo:**
 
 ``` go
-var myInt int = 5
-var myFloat float64 = 3.14
-var myStr string = "Olá, Mundo!"
-var myBool bool = true
-```
+package main
 
-Não é necessariamente obrigatório inicializar uma variável assim que declará-la.
+import "fmt"
 
-``` go
-// Declara as variáveis
-var myInt int
-var myFloat float64
-var myStr string
-var myBool bool
-
-// Atribui os valores a elas
-myInt = 5
-myFloat = 3.14
-myStr = "Olá, Mundo!"
-myBool = true
+func main() {
+    var msg string = "Hello, World!"
+    fmt.Println(msg) // -> Hello, World!
+}
 ```
 
 ### Tipagem Automática
 
-Também chamado de "inferência de tipo", a tipagem automática é a capacidade de deduzir automaticamente o tipo de uma variável com base no seu valor atribuído. É feita a partir do operador **`:=`**.
+Também chamada de **inferência de tipo**, a tipagem automática permite declarar uma variável sem especificar o tipo, deixando esse trabalho para o compilador. O compilador irá considerar o valor atribuído à variável para definir o tipo dela.
+
+Para essas variáveis, deve-se atribuir um valor no momento de sua declaração, e além disso, deve ser usado o operador **`:=`**.
 
 **Sintaxe:**
 
 ``` go
-nomeVariável := valor
+nomeVariavel := valor
 ```
 
-Perceba que não há necessidade de escrever `var` ao início da declaração.
+Para alterar o valor dessas variáveis, é usado o operador de atribuição comum (**`=`**).
 
-> **OBS.:** Ao usar a tipagem automática, é obrigatório inicializar a variável no mesmo momento da declaração.
+> **NOTA:** Também é possível declarar variáveis automaticamente tipadas com `var nomeVariavel = valor`, só que menos comum.
 
 **Exemplo:**
 
 ``` go
-myInt := 5
-myFloat := 3.14
-myStr := "Olá, Mundo!"
-myBool := true
+package main
+
+import "fmt"
+
+func main() {
+    // Declara a variável do tipo string (pois seu valor é uma string)
+    msg := "Hello, World!"
+
+    // Imprime a variável
+    fmt.Println(msg) // -> Hello, World!
+
+    // Altera o valor da variável e a imprime
+    msg = "Hello, Go!"
+    fmt.Println(msg) // -> Hello, Go!
+}
 ```
 
-> **OBS.:** Variáveis de tipagem automática não podem ser declaradas fora de funções.
+> **NOTA:** Com exceção da declaração, variáveis comuns e variáveis automaticamente tipadas são exatamente iguais.
+
+### Nomes para Variáveis
+
+Existem algumas regras para nomear variáveis:
+
+* Devem iniciar com uma letra ou `_`.
+* Podem conter caracteres alfanuméricos e underlines (`a-Z`, `0-9`, `_`).
+* São case-sensitive, ou seja, caracteres maiúsculos e minúsculos são diferentes (`x` é diferente de `X`).
+
+Além disso, normalmente as variáveis em Go são escritas em *camelCase*, onde a primeira palavra é escrita inteiramente em letras minúsculas, e a primeira letra das próximas palavras são escritas em maiúsculas.
 
 ### Declaração Múltipla de Variáveis
 
-É possível declarar várias variáveis na mesma linha.
-
-**Exemplo:**
-
-``` go
-var x, y, z int = 2, 5, 8
-```
-
-Os valores podem ser atribuídos posteriormente também.
-
-**Exemplo:**
-
-``` go
-var x, y, z int
-x, y, z = 2, 5, 8
-```
-
-Se não passado o tipo, é possível declarar variáveis de tipos diferentes na mesma linha.
-
-**Exemplo:**
-
-``` go
-var x, y = 5, "Go!"
-```
-
-**O mesmo para variáveis inferidas:**
-
-``` go
-x, y, z := 5, "Go!", 7.2
-```
-
-#### Declaração Múltipla de Variáveis em Bloco
-
-É possível declarar múltiplas variáveis dentro de um bloco, declarando com **`var ()`**.
-
-**Exemplo:**
-
-``` go
-var (
-    x int = 5
-    y string = "Go!"
-    z float32 = 7.2
-)
-```
-
-### Regras para Nome de Variáveis
-
-As regras são:
-
-* Devem iniciar com uma letra ou `_`.
-
-* Podem conter caracteres alfanuméticos e underlines (`a-z`, `A-Z`, `0-9`, `_`);
-
-* São case-sensitive, ou seja, caracteres maiúsculos e minúsculos são diferentes (`x` é diferente de `X`).
-
-* Geralmente são escritas em *camelCase*.
-
-## Constantes
-
-Constantes são declaradas usando a palavra-chave **`const`**, semelhante à declaração de variáveis, e podem ser tipadas ou não tipadas.
+É possível declarar várias variáveis em uma única linha, e para isso, é necessário separá-las com vírgula.
 
 **Sintaxe:**
 
 ``` go
-// Contante tipada
-const NOMECONST tipo = valor
-
-// Constante não tipada
-const NAMECONST = valor
+var x, y, z tipo
 ```
 
 **Exemplo:**
 
 ``` go
-const PI = 3.14159
+package main
+
+import "fmt"
+
+func main() {
+    var x, y, z int = 5, 7, 2
+    fmt.Println(x) // -> 5
+    fmt.Println(y) // -> 7
+    fmt.Println(z) // -> 2
+}
 ```
 
-### Regras para Constantes
+É possível também declarar múltiplas variáveis com valores de tipos diferentes entre elas, utilizando assim, variáveis automaticamente tipadas.
 
-* Nomes para constantes possuem a mesmas regras de variáveis.
+**Sintaxe:**
 
-* Constantes geralmente são escritas com letras maiúsculas.
-
-* Constantes podem ser declaradas dentro e fora de funções.
-
-### Declaração Múltipla de Constantes
-
-Para declarar múltiplas constantes, é usado **`const ()`**.
+``` go
+x, y, z := valorX, valorY, valorZ
+```
 
 **Exemplo:**
 
 ``` go
-const (
-    X int = 5
-    Y string = "Olá, Mundo!"
-    Z = 3.14
+package main
+
+import "fmt"
+
+func main() {
+    x, y, z := 1.2, 5, "Hello"
+    fmt.Println(x) // -> 1.2
+    fmt.Println(y) // -> 5
+    fmt.Println(z) // -> "Hello"
+}
+```
+
+> **NOTA:** As mesmas variáveis acima podem ser declaradas com `var x, y, z = 1.2, 5, "Hello"`.
+
+Outra maneira de declarar múltiplas variáveis ao mesmo tempo, é utilizando `var ()`, onde `()` é um bloco que irá declarar as variáveis.
+
+**Sintaxe:**
+
+``` go
+var (
+    x tipo = valorX
+    y tipo = valorY
+    z tipo = valorZ
 )
 ```
 
-## Output
+**Exemplo:**
 
-Em Go, há três funções para saída de texto:
+``` go
+package main
 
-* **`Print()`**
+import "fmt"
+
+func main() {
+    var (
+        x float32 = 1.2
+        y int     = 5
+        z string  = "Hello"
+    )
+    fmt.Println(x) // -> 1.2
+    fmt.Println(y) // -> 5
+    fmt.Println(z) // -> "Hello"
+}
+```
+
+### Declaração de Variáveis Fora de Funções
+
+É possível declarar variáveis fora de qualquer função, o que torna ele uma variável global - o que significa que ela pode ser usada e modificada em qualquer lugar do código.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+var msg = "Hello, World!"
+
+func main() {
+    fmt.Println(msg)
+}
+```
+
+> No exemplo acima, a variável é automaticamente tipada, no entanto, não é possível declarar variáveis automaticamente tipadas omitindo `var` e utilizando o operador `:=`.
+
+## Constantes
+
+Constantes são como variáveis, porém seus valores não podem ser alterados uma vez que definidos em sua declaração.
+
+São declaradas a partir da palavra-chave **`const`**, seguida do nome e o valor da constante.
+
+**Sintaxe:**
+
+``` go
+// Constante tipada
+const NOMECONST tipo = valor
+
+// Constante automaticamente tipada
+const NOMECONST = valor
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    const PI = 3.14159
+    fmt.Println(PI) // -> 3.14159
+}
+```
+
+> **NOTA:** Tentar modificar o valor de uma constante irá resultar em um erro.
+
+### Nomes para Constantes
+
+As regras para nomear constantes são as mesmas que para variáveis. Normalmente, os nomes para constantes são escritos com todas as letras em maiúsculas.
+
+### Declaração Múltipla de Constantes
+
+A declaração múltipla de constantes é feita da mesma maneira que para variáveis.
+
+**Sintaxe:**
+
+``` go
+const X, Y, Z tipo = valorX, valorY, valorZ
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    const X, Y, Z int = 5, 7, 2
+    fmt.Println(X) // -> 5
+    fmt.Println(Y) // -> 7
+    fmt.Println(Z) // -> 2
+}
+```
+
+**Para constantes automaticamente tipadas:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    const X, Y, Z = 5, 9.7, "Hello"
+    fmt.Println(X) // -> 5
+    fmt.Println(Y) // -> 9.7
+    fmt.Println(Z) // -> Hello
+}
+```
+
+**Para múltipla declaração com bloco `const ()`:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    const (
+        X int     = 5
+        Y float32 = 9.7
+        Z string  = "Hello"
+    )
+    fmt.Println(X) // -> 5
+    fmt.Println(Y) // -> 9.7
+    fmt.Println(Z) // -> Hello
+}
+```
+
+### Declaração de Constantes Fora de Funções
+
+Assim como com as variáveis, é possível declarar constantes fora de qualquer função, tornando-as globais.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+const MSG = "Hello, World!"
+
+func main() {
+    fmt.Println(MSG)
+}
+```
+
+## Saída
+
+Saída se refere a impressão de dados na tela, e pode se feito de várias maneiras. O pacote `fmt` fornece três funções que imprimem valores na saída padrão (`stdout`).
+
 * **`Println()`**
+* **`Print()`**
 * **`Printf()`**
 
-### Função `Print()`
+### Função `fmt.Println()`
 
-Imprime os valores sem quebra de linha no fim.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    str1 := "Olá"; str2 := "Mundo"
-
-    fmt.Print(str1)
-    fmt.Print(str2)
-    // Output => OláMundo!
-}
-```
-
-**Pode aceitar múltiplos argumentos para impressão:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    str1 := "Olá"; str2 := "Mundo"
-
-    fmt.Print(str1, ", ", str2)
-    // Output => Olá, Mundo!
-}
-```
-
-**Se os argumentos para impressão não forem strings, será criado um espaço entre eles:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    var x, y = 13, 22
-
-    fmt.Print(x, y)
-    // Output => 13 22
-}
-```
-
-### Função `Println()`
-
-Similar a função `Print()`, porém imprime um espaço entre osargumentos e quebra a linha no fim.
+Imprime os valores de seus argumentos e, no fim, adiciona uma quebra de linha (`\n`).
 
 **Exemplo:**
 
@@ -308,19 +424,16 @@ package main
 import "fmt"
 
 func main() {
-    var str1, str2 = "Olá", "Mundo!"
-
-    fmt.Println(str1)
-    fmt.Println(str2)
-
-    /* Output =>
-    Olá
-    Mundo!
-    */
+    s1 := "Hello"
+    s2 := "World"
+    fmt.Println(s1) // -> Hello
+    fmt.Println(s2) // -> World
 }
 ```
 
-**Com mais de um argumento:**
+Essa função aceita múltiplos argumentos para impressão, separando-os com um espaço e quebrando a linha no final.
+
+**Exemplo:**
 
 ``` go
 package main
@@ -328,28 +441,59 @@ package main
 import "fmt"
 
 func main() {
-    var x, y, z = 5, 10, 15
-
-    fmt.Println(x, y)
-    fmt.Println(z)
-
-    /* Output =>
-    5 10
-    15
-    */
+    s1 := "Hello"
+    s2 := "World"
+    fmt.Println(s1, s2) // -> Hello World
 }
 ```
 
-### Função `Printf()`
+### Função `fmt.Print()`
 
-Formata os valores antes de imprimir.
+Imprime os valores de seus argumentos sem quebrar a linha no final.
 
-**Formatadores:**
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    s1 := "Hello"
+    s2 := "World"
+    fmt.Print(s1) // -> Hello
+    fmt.Print(s2) // -> World
+
+    // O output final será: HelloWorld
+}
+```
+
+Também aceita múltiplos argumentos, mas ao contrário de `fmt.Println()`, não os separa a não ser que os valores não sejam strings - ou seja, se o próximo argumento não for uma string, ele irá separar com um espaço.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Print("Hello", ", ") // -> Hello,
+    fmt.Print("World", "!")  // -> World!
+    // O output final será: Hello, World!
+}
+```
+
+### Função `fmt.Printf()`
+
+A função **`fmt.Printf()`** permite formatar os valores antes de imprimir.
+
+**Principais formatadores:**
 
 * **'`%v`'**: Imprime o valor do argumento.
 * **'`%T`'**: Imprime o tipo do argumento.
 
-Antes de imprimir, os formatadores são substituídos pelo valor ou tipo de seu respectivo argumento.
+Antes da impressão, os formatadores são substituídos pelo valor ou tipo de seu respectivo argumento.
 
 **Exemplo:**
 
@@ -359,272 +503,54 @@ package main
 import "fmt"
 
 func main() {
-    var x, y, z = "Olá, Mundo!", 15, true
-
-    fmt.Printf("Valor: %v | Tipo: %T\n", x, x)
-    fmt.Printf("Valor: %v | Tipo: %T\n", y, y)
-    fmt.Printf("Valor: %v | Tipo: %T\n", z, y)
-
-    /* Output =>
-    Valor: Olá, Mundo! | Tipo: string
-    Valor: 15 | Tipo: int
-    Valor: true | Tipo: int
-    */
+    x, y, z := "Hello", 15, true
+    fmt.Printf("Valor: %v | Tipo: %T\n", x, x) // -> Valor: Hello | Tipo: string
+    fmt.Printf("Valor: %v | Tipo: %T\n", y, y) // -> Valor: 15 | Tipo: int
+    fmt.Printf("Valor: %v | Tipo: %T\n", z, y) // -> Valor: true | Tipo: int
 }
 ```
 
-## Formatadores
+## Tipos de Dados
 
-### Formatadores para Inteiros
-
-* **'`%d`'**: Formata um valor como número decimal.
-* **'`%b`'**: Formata um valor como número binário.
-* **'`%o`'**: Formata um valor como número octal.
-* **'`%x`'**: Formata um número como hexadecimal (letras minúsculas).
-* **'`%X`'**: Formata um número como hexadecimal (letras maiúsculas).
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    var x = 43
-
-    fmt.Printf("Valor em decimal: %d\n", x)
-    fmt.Printf("Valor em binário: %b\n", x)
-    fmt.Printf("Valor em octal: %o\n", x)
-    fmt.Printf("Valor em hexadecimal: %x\n", x)
-    fmt.Printf("Valor hexadecimal maiúsculo: %X\n", x)
-
-    /* Output
-    Valor em decimal: 43
-    Valor em binário: 101011
-    Valor em octal: 53
-    Valor em hexadecimal: 2b
-    Valor hexadecimal maiúsculo: 2B
-    */
-}
-```
-
-### Formatadores para Números de Pontos Flutuante
-
-* **'`%f`'**: Formata um valor como um número de ponto flutuante na notação decimal.
-* **'`%e`'**: Formata um valor usando notação científica (letras minúsculas).
-* **'`%E`'**: Formata um valor usando notação científica (letras maiúsculas).
-* **'`%g`', '`%G`'**: Formata um valor usando a notação de `%e` ou `%f`, dependendo da magnitude no número.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    var x = 3.14159
-
-    fmt.Printf("Valor padrão: %f\n", x)
-    fmt.Printf("Valor em notação científica: %e\n", x)
-    fmt.Printf("Valor em notação científica: %E\n", x)
-    fmt.Printf("Valor com `%%g`: %g\n", x)
-
-    /* Output
-    Valor padrão: 3.141590
-    Valor em notação científica: 3.141590e+00
-    Valor em notação científica: 3.141590E+00
-    Valor com `%g`: 3.14159
-    */
-}
-```
-
-### Formatadores para Strings
-
-* **'`%s`'**: Formata um valor para uma string.
-* **'`%q`'**: Formata um valor para uma string com aspas duplas (imprime as aspas duplas).
-* **'`%x`'**: Formata um valor para bytes hex dump.
-* **'`% x`'**: Formata um valor para bytes hex dump com espaços.
-
-> **OBS.:** Se nos formatos `%x` e `% x` o `x` for escrito em maiúsculo, será formatado as letras em maiúsculas.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    var str = "Go!"
-
-    fmt.Printf("String: %s\n", str)
-    fmt.Printf("String com aspas: %q\n", str)
-    fmt.Printf("String como hex dump: %x\n", str)
-    fmt.Printf("String como hex dump com espaços: % x\n", str)
-
-    /* Output
-    String: Go!
-    String com aspas: "Go!"
-    String como hex dump: 476f21
-    String como hex dump com espaços: 47 6f 21
-    */
-}
-```
-
-### Formatadores para Booleanos
-
-Pode-se usar **`%t`** ou **`%v`**.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    var x = true
-    var y = false
-
-    fmt.Printf("Valor de x: %t\n", x)
-    fmt.Printf("Valor de y: %t\n", y)
-
-    /* Output
-    Valor de x: true
-    Valor de y: false
-    */
-}
-```
-
-### Outros Formatadores
-
-* **'`%v`'**: Formata um valor na forma mais simples para sua representação.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        var x = 22
-        var y = "Olá, Mundo!"
-        var z = true
-
-        fmt.Printf("Valor de x: %v\n", x)
-        fmt.Printf("Valor de y: %v\n", y)
-        fmt.Printf("Valor de z: %v\n", z)
-
-        /* Output
-        Valor de x: 22
-        Valor de y: Olá, Mundo!
-        Valor de z: true
-        */
-    }
-    ```
-
-* **'`%T`'**: Formata um valor para seu tipo.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        var x = 22
-        var y = "Olá, Mundo!"
-        var z = true
-
-        fmt.Printf("Tipo de x: %T\n", x)
-        fmt.Printf("Tipo de y: %T\n", y)
-        fmt.Printf("Tipo de z: %T\n", z)
-
-        /* Output
-        Tipo de x: int
-        Tipo de y: string
-        Tipo de z: bool
-        */
-    }
-    ```
-
-* **'`%c`'**: Formata um valor como um caractere (unicode).
-* **'`%U`'**: Formata um valor como ponto de código Unicode.
-
-**Exemplo `%c` e `%U`:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    char := 'A'
-
-    fmt.Printf("Caractere: %c\n", char)
-    fmt.Printf("Código Unicode: %U\n", char)
-
-    /* Output
-    Caractere: A
-    Código Unicode: U+0041
-    */
-}
-```
-
-### Função `Sprintf()`
-
-Formata um texto igual a função `Printf()`, mas ao invés de imprimir o texto, a função **`Sprintf()`** retorna o texto.
-
-**Sintaxe:**
-
-``` go
-variavelParaOTexto := fmt.Sprintf(stringParaFormatar, formatador1, formatador2, ..., formatadorN)
-```
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    // Variáveis que serão formatadas
-    x := 10
-    y := 3
-
-    // Formata o texto e o armazena em uma variável
-    texto := fmt.Sprintf("A soma entre %d e %d é %d", x, y, x + y)
-
-    // Imprime o texto formatado
-    fmt.Println(texto) // Output => A soma entre 10 e 3 é 13
-}
-```
-
-## Tipos Primitivos
-
-Em Go, os tipos primitivos básicos são:
+Em Go, os tipos de dados básicos são:
 
 * **'`int`'**: Representa números inteiros.
-* **'`float32`', '`float64`'**: Representam números de ponto flutuante.
-* **'`complex64`', '`complex128`'**: Representam complexos.
-* **'`string`'**: Representa uma string
+* **'`float32`', '`float64`'**: Representam números de ponto flutuante (números reais).
+* **'`complex64`', '`complex128`'**: Representam números complexos.
+* **'`string`'**: Representa uma string (cadeia de caracteres).
 * **'`bool`'**: Representa um valor booleano.
 
 ### Inteiros
 
-O tipo **`int`** é a maneira mais simples de representar números inteiros, e seu tamanho varia de acordo com a arquitetura da máquina.
+O tipo **`int`** é maneira mais simples de representar números inteiros, e seu tamanho varia de acordo com a arquitetura da máquina.
+
+**Exemplo:**
 
 ``` go
-var inteiro int
+package main
+
+import "fmt"
+
+func main() {
+    myInt := 23
+    fmt.Printf("Valor: %v | Tipo: %T\n", myInt, myInt)
+    // -> Valor: 23 | Tipo: int
+}
 ```
 
 #### Inteiros com Tamanho Específico
 
-Os tipos **`int8`**, **`int16`**, **`int32`** e **`int64`** representam números inteiros com tamanhos específicos de 8, 16, 32 e 64 bits, respectivamente.
+Existem vários tipos de inteiros, onde cada tipo possui um limite diferente de valores.
+
+**Os tipos são:**
+
+* **'`int8`'**: Representa números inteiros com o tamanho de 8 bits.
+* **'`int16`'**: Representa números inteiros com o tamanho de 16 bits.
+* **'`int32`'**: Representa números inteiros com o tamanho de 32 bits.
+* **'`int64`'**: Representa números inteiros com o tamanho de 64 bits.
 
 ``` go
-var inteiro8 int8
+var inteiro8  int8
 var inteiro16 int16
 var inteiro32 int32
 var inteiro64 int64
@@ -632,20 +558,29 @@ var inteiro64 int64
 
 #### Inteiros sem Sinal
 
-São inteiros que não têm sinal negativo, representados pelos tipos **`uint8`**, **`uint16`**, **`uint32`** e **`uint64`**, que têm tamanhos específicos de 8, 16, 32 e 64 bits.
+Inteiros sem sinal são inteiros não negativos.
+
+**Os tipos para inteiros sem sinal são:**
+
+* **'`uint`'**: Representa números inteiros sem sinal, e seu tamanho varia de acordo com a arquitetura da máquina.
+* **'`uint8`'**: Representa números inteiros sem sinal com tamanho de 8 bits.
+* **'`uint16`'**: Representa números inteiros sem sinal com tamanho de 16 bits.
+* **'`uint32`'**: Representa números inteiros sem sinal com tamanho de 32 bits.
+* **'`uint64`'**: Representa números inteiros sem sinal com tamanho de 64 bits.
 
 ``` go
-var inteiroSemSinal8 uint8
-var inteiroSemSinal16 uint16
-var inteiroSemSinal32 uint32
-var inteiroSemSinal64 uint64
+var uinteiro    uint
+var uinteiro8   uint8
+var uinteiro16  uint16
+var uinteiro32  uint32
+var uinteiro64  uint64
 ```
 
-Há também o tipo **`uintptr`**, que é usado para armazenar valores inteiros não assinados suficientes para armazenar todos os bits de um ponteiro.
+> **NOTA:** Há também o tipo `uintptr`, que é usado para armazenar valores inteiros não assinados suficientes para armazenar todos os bits de um ponteiro.
 
-#### `byte`
+#### Tipo `byte`
 
-É um alias para o tipo `uint8`, que equivale a 8 bits. É geralmente usado para representar caracteres ASCII.
+O tipo **`byte`** é um alias para o tipo `uint8`, que equivale a 8 bits, sendo assim, perfeito para representar caracteres ASCII.
 
 **Exemplo:**
 
@@ -659,130 +594,14 @@ import (
 
 func main() {
     var x byte = 2
-
-    fmt.Printf("Bytes: %d\n", unsafe.Sizeof(x))
-    fmt.Printf("Tipo: %T | Valor: %v\n", x, x)
-
-    /* Output:
-    Bytes: 1
-    Tipo: uint8 | Valor: 2
-    */
+    fmt.Printf("Tamanho: %v byte(s) | Tipo: %T\n", unsafe.Sizeof(x), x)
+    // -> Tamanho: 1 byte(s) | Tipo: uint8
 }
 ```
 
-A função `Sizeof()` do pacote `unsafe` é usada para verificar a quantidade de bytes de uma variável.
+O tamanho impresso é de 1 byte, pois 8 bits equivalem a 1 byte.
 
-##### Manipulação de Slice de Bytes
-
-Para manipular slice de bytes, são usadas as funções do pacote **`bytes`**, que pertence a biblioteca padrão.
-
-###### Cópia de Slice de Bytes
-
-Para copiar um slice de bytes, é usada a função **`bytes.Clone()`**.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "bytes"
-    "fmt"
-)
-
-func main() {
-    // Slice com os caracteres "G" e "o"
-    slice := []byte{71, 111} // Caracteres "G" e "o"
-
-    // Cria uma cópia para o slice
-    copySlice := bytes.Clone(slice)
-
-    // Modifica somente o slice original
-    slice = append(slice, 33) // Adiciona "!" no final
-
-    // Imprime o slice original e sua cópia
-    fmt.Println(slice)      // Output => [71 111 33]
-    fmt.Println(copySlice)  // Output => [71 111]
-
-    // Imprime os elementos dos slices como caracteres
-    for _, v := range slice {
-        fmt.Print(string(v)) // Output => Go!
-    }
-    fmt.Println()
-
-    for _, v := range copySlice {
-        fmt.Print(string(v)) // Output => Go
-    }
-    fmt.Println()
-}
-```
-
-###### Slice de Bytes para Maiúscula ou Minúscula
-
-As funções **`bytes.ToLower()`** e **`bytes.ToUpper`** retornam um novo slice de bytes com todas as letras Unicode mapeadas para minúsculo e maiúsculo, respectivamente.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "bytes"
-    "fmt"
-)
-
-func main() {
-    // Slice de bytes
-    slice := []byte("Hello, World!")
-
-    // Slice minúsculo
-    lowerSlice := bytes.ToLower(slice)
-
-    // Slice maiúsculo
-    upperSlice := bytes.ToUpper(slice)
-
-    // Imprime os resultados
-    fmt.Printf("%s\n", lowerSlice)
-    fmt.Printf("%s\n", upperSlice)
-
-    /* Output:
-    hello, world!
-    HELLO, WORLD!
-    */
-}
-```
-
-###### Remover no Início/Final de Slices de Bytes
-
-A função **`bytes.Trim()`** retorna um novo slice de bytes sem uma dada string no início e fim.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "bytes"
-    "fmt"
-)
-
-func main() {
-    // Slice de bytes
-    slice := []byte("--Hello-World!--")
-
-    // Remove `-` no início e fim
-    newSlice := bytes.Trim(slice, "-")
-
-    // Imprime o resultado
-    fmt.Printf("%s\n", newSlice)
-
-    // Output => Hello-World!
-}
-```
-
-Para remover apenas no início ou apenas no fim, use **`bytes.TrimLeft()`** e **`bytes.TrimRight()`**, respectivamente.
-
-> **Whitespaces:** A função **`bytes.TrimSpace()`** retorna uma cópia do slice passado sem os caracteres de espaço em branco no início e no final. Então há mais sentido em usá-la ao invés de `bytes.Trim(s, " ")`.
+> **NOTA:** A função `unsafe.Sizeof()` é usada para verificar a quantidade de bytes que uma variável possui.
 
 ##### Buffer para Slice de Bytes
 
@@ -809,7 +628,7 @@ var b bytes.Buffer
     func main() {
         b := bytes.NewBuffer([]byte("Hello, World!"))
         fmt.Println(b.String())
-        // Output => Hello, World!
+        // -> Hello, World!
     }
     ```
 
@@ -826,7 +645,7 @@ var b bytes.Buffer
     func main() {
         b := bytes.NewBufferString("Hello, World!")
         fmt.Println(b)
-        // Output => Hello, World!
+        // -> Hello, World!
     }
     ```
 
@@ -882,7 +701,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
     func main() {
         b := bytes.NewBuffer([]byte("Hello, World!"))
         fmt.Println(b.Bytes())
-        // Output => [72 101 108 108 111 44 32 87 111 114 108 100 33]
+        // -> [72 101 108 108 111 44 32 87 111 114 108 100 33]
     }
     ```
 
@@ -899,7 +718,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
     func main() {
         b := bytes.NewBuffer([]byte("Hello, World!"))
         fmt.Println(b.String())
-        // Output => Hello, World!
+        // -> Hello, World!
     }
     ```
 
@@ -915,7 +734,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
 
     func main() {
         b := bytes.NewBuffer([]byte("Hello, World!"))
-        fmt.Println(b.Len()) // Output => 13
+        fmt.Println(b.Len()) // -> 13
     }
     ```
 
@@ -931,7 +750,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
 
     func main() {
         b := bytes.NewBuffer([]byte("Hello, World!"))
-        fmt.Println(b.Cap()) // Output => 13
+        fmt.Println(b.Cap()) // -> 13
     }
     ```
 
@@ -947,9 +766,9 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
 
     func main() {
         var b bytes.Buffer
-        fmt.Println(b.Cap()) // Output => 0
+        fmt.Println(b.Cap()) // -> 0
         b.Grow(64)
-        fmt.Println(b.Cap()) // Output => 64
+        fmt.Println(b.Cap()) // -> 64
     }
     ```
 
@@ -973,7 +792,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
         }
 
         fmt.Println("Bytes lidos:", n)
-        // Output => Bytes lidos: 13
+        // -> Bytes lidos: 13
     }
     ```
 
@@ -995,9 +814,9 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
         }
 
         fmt.Println("Byte lido:", n)
-        // Output => Bytes lidos: 72
+        // -> Bytes lidos: 72
 
-        fmt.Println(b.String()) // Output => ello, World!
+        fmt.Println(b.String()) // -> ello, World!
     }
     ```
 
@@ -1019,9 +838,9 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
         }
 
         fmt.Println("Bytes lidos:", n)
-        // Output => Bytes lidos: [72 101 108 108 111 44 32 87]
+        // -> Bytes lidos: [72 101 108 108 111 44 32 87]
 
-        fmt.Println(b.String()) // Output => orld!
+        fmt.Println(b.String()) // -> orld!
     }
     ```
 
@@ -1043,9 +862,9 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
         }
 
         fmt.Println("Bytes lidos:", n)
-        // Output => Hello, W
+        // -> Hello, W
 
-        fmt.Println(b.String()) // Output => orld!
+        fmt.Println(b.String()) // -> orld!
     }
     ```
 
@@ -1091,7 +910,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
         b.Reset()
 
         b.WriteString("Hello, Go!")
-        fmt.Println(b.String()) // Output => Hello, Go!
+        fmt.Println(b.String()) // -> Hello, Go!
     }
     ```
 
@@ -1108,7 +927,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
     func main() {
         b := bytes.NewBuffer([]byte("Hello, World!"))
         b.Truncate(5)
-        fmt.Println(b.String()) // Output => Hello
+        fmt.Println(b.String()) // -> Hello
     }
     ```
 
@@ -1156,7 +975,7 @@ No exemplo acima, a função **`ReverseString()`** inverte a ordem dos caractere
             return
         }
         fmt.Println(b.String())
-        // Output => W
+        // -> W
     }
     ```
 
@@ -1212,7 +1031,7 @@ func main() {
     slice2 := []byte{71, 111, 33} // Caracteres "G", "o" e "!"
 
     result := bytes.Compare(slice1, slice2)
-    fmt.Println(result) // Output => -1
+    fmt.Println(result) // -> -1
 }
 ```
 
@@ -1237,7 +1056,7 @@ func main() {
 
     // Verifica se o subslice está dentro do primeiro
     result := bytes.Contains(slice, subSlice)
-    fmt.Println(result) // Output => true
+    fmt.Println(result) // -> true
 }
 ```
 
@@ -1259,7 +1078,7 @@ func main() {
 
     // Verifica se há o caractere "á" no slice
     result := bytes.ContainsAny(slice, "á")
-    fmt.Println(result) // Output => true
+    fmt.Println(result) // -> true
 }
 ```
 
@@ -1283,7 +1102,7 @@ func main() {
 
     // Encontra o índice do caractere "W"
     index := bytes.Index(slice, []byte("W"))
-    fmt.Println(index) // Output => 6
+    fmt.Println(index) // -> 6
 }
 ```
 
@@ -1305,7 +1124,7 @@ func main() {
 
     // Encontra o índice do caractere "W"
     index := bytes.IndexAny(slice, "á")
-    fmt.Println(index) // Output => 2
+    fmt.Println(index) // -> 2
 }
 ```
 
@@ -1327,7 +1146,7 @@ func main() {
 
     // Verifica o índice do caractere "W" (byte 87)
     result := bytes.IndexByte(slice, 87)
-    fmt.Println(result) // Output => 7
+    fmt.Println(result) // -> 7
 }
 ```
 
@@ -1364,7 +1183,7 @@ func main() {
 
     // Mapeia o slice de bytes
     newSlice := bytes.Map(mapping, slice)
-    fmt.Printf("%s\n", newSlice) // Output => Aaaaa, Aaaaa!
+    fmt.Printf("%s\n", newSlice) // -> Aaaaa, Aaaaa!
 }
 ```
 
@@ -1404,7 +1223,7 @@ func main() {
 }
 ```
 
-###### Separar em Slice de Bytes
+###### Separarão em Slice de Bytes
 
 A função **`bytes.Split()`** separa um slice de bytes a partir de um separador e, no fim, retorna um slice de bytes multidimensional.
 
@@ -1428,7 +1247,7 @@ func main() {
     // Imprime o resultado
     fmt.Printf("%s\n", newSlice)
 
-    // Output => [Hello World]
+    // -> [Hello World]
 }
 ```
 
@@ -1454,7 +1273,7 @@ func main() {
     // Imprime o resultado
     fmt.Printf("%s\n", newSlice)
 
-    // Output => [a b c d e,f,g]
+    // -> [a b c d e,f,g]
 }
 ```
 
@@ -1480,7 +1299,7 @@ func main() {
     // Imprime o resultado
     fmt.Printf("%s\n", newSlice)
 
-    // Output => [a, b, c, d, e, f, g]
+    // -> [a, b, c, d, e, f, g]
 }
 ```
 
@@ -1606,11 +1425,11 @@ func main() {
     x := "Hello, 界"
 
     // Imprime a largura da string
-    fmt.Println(len(x)) // Output => 10
+    fmt.Println(len(x)) // -> 10
 
     for _, char := range x {
         // Imprime cada caractere da string
-        fmt.Printf("%c ", char) // Output => H e l l o ,   界
+        fmt.Printf("%c ", char) // -> H e l l o ,   界
     }
 }
 ```
@@ -1619,7 +1438,7 @@ func main() {
 
 Há dois tipos para representar números de ponto flutuante: **`float32`** e **`float64`**.
 
-* **'`float32`'**: Ocupa 32 bits, e sua faixa é **`-3.4e+38`** até **`3.4e+38`**
+* **'`float32`'**: Ocupa 32 bits, e sua faixa é **`-3.4e+38`** até **`3.4e+38`**.
 
     ``` go
     package main
@@ -1633,7 +1452,7 @@ Há dois tipos para representar números de ponto flutuante: **`float32`** e **`
         fmt.Printf("Tipo: %T | Valor: %v\n", x, x)
         fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
 
-        /* Output =>
+        /* ->
         Tipo: float32 | Valor: 123.456
         Tipo: float32 | Valor: 3.4e+38
         */
@@ -1654,7 +1473,7 @@ Há dois tipos para representar números de ponto flutuante: **`float32`** e **`
         fmt.Printf("Tipo: %T | Valor: %v\n", x, x)
         fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
 
-        /* Output =>
+        /* ->
         Tipo: float64 | Valor: 123.456
         Tipo: float64 | Valor: 1.7e+308
         */
@@ -1698,12 +1517,9 @@ func main() {
     var str2 string = "Olá, Go!"
 
     fmt.Printf("Tipo: %T | Valor: %v\n", str1, str1)
+    // -> Tipo: string | Valor: Olá, Mundo!
     fmt.Printf("Tipo: %T | Valor: %v\n", str2, str2)
-
-    /* Output =>
-    Tipo: string | Valor: Olá, Mundo!
-    Tipo: string | Valor: Olá, Go!
-    */
+    // -> Tipo: string | Valor: Olá, Go!
 }
 ```
 
@@ -1711,7 +1527,7 @@ func main() {
 
 #### Comprimento de uma String
 
-A função **`len()`** retorna o comprimento de uma string.
+A função **`len()`**, quando recebe uma string, retorna o comprimento da mesma.
 
 **Exemplo:**
 
@@ -1721,8 +1537,8 @@ package main
 import "fmt"
 
 func main() {
-    myStr := "Hello, World!"
-    fmt.Println(len(myStr)) // Output => 13
+    str := "Hello, World!"
+    fmt.Println(len(str)) // -> 13
 }
 ```
 
@@ -1747,7 +1563,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         resultado := strings.ToUpper(myStr)
 
         fmt.Println(resultado)
-        // Output => OLÁ, MUNDO!
+        // -> OLÁ, MUNDO!
     }
     ```
 
@@ -1766,7 +1582,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         resultado := strings.ToLower(myStr)
 
         fmt.Println(resultado)
-        // Output => olá, mundo!
+        // -> olá, mundo!
     }
     ```
 
@@ -1785,11 +1601,11 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         subStr := "Mundo"
 
         resultado := strings.Contains(myStr, subStr)
-        fmt.Println(resultado) // Output => true
+        fmt.Println(resultado) // -> true
     }
     ```
 
-* **'`Count`'**: Dada uma string e uma substring, retorna a quantidade de vezes que a substring ocorreu dentro da string.
+* **'`Count()`'**: Dada uma string e uma substring, retorna a quantidade de vezes que a substring ocorreu dentro da string.
 
     ``` go
     package main
@@ -1804,7 +1620,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         subStr := "o"
 
         resultado := strings.Count(myStr, subStr)
-        fmt.Println(resultado) // Output => 2
+        fmt.Println(resultado) // -> 2
     }
     ```
 
@@ -1823,7 +1639,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         subStr := "Olá"
 
         resultado := strings.HasPrefix(myStr, subStr)
-        fmt.Println(resultado) // Output => true
+        fmt.Println(resultado) // -> true
     }
     ```
 
@@ -1842,7 +1658,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         subStr := "!"
 
         resultado := strings.HasSuffix(myStr, subStr)
-        fmt.Println(resultado) // Output => true
+        fmt.Println(resultado) // -> true
     }
     ```
 
@@ -1861,7 +1677,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         subStr := "W"
 
         resultado := strings.Index(myStr, subStr)
-        fmt.Println(resultado) // Output => 7
+        fmt.Println(resultado) // -> 7
     }
     ```
 
@@ -1889,7 +1705,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
 
         resultado := strings.Replace(myStr, "Golang", "Go", -1)
         fmt.Println(resultado)
-        // Output => Go is powerful. Go is amazing.
+        // -> Go is powerful. Go is amazing.
     }
     ```
 
@@ -1914,7 +1730,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
 
         resultado := strings.ReplaceAll(myStr, "Golang", "Go")
         fmt.Println(resultado)
-        // Output => Go is powerful. Go is amazing.
+        // -> Go is powerful. Go is amazing.
     }
     ```
 
@@ -1933,7 +1749,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         mySplit := strings.Split(myStr, " ")
 
         fmt.Println(mySplit)
-        // Output => [I love Golang!]
+        // -> [I love Golang!]
     }
     ```
 
@@ -1952,7 +1768,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         resultado := strings.Repeat(myStr, 2)
 
         fmt.Println(resultado)
-        // Output => Olá, Mundo!Olá, Mundo!
+        // -> Olá, Mundo!Olá, Mundo!
     }
     ```
 
@@ -1971,7 +1787,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         resultado := strings.TrimSpace(myStr)
 
         fmt.Println(resultado)
-        // Output => "Olá, Mundo!"
+        // -> "Olá, Mundo!"
     }
     ```
 
@@ -1990,7 +1806,7 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
         resultado := strings.Trim(myStr, "-")
 
         fmt.Println(resultado)
-        // Output => "Olá, Mundo!"
+        // -> "Olá, Mundo!"
     }
     ```
 
@@ -2005,15 +1821,23 @@ O pacote **`strings`** fornece várias funções para manipulação de strings.
     )
 
     func main() {
-        fmt.Println(strings.Compare("abc", "abc")) // Output => 0
-        fmt.Println(strings.Compare("abc", "def")) // Output => -1
-        fmt.Println(strings.Compare("def", "abc")) // Output => 1
+        fmt.Println(strings.Compare("abc", "abc")) // -> 0
+        fmt.Println(strings.Compare("abc", "def")) // -> -1
+        fmt.Println(strings.Compare("def", "abc")) // -> 1
     }
     ```
 
-### Booleanos
+#### Formatação de Strings
 
-O tipo **`bool`** representa valores booleanos, que são **`true`** e **`false`**.
+Para formatar uma string em uma variável, é usada a função **`fmt.Sprintf()`**. Essa função funciona de maneira similar a função `fmt.Printf()`, mas ao invés de imprimir, ela retorna a string.
+
+**Sintaxe:**
+
+``` go
+texto := fmt.Sprintf(s, formatador1, formatador2, ..., formatadorN)
+```
+
+**Exemplo:**
 
 ``` go
 package main
@@ -2021,10 +1845,213 @@ package main
 import "fmt"
 
 func main() {
-    var x bool
-    fmt.Printf("Tipo: %T\n", x) // Output => Tipo: bool
+    x, y := 5, 2
+    s := fmt.Sprintf("A soma entre %d e %d é igual a %d", x, y, x + y)
+    fmt.Println(s) // -> A soma entre 5 e 2 é igual a 7
 }
 ```
+
+##### Formatadores
+
+###### Formatadores para Inteiros
+
+* **'`%d`'**: Formata um valor como número decimal.
+* **'`%b`'**: Formata um valor como número binário.
+* **'`%o`'**: Formata um valor como número octal.
+* **'`%x`'**: Formata um número como hexadecimal (letras minúsculas).
+* **'`%X`'**: Formata um número como hexadecimal (letras maiúsculas).
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var x = 43
+
+    fmt.Printf("Valor em decimal: %d\n", x)
+    fmt.Printf("Valor em binário: %b\n", x)
+    fmt.Printf("Valor em octal: %o\n", x)
+    fmt.Printf("Valor em hexadecimal: %x\n", x)
+    fmt.Printf("Valor hexadecimal maiúsculo: %X\n", x)
+
+    /* Output
+    Valor em decimal: 43
+    Valor em binário: 101011
+    Valor em octal: 53
+    Valor em hexadecimal: 2b
+    Valor hexadecimal maiúsculo: 2B
+    */
+}
+```
+
+###### Formatadores para Números de Pontos Flutuante
+
+* **'`%f`'**: Formata um valor como um número de ponto flutuante na notação decimal.
+* **'`%e`'**: Formata um valor usando notação científica (letras minúsculas).
+* **'`%E`'**: Formata um valor usando notação científica (letras maiúsculas).
+* **'`%g`', '`%G`'**: Formata um valor usando a notação de `%e` ou `%f`, dependendo da magnitude no número.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var x = 3.14159
+
+    fmt.Printf("Valor padrão: %f\n", x)
+    fmt.Printf("Valor em notação científica: %e\n", x)
+    fmt.Printf("Valor em notação científica: %E\n", x)
+    fmt.Printf("Valor com `%%g`: %g\n", x)
+
+    /* Output:
+    Valor padrão: 3.141590
+    Valor em notação científica: 3.141590e+00
+    Valor em notação científica: 3.141590E+00
+    Valor com `%g`: 3.14159
+    */
+}
+```
+
+###### Formatadores para Strings
+
+* **'`%s`'**: Formata um valor para uma string.
+* **'`%q`'**: Formata um valor para uma string com aspas duplas (imprime as aspas duplas).
+* **'`%x`'**: Formata um valor para bytes hex dump.
+* **'`% x`'**: Formata um valor para bytes hex dump com espaços.
+
+> **OBS.:** Se nos formatos `%x` e `% x` o `x` for escrito em maiúsculo, será formatado as letras em maiúsculas.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var str = "Go!"
+
+    fmt.Printf("String: %s\n", str)
+    fmt.Printf("String com aspas: %q\n", str)
+    fmt.Printf("String como hex dump: %x\n", str)
+    fmt.Printf("String como hex dump com espaços: % x\n", str)
+
+    /* Output:
+    String: Go!
+    String com aspas: "Go!"
+    String como hex dump: 476f21
+    String como hex dump com espaços: 47 6f 21
+    */
+}
+```
+
+###### Formatadores para Booleanos
+
+Pode-se usar **`%t`** ou **`%v`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    var x = true
+    var y = false
+
+    fmt.Printf("Valor de x: %t\n", x)
+    fmt.Printf("Valor de y: %t\n", y)
+
+    /* Output:
+    Valor de x: true
+    Valor de y: false
+    */
+}
+```
+
+###### Outros Formatadores
+
+* **'`%v`'**: Formata um valor na forma mais simples para sua representação.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        var x = 22
+        var y = "Olá, Mundo!"
+        var z = true
+
+        fmt.Printf("Valor de x: %v\n", x)
+        fmt.Printf("Valor de y: %v\n", y)
+        fmt.Printf("Valor de z: %v\n", z)
+
+        /* Output:
+        Valor de x: 22
+        Valor de y: Olá, Mundo!
+        Valor de z: true
+        */
+    }
+    ```
+
+* **'`%T`'**: Formata um valor para seu tipo.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        var x = 22
+        var y = "Olá, Mundo!"
+        var z = true
+
+        fmt.Printf("Tipo de x: %T\n", x)
+        fmt.Printf("Tipo de y: %T\n", y)
+        fmt.Printf("Tipo de z: %T\n", z)
+
+        /* Output:
+        Tipo de x: int
+        Tipo de y: string
+        Tipo de z: bool
+        */
+    }
+    ```
+
+* **'`%c`'**: Formata um valor como um caractere (unicode).
+* **'`%U`'**: Formata um valor como ponto de código Unicode.
+
+**Exemplo `%c` e `%U`:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    char := 'A'
+
+    fmt.Printf("Caractere: %c\n", char)
+    fmt.Printf("Código Unicode: %U\n", char)
+
+    /* Output:
+    Caractere: A
+    Código Unicode: U+0041
+    */
+}
+```
+
+### Booleanos
+
+São valores booleanos (`true` e `false`) são representados pelo tipo **`bool`**.
 
 **Exemplo:**
 
@@ -2038,9 +2065,9 @@ func main() {
     var y bool = false
     var z bool
 
-    fmt.Println(x) // Output => true
-    fmt.Println(y) // Output => false
-    fmt.Println(z) // Output => false
+    fmt.Println(x) // -> true
+    fmt.Println(y) // -> false
+    fmt.Println(z) // -> false
 }
 ```
 
@@ -2064,7 +2091,7 @@ func main() {
 
     // Imprime o tipo e o valor após a conversão
     fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
-    // Output => Tipo: int | Valor: 5
+    // -> Tipo: int | Valor: 5
 }
 ```
 
@@ -2093,7 +2120,7 @@ func main() {
 
     // Imprime o tipo e o valor após a conversão
     fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
-    // Output => Tipo: int | Valor: 5
+    // -> Tipo: int | Valor: 5
 }
 ```
 
@@ -2117,8 +2144,8 @@ func main() {
     // Imprime o tipo e o valor após a conversão
     fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
     fmt.Printf("Tipo: %T | Valor: %v\n", z, z)
-    // Output => Tipo: float32 | Valor: 5
-    // Output => Tipo: float64 | Valor: 5
+    // -> Tipo: float32 | Valor: 5
+    // -> Tipo: float64 | Valor: 5
 }
 ```
 
@@ -2147,7 +2174,7 @@ func main() {
 
     // Imprime o tipo e o valor após a conversão
     fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
-    // Output => Tipo: float64 | Valor: 5
+    // -> Tipo: float64 | Valor: 5
 }
 ```
 
@@ -2175,7 +2202,7 @@ func main() {
     fmt.Printf("Tipo: %T | Valor: %v\n", x, x)
     fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
     fmt.Printf("Tipo: %T | Valor: %v\n", z, z)
-    /* Output =>
+    /* Output:
     Tipo: string | Valor: 5.13
     Tipo: string | Valor: 8
     Tipo: string | Valor: true
@@ -2203,27 +2230,30 @@ func main() {
 
     // Imprime o tipo e o valor após a conversão
     fmt.Printf("Tipo: %T | Valor: %v\n", y, y)
-    // Output => Tipo: bool | Valor: true
+    // -> Tipo: bool | Valor: true
 }
 ```
 
-## Input de Valores
+## Operadores
 
-### Com o Pacote `fmt`
+Em Go, os quatro tipos de operadores principais são:
 
-Para capturar a entrada do usuário até o primeiro espaço em branco, pode ser utilizado **`fmt.Scan()`**, **`fmt.Scanf()`** ou **`fmt.Scanln()`**.
+* Operadores aritméticos
+* Operadores de comparação
+* Operadores lógicos
+* Operadores bitwise
 
-#### Função `fmt.Scan()`
+### Operadores Aritméticos
 
-Captura a entrada do usuário até o primeiro espaço em branco, independentemente do tipo de valor.
+Os operadores aritméticos realizam operações matemáticas em variáveis ou valores numéricos literais.
 
-**Sintaxe:**
+**Os operadores aritméticos são:**
 
-``` go
-fmt.Scan(&variavel)
-```
-
-A função deve receber o endereço da variável, e por isso é usado o operador **`&`**.
+* **'`+`'**: Operador de adição.
+* **'`-`'**: Operador de subtração
+* **'`*`'**: Operador de multiplicação.
+* **'`/`'**: Operador de divisão.
+* **'`%`'**: Operador de resto da divisão.
 
 **Exemplo:**
 
@@ -2233,23 +2263,613 @@ package main
 import "fmt"
 
 func main() {
-    // Variável que receberá o input
+    x := 5
+    y := 2
+
+    fmt.Println("Soma:", x + y)             // -> Soma: 7
+    fmt.Println("Subtração:", x - y)        // -> Subtração: 3
+    fmt.Println("Multiplicação:", x * y)    // -> Multiplicação: 10
+    fmt.Println("Divisão:", x / y)          // -> Divisão: 2
+    fmt.Println("Resto da divisão:", x % y) // -> Resto da divisão: 1
+}
+```
+
+> **NOTA:** Na divisão, o resultado é 2 porque ambos os operandos são inteiros, e por isso o resultado também é um inteiro. Para corrigir isso, um dos operados pode ser convertido para `float32` ou `float64`.
+
+Além disso, há também os operadores de incremento e decremento.
+
+* **'`++`'**: Operador de incremento.
+* **'`--`'**: Operador de decremento.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 5
+    x++
+    fmt.Println(x) // -> 6
+
+    x--
+    fmt.Println(x) // -> 5
+}
+```
+
+### Operadores de Comparação
+
+Os operadores de comparação compararam dois valores e retornam um valor booleano.
+
+Os operadores de comparação são:
+
+* **'`==` (Igual)'**: Verdadeiro se os operandos forem iguais (mesmo tipo e valor).
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := "Go!" == "Go!"
+        y := 2 == 2.0
+        z := 5 == '5'
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> false
+    }
+    ```
+
+* **'`!=` (Diferente)'**: Verdadeiro se os operandos forem diferentes.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := "Go!" != "Go!"
+        y := 2 != 2.0
+        z := 5 != '5'
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> false
+        fmt.Println(y) // -> true
+        fmt.Println(z) // -> true
+    }
+    ```
+
+* **'`<`' (Menor)**: Verdadeiro se o operando à esquerda for menor que o da direita.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := 2 < 5
+        y := 5.3 < 4
+        z := 6 < 7
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> true
+    }
+    ```
+
+* **'`>`' (Maior)**: Verdadeiro se o operando à esquerda for maior que o da direita.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := 5 > 2
+        y := 2 > 3
+        z := 7 > 7
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> false
+    }
+    ```
+
+* **'`<=`' (Menor ou igual)**: Verdadeiro se o operando à esquerda for menor ou igual ao da direita.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := 2 <= 5
+        y := 5 <= 4
+        z := 6 <= 6
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> true
+    }
+    ```
+
+* **'`>=`' (Maior ou igual)**: Verdadeiro se o operando à esquerda for maior ou igual ao da direita.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := 5 >= 2
+        y := 2 >= 3
+        z := 7 >= 7
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> true
+    }
+    ```
+
+### Operadores Lógicos
+
+* **'`&&`' (AND)**: Verdadeiro se ambos os operandos forem verdadeiro.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := true && true
+        y := true && false
+        z := false && false
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> false
+    }
+    ```
+
+* **'`||`' (OR)**: Verdadeiro se pelo menos um dos operandos for verdadeiro.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := true || true
+        y := true || false
+        z := false || false
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> true
+        fmt.Println(z) // -> false
+    }
+    ```
+
+* **'`!`' (NOT)**: Inverte o valor booleano, ou seja, se a variável ou expressão for verdadeira, ela se torna false, e se for falsa, se torna verdadeira.
+
+    ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Variáveis que armazenam operações
+        x := !false
+        y := !true
+        z := !(5 < 10)
+
+        // Imprime o resultado de operações
+        fmt.Println(x) // -> true
+        fmt.Println(y) // -> false
+        fmt.Println(z) // -> false
+    }
+    ```
+
+### Operadores Bitwise
+
+Os operadores bitwise são utilizados para realizar operações a nível de bits em números inteiros. Os operadores bitwise atuam em cada bit individual de dois números e executam operações como deslocamento, AND, OR, XOR, entre outros.
+
+**Os operadores bitwise são:**
+
+* **'`&`' (AND)**: Retorna 1 para cada posição de bit em que ambos os operadores têm o bit 1.
+
+  ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Operação bitwise
+        x := 5 // 0101 em binário
+        y := 3 // 0011 em binário
+        resultado := x & y // 0001 (1 em decimal)
+
+        // Imprime o resultado da operação
+        fmt.Println(resultado) // -> 1
+    }
+  ```
+
+* **'`|`' (OR)**: Retorna 1 para cada posição de bit em que pelo menos um dos operandos tem o bit 1.
+
+  ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Operação bitwise
+        x := 5 // 0101 em binário
+        y := 3 // 0011 em binário
+        resultado := x | y // 0111 (7 em decimal)
+
+        // Imprime o resultado da operação
+        fmt.Printf("Biário: %b | Decimal: %d\n", resultado, resultado)
+        // -> Biário: 111 | Decimal: 7
+    }
+  ```
+
+* **'`^`' (XOR)**: Retorna 1 para cada posição de bit em que apenas um dos operandos tem um bit 1.
+
+  ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Operação bitwise
+        x := 5 // 0101 em binário
+        y := 3 // 0011 em binário
+        resultado := x ^ y // 0110 (6 em decimal)
+
+        // Imprime o resultado da operação
+        fmt.Printf("Biário: %b | Decimal: %d\n", resultado, resultado)
+        // -> Biário: 110 | Decimal: 6
+    }
+  ```
+
+* **'`<<`' (Deslocamento à Esquerda)**: Move os bits dos números para a esquerda.
+
+  ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Operação bitwise
+        x := 5 // 0101 em binário
+        resultado := x << 2 // 10100 (20 em decimal)
+
+        // Imprime o resultado da operação
+        fmt.Printf("Biário: %b | Decimal: %d\n", resultado, resultado)
+        // -> Biário: 10100 | Decimal: 20
+    }
+  ```
+
+* **'`>>`' (Deslocamento à Direita)**: Move os bits dos números para a direta.
+
+  ``` go
+    package main
+
+    import "fmt"
+
+    func main() {
+        // Operação bitwise
+        x := 5 // 0101 em binário
+        resultado := x >> 2 // 0001 (1 em decimal)
+
+        // Imprime o resultado da operação
+        fmt.Println(resultado) // -> 1
+    }
+  ```
+
+### Operadores de Atribuição
+
+O operador de atribuição mais comum é **`=`**, mas também há outros operadores que realizam uma operação e armazenam o resultado na variável.
+
+**Os operadores de atribuição são:**
+
+* **'`=`'**: Atribui o valor à variavel.
+* **'`+=`'**: Soma um valor à variável.
+* **'`-=`'**: Subtrai um valor da variável.
+* **'`*=`'**: Multiplica a variável por um valor.
+* **'`/=`'**: Divide a variável por um valor.
+* **'`%=`'**: Calcula o resto da divisão da variável pelo valor e atribui o resultado à variável.
+* **'`&=`'**: Realiza a operação bit a bit AND com a variável e o valor, e então atribui o resultado à variável.
+* **'`|=`'**: Realiza a operação bit a bit OR com a variável e o valor, e então atribui o resultado à variável.
+* **'`^=`'**: Realiza a operação bit a bit XOR com a variável e o valor, e então atribui o resultado à variável.
+* **'`<<=`'**: Desloca os bits da variável para a esquerda na mesma quantidade de vezes do valor.
+* **'`>>=`'**: Desloca os bits da variável para a direita na mesma quantidade do valor.
+
+## Estruturas Condicionais
+
+### `if`, `else` e `else if`
+
+As palavras-chaves `if`, `else` e `else if` são usadas para analisar condições, sendo essas condições uma expressão ou variável que retorna um valor booleano.
+
+**Sintaxe `if`:**
+
+``` go
+if condicao {
+    // Bloco executa quando a condição for verdadeira
+}
+```
+
+A condição deve ser uma expressão ou uma variável que retorna um valor booleano, e ela testar verdadeiro, será executado o código dentro do bloco.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    if 1 + 1 == 2 {
+        // Esse bloco irá executar, já que 1 + 1 é 2
+        fmt.Println("1 + 1 é igual a 2!") // -> 1 + 1 é igual a 2
+    }
+}
+```
+
+**Sintaxe `if`/`else`:**
+
+``` go
+if condicao {
+    // Executa quando a condicao é verdadeira
+} else {
+    // Executa quando o bloco `if` não executa
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    if 1 + 1 == 3 {
+        // Esse bloco não irá executar
+        fmt.Println("1 + 1 é igual a 3!")
+    } else {
+        // Esse bloco irá executar, já que o bloco acima não executou
+        fmt.Println("Bloco else") // -> Bloco else
+    }
+}
+```
+
+**Sintaxe `if`/`else if`:**
+
+``` go
+if condicao1 {
+    // Executa caso a `condicao1` seja verdadeira
+} else if condicao2 {
+    // Executa caso a `condicao2` seja verdadeira
+} // Pode ou não possuir `else`
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 2
+    if x == 1 {
+        fmt.Println("X é 1")
+    } else if x == 2 {
+        // Apenas esse bloco executará
+        fmt.Println("X é 2") // -> X é 2
+    } else if x == 3 {
+        fmt.Println("X é 3")
+    } else {
+        fmt.Println("X é diferente de 1, 2 e 3")
+    }
+}
+```
+
+> **NOTA:** Em uma estrutura condicional podem haver nenhum ou vários `else if`, e apenas um `else`. Além disso, a estrutura sempre deve ser inicializada com `if`.
+
+### Estrutura `switch`
+
+Uma estrutura **`switch`** permite executar um bloco diferente de acordo com o valor de uma dada variável ou expressão.
+
+**Sintaxe:**
+
+``` go
+switch expressao {
+case valor1:
+    // Executa caso `expressao` seja igual a `valor1`
+case valor2:
+    // Executa caso `expressao` seja igual a `valor2`
+case valor3:
+    // Executa caso `expressao` seja igual a `valor3`
+default:
+    // Executa caso nenhum `case` anterior execute
+}
+```
+
+Se o valor passado após a palavra-chave `case` for igual ao valor da expressão passada em `switch`, o bloco abaixo é executado, mas se o valor não corresponder, então é passado para o próximo `case`. Se nenhum `case` corresponder, é executado o bloco `default`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 2
+    switch x {
+    case 1:
+        fmt.Println("X é 1")
+    case 2:
+        // Apenas este bloco irá executar
+        fmt.Println("X é 2") // -> X é 2
+    case 3:
+        fmt.Println("X é 3")
+    default:
+        fmt.Println("X é diferente de 1, 2 e 3")
+    }
+}
+```
+
+#### Múltiplos Valores em `case`
+
+Um `case` pode receber mais de um valor, permitindo executar um único bloco para diferentes valores, sem a necessidade de duplicar blocos.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 3
+    switch x {
+    case 1, 2, 3:
+        // Este bloco irá executar, já que x é 3
+        fmt.Println("X é 1, 2 ou 3") // -> X é 1, 2 ou 3
+    default:
+        fmt.Println("X é diferente de 1, 2 e 3")
+    }
+}
+```
+
+#### `switch` sem Expressão
+
+Se não definida uma expressão em uma estrutura `switch`, os `case`s aceitam uma condição, executando seus blocos caso essa expressão seja verdadeira.
+
+**Sintaxe:**
+
+``` go
+switch {
+case condicao1:
+    // Executa quando `condicao1` for verdadeira
+case condicao2:
+    // Executa quando `condicao2` for verdadeira
+case condicao3:
+    // Executa quando `condicao3` for verdadeira
+default:
+    // Executa quando nenhum `case` corresponder
+}
+```
+
+Basicamente, uma estrutura `switch` sem expressão é uma estrutura condicional `if`/`else if`, e geralmente é mais eficiente, além de ser mais legível.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 2
+    switch {
+    case x == 1:
+        fmt.Println("X é 1")
+    case x == 2:
+        // Apenas este bloco irá executar
+        fmt.Println("X é 2") // -> X é 2
+    case x == 3:
+        fmt.Println("X é 3")
+    default:
+        fmt.Println("X é diferente de 1, 2 e 3")
+    }
+}
+```
+
+#### Palavra-chave `fallthrough`
+
+A palavra-chave **`fallthrough`** é usada para executar também o próximo bloco `case`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    x := 2
+    switch {
+    case x == 1:
+        fmt.Println("X é 1")
+    case x == 2:
+        // Este bloco irá executar
+        fmt.Println("X é 2") // -> X é 2
+        fallthrough
+    case x == 3:
+        // Este bloco também irá executar
+        fmt.Println("X é 3") // -> X é 3
+    default:
+        fmt.Println("X é diferente de 1, 2 e 3")
+    }
+}
+```
+
+## Input de Valores
+
+### Input de No Mínimo Uma Palavra
+
+Para capturar a entrada do usuário até o primeiro espaço em branco, pode ser utiliado as funções **`fmt.Scan()`**, **`fmt.Scanf()`** e **`fmt.Scanln()`**.
+
+#### Função `fmt.Scan()`
+
+A função `fmt.Scan()` captura a entrada do usuário até o primeiro espaço em branco, independentemente do tipo de valor.
+
+**Sintaxe:**
+
+``` go
+fmt.Scan(&variavel)
+```
+
+A variável passada será a variável que vai receber o valor passado pelo usuário. A função deve receber o endereço de memória da variável, e por isso é usado o operador **`&`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
     var nome string
-
-    // Mensagem do input
     fmt.Print("Digite seu nome: ")
-
-    // Pede um nome ao usuário
     fmt.Scan(&nome)
-
-    // Imprime uma mensagem com o nome
     fmt.Printf("Olá, %s!\n", nome)
 }
 ```
 
 #### Função `fmt.Scanf()`
 
-Similar a função `fmt.Scan()`, porém aceita apenas um tipo de entrada. A entrada permitida deve ser especifica por meio de um formatador, como `"%s"` ou `"%d"`.
+A função `fmt.Scanf()` é similar a função `fmt.Scan()`, porém aceita apenas um tipo de entrada. A entrada permitida deve ser especifica por meio de um formatador, como `"%s"` e `"%d"`.
 
 **Sintaxe:**
 
@@ -2297,9 +2917,9 @@ func main() {
 }
 ```
 
-No código acima, a função **`LimparBuffer()`** é usada para ler uma linha de texto de entrada padrão e descartá-la. Isso é necessário para que na segunda entrada, não haja conflitos com a primeira.
+No exemplo acima, a função **`LimparBuffer()`** é usada para ler uma linha de texto de entrada padrão e descartá-la. Isso é necessário para que não haja conflitos da primeira entrada com a segunda.
 
-A necessidade de limpar o buffer após uma entrada com `fmt.Scanf()` é por conta dessa função deixar uma quebra de linha no fim da entrada, afetando assim o próximo input, caso houver.
+A necessidade de limpar o buffer após uma entrada com `fmt.Scanf()` é por conta dessa função deixar uma quebra de linha no fim da entrada, afetando assim o próximo input, caso haja.
 
 #### Função `fmt.Scanln()`
 
@@ -2333,16 +2953,21 @@ func main() {
 }
 ```
 
-### Com o Pacote `bufio`
+### Input com Mais de Uma Palavra
 
-O pacote `bufio` em conjunto com o pacote `os` permite ler entradas com mais de uma palavra.
+O pacote `bufio` em conjunto com o pacote `os` fornece ferramentas que permitem ler entradas com mais de uma palavra.
 
 **Sintaxe:**
 
 ``` go
-scanner := bufio.NewScanner(os.Stdin) // Cria um scanner para leitura
-scanner.Scan() // Lê uma linha da entrada do usuário
-variavel := scanner.Text() // Retorna o texto lido da chamada anterior
+// Cria um scanner para leitura
+scanner := bufio.NewScanner(os.Stdin)
+
+// Lê uma linha de entrada do usuário
+scanner.Scan()
+
+// Retorna o texto lido da chamada anterior
+variavel := scanner.Text()
 ```
 
 **Exemplo:**
@@ -2382,10 +3007,10 @@ Em Go, arrays só podem armazenar valores de mesmo tipo. Declarar um array é si
 
 ``` go
 // Com `var`
-var nomeArray = [comprimento]tipo{valor1, valor2, ..., valor10}
+var nomeArray = [comprimento]tipo{valor1, valor2, ..., valorN}
 
 // Com `:=`
-nomeArray := [comprimento]tipo{valor1, valor2, ..., valor10}
+nomeArray := [comprimento]tipo{valor1, valor2, ..., valorN}
 ```
 
 **Exemplo:**
@@ -2428,11 +3053,11 @@ func main() {
     myArray := [5]int{2, 4, 6, 8, 10}
 
 
-    fmt.Println(myArray[0]) // Output => 2
-    fmt.Println(myArray[1]) // Output => 4
-    fmt.Println(myArray[2]) // Output => 6
-    fmt.Println(myArray[3]) // Output => 8
-    fmt.Println(myArray[4]) // Output => 10
+    fmt.Println(myArray[0]) // -> 2
+    fmt.Println(myArray[1]) // -> 4
+    fmt.Println(myArray[2]) // -> 6
+    fmt.Println(myArray[3]) // -> 8
+    fmt.Println(myArray[4]) // -> 10
 }
 ```
 
@@ -2450,7 +3075,7 @@ func main() {
     // Altera o segundo elemento para `20`
     myArray[1] = 20
 
-    fmt.Println(myArray) // Output => [2 20 6 8]
+    fmt.Println(myArray) // -> [2 20 6 8]
 }
 ```
 
@@ -2478,10 +3103,10 @@ func main() {
     boolArray := [3]bool{}
 
     // Imprime os arrays
-    fmt.Println(intArray)   // Output => [0 0 0]
-    fmt.Println(floatArray) // Output => [0 0 0]
-    fmt.Println(strArray)   // Output => [  ]
-    fmt.Println(boolArray)  // Output => [false false false]
+    fmt.Println(intArray)   // -> [0 0 0]
+    fmt.Println(floatArray) // -> [0 0 0]
+    fmt.Println(strArray)   // -> [  ]
+    fmt.Println(boolArray)  // -> [false false false]
 }
 ```
 
@@ -2501,7 +3126,7 @@ func main() {
     myArray := [5]int{1:5, 2:10}
 
     // Imprime o array
-    fmt.Println(myArray) // Output => [0 5 10 0 0]
+    fmt.Println(myArray) // -> [0 5 10 0 0]
 }
 ```
 
@@ -2514,7 +3139,7 @@ Para declarar uma slice, basta declarar um array sem especificar um tamanho fixo
 **Sintaxe:**
 
 ``` go
-nomeSlice := []tipo{valor1, valor2, ..., valor10}
+nomeSlice := []tipo{valor1, valor2, ..., valorN}
 ```
 
 **Exemplo:**
@@ -2531,9 +3156,9 @@ func main() {
     mySlice3 := []int{5, 4, 3, 2}
 
     // Imprime a largura dos slices
-    fmt.Println(len(mySlice1)) // Output => 0
-    fmt.Println(len(mySlice2)) // Output => 3
-    fmt.Println(len(mySlice3)) // Output => 4
+    fmt.Println(len(mySlice1)) // -> 0
+    fmt.Println(len(mySlice2)) // -> 3
+    fmt.Println(len(mySlice3)) // -> 4
 }
 ```
 
@@ -2564,15 +3189,15 @@ func main() {
     mySlice2 := make([]int, 2)
 
     // Imprimindo os slices
-    fmt.Println(mySlice1) // Output => [0 0 0]
-    fmt.Println(mySlice2) // Output => [0 0]
+    fmt.Println(mySlice1) // -> [0 0 0]
+    fmt.Println(mySlice2) // -> [0 0]
 
     // Imprimindo largura e capacidade dos slices
-    fmt.Println(len(mySlice1)) // Output => 3
-    fmt.Println(cap(mySlice1)) // Output => 5
+    fmt.Println(len(mySlice1)) // -> 3
+    fmt.Println(cap(mySlice1)) // -> 5
 
-    fmt.Println(len(mySlice2)) // Output => 2
-    fmt.Println(cap(mySlice2)) // Output => 2
+    fmt.Println(len(mySlice2)) // -> 2
+    fmt.Println(cap(mySlice2)) // -> 2
 }
 ```
 
@@ -2594,9 +3219,9 @@ func main() {
     mySlice3 := []int{5, 4, 3, 2}
 
     // Imprime a largura dos slices
-    fmt.Println(len(mySlice1)) // Output => 0
-    fmt.Println(len(mySlice2)) // Output => 3
-    fmt.Println(len(mySlice3)) // Output => 4
+    fmt.Println(len(mySlice1)) // -> 0
+    fmt.Println(len(mySlice2)) // -> 3
+    fmt.Println(len(mySlice3)) // -> 4
 }
 ```
 
@@ -2614,9 +3239,9 @@ func main() {
     mySlice3 := make([]int, 3, 4)
 
     // Imprime a capacidade dos slices
-    fmt.Println(cap(mySlice1)) // Output => 10
-    fmt.Println(cap(mySlice2)) // Output => 2
-    fmt.Println(cap(mySlice3)) // Output => 4
+    fmt.Println(cap(mySlice1)) // -> 10
+    fmt.Println(cap(mySlice2)) // -> 2
+    fmt.Println(cap(mySlice3)) // -> 4
 }
 ```
 
@@ -2652,12 +3277,12 @@ func main() {
     slice6 := mySlice[:]
 
     // Imprime as fatias
-    fmt.Println(slice1) // Output => [4 5 6 7]
-    fmt.Println(slice2) // Output => [2 3]
-    fmt.Println(slice3) // Output => [6 7 8 9]
-    fmt.Println(slice4) // Output => [3 4 5]
-    fmt.Println(slice5) // Output => [1 2 3 4]
-    fmt.Println(slice6) // Output => [1 2 3 4 5 6 7 8 9]
+    fmt.Println(slice1) // -> [4 5 6 7]
+    fmt.Println(slice2) // -> [2 3]
+    fmt.Println(slice3) // -> [6 7 8 9]
+    fmt.Println(slice4) // -> [3 4 5]
+    fmt.Println(slice5) // -> [1 2 3 4]
+    fmt.Println(slice6) // -> [1 2 3 4 5 6 7 8 9]
 }
 ```
 
@@ -2686,8 +3311,8 @@ func main() {
     novoSlice := append(mySlice[:], 5)
 
     // Imprime a slice antigo e o novo
-    fmt.Println(mySlice)    // Output => [1 2 3 4]
-    fmt.Println(novoSlice)  // Output => [1 2 3 4 5]
+    fmt.Println(mySlice)    // -> [1 2 3 4]
+    fmt.Println(novoSlice)  // -> [1 2 3 4 5]
 }
 ```
 
@@ -2708,7 +3333,7 @@ func main() {
     mySlice = append(mySlice[:], 5, 6, 7)
 
     // Imprime a slice
-    fmt.Println(mySlice) // Output => [1 2 3 4 5 6 7]
+    fmt.Println(mySlice) // -> [1 2 3 4 5 6 7]
 }
 ```
 
@@ -2728,7 +3353,7 @@ func main() {
     mySlice3 := append(mySlice1, mySlice2...)
 
     // Imprimindo a cópia dos slices
-    fmt.Println(mySlice3) // Output => [1 2 3 10 20 30]
+    fmt.Println(mySlice3) // -> [1 2 3 10 20 30]
 }
 ```
 
@@ -2756,7 +3381,7 @@ func main() {
     mySlice = append(mySlice[:indexToRemove], mySlice[indexToRemove + 1:]...)
 
     // Imprime a nova slice
-    fmt.Println(mySlice) // Output => [1 2 4 5]
+    fmt.Println(mySlice) // -> [1 2 4 5]
 }
 ```
 
@@ -2787,7 +3412,7 @@ func main() {
     }
 
     // Imprime a nova slice
-    fmt.Println(newSlice) // Output => [1 3 4 5]
+    fmt.Println(newSlice) // -> [1 3 4 5]
 }
 ```
 
@@ -2815,7 +3440,7 @@ func main() {
     fmt.Printf("Elementos copiados: %d\n", numElements)
     fmt.Printf("Cópia da slice: %v\n", newSlice)
 
-    /* Output =>
+    /* ->
     Slice original: [1 2 3 4 5]
     Elementos copiados: 5
     Cópia da slice: [1 2 3 4 5 0]
@@ -2844,7 +3469,7 @@ func main() {
 
     // Imprime a matriz
     fmt.Println(matriz)
-    // Output => [[1 2 3] [4 5 6] [7 8 9]]
+    // -> [[1 2 3] [4 5 6] [7 8 9]]
 }
 ```
 
@@ -2876,7 +3501,7 @@ func main() {
 
     // Imprime a matriz
     fmt.Println(matriz)
-    // Output => [[1 2 3] [4 5 6] [7 8 9]]
+    // -> [[1 2 3] [4 5 6] [7 8 9]]
 }
 ```
 
@@ -2902,7 +3527,7 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
         sort.Ints(myIntSlice)
 
         // Imprime a slice ordenada
-        fmt.Println(myIntSlice) // Output => [1 2 3 4 5]
+        fmt.Println(myIntSlice) // -> [1 2 3 4 5]
     }
     ```
 
@@ -2924,7 +3549,7 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
         sort.Float64s(myFloatSlice)
 
         // Imprime a slice ordenada
-        fmt.Println(myFloatSlice) // Output => [5.1 5.2 5.3 5.4 5.5]
+        fmt.Println(myFloatSlice) // -> [5.1 5.2 5.3 5.4 5.5]
     }
     ```
 
@@ -2946,7 +3571,7 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
         sort.Strings(myStrSlice)
 
         // Imprime a slice ordenada
-        fmt.Println(myStrSlice) // Output => [C++ Go Python Ruby]
+        fmt.Println(myStrSlice) // -> [C++ Go Python Ruby]
     }
     ```
 
@@ -2967,7 +3592,7 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
         // Verifica se a slice está ordenada
         ordenado := sort.IntsAreSorted(myIntSlice)
 
-        fmt.Println(ordenado) // Output => true
+        fmt.Println(ordenado) // -> true
     }
     ```
 
@@ -2988,7 +3613,7 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
         // Verifica se a slice está ordenada
         ordenado := sort.Float64sAreSorted(myFloatSlice)
 
-        fmt.Println(ordenado) // Output => true
+        fmt.Println(ordenado) // -> true
     }
     ```
 
@@ -3009,483 +3634,13 @@ O pacote **`sort`** fornece funcionalidades para ordenar slices e arrays.
         // Verifica se a slice está ordenada
         ordenado := sort.StringsAreSorted(myStrSlice)
 
-        fmt.Println(ordenado) // Output => true
+        fmt.Println(ordenado) // -> true
     }
     ```
-
-## Operadores
-
-Em Go, os quatro tipos de operadores principais são:
-
-* Operadores aritméticos
-* Operadores de comparação
-* Operadores lógicos
-* Operadores bitwise
-
-### Operadores Aritméticos
-
-Permitem realizar operações matemáticas em variáveis ou valores numéricos. Os operadores aritméticos são:
-
-* **'`+`'**: Adição.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 10 + 5
-        y := 7 + 4
-        z := 1 + 1
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => 15
-        fmt.Println(y) // Output => 11
-        fmt.Println(z) // Output => 2
-    }
-    ```
-
-* **'`-`'**: Subtração.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 5 - 2
-        y := 1 - 3
-        z := 10 - 8
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => 3
-        fmt.Println(y) // Output => -2
-        fmt.Println(z) // Output => 2
-    }
-    ```
-
-* **'`*`'**: Multiplicação.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 10 * 3
-        y := 13 * 1
-        z := 8 * 8
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => 30
-        fmt.Println(y) // Output => 13
-        fmt.Println(z) // Output => 64
-    }
-    ```
-
-* **'`/`'**: Divisão.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 12 / 2
-        y := 21 / 3
-        z := 5 / 2
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => 6
-        fmt.Println(y) // Output => 7
-        fmt.Println(z) // Output => 2
-    }
-    ```
-
-    Se ambos os operandos forem inteiros, o resultado será inteiro e por isso `5 / 2 = 2`. Para a divisão real, pelo menos um dos operandos deve ser um número de ponto flutuante.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 13 / 2.0
-        y := 9.0 / 6.0
-        z := 5.0 / 2
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => 6.5
-        fmt.Println(y) // Output => 1.5
-        fmt.Println(z) // Output => 2.5
-    }
-    ```
-
-* **'`%`'**: Módulo (resto da divisão).
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 13 % 2
-        y := 9 % 6
-        z := 5 % 2
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => 1
-        fmt.Println(y) // Output => 3
-        fmt.Println(z) // Output => 1
-    }
-    ```
-
-* **'`++`'**: Incrementa 1 à uma variável.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variável com o valor 10
-        x := 10
-
-        // Incrementa 1 à variável
-        x++ // O mesmo que `x += 1` ou `x = x + 1`
-
-        // Imprime a variável
-        fmt.Println(x) // Output => 11
-    }
-    ```
-
-* **'`--`'**: Decrementa 1 de uma variável.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variável com o valor 10
-        x := 10
-
-        // Decrementa 1 de uma variável
-        x-- // O mesmo que `x -= 1` ou `x = x - 1`
-
-        // Imprime a variável
-        fmt.Println(x) // Output => 9
-    }
-    ```
-
-### Operadoes de Comparação
-
-* **'`==` (Igual)'**: Verdadeiro se os operandos forem iguais (mesmo tipo e valor).
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := "Go!" == "Go!"
-        y := 2 == 2.0
-        z := 5 == '5'
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => false
-    }
-    ```
-
-* **'`!=` (Diferente)'**: Verdadeiro se os operandos forem diferentes.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := "Go!" != "Go!"
-        y := 2 != 2.0
-        z := 5 != '5'
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => false
-        fmt.Println(y) // Output => true
-        fmt.Println(z) // Output => true
-    }
-    ```
-
-* **'`<`' (Menor)**: Verdadeiro se o operando à esquerda for menor que o da direita.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 2 < 5
-        y := 5.3 < 4
-        z := 6 < 7
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => true
-    }
-    ```
-
-* **'`>`' (Maior)**: Verdadeiro se o operando à esquerda for maior que o da direita.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 5 > 2
-        y := 2 > 3
-        z := 7 > 7
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => false
-    }
-    ```
-
-* **'`<=`' (Menor ou igual)**: Verdadeiro se o operando à esquerda for menor ou igual ao da direita.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 2 <= 5
-        y := 5 <= 4
-        z := 6 <= 6
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => true
-    }
-    ```
-
-* **'`>=`' (Maior ou igual)**: Verdadeiro se o operando à esquerda for maior ou igual ao da direita.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := 5 >= 2
-        y := 2 >= 3
-        z := 7 >= 7
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => true
-    }
-    ```
-
-### Operadores Lógicos
-
-* **'`&&`' (AND)**: Verdadeiro se ambos os operandos forem verdadeiro.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := true && true
-        y := true && false
-        z := false && false
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => false
-    }
-    ```
-
-* **'`||`' (OR)**: Verdadeiro se pelo menos um dos operandos for verdadeiro.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := true || true
-        y := true || false
-        z := false || false
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => true
-        fmt.Println(z) // Output => false
-    }
-    ```
-
-* **'`!`' (NOT)**: Inverte o valor booleano, ou seja, se a variável ou expressão for verdadeira, ela se torna false, e se for falsa, se torna verdadeira.
-
-    ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Variáveis que armazenam operações
-        x := !false
-        y := !true
-        z := !(5 < 10)
-
-        // Imprime o resultado de operações
-        fmt.Println(x) // Output => true
-        fmt.Println(y) // Output => false
-        fmt.Println(z) // Output => false
-    }
-    ```
-
-### Operadores Bitwise
-
-São utilizados para realizar operações a nível de bits em números inteiros. Os operadores bitwise atuam em cada bit individual de dois números e executam operações como deslocamento, AND, OR, XOR, entre outros.
-
-**Os operadores bitwise são:**
-
-* **'`&`' (AND)**: Retorna 1 para cada posição de bit em que ambos os operadores têm o bit 1.
-
-  ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Operação bitwise
-        x := 5 // 0101 em binário
-        y := 3 // 0011 em binário
-        resultado := x & y // 0001 (1 em decimal)
-
-        // Imprime o resultado da operação
-        fmt.Println(resultado) // Output => 1
-    }
-  ```
-
-* **'`|`' (OR)**: Retorna 1 para cada posição de bit em que pelo menos um dos operandos tem o bit 1.
-
-  ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Operação bitwise
-        x := 5 // 0101 em binário
-        y := 3 // 0011 em binário
-        resultado := x | y // 0111 (7 em decimal)
-
-        // Imprime o resultado da operação
-        fmt.Printf("Biário: %b | Decimal: %d\n", resultado, resultado)
-        // Output => Biário: 111 | Decimal: 7
-    }
-  ```
-
-* **'`^`' (XOR)**: Retorna 1 para cada posição de bit em que apenas um dos operandos tem um bit 1.
-
-  ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Operação bitwise
-        x := 5 // 0101 em binário
-        y := 3 // 0011 em binário
-        resultado := x ^ y // 0110 (6 em decimal)
-
-        // Imprime o resultado da operação
-        fmt.Printf("Biário: %b | Decimal: %d\n", resultado, resultado)
-        // Output => Biário: 110 | Decimal: 6
-    }
-  ```
-
-* **'`<<`' (Deslocamento à Esquerda)**: Move os bits dos números para a esquerda.
-
-  ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Operação bitwise
-        x := 5 // 0101 em binário
-        resultado := x << 2 // 10100 (20 em decimal)
-
-        // Imprime o resultado da operação
-        fmt.Printf("Biário: %b | Decimal: %d\n", resultado, resultado)
-        // Output => Biário: 10100 | Decimal: 20
-    }
-  ```
-
-* **'`>>`' (Deslocamento à Direita)**: Move os bits dos números para a direta.
-
-  ``` go
-    package main
-
-    import "fmt"
-
-    func main() {
-        // Operação bitwise
-        x := 5 // 0101 em binário
-        resultado := x >> 2 // 0001 (1 em decimal)
-
-        // Imprime o resultado da operação
-        fmt.Println(resultado) // Output => 1
-    }
-  ```
-
-### Operadores de Atribuição
-
-O operador de atribuição mais comum é **`=`**, mas também há outros operadores que realizam uma operação e armazenam o resultado na variável.
-
-**Os operadores de atribuição são:**
-
-* **'`=`'**: Atribui o valor à variavel.
-* **'`+=`'**: Soma um valor à variável.
-* **'`-=`'**: Subtrai um valor da variável.
-* **'`*=`'**: Multiplica a variável por um valor.
-* **'`/=`'**: Divide a variável por um valor.
-* **'`%=`'**: Calcula o resto da divisão da variável pelo valor e atribui o resultado à variável.
-* **'`&=`'**: Realiza a operação bit a bit AND com a variável e o valor, e então atribui o resultado à variável.
-* **'`|=`'**: Realiza a operação bit a bit OR com a variável e o valor, e então atribui o resultado à variável.
-* **'`^=`'**: Realiza a operação bit a bit XOR com a variável e o valor, e então atribui o resultado à variável.
-* **'`<<=`'**: Desloca os bits da variável para a esquerda na mesma quantidade de vezes do valor.
-* **'`>>=`'**: Desloca os bits da variável para a direita na mesma quantidade do valor.
 
 ## Estruturas de Repetição
 
-Em Go, **`for`** é o único loop, podendo ser usado para diferentes casos.
+Em Go, **`for`** é o único loop, podendo ser usado em diferentes casos.
 
 **Sintaxe:**
 
@@ -3494,7 +3649,7 @@ for variavelInicial; condicao; incremento
 ```
 
 * **'`variavelInicial`'**: Inicia uma variável.
-* **'`condicao`'**: É analisada em toda iteração do loop, encerrando o loop quando se torna falsa.
+* **'`condicao`'**: Avalia uma condição em toda iteração do loop, encerrando o loop quando se torna falsa.
 * **'`incremento`'**: Incrementa a variável iniciada a cada iteração do loop.
 
 **Exemplo:**
@@ -3505,16 +3660,24 @@ package main
 import "fmt"
 
 func main() {
-    for i := 0; i < 5; i++ {
-        fmt.Printf("%d ", i)
+    for x := 0; x < 10; x++ {
+        fmt.Printf("%d ", x)
     }
-    // Output => 0 1 2 3 4
+    // Output final: 0 1 2 3 4 5 6 7 8 9
 }
 ```
 
-### Palavra-chave `break`
+### Loop Condicional
 
-A palavra-chave **`break`** sai de um loop imediatamente.
+Um loop condicional executa enquando uma dada condição se mantiver verdadeira.
+
+**Sintaxe:**
+
+``` go
+for condicao {
+    // Executa enquando `condicao` for verdadeira
+}
+```
 
 **Exemplo:**
 
@@ -3524,21 +3687,23 @@ package main
 import "fmt"
 
 func main() {
-    for i := 0; i < 10; i++ {
-        if i == 5 { break }
-        fmt.Printf("%d ", i)
+    x := 0
+    for x < 10 {
+        fmt.Printf("%d ", x)
+        x++
     }
-    // Output => 0 1 2 3 4
+    // Output final: 0 1 2 3 4 5 6 7 8 9
 }
 ```
 
-No exemplo acima, o loop é encerrado quando a variável de inicialização se torna 5.
+### Controle de Fluxo em Loops
 
-### Palavra-chave `continue`
+Para controlar o fluxo em loops, existem as palavras-chaves **`break`** e **`continue`**.
 
-A palavra-chave **`continue`** pula para a próxima iteração do loop.
+* **'`break`'**: Interrompe o loop.
+* **'`continue`'**: Pula para a próxima iteração do loop.
 
-**Exemplo:**
+**Exemplo com `break`:**
 
 ``` go
 package main
@@ -3546,21 +3711,17 @@ package main
 import "fmt"
 
 func main() {
-    for i := 0; i < 10; i++ {
-        if i % 2 != 0 { continue }
-        fmt.Printf("%d ", i)
+    for x := 0; x < 10; x++ {
+        if x > 5 {
+            break
+        }
+        fmt.Printf("%d ", x)
     }
-    // Output => 0 2 4 6 8
+    // Output final: 0 1 2 3 4 5
 }
 ```
 
-No exemplo acima, é pulado para a príxima iteração toda vez que a variável de inicialização for ímpar.
-
-### Loop apenas com Condição
-
-Um loop **`for`** com apenas condições executa até que a condição se torne falsa ou o loop seja interrompido com `break`.
-
-**Exemplo:**
+**Exemplo com `continue`:**
 
 ``` go
 package main
@@ -3568,18 +3729,27 @@ package main
 import "fmt"
 
 func main() {
-    cont := 0
-    for cont < 5 {
-        fmt.Printf("%d ", cont)
-        cont++
+    for x := 0; x < 10; x++ {
+        if x % 2 != 0 {
+            continue
+        }
+        fmt.Printf("%d ", x)
     }
-    // Output => 0 1 2 3 4
+    // Output final: 0 2 4 6 8
 }
 ```
 
 ### Loop Infinito
 
-Declarar **`for`** sem mais outras declarações, resultará em um loop infinito que só se encerrará com `break`.
+Um `for` sem nenhuma declaração irá executar seu bloco continuamente até encontrar a palavra-chave `break`.
+
+**Sintaxe:**
+
+``` go
+for {
+    // Executará infinitamente
+}
+```
 
 **Exemplo:**
 
@@ -3589,19 +3759,21 @@ package main
 import "fmt"
 
 func main() {
-    cont := 0
+    var x int
     for {
-        fmt.Printf("%d ", cont)
-        cont++
-        if cont == 5 { break }
+        fmt.Printf("%d ", x)
+        x++
+        if x > 9 {
+            break
+        }
     }
-    // Output => 0 1 2 3 4
+    // Output final: 0 1 2 3 4 5 6 7 8 9
 }
 ```
 
 ### Loop com `range`
 
-Para iterar sobre strings, arrays, slices, map sou canais, são declaradas variáveis de índice e valor junto à declaração `for`.
+Para iterar sobre strings, arrays, slices, maps ou canais, são declaradas variáveis de índice e valor junto à declaração `for`.
 
 **Sintaxe:**
 
@@ -3657,216 +3829,6 @@ func main() {
 }
 ```
 
-## Estruturas Condicionais
-
-### Estruturas `if`, `else` e `else if`
-
-#### Declaração `if`
-
-Uma estrutura condicional é iniciada com a declaração **`if`**, e após ele uma condição e um bloco de código. O bloco de código só irá executar se a condição for verdadeira.
-
-**Sintaxe:**
-
-``` go
-if condicao {
-    // Bloco que executa quando a `condicao` for `true`
-}
-```
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := true
-    if x {
-        fmt.Println("Olá, Mundo!")
-    }
-    // Output => Olá, Mundo!
-}
-```
-
-#### Declaração `else`
-
-Além de `if`, há também a declaração **`else`**, que executa quando o `if` não é verdadeiro.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := false
-    if x {
-        fmt.Println("Olá, Mundo!")
-    } else {
-        fmt.Println("Olá, Go!")
-    }
-    // Output => Olá, Go!
-}
-```
-
-> **OBS.:** Em uma estrutura condicinal só pode haver um `else`.
-
-#### Declaralção `else if`
-
-E por fim, há a declaração **`else if`**, que funciona como o `if`, mas só é verificada se as condições acima dela forem falsas.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := 2
-    if x == 1 {
-        fmt.Println("Olá, Mundo!")
-    } else if x == 2 {
-        fmt.Println("Olá, Go!")
-    } else {
-        fmt.Println("Valor diferente de 1 e 2")
-    }
-    // Output => Olá, Go!
-}
-```
-
-> **OBS.:** Em uma estrutura condicional pode haver vários `else if`.
-
-### Estrutura `switch`
-
-Executa um bloco dentre vários, baseando-se no valor de uma dada variável ou expressão. Para cada possível valor de uma expressão, é criado um **`case`**, e no fim é criado um **`default`** caso nenhum `case` seja executado.
-
-**Sintaxe:**
-
-``` go
-switch expressao {
-case opcao1:
-    // Executa caso o valor de `expressao` seja `opcao1`
-case opcao2:
-    // Executa caso o valor de `expressao` seja `opcao2`
-...
-case opcaoN:
-    // Executa caso o valor de `expressao` seja `opcaoN`
-default:
-    // Executa quando nenhum caso acima é executado
-}
-```
-
-> **OBS.:** O valor de cada `case` deve ser do mesmo tipo da expressão, ou será lançado um erro.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := 3
-
-    switch x {
-    case 1:
-        fmt.Println("x é igual a 1")
-    case 2:
-        fmt.Println("x é igual a 2")
-    case 3:
-        fmt.Println("x é igual a 3")
-    default:
-        fmt.Println("x é diferente de 1, 2 e 3")
-    }
-    // Output => x é igual a 3
-}
-```
-
-Para executar também o próximo `case`, você pode declarar **`fallthrough`** no fim de um bloco `case`.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := 1
-
-    switch x {
-    case 1:
-        fmt.Println("x é igual a 1")
-        fallthrough
-    case 2:
-        fmt.Println("x é igual a 2")
-    case 3:
-        fmt.Println("x é igual a 3")
-    default:
-        fmt.Println("x é diferente de 1, 2 e 3")
-    }
-    /* Output:
-    x é igual a 1
-    x é igual a 2
-    */
-}
-```
-
-#### Múltiplos Valores para `case`
-
-Um `case` pode receber mais de um valor, e assim, permitindo executar um único bloco para diferentes valores, sem a necessidade de duplicar blocos.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := 3
-
-    switch x {
-    case 1, 2, 3:
-        fmt.Println("x é igual a 1, 2 ou 3")
-    default:
-        fmt.Println("x não é igual a 1, 2 e 3")
-    }
-    // Output => x é igual a 3
-}
-```
-
-#### `switch` sem Expressão
-
-Se não definida uma expressão para `switch`, será executado o primeiro `case` que testar verdadeiro, ou `default`, caso nenhum seja verdadeiro.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    x := 10
-
-    switch {
-    case x > 0:
-        fmt.Printf("%d é MAIOR que 0\n", x)
-    case x < 0:
-        fmt.Printf("%d é MENOR que 0\n", x)
-    default:
-        fmt.Println("Valor é 0")
-    }
-    // Output => 10 é MAIOR que 0
-}
-```
-
-> **NOTA:** O compilador otimiza a execução do `switch`. especialmente quando há muitos `case`. Por esse motivo, o compilador pode gerar código mais eficiente usando uma instrução `switch` em vez de várias instruções `if`.
-
 ## Funções
 
 São criadas a partir da palavra-chave **`func`**, seguida de parênteses e um bloco de código.
@@ -3895,7 +3857,7 @@ func OlaMundo() {
 
 func main() {
     OlaMundo() // Chama a função
-    // Output => Olá, Mundo!
+    // -> Olá, Mundo!
 }
 ```
 
@@ -3906,7 +3868,7 @@ A função acima imprime "Olá, Mundo!".
 * São case-sensitive.
 * Devem se iniciar com um letra.
 * Podem conter apenas caracteres alfanuméricos e `_`.
-* Geralmente são escritas em PascalCase.
+* Geralmente são escritas em *PascalCase*.
 
 ### Parâmetros e Argumentos
 
@@ -3932,7 +3894,7 @@ func DigaOla(nome string) {
 
 func main() {
     DigaOla("Mundo") // Chama a função
-    // Output => Olá, Mundo!
+    // -> Olá, Mundo!
 }
 ```
 
@@ -3950,7 +3912,7 @@ func Soma(x int, y int) {
 
 func main() {
     Soma(5, 2) // Chama a função
-    // Output => A soma entre 5 e 2 é 7
+    // -> A soma entre 5 e 2 é 7
 }
 ```
 
@@ -3984,7 +3946,7 @@ func Multiplicar(x int, y int) int {
 func main() {
     resultado := Multiplicar(5, 2) // Chama a função
     fmt.Printf("Resultado da multiplicação: %d\n", resultado)
-    // Output => Resultado da multiplicação: 10
+    // -> Resultado da multiplicação: 10
 }
 ```
 
@@ -4019,7 +3981,7 @@ func Multiplicar(x int, y int) (resultado int) {
 func main() {
     resultado := Multiplicar(5, 2) // Chama a função
     fmt.Printf("Resultado da multiplicação: %d\n", resultado)
-    // Output => Resultado da multiplicação: 10
+    // -> Resultado da multiplicação: 10
 }
 ```
 
@@ -4041,7 +4003,7 @@ func Multiplicar(x int, y int) (resultado int) {
 func main() {
     resultado := Multiplicar(5, 2) // Chama a função
     fmt.Printf("Resultado da multiplicação: %d\n", resultado)
-    // Output => Resultado da multiplicação: 7
+    // -> Resultado da multiplicação: 7
 }
 ```
 
@@ -4110,7 +4072,7 @@ func main() {
 
     // Imprime o resultado da multiplicação
     fmt.Printf("Resultado da multiplicação: %d\n", ResultadoMult)
-    // Output => Resultado da multiplicação: 10
+    // -> Resultado da multiplicação: 10
 }
 ```
 
@@ -4137,7 +4099,7 @@ func main() {
 
     // Imprime o resultado da multiplicação
     fmt.Printf("Resultado da multiplicação: %d\n", ResultadoMult)
-    // Output => Resultado da multiplicação: 10
+    // -> Resultado da multiplicação: 10
 }
 ```
 
@@ -4165,7 +4127,7 @@ func main() {
     valor := 5
     resultado := Fatorial(5) // Chama a função
     fmt.Printf("%d! = %d\n", valor, resultado)
-    // Output => 5! = 120
+    // -> 5! = 120
 }
 ```
 
@@ -4203,9 +4165,9 @@ func Sum(nums ...int) int {
 }
 
 func main() {
-    fmt.Println("Soma:", Sum(1, 2, 3, 4, 5)) // Output => 15
-    fmt.Println("Soma:", Sum(5, 2, 4)) // Output => 11
-    fmt.Println("Soma:", Sum()) // Output => 0
+    fmt.Println("Soma:", Sum(1, 2, 3, 4, 5)) // -> 15
+    fmt.Println("Soma:", Sum(5, 2, 4)) // -> 11
+    fmt.Println("Soma:", Sum()) // -> 0
 }
 ```
 
@@ -4243,7 +4205,7 @@ import "fmt"
 func main() {
     // Função anônima
     func() {
-        fmt.Println("Olá, Mundo!") // Output => Olá, Mundo!
+        fmt.Println("Olá, Mundo!") // -> Olá, Mundo!
     }()
 
     // Função anônima em uma variável
@@ -4252,7 +4214,7 @@ func main() {
     }
 
     // Chama a variável (que é uma função)
-    myFunc() // Output => Olá, Go!
+    myFunc() // -> Olá, Go!
 }
 ```
 
@@ -4276,9 +4238,9 @@ func main() {
         }
     }()
 
-    fmt.Println(contador()) // Output => 1
-    fmt.Println(contador()) // Output => 2
-    fmt.Println(contador()) // Output => 3
+    fmt.Println(contador()) // -> 1
+    fmt.Println(contador()) // -> 2
+    fmt.Println(contador()) // -> 3
 }
 ```
 
@@ -4311,7 +4273,7 @@ func MostrarResultado(n float64, callback func(float64) float64) {
 
 func main() {
     MostrarResultado(25, RaizQuadrada)
-    // Output => A raiz quadrada de 25.0 é 5.0
+    // -> A raiz quadrada de 25.0 é 5.0
 }
 ```
 
@@ -4337,7 +4299,7 @@ func main() {
     MostrarResultado(25, func(n float64) float64 {
         return math.Pow(n, 0.5)
     })
-    // Output => A raiz quadrada de 25.0 é 5.0
+    // -> A raiz quadrada de 25.0 é 5.0
 }
 ```
 
@@ -4367,41 +4329,13 @@ func Tipo[T any](x T) string {
 }
 
 func main() {
-    fmt.Println(Tipo("Hello"))        // Output => string
-    fmt.Println(Tipo(5))              // Output => int
-    fmt.Println(Tipo(23.7))           // Output => float64
-    fmt.Println(Tipo(true))           // Output => bool
-    fmt.Println(Tipo([]int{1, 2, 3})) // Output => []int
+    fmt.Println(Tipo("Hello"))        // -> string
+    fmt.Println(Tipo(5))              // -> int
+    fmt.Println(Tipo(23.7))           // -> float64
+    fmt.Println(Tipo(true))           // -> bool
+    fmt.Println(Tipo([]int{1, 2, 3})) // -> []int
 }
 ```
-
-## Instrução `goto`
-
-A declaração **`goto`** é usada para executar o código de uma label.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    i := 0
-
-    count:
-        fmt.Printf("%d ", i)
-        i++
-        if i <= 5 {
-            goto count
-        }
-    // Output => 0 1 2 3 4 5
-}
-```
-
-No exemplo acima, a etiqueta `count` é executada, e é analisado o código dela mesmo que não seja chamada como uma função.
-
-> **NOTA:** O uso da instrução `goto` deve ser feito de maneira consciente, pois pode dificultar a leitura do código, além de que na maioria das vezes ele não é realmente necessário, podendo ser usado funções, `switch`s, `if`, entre outras estruturas.
 
 ## Structs
 
@@ -4632,7 +4566,7 @@ func main() {
     }
 
     fmt.Println(myMap)
-    // Output => map[a:Exemplo2 c:Exemplo3 z:Exemplo1]
+    // -> map[a:Exemplo2 c:Exemplo3 z:Exemplo1]
 
 }
 ```
@@ -4696,7 +4630,7 @@ func main() {
 
     // Imprime o map
     fmt.Println(myMap)
-    // Output => map[num1:5 num3:9]
+    // -> map[num1:5 num3:9]
 }
 ```
 
@@ -4732,10 +4666,10 @@ func main() {
     val4, exist4 := myMap["num4"]
 
     // Imprime os resultados
-    fmt.Println(val1, exist1) // Output => 5 true
-    fmt.Println(val2, exist2) // Output => 7 true
-    fmt.Println(val3, exist3) // Output => 9 true
-    fmt.Println(val4, exist4) // Output => 0 false
+    fmt.Println(val1, exist1) // -> 5 true
+    fmt.Println(val2, exist2) // -> 7 true
+    fmt.Println(val3, exist3) // -> 9 true
+    fmt.Println(val4, exist4) // -> 0 false
 }
 ```
 
@@ -4763,10 +4697,10 @@ func main() {
     _, exist4 := myMap["num4"]
 
     // Imprime os resultados
-    fmt.Println(exist1) // Output => true
-    fmt.Println(exist2) // Output => true
-    fmt.Println(exist3) // Output => true
-    fmt.Println(exist4) // Output => false
+    fmt.Println(exist1) // -> true
+    fmt.Println(exist2) // -> true
+    fmt.Println(exist3) // -> true
+    fmt.Println(exist4) // -> false
 }
 ```
 
@@ -4796,8 +4730,8 @@ func main() {
     map2["num1"] = 11
 
     // Imprime os maps
-    fmt.Println(map1) // Output => map[num1:11 num2:7 num3:9]
-    fmt.Println(map2) // Output => map[num1:11 num2:7 num3:9]
+    fmt.Println(map1) // -> map[num1:11 num2:7 num3:9]
+    fmt.Println(map2) // -> map[num1:11 num2:7 num3:9]
 }
 ```
 
@@ -4833,8 +4767,8 @@ func main() {
     copyMap["num1"] = 11
 
     // Imprime os maps
-    fmt.Println(myMap)   // Output => map[num1:5 num2:7 num3:9]
-    fmt.Println(copyMap) // Output => map[num1:11 num2:7 num3:9]
+    fmt.Println(myMap)   // -> map[num1:5 num2:7 num3:9]
+    fmt.Println(copyMap) // -> map[num1:11 num2:7 num3:9]
 }
 ```
 
@@ -4883,11 +4817,11 @@ func (s MyStruct) Soma(x, y int) int {
 
 func main() {
     // Usa a função OlaMundo()
-    MyStruct.OlaMundo(MyStruct{}) // Output => Olá, Mundo!
+    MyStruct.OlaMundo(MyStruct{}) // -> Olá, Mundo!
 
     // Usa a função Soma() e imprime o resultado dela
     resultadoSoma := MyStruct.Soma(MyStruct{}, 5, 2)
-    fmt.Println(resultadoSoma) // Output => 7
+    fmt.Println(resultadoSoma) // -> 7
 }
 ```
 
@@ -4924,11 +4858,11 @@ func main() {
     instanceStruct := MyStruct{}
 
     // Usa a função OlaMundo()
-    instanceStruct.OlaMundo() // Output => Olá, Mundo!
+    instanceStruct.OlaMundo() // -> Olá, Mundo!
 
     // Usa a função Soma() e imprime o resultado dela
     resultadoSoma := instanceStruct.Soma(5, 2)
-    fmt.Println(resultadoSoma) // Output => 7
+    fmt.Println(resultadoSoma) // -> 7
 }
 ```
 
@@ -4985,10 +4919,10 @@ func main() {
     divisao := numeros.Div()
 
     // Imprime os resultados
-    fmt.Println("Soma:", soma) // Output => 7
-    fmt.Println("Subtração:", subtracao) // Output => 3
-    fmt.Println("Multiplicação:", multiplicacao) // Output => 10
-    fmt.Println("Divisão:", divisao) // Output => 2.5
+    fmt.Println("Soma:", soma) // -> 7
+    fmt.Println("Subtração:", subtracao) // -> 3
+    fmt.Println("Multiplicação:", multiplicacao) // -> 10
+    fmt.Println("Divisão:", divisao) // -> 2.5
 }
 ```
 
@@ -5010,11 +4944,11 @@ func main() {
 
     // Atribui um valor inteiro à variável
     valorGenerico = 23
-    fmt.Println(valorGenerico) // Output => 23
+    fmt.Println(valorGenerico) // -> 23
 
     // Atribui uma string à variável
     valorGenerico = "Olá, Mundo!"
-    fmt.Println(valorGenerico) // Output => "Olá, Mundo!"
+    fmt.Println(valorGenerico) // -> "Olá, Mundo!"
 }
 ```
 
@@ -5039,10 +4973,10 @@ func Tipo(v interface{}) reflect.Type {
 }
 
 func main() {
-    fmt.Println(Tipo(5)) // Output => int
-    fmt.Println(Tipo(2.3)) // Output => float64
-    fmt.Println(Tipo("Olá")) // Output => string
-    fmt.Println(Tipo(false)) // Output => bool
+    fmt.Println(Tipo(5)) // -> int
+    fmt.Println(Tipo(2.3)) // -> float64
+    fmt.Println(Tipo("Olá")) // -> string
+    fmt.Println(Tipo(false)) // -> bool
 }
 ```
 
@@ -5070,7 +5004,7 @@ func main() {
     s, ok := x.(string)
 
     fmt.Printf("%v | %v\n", s, ok)
-    // Output => Olá, Mundo! | true
+    // -> Olá, Mundo! | true
 }
 ```
 
@@ -5103,11 +5037,11 @@ func Foo(i interface{}) {
 }
 
 func main() {
-    Foo("Olá, Mundo!")          // Output => "Olá, Mundo!" é uma string.
-    Foo(10)                     // Output => O valor 10 é um número inteiro.
-    Foo(2.5)                    // Output => O valor 2.5 é um número real.
-    Foo(true)                   // Output => O valor true é booleano.
-    Foo([]int{0, 1, 2})         // Output => Desconheço o tipo []int.
+    Foo("Olá, Mundo!")          // -> "Olá, Mundo!" é uma string.
+    Foo(10)                     // -> O valor 10 é um número inteiro.
+    Foo(2.5)                    // -> O valor 2.5 é um número real.
+    Foo(true)                   // -> O valor true é booleano.
+    Foo([]int{0, 1, 2})         // -> Desconheço o tipo []int.
 }
 ```
 
@@ -5165,7 +5099,7 @@ func main() {
     var ponteiroInteiro *int = &x
 
     // Imprime o valor que o ponteiro aponta
-    fmt.Println(*ponteiroInteiro) // Output => 23
+    fmt.Println(*ponteiroInteiro) // -> 23
 }
 ```
 
@@ -5185,7 +5119,7 @@ func main() {
     var ponteiroInteiro *int
 
     // Imprime o valor que o ponteiro aponta
-    fmt.Println(ponteiroInteiro) // Output => <nil>
+    fmt.Println(ponteiroInteiro) // -> <nil>
 }
 ```
 
@@ -5209,2273 +5143,6 @@ func AlterarValor(x *int) {
 func main() {
     valor := 10
     AlterarValor(&valor)
-    fmt.Println(valor) // Output => 5
+    fmt.Println(valor) // -> 5
 }
 ```
-
-## Manipulação de Erros
-
-### Tipo `error`
-
-Uma variável `error` representa qualquer valor que descreva um erro.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func Divisao(x, y float64) (float64, error) {
-    // Verifica se a divisão é por zero
-    if y == 0 {
-        // Cria uma mensagem de erro e a retorna
-        return 0, fmt.Errorf("Divisao por %g", y)
-    }
-
-    // Retorna o resultado da divisão. `nil` indica que não ocorreu nenhum erro
-    return x / y, nil
-}
-
-func main() {
-    // `x` é o resultado da divisão. `err` é o erro
-    x, err := Divisao(5, 0)
-
-    // Verifica se ocorreu algum erro
-    if err != nil {
-        fmt.Println("Erro:", err)
-        return // Encerra o programa
-    }
-
-    // Imprime o resultado da divisão
-    fmt.Println(x)
-}
-```
-
-No exemplo acima, há a função **`Errorf()`** do pacote `fmt`, que é usada para formatar mensagens de erro.
-
-### Erro Personalizado
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "errors"
-    "fmt"
-)
-
-// Erro personalizado
-type DivisionError struct {
-    x, y float64
-    msg  string
-}
-
-// Mensagem de erro personalizada
-func (e *DivisionError) Error() string {
-    return e.msg
-}
-
-// Divide um valor pelo outro
-func Division(x, y float64) (float64, error) {
-    // Caso a divisão seja por zero
-    if y == 0 {
-        return 0, &DivisionError{
-            msg: "ERRO: Não é possível dividir por 0",
-            x:   x,
-            y:   y,
-        }
-        /*
-        Aqui, `&DivisionError{}` é retornado como erro, que é uma struct com os valores da operação e a mensagem de erro.
-        */
-    }
-
-    // Retorna o resultado da divisão e não indica nenhum erro
-    return x / y, nil
-}
-
-func main() {
-    // Valores para a divisão
-    var num1 float64 = 5
-    var num2 float64 = 0
-
-    // Obtém o resultado da divisão e verifica se ocorreu algum erro
-    result, err := Division(num1, num2)
-
-    // Se tiver ocorrido algum erro, `err` será diferente de `nil`
-    if err != nil {
-        // Instância da estrutura de erro
-        var e *DivisionError
-
-        switch {
-        // Verifica se a mensagem de erro é igual à mensagem ocorrida
-        case errors.As(err, &e):
-            fmt.Printf("Não pode dividir %.1f por %.1f\n", e.x, e.y)
-        // Mensagem de erro genérica
-        default:
-            fmt.Println("Erro inesperado:", err)
-        }
-        // Encerra o programa
-        return
-    }
-
-    // Imprime o resultado da divisão (caso não haja erros)
-    fmt.Printf("%.1f / %.1f = %.1f\n", num1, num2, result)
-}
-```
-
-## Funções Adiadas
-
-Uma declaração **`defer`** adia a execução de uma função até que a função envolvente seja concluída. A função adiada é colocada em uma pilha e será executada por último, antes do retorno da função envolvente, garantindo a execução de determinadas operações de limpeza, como fechar arquivos ou liberar recursos.
-
-As funções adiadas são executadas em ordem reversa, ou seja, a última função adiada é a primeira a ser executada após a conclusão da função envolvente.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    defer fmt.Println("Primeira chamada defer")
-    fmt.Println("Início da função")
-    defer fmt.Println("Segunda chamada defer")
-    fmt.Println("Fim da função")
-
-    /* Output:
-    Início da função
-    Fim da função
-    Segunda chamada defer
-    Primeira chamada defer
-    */
-}
-```
-
-A ação adiada irá considerar o valor que recebeu quando ela foi declarada, e não o valor final.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    i := 0
-    defer fmt.Println(i)
-    i++
-    // Output => 0
-}
-```
-
-Assim, seria possível até mesmo imprimir números de maneira regressiva com um loop `for`.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func main() {
-    for i := 0; i <= 5; i++ {
-        defer fmt.Printf("%d ", i)
-    }
-    // Output => 5 4 3 2 1 0
-}
-```
-
-A declaração `defer` é frequentemente usada para garantir a limpeza de recursos, como fechar arquivos, liberar mutexes, ou desalocar memória. Isso é útil para garantir que os recursos sejam liberados mesmo se ocorrerem erros ou exceções durante a execução da função.
-
-<!-- Exemplo com manipulação de arquivo -->
-
-## `panic()` e `recover()`
-
-A função **`panic()`** encerra a função e recebe como argumento uma mensagem que é impressa em forma de erro.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func Foo() {
-    for i := 0; i <= 10; i++ {
-        if i > 5 {
-            // Quebra de linha
-            fmt.Println()
-
-            // "Panica" mostrando uma mensagem e encerrando o programa
-            panic("Ultrapassou 5")
-        }
-        fmt.Printf("%d ", i)
-    }
-}
-
-func main() {
-    Foo()
-    /* Output:
-    0 1 2 3 4 5
-    panic: Ultrapassou 5
-    */
-}
-```
-
-Já a função **`recover()`**, é usada para recuperar a mensagem passada para `panic()`.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func Foo() {
-    for i := 0; i <= 10; i++ {
-        if i > 5 {
-            // Quebra de linha
-            fmt.Println()
-
-            // `panic` com o valor que ultrapassou 5
-            panic(fmt.Sprintf("%d", i))
-        }
-        fmt.Printf("%d ", i)
-    }
-}
-
-func main() {
-    defer func() {
-        if r := recover(); r != nil {
-            fmt.Printf("Valor recuperado: %s\n", r)
-        }
-    }()
-    Foo()
-    /* Output:
-    0 1 2 3 4 5
-    Valor recuperado: 6
-    */
-}
-```
-
-**Exemplo mais sofisticado:**
-
-``` go
-package main
-
-import "fmt"
-
-func Foo() {
-    // Recupera o valor de `panic`
-    defer func() {
-        if r := recover(); r != nil {
-            fmt.Println("Valor recuperado:", r)
-        }
-    }()
-
-    // Função recursiva
-    Bar(0)
-}
-
-func Bar(i int) {
-    // Executa `panic` quando `i` é maior que 5
-    if i > 5 {
-        // Quebra de linha
-        fmt.Println()
-
-        // "Panica" com o valor de `i` (no caso, esse valor é 6)
-        panic(fmt.Sprintf("%d", i))
-    }
-
-    // Imprime o valor de `i`
-    fmt.Printf("%d ", i)
-
-    // Chama a si mesma
-    Bar(i + 1)
-}
-
-func main() {
-    Foo()
-    /*Output:
-    0 1 2 3 4 5
-    Valor recuperado: 6
-    */
-}
-```
-
-## Pacotes
-
-Os pacotes são usados para reutilização de código, permitindo importar várias funcionalidades já definidas anteriormente.
-
-Os pacotes podem ser utilizados após importados, e para importá-los, é usada a palavra-chave **`import`**, seguida do nome do pacote entre aspas duplas.
-
-**Sintaxe:**
-
-``` go
-import "pacote"
-```
-
-**Para importar vários pacotes:**
-
-``` go
-import (
-    "pacote1"
-    "pacote2"
-    "pacote3"
-)
-```
-
-O uso de pacotes é útil por vários motivos, entre eles:
-
-* Menor chance de duplicidade de nomes.
-* Organização e reuso do código.
-* Ele acelera o compilador, exigindo apenas a recompilação de partes menores de um programa.
-
-### Criação de Pacotes
-
-Todos os pacotes são listados na pasta `~/go/src`, e se quiser criar um pacote, é lá onde você deve criá-lo.
-
-Ao criar um novo pacote, é recomendado que você crie uma pasta com o mesmo nome do pacote. Dentro dessa pasta, você pode escrever o arquivo com as funcionalidades do pacote.
-
-**Exemplo:**
-
-``` go
-// Pacote em ~\go\src\meupacote\main.go
-package olamundo
-
-import "fmt"
-
-func OlaMundo() {
-    fmt.Println("Olá, Mundo!")
-}
-```
-
-``` go
-// Arquivo principal
-package main
-
-import "olamundo"
-
-func main() {
-    olamundo.OlaMundo()
-    // Output => Olá, Mundo!
-}
-```
-
-É importante observar que o nome pelo qual o pacote é importado é o mesmo que foi definido após a palavra-chave package no início do arquivo.
-
-> **NOTA:** Se o pacote estiver em uma subpasta, você deve especificar o caminho completo ao importá-lo. Por exemplo: import "meuspacotes/pacote1". Isso garante que o compilador encontre o pacote corretamente.
-
-### Biblioteca Padrão
-
-#### Pacote `math/rand`
-
-O pacote **`math/rand`** faz parte da biblioteca padrão e é usado para gerar números pseudoaleatórios considerando uma semente.
-
-**As principais funções são:**
-
-* **'`Float64()`'**: Gera um número float aleatório no intervalo [0, 1).
-* **'`Int()`'**: Gera um número inteiro aleatório.
-* **'`Intn()`'**: Gera um número inteiro aleatório no intervalo [0, n).
-* **'`Seed()`'**: Inicializa a fonte de números aleatórios com um valor semente.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "math/rand"
-)
-
-func main() {
-    // Números aleatórios
-    randomFloat := rand.Float64()
-    randomInt := rand.Intn(10)
-
-    // Imprime os resultados
-    fmt.Println(randomFloat)
-    fmt.Println(randomInt)
-}
-```
-
-> **OBS.:** Números gerados pelo pacote `math/rand` não são adequados em situações que exigem segurança, como criptografia. Nesses casos, use `crypto/rand`.
-
-#### Pacote `time`
-
-O pacote **`time`** faz parte da biblioteca padrão e possui diversas funcionalidades para trabalhar com informações relacionadas ao tempo, como funções para representar e manipular datas, horários e durações.
-
-##### Constantes de `time`
-
-**Constantes que representam tempo:**
-
-* **'`Nanosecond`'**: Representa um nanossegundo.
-* **'`Microsecond`'**: Representa um microssegundo.
-* **'`Millisecond`'**: Representa um milissegundo.
-* **'`Second`'**: Representa um segundo.
-* **'`Minute`'**: Representa um minuto.
-* **'`Hour`'**: Representa uma hora;
-
-**Constantes para dias da semana:**
-
-* **'`Sunday`'**: Representa domingo.
-* **'`Monday`'**: Representa segunda-feira.
-* **'`Tuesday`'**: Representa terça-feira.
-* **'`Wednesday`'**: Representa quarta-feira.
-* **'`Thursday`'**: Representa quinta-feira.
-* **'`Friday`'**: Representa sexta-feira.
-* **'`Saturday`'**: Representa sábado.
-
-**Constantes para os meses:**
-
-* **'`January`'**: Representa janeiro.
-* **'`February`'**: Representa fevereiro.
-* **'`March`'**: Representa março.
-* **'`April`'**: Representa abril.
-* **'`May`'**: Representa maio.
-* **'`June`'**: Representa junho.
-* **'`July`'**: Representa julho.
-* **'`August`'**: Representa agosto.
-* **'`September`'**: Representa setembro.
-* **'`October`'**: Representa outubro.
-* **'`November`'**: Representa novembro.
-* **'`December`'**: Representa dezembro.
-
-##### Datas e Horários
-
-Para representar uma datas e horários, são usadas funções.
-
-* **'`Now()`'**: Retorna a data e hora atuais.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        dataAtual := time.Now() // Data e hora atuais
-        fmt.Println(dataAtual) // Imprime a data e horas atuais
-    }
-    ```
-
-* **'`Date()`'**: Cria uma data e horário específicos. A variável que armazena será uma instância de `time.Time`.
-
-    Os argumentos são:
-
-    1. Ano
-    1. Mês
-    1. Dia
-    1. Horas
-    1. Minutos
-    1. Segundos
-    1. Milisegundos
-    1. Timezone
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Cria a data Data => 30/01/2005 13:22:04
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Imprime a data criada
-        fmt.Println(data) // Output => 2005-01-30 13:22:04 +0000 UTC
-    }
-    ```
-
-* **'`Parse()`'**: Converte uma string em uma instância `time.Time` usando um formato específico.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Data em string
-        dataString := "2005-01-30T13:22:04Z"
-
-        // Converte a data em string para uma instância `time.Time`
-        data, err := time.Parse(time.RFC3339, dataString)
-
-        // Verifica se houve um erro na conversão
-        if err != nil {
-            fmt.Println("Erro:", err)
-            return
-        }
-
-        // Imprime a data criada
-        fmt.Println(data) // Output => 2005-01-30 13:22:04 +0000 UTC
-    }
-    ```
-
-**Métodos de Instâncias `time.Time`:**
-
-* **'`Format()`'**: Converte uma instância de `time.Time` em um formato específico.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Converte a instância `time.Time` para uma string
-        dataFormatada := data.Format(time.RFC822)
-
-        // Imprime a data criada
-        fmt.Println(dataFormatada) // Output => 30 Jan 05 13:22 UTC
-    }
-    ```
-
-* **'`Year()`'**: Retorna o ano da data.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Ano da data
-        ano := data.Year()
-
-        // Imprime o ano da data
-        fmt.Println(ano) // Output => 2005
-    }
-    ```
-
-* **'`Month()`'**: Retorna o mês da data.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Mês da data
-        mes := data.Month()
-
-        // Imprime o mês da data
-        fmt.Println(mes) // Output => January
-    }
-    ```
-
-* **'`Day()`'**: Retorna o dia da data.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Dia da data
-        dia := data.Day()
-
-        // Imprime o dia da data
-        fmt.Println(dia) // Output => 30
-    }
-    ```
-
-* **'`Weekday()`'**: Retorna o dia da semana da data.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Dia da semana da data
-        diaSemana := data.Weekday()
-
-        // Imprime o dia da semana da data
-        fmt.Println(diaSemana) // Output => Sunday
-    }
-    ```
-
-* **'`Add()`'**: Retorna uma nova data que é a soma entre `self` e um dado tempo.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
-
-        // Adiciona 2 dias a data
-        novaData := data.Add(48 * time.Hour)
-
-        // Imprime a nova data
-        fmt.Println(novaData) // Output => 2005-02-01 13:22:04 +0000 UTC
-    }
-    ```
-
-* **'`Sub()`'**: Retorna a diferença entre `self` e uma dada data.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "time"
-    )
-
-    func main() {
-        // Instância de `time.Time`
-        data := time.Date(2005, time.January, 30, 13, 0, 0, 0, time.UTC)
-
-        // Subtrai 2 dias da data
-        novaData := data.Sub(time.Date(2005, time.January, 30, 9, 0, 0, 0, time.UTC))
-
-        // Imprime a nova data
-        fmt.Println(novaData) // Output => 4h0m0s
-    }
-    ```
-
-###### Comparação entre Datas
-
-As funções **`Equal()`**, **`Before()`** e **`After()`** verificam se `self` e igual, anterior ou posterior a uma dada data, retornando um valor booleano.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
-    // Instâncias de `time.Time`
-    data1 := time.Date(2005, 05, 23, 12, 0, 0, 0, time.UTC)
-    data2 := time.Date(2002, 03, 15, 13, 30, 0, 0, time.UTC)
-
-    // Verifica a ordem das datas
-    if data1.Equal(data2) {
-        fmt.Println("As datas são iguais")
-    } else if data1.Before(data2) {
-        fmt.Println("A primeira data é anterior à segunda")
-    } else { // Ou `data1.After(data2)`
-        fmt.Println("A primeira data é posterior à segunda")
-    }
-}
-```
-
-##### Duração
-
-Com a função **`Duration()`** do pacote **`time`** é possível expressar durações para impressão ou como argumentos.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
-    duration := 5 * time.Second
-    fmt.Println("Duração:", duration)
-    // Output => Duração: 5s
-}
-```
-
-##### Espera na Execução
-
-A função **`Sleep()`** do pacote `time` permite pausar a execução do programa por um determinado tempo.
-
-**Sintaxe:**
-
-``` go
-time.Sleep(tempo)
-```
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
-    for i := 10; i >= 0; i-- {
-        fmt.Printf("%d ", i)
-        time.Sleep(time.Second)
-        if i == 0 {
-            fmt.Println("FIM")
-        }
-    }
-    // Imprime uma contagem regressiva
-}
-```
-
-##### Temporizadores
-
-Um *timer* é usado para agendar a execução de uma determinada ação após um certo período de tempo.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
-    // Timer que dispara após 5 segundos
-    timer := time.NewTimer(5 * time.Second)
-
-    // Espera o temporizador expirar
-    <-timer.C
-
-    fmt.Println("Temporizador expirado!")
-}
-```
-
-##### Tickers
-
-Um ticker é semelhante a um temporizador, mas ele dispara repetidamente em intervalos regulares até ser parado.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
-    // Ticker que dispara a cada segundo
-    ticker := time.NewTicker(time.Second)
-
-    // Executa a cada segundo
-    i := 0
-    for {
-        <-ticker.C
-        i++
-        fmt.Printf("%d ", i)
-        if i == 10 {
-            fmt.Println("FIM")
-            ticker.Stop() // Para o ticker
-            break
-        }
-    }
-}
-```
-
-> **NOTA:** Lembre-se de parar o ticker quando não for mais necessário para evitar vazamentos de recursos. Para parar um ticker, use o método **`Stop()`** no ticker.
-
-#### Pacote `os`
-
-O pacote **`os`** possui ferramentas para executar funcionalidades do sistema.
-
-Há três pacotes em `os`:
-
-* **'`exec`'**: Executa comandos externos.
-* **'`signal`'**: Implementa acesso a sinais recebidos.
-* **'`user`'**: Permite pesquisas de contas de usuário por nome ou ID.
-
-**Funções:**
-
-* **'`Exit()`'**: Encerra o programa. Pode receber um inteiro como argumento, que simboliza o tipo de saída (`0` indica sucesso e não imprime o tipo de saída).
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "os"
-    )
-
-    func main() {
-        fmt.Println("Olá, Mundo!")
-        os.Exit(0) // Programa encerra aqui
-        fmt.Println("Olá, Go!")
-    }
-    ```
-
-* **'`Expand()`'**: Substitui `${var}` ou `$var` na string se baseando em uma função de mapeamento.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "os"
-    )
-
-    func main() {
-        x := func(substituirNome string) string {
-            switch substituirNome {
-            case "MSG1":
-                return "Olá"
-            case "MSG2":
-                return "Mundo"
-            }
-
-            return ""
-        }
-        fmt.Println(os.Expand("${MSG1}, $MSG2!", x))
-        // Output => Olá, Mundo!
-    }
-    ```
-
-* **'`Setenv()`'**: Define as chaves e valores no ambiente.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "os"
-    )
-
-    func main() {
-        os.Setenv("MSG1", "Olá")
-        os.Setenv("MSG2", "Mundo")
-    }
-    ```
-
-* **'`Getenv()`'**: Retorna o valor da chave especificada.
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    os.Setenv("MSG1", "Olá")
-    os.Setenv("MSG2", "Mundo")
-
-    fmt.Println(os.Getenv("MSG1")) // Output => Olá
-    fmt.Println(os.Getenv("MSG2")) // Output => Mundo
-}
-```
-
-* **'`ExpandEnv()`'**: Substitui `${var}` ou `$var` na string com base nos valores das chaves definidas no ambiente.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "os"
-    )
-
-    func main() {
-        os.Setenv("MSG1", "Olá")
-        os.Setenv("MSG2", "Mundo")
-
-        fmt.Println(os.ExpandEnv("${MSG1}, $MSG2!"))
-        // Output => Olá, Mundo!
-    }
-    ```
-
-##### Manipulação de Arquivos
-
-O pacote **`os`** oferece funcionalidades para trabalhar com arquivos.
-
-###### Criar Arquivos
-
-A função **`os.Create()`** recebe como argumento um caminho, criando-o caso não exista, e sobrescrevendo-o, caso exista.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    // Cria um arquivo chamado `file.txt`
-    file, err := os.Create("file.txt")
-    if err != nil {
-        fmt.Println("Err:", err)
-    }
-
-    // Imprime o nome do arquivo criado
-    fmt.Println(file.Name()) // Output => file.txt
-}
-```
-
-###### Excluir Arquivos
-
-A função **`os.Remove()`** é usada para excluir um arquivo ou pasta.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "os"
-)
-
-func main() {
-    // Exclui o arquivo `exemplo.txt` na pasta `caminho`
-    os.Remove("caminho/exemplo.txt")
-}
-```
-
-Para excluir todo o caminho, mesmo que seja uma pasta com outros arquivos, é usado **`os.RemoveAll()`**.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "os"
-)
-
-func main() {
-    // Exclui a pasta `exemplo` junto de seus arquivos
-    os.RemoveAll("caminho/exemplo")
-}
-```
-
-###### Renomear (mover) Arquivos
-
-A função **`os.Rename()`** move um arquivo ou pasta para um outro diretório.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "os"
-)
-
-func main() {
-    // Move o arquivo `file.txt` para um novo caminho
-    os.Rename("file.txt", "novo/caminho/file.txt")
-}
-```
-
-###### Ler Arquivos
-
-Para ler arquivos, pode ser usada a função **`os.ReadFile()`**, que recebe o caminho do arquivo como argumento.
-
-**Exemplo:**
-
-``` txt
-Olá, Mundo!
-Olá, Go!
-```
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    data, err := os.ReadFile("file.txt")
-    if err != nil {
-        fmt.Println("Err:", err)
-    }
-
-    os.Stdout.Write(data)
-    /* Output:
-    Olá, Mundo!
-    Olá, Go!
-    */
-}
-```
-
-###### Escrever em Arquivos
-
-Para escrever em arquivos, é usada a função **`os.WriteFile()`**, que recebe como argumentos:
-
-1. **'`name`'**: Arquivo.
-1. **'`data`'**: Dados que serão escritos.
-1. **'`perm`'**: Permissão do arquivo.
-
-Antes de escrever no arquivo, ele é truncado, mas sem alterar as permissões.
-
-Se o arquivo não existir, ele será criado com as permissões definidas em `perm`.
-
-> **NOTA:** Se ocorrer algum erro durante a operação de escrita, o arquivo pode ficar em um estado parcialmente escrito.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    err := os.WriteFile("file.txt", []byte("Olá, Mundo!"), 0666)
-    if err != nil {
-        fmt.Println("Err:", err)
-    }
-
-    // Imprime o arquivo
-    data, err := os.ReadFile("file.txt")
-    if err != nil {
-        fmt.Println("Err:", err)
-    }
-    fmt.Printf("%s\n", string(data)) // Output => Olá, Mundo!
-}
-```
-
-###### Abrir Arquivos
-
-A função **`os.Open()`** abre o arquivo especificado para leitura. O arquivo aberto terá o modo **`O_RDONLY`**.
-
-**Exemplo:**
-
-Arquivo de texto:
-
-``` txt
-Olá, Mundo!
-Olá, Go!
-```
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    // Abre o arquivo `file.txt`
-    file, err := os.Open("file.txt")
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    defer file.Close() // Garante o fechamento do arquivo
-
-    // Imprime o conteúdo do arquivo
-    data := make([]byte, 1024)
-    n, err := file.Read(data)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-
-    fmt.Printf("%s\n", data[:n])
-    /* Output:
-    Olá, Mundo!
-    Olá, Go!
-    */
-}
-```
-
-Como visto acima, é usado o método **`Read()`** para ler o conteúdo do arquivo.
-
-Outra maneira de abrir arquivos, é usando a função **`os.OpenFile()`**, que funciona como `os.Open()`, porém pede que especifique o flag e a permissão para abrir o arquivo.
-
-Os flags para abrir arquivos são representados por constantes:
-
-* **'`O_RDONLY`'**: Apenas leitura.
-* **'`O_WRONLY`'**: Apenas escrita.
-* **'`O_RDWR`'**: Leitura e escrita.
-* **'`O_APPEND`'**: Adicionar dados no arquivo quando escrever.
-* **'`O_CREATE`'**: Criar um novo arquivo se o nome não existir.
-* **'`O_TRUNC`'**: Truncar o arquivo ao abrí-lo.
-
-> **NOTA:** Ao abrir um arquivo, não se esqueça de fechá-lo com o método **`Close()`**. Para garantir o fechamento, é utilizado `defer`.
-
-O método **`Write()`** **escreve no arquivo**.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    // Abre o arquivo `file.txt`
-    file, err := os.OpenFile("file.txt", os.O_APPEND, 0666)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    defer file.Close() // Garante o fechamento do arquivo
-
-    // Escreve "Olá, Go!" no arquivo
-    n, err := file.Write([]byte("\nOlá, Go!"))
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    fmt.Println("Bytes gravados:", n)
-}
-```
-
-O método **`os.WriteAt()`** é usado para escrever no arquivo a partir de um determinado byte.
-
-**Exemplo:**
-
-Arquivo de texto:
-
-``` txt
-____, Mundo!
-```
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    // Abre o arquivo `file.txt`
-    file, err := os.OpenFile("file.txt", os.O_WRONLY, 0666)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    defer file.Close() // Garante o fechamento do arquivo
-
-    // Escreve substitui `____` por `Olá` no arquivo
-    n, err := file.WriteAt([]byte("Olá"), 0)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    fmt.Println("Bytes gravados:", n)
-}
-```
-
-O arquivo de texto será "Olá, Mundo!".
-
-Outro método para escrever em arquivos é `os.WriteString()`, que grava no arquivo a string especificada.
-
-**Exemplo:**
-
-Arquivo de texto:
-
-``` txt
-Olá, Mundo!
-```
-
-``` go
-package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    // Abre o arquivo `file.txt`
-    file, err := os.OpenFile("file.txt", os.O_APPEND, 0666)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    defer file.Close() // Garante o fechamento do arquivo
-
-    // Escreve "Olá, Go!" no arquivo
-    n, err := file.WriteString("\nOlá, Go!")
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    fmt.Println("Bytes gravados:", n)
-}
-```
-
-## Concorrência
-
-Concorrência refere-se à execução simultânea de tarefas ou processos independentes, onde a ordem de execução não é prioridade.
-
-Em Go, a abordagem principal para a concorrência é baseada em goroutines e canais (channels).
-
-### Goroutines
-
-É uma função que é executada concorrentemente com outras goroutines.
-
-São criadas a partir da palavra-chave **`go`** antes de chamar uma função. Isso inicia a execução da função em uma nova goroutine, permitindo que ela seja executada em paralelo com outras partes do programa.
-
-**Sintaxe:**
-
-``` go
-// Função concorrente (goroutine)
-func FuncaoConcorrente() {
-    // Código da goroutine
-}
-
-func main() {
-    // Chama a goroutine
-    go FuncaoConcorrente()
-}
-```
-
-Também é comum utilizá-las como funções anônimas.
-
-``` go
-func main() {
-    // Chama a goroutine
-    go func() {
-        // Código da goroutine
-    }()
-}
-```
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-// Função que imprime "Olá, Mundo!" a cada 1 segundo
-func OlaMundo() {
-    for {
-        fmt.Println("Olá, Mundo!")
-        time.Sleep(time.Second) // Espera 1 segundo
-    }
-}
-
-func main() {
-    go OlaMundo()
-
-    // Entrada para encerrar
-    fmt.Println("Pressione ENTER para encerrar")
-    fmt.Scanln()
-}
-```
-
-### Channels
-
-Os canais são usados para a comunicação entre goroutines. Eles permitem que as goroutines enviem e recebam dados de forma segura e coordenada.
-
-Um canal é declarado usando **`make`** e a palavra-chave **`chan`**. A comunicação é feita através do operador **`<-`**, que pode ser usado para enviar e receber dados no canal.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-// Função que faz uma contagem progressiva
-func Contagem(canal chan int) {
-    cont := 0
-    for {
-        cont++
-        canal <- cont
-        time.Sleep(time.Second) // Espera 1 segundo antes de continuar
-    }
-}
-
-// Função que imprime cada valor da contagem
-func ImprimirContagem(canal chan int) {
-    for {
-        valor := <- canal
-        fmt.Println(valor)
-    }
-}
-
-func main() {
-    // Canal
-    canal := make(chan int)
-
-    // Chama a contagem
-    go Contagem(canal)
-
-    // Chama a função para imprimir
-    go ImprimirContagem(canal)
-
-    // Entrada para encerrar
-    fmt.Println("Pressione ENTER para encerrar")
-    fmt.Scanln()
-}
-```
-
-### Declaração `select`
-
-É usado para lidar com várias operações de canal de forma concorrente. Ele permite que o programa aguarde várias comunicações de canal, escolhendo a primeira que estiver pronta.
-
-**Sintaxe:**
-
-``` go
-select {
-case msg1 := <- canal1:
-    // Código
-case msg2 := <- canal2:
-    // Código
-case msg3 := <- canal3:
-    // Código
-default:
-    // Código
-}
-```
-
-A sintaxe básica de `select` é semelhando a um bloco `switch`, mas em vez de avaliar condições de caso, o `select` lida com operações de canal.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-// Função que faz uma contagem regressiva
-func Contagem(canal chan int) {
-    cont := 10
-    for cont >= 0 {
-        canal <- cont
-        cont--
-        time.Sleep(time.Second) // Espera 1 segundo antes de continuar
-    }
-    close(canal) // Fecha o canal
-}
-
-// Função que imprime cada valor da contagem
-func ImprimirContagem(canal chan int) {
-    for {
-        select {
-        case valor, ok := <- canal:
-            if !ok {
-                fmt.Println("Canal fechado...")
-                return
-            }
-            fmt.Println(valor)
-        case <- time.After(2 * time.Second):
-            fmt.Println("TIMEOUT | Nenhuma mensagem após 2 segundos")
-        }
-    }
-}
-
-func main() {
-    // Canal
-    canal := make(chan int)
-
-    // Chama a contagem
-    go Contagem(canal)
-
-    // Chama a função para imprimir
-    go ImprimirContagem(canal)
-
-    // Espera a execução das goroutines
-    time.Sleep(15 * time.Second)
-}
-```
-
-No exemplo acima, a goroutine `ImprimirContagem()` imprime o valor do canal depois de verificar se o canal foi fechado por meio da variável `ok`, atribuída por meio do próprio canal junto do valor desse canal. Se não houver nenhuma resposta por 2 segundos, é executado o segundo caso.
-
-### Context
-
-O pacote **`context`** fornece ferramentas para lidar cancelamento de operações e compartilhamento de valores entre goroutines.
-
-Um contexto permito passar sinais de cancelamento e prazos de execução para goroutines de maneira coordenada e segura, além de permitir transmitir valores específicos para uma árvore de chamadas de funções, como valores de autenticação, limites de tempo ou cancelamento, e outras informações de rastreamento.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "context"
-    "fmt"
-    "time"
-)
-
-func main() {
-    // Criando um contexto com cancelamento após 1 segundo
-    ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
-    defer cancel() // Garante que o contexto seja cancelado quando a função main sair
-
-    // Executando uma operação em uma goroutine com o contexto criado
-    go func(ctx context.Context) {
-        select {
-        case <-time.After(2 * time.Second):
-            fmt.Println("Operação concluída com sucesso.")
-        case <-ctx.Done(): // Verifica se o contexto foi cancelado
-            fmt.Println("Operação cancelada:", ctx.Err())
-        }
-    }(ctx)
-
-    // Esperando alguns segundos para ver a saída
-    time.Sleep(3 * time.Second)
-}
-```
-
-### Data Races
-
-Uma data race é quando goroutines tentam acessar simultaneamente um mesmo dado, podendo uma alterar esse dado de forma com que a outra goroutine funcione de maneira inesperada.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func IsEven(n int) bool {
-    return n % 2 == 0
-}
-
-func main() {
-    n := 0
-
-    // goroutine 1
-    go func() {
-        result := IsEven(n)
-        time.Sleep(5 * time.Millisecond)
-        if result {
-            fmt.Println(n, "é par")
-            return
-        }
-        fmt.Println(n, "é ímpar")
-    }()
-
-    // goroutine 2
-    go func() {
-        n++
-    }()
-
-    time.Sleep(time.Second)
-}
-```
-
-**Analisando o código acima:**
-
-1. A primeira goroutine armazena na variável `result` se o valor de `n` - que é inicialmente 0 - é par.
-1. Após armazenar o resultado em `result`, é feita uma pausa com `time.Sleep()`.
-1. Durante essa pausa, a segunda goroutine executa, incrementando a variável `n`, tornando seu valor igual a 1.
-1. De volta à primeira goroutine, o tempo da pausa termina, e então é verificado o resultado da verificação.
-1. É impresso que "1 é par" porque ao imprimir a mensagem a variável `n` não possui o mesmo valor de antes da pausa, já que foi incrementada durante essa pausa.
-
-Basicamente, o resultado depende de qual das ações é executada primeiro.
-
-**Um exemplo mais simples:**
-
-``` go
-package main
-
-import "fmt"
-
-func Num() int {
-    var n int
-    go func() {
-        n = 13
-    }()
-
-    return n
-}
-
-func main() {
-    fmt.Println(Num())
-    // Output => 0
-}
-```
-
-#### Correção de Data Races
-
-Há mais de uma solução para data races, tendo todas elas em comum o acesso à variável e bloqueio caso seja escrito nela.
-
-**As soluções são:**
-
-* Bloqueio com Waitgroups
-* Bloqueio com canais
-* Com mutex
-
-##### Bloqueio com Waitgroups
-
-Bloqueia o acesso até que a operação de escrita tenha sido compleatada.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "sync"
-)
-
-func Num() int {
-    // Valor que será retornado
-    var n int
-
-    // Variável waitgroup
-    var wg sync.WaitGroup
-    wg.Add(1)
-
-    go func() {
-        n = 13
-        // Indica o fim da escrita
-        wg.Done()
-    }()
-    // Espera a escrita ser concluída
-    wg.Wait()
-
-    // Retorna o valor
-    return n
-}
-
-func main() {
-    fmt.Println(Num())
-    // Output => 13
-}
-```
-
-##### Bloqueio com Canais
-
-É feito o uso de canais para bloquear a variável.
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func Num() int {
-    // Valor que será retornado
-    var n int
-
-    // Canal
-    done := make(chan struct{})
-
-    go func() {
-        n = 13
-        // Indica o fim da escrita
-        done <- struct{}{}
-    }()
-    // Espera a escrita ser concluída
-    <-done
-
-    // Retorna o valor
-    return n
-}
-
-func main() {
-    fmt.Println(Num())
-    // Output => 13
-}
-```
-
-**Outra possibilidade ao usar canais, é retornar o canal em si:**
-
-**Exemplo:**
-
-``` go
-package main
-
-import "fmt"
-
-func Num() chan int {
-    // Canal
-    c := make(chan int)
-
-    go func() {
-        // Atribui o valor ao canal
-        c <- 13
-    }()
-    // Retorna o canal
-    return c
-}
-
-func main() {
-    x := <- Num()
-    fmt.Println(x)
-    // Output => 13
-}
-```
-
-##### Mutex
-
-São eficazes quando é preciso garantir a exclusão simultânea para proteger dados compartilhados contra race conditions.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "sync"
-)
-
-type SafeNumber struct {
-    n           int
-    m           sync.Mutex
-    initialized bool
-}
-
-func (x *SafeNumber) Set(n int) {
-    x.m.Lock()
-    defer x.m.Unlock()
-    x.n = n
-    x.initialized = true
-}
-
-func (x *SafeNumber) Get() (int, bool) {
-    x.m.Lock()
-    defer x.m.Unlock()
-    if !x.initialized {
-        return 0, false
-    }
-    return x.n, true
-}
-
-func Num() int {
-    x := &SafeNumber{}
-
-    // Inicia a goroutine que define o valor de x
-    go x.Set(13)
-
-    // Aguarda até que o valor de x seja definido
-    for {
-        if n, ok := x.Get(); ok {
-            return n
-        }
-    }
-}
-
-func main() {
-    fmt.Println(Num())
-    // Saída esperada: 13
-}
-```
-
-## Once
-
-O pacote **`sync`** fornece o tipo **`Once`**, que é usado para executar uma função apenas uma vez, independentemente de quantas vezes ela for chamada após a primeira. Isso é feito por meio do método **`Do()`**.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "sync"
-)
-
-func main() {
-    var once sync.Once
-
-    function := func() {
-        fmt.Println("Hello, World!")
-    }
-
-    once.Do(function) // Output => Hello, World!
-    once.Do(function) // Não imprime
-}
-```
-
-No exemplo acima, é impresso "Hello, World!" apenas uma vez, mesmo que seja chamado duas vezes a partir da instância do tipo `Once`.
-
-Mesmo se passado outra função em uma chamada posterior, ela não executada.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "sync"
-)
-
-func main() {
-    var once sync.Once
-
-    function1 := func() {
-        fmt.Println("Hello, World!")
-    }
-
-    function2 := func() {
-        fmt.Println("Hello, Go!")
-    }
-
-    once.Do(function1) // Output => Hello, World!
-    once.Do(function2) // Não imprime
-}
-```
-
-## Expressões Regulares
-
-As expressões regulares são implementas no pacote padrão **`regexp`**. Este pacote fornece funções para compilar e usar padrões de expressões regulares.
-
-### Sintaxe de Expressões Regulares
-
-#### Correspondência Literal
-
-**Exemplo:**
-
-``` go
-// Corresponde à sequência literal "abc" na string "abcdef"
-regexp.MatchString("abc", "abcdef")
-```
-
-#### Meta-caracteres
-
-* **'`.`'**: Corresponde a qualquer caractere entre os dois caracteres que cercam o `.`.
-
-    ``` go
-    // Corresponde a qualquer caractere entre "a" e "c"
-    regexp.MatchString("a.c", "abc")
-    ```
-
-* **'`*`'**: Corresponde a zero ou mais ocorrências do elemento anterior.
-
-    ``` go
-    // Corresponde a "ac", "abc", "abbc", etc
-    regexp.MatchString("ab*c", "ac")
-    ```
-
-* **'`+`'**: Corresponde a uma ou mais ocorrências do elemento anterior.
-
-    ``` go
-    // Corresponde a "abc", "abbc", "abbbc", "etc
-    regexp.MatchString("ab+c", "abbc")
-    ```
-
-* **'`?`'**: Torna o elemento anterior opcional (zero ou uma ocorrência).
-
-    ``` go
-    // Corresponde a "ac" ou "abc"
-    regexp.MatchString("ab?c", "ac")
-    ```
-
-#### Classes de Caracteres
-
-* **'`[abc]`'**: Corresponde a "a", "b" ou "c".
-* **'`[^abc]`'**: Corresponde a qualquer caractere que não seja "a", "b" ou "c".
-* **'`[a-z]`'**: Corresponde a qualquer caractere de  "a" a "z". O mesmo funciona para caracteres em maiúsculo (`[A-Z]`) e para números (`[0-9]`) .
-
-#### Quantificadores
-
-* **'`{n}`'**: Corresponde se houver n ocorrências do caractere anterior.
-
-    ``` go
-    // Corresponde a "aaa"
-    regexp.MatchString("a{3}", "aaa")
-    ```
-
-* **'`{n,}`'**: Corresponde se houver pelo menos n ocorrências do caractere anterior.
-
-    ``` go
-    // Corresponde a "aaa", "aaaa", "aaaaa", etc
-    regexp.MatchString("a{3,}", "aaaaa")
-    ```
-
-* **'`{n, m}`'**: Corresponde se o caractere anterior se repetir entre n e m.
-
-    ``` go
-    // Corresponde a "aa", "aaa", "aaaa" e "aaaaa"
-    regexp.MatchString("a{2, 5}", "aaaaa")
-    ```
-
-#### Âncoras
-
-* **'`^`'**: Corresponde se o padrão estiver no início da string.
-
-    ``` go
-    // Corresponde se a string se iniciar com "a"
-    regexp.MatchString("^a", "abc")
-    ```
-
-* **'`$`'**: Corresponde se o padrão estiver no final da string.
-
-    ``` go
-    // Corresponde a qualquer string que terminar com "c"
-    regexp.MatchString("c$", "abc")
-    ```
-
-#### Caracteces de Escape em RegExp
-
-* **'`\`'**: Corresponde a um caractere de escape literal.
-
-    ``` go
-    regexp.MatchString("\\.", ".abc")
-    ```
-
-* **'`\b`'**: Corresponde à posição entre um caractere de palavra (como letras e números) e um caractere que não é uma palavra.
-
-    ``` go
-    // Corresponde a "Olá, Mundo!"
-    regexp.MatchString(`\bMundo\b`, "Olá, Mundo!")
-    ```
-
-#### Grupos de Captura
-
-* **'`()`'**: Agrupa caracteres, fazendo-os agir como se fosse um.
-
-    ``` go
-    // Corresponde a "abc", "abcabc", "abcabcabc", etc
-    regexp.MatchString("(abc)+", "abcabcabc")
-    ```
-
-### Compilação de Expressões Regulares
-
-Para começar a trabalhar com exmpressões regulares, é necessário compilar o padrão de expressão regular usando a função **`Compile()`**. Essa função retorna um objeto `*Regexp`, que pode ser usado para realizar operações de correspondência em strings.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "regexp"
-)
-
-func main() {
-    // Compila uma expressão regular para verificar se há letras
-    regex, err := regexp.Compile(`[a-zA-Z]`)
-
-    // Em caso de erro na compilação da expressão regular
-    if err != nil {
-        fmt.Println("Erro ao compilar a regexp:", err)
-        return
-    }
-
-    // Verifica se há correspondência na string "Olá, Mundo!"
-    match := regex.MatchString("Olá, Mundo!")
-    fmt.Println(match) // Output => true
-}
-```
-
-No exemplo acima, `regex` é um objeto `*Regexp` que posteriormente é usado para verificar se há letras em uma string com o método **`MatchString()`**.
-
-> **NOTA:** Sempre que possível, reutilize objetos `*Regexp` para melhorar o desempenho, especialmente em cenários de alto uso.
-
-Se houver a certeza de que a expressão regular está correta, você pode usar a função **`MustCompile()`** para compilar. Essa função assume que a expressão está correta e não retorna um erro.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "regexp"
-)
-
-func main() {
-    // Compila uma expressão regular para verificar se há letras
-    regex := regexp.MustCompile(`[a-zA-Z]`)
-
-    // Verifica se há correspondência na string "Olá, Mundo!"
-    match := regex.MatchString("Olá, Mundo!")
-    fmt.Println(match) // Output => true
-}
-```
-
-#### `CompilePOSIX()`
-
-É possível também compilar com a função **`CompilePOSIX()`**, que usa uma interpretação mais restrita, seguindo o padrão POSIX (Portable Operating System Interface). É considerada geralmente quando há requisitos específicos em relação a compatibilidade com POSIX ou precise de um conjunto de recursos mais restrito.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "regexp"
-)
-
-func main() {
-    // Compila uma expressão regular para verificar se há letras
-    regex, err := regexp.CompilePOSIX(`[a-zA-Z]`)
-
-    // Em caso de erro na compilação da expressão regular
-    if err != nil {
-        fmt.Println("Erro ao compilar a regexp:", err)
-        return
-    }
-
-    // Verifica se há correspondência na string "Olá, Mundo!"
-    match := regex.MatchString("Olá, Mundo!")
-    fmt.Println(match) // Output => true
-}
-```
-
-Assim como `MustCompile()`, há também a função **`MustCompilePOSIX()`** que não retorna um erro, pois assume que a expressão regular está correta.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "fmt"
-    "regexp"
-)
-
-func main() {
-    // Compila uma expressão regular para verificar se há letras
-    regex := regexp.MustCompilePOSIX(`[a-zA-Z]`)
-
-    // Verifica se há correspondência na string "Olá, Mundo!"
-    match := regex.MatchString("Olá, Mundo!")
-    fmt.Println(match) // Output => true
-}
-```
-
-### Principais Métodos de `*Regexp`
-
-* **'`MatchString()`'**: Verifica se a expressão regular corresponde a uma dada string.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "regexp"
-    )
-
-    func main() {
-        // Expressão regular que verifica se a primeira letra é maiúcula
-        regex, err := regexp.Compile(`[A-Z]`)
-
-        // Veririca se há um erro na compilação
-        if err != nil {
-            fmt.Println("Erro:", err)
-            return
-        }
-
-        // Verifica se a expressão regular corresponde duas strings
-        fmt.Println(regex.MatchString("Olá")) // Output => true
-        fmt.Println(regex.MatchString("olá")) // Output => false
-    }
-    ```
-
-* **'`FindString()`'**: Retorna a primeira correspondência da expressão regular na string fornecida.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "regexp"
-    )
-
-    func main() {
-        // Expressão regular que verifica há a palavra "Mundo"
-        regex, err := regexp.Compile(`Mundo`)
-
-        // Veririca se há um erro na compilação
-        if err != nil {
-            fmt.Println("Erro:", err)
-            return
-        }
-
-        // Verifica se a expressão regular corresponde a uma string
-        str := "Olá, Mundo!"
-        match := regex.FindString(str)
-        fmt.Println(match) // Output => Mundo
-    }
-    ```
-
-* **'`FindAllString()`'**: Retorna todas as correspondências da expressão regular na string fornecida em um slice. Aceita um segundo argumento, que deve ser um valor inteiro relativo ao máximo de correspondências.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "regexp"
-    )
-
-    func main() {
-        // Expressão regular
-        regex, err := regexp.Compile(`lang`)
-
-        // Veririca se há um erro na compilação
-        if err != nil {
-            fmt.Println("Erro:", err)
-            return
-        }
-
-        // Verifica se a expressão regular corresponde duas strings
-        str := "Golang! Clang!"
-        matches := regex.FindAllString(str, len(str))
-        fmt.Println(matches) // Output => [lang lang]
-    }
-    ```
-
-* **'`FindStringIndex()`'**: Retorna um slice de inteiros que contém os índices de início e fim da primeira ocorrência da expressão regular na string fornecida.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "regexp"
-    )
-
-    func main() {
-        // Expressão regular
-        regex, err := regexp.Compile(`lang`)
-
-        // Veririca se há um erro na compilação
-        if err != nil {
-            fmt.Println("Erro:", err)
-            return
-        }
-
-        // Verifica se a expressão regular corresponde a uma string
-        str := "Golang!"
-        index := regex.FindStringIndex(str)
-        fmt.Println(index) // Output => [2 6]
-    }
-    ```
-
-* **'`ReplaceAllString()`'**: Substitui todas as correspondências da expressão regular na string fornecida pela segunda string fornecida.
-
-    ``` go
-    package main
-
-    import (
-        "fmt"
-        "regexp"
-    )
-
-    func main() {
-        // Expressão regular
-        regex, err := regexp.Compile(`Mundo`)
-
-        // Veririca se há um erro na compilação
-        if err != nil {
-            fmt.Println("Erro:", err)
-            return
-        }
-
-        // Substitui uma palavra na string
-        str := "Olá, Mundo!"
-        replace := regex.ReplaceAllString(str, "Go")
-        fmt.Println(replace) // Output => Olá, Go!
-    }
-    ```
-
-## Módulos
-
-Um módulo é uma coleção de pacotes definidos no arquivo `god.mod`.
-
-O arquivo `go.mod` define o nome do módulo (geralmente o caminho do repositório Git), as versões das dependências usadas pelo módulo e quaisquer outras configurações relacionadas ao módulo.
-
-O arquivo **`go.sum`** é usado para registrar as sp,as de verificação de todos os módulos e suas dependências. Isso garante que, ao baixar dependências, seja buscadas exatamente as mesmas versões que foram usadas durante o desenvolvimento e evita a introdução de dependências não verificadas.
-
-Para **adicionar novas dependências**, é usado **`go get`** seguido do caminho do pacote ou módulo desejado. Isso atualizará automaticamente o arquivo `go.mod` com a nova dependência e seu número de versão.
-
-Os módulos suportam versionamento semântico, permitindo especificar intervalos de versões para as dependências no arquivo `go.mod`. Isso oferece flexibilidade para garantir o uso apenas de versões compatíveis com as dependências.
-
-***Vendoring*** é suportado, que é a prática de incluir todas as dependências diretamente no diretório do projeto, em vez de depender do sistema de arquivos global. Isso é útil para garantir a portabilidade e a reproducibilidade do código, especialmente em ambientes de implantação.
-
-### Criar um Módulo
-
-**As propriedades são:**
-
-* O caminho do diretório atual. Isso se refere a localização de onde o módulo pode ser baixado pelas ferramentas Go.
-* A versão mínima de Go necessária para o módulo atual.
-* A lista das versões mínimas dos outros módulos necessários para o módulo atual.
-* (Opcional) Instruções para substituir um módulo necessário com outra versão do módulo ou um diretório local, ou excluir uma versão específica de um módulo necessário.
-
-Para gerar o arquivo `go.mod`, execute:
-
-``` bash
-go mod init exemplo/modulo
-```
-
-## JSON
-
-Para trabalhar com JSON em Go, é usado o pacote **`encoding/json`**, que possui ferramentas para codificar e decodificar JSON.
-
-### Codificar JSON
-
-Para **codificar dados JSON**, é usada a função **`json.Marshal()`**.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "encoding/json"
-    "fmt"
-)
-
-type Foo struct {
-    Msg    string
-    Number int
-}
-
-func main() {
-    f := Foo{"Hello", 13}
-    b, err := json.Marshal(f)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    fmt.Println(b)
-    fmt.Println(string(b))
-
-    /* Output:
-    [123 34 77 115 103 34 58 34 72 101 108 108 111 34 44 34 78 117 109 98 101 114 34 58 49 51 125]
-    {"Msg":"Hello","Number":13}
-    */
-}
-```
-
-No exemplo acima, uma instância (`f`) da estrutura `Foo` é criada com os valores "Hello", para `Msg` e 13 para `Number`, e com essa instâcia é feita uma codificação para JSON, sendo o resultado um slice de bytes.
-
-> **NOTA:** Os campos da estrutura só serão exportados corretamente se a primeira letra for maiúscula, assim como no exemplo anterior.
-
-### Decodificar JSON
-
-Para decodificar um JSON, é usada a função **`json.Unmarshal()`**, que recebe dois argumentos:
-
-1. JSON em bytes que será decodificado.
-1. Endereço de memória da instância da estrutura que receberá a decodificação.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "encoding/json"
-    "fmt"
-)
-
-type Foo struct {
-    Msg    string
-    Number int
-}
-
-func main() {
-    var f Foo
-    b := `{"Msg":"Hello","Number":13}`
-    err := json.Unmarshal([]byte(b), &f)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    fmt.Println(f.Msg)    // Output => "Hello"
-    fmt.Println(f.Number) // Output => 13
-}
-```
-
-#### Decodificação Arbitrária
-
-Quando não se tem conhecimento dos dados de um JSON, pode-se usar uma interface vazia para decodificar ele.
-
-**Exemplo:**
-
-``` go
-package main
-
-import (
-    "encoding/json"
-    "fmt"
-)
-
-func main() {
-    var f interface{}
-    b := `{"Msg":"Hello","Number":13}`
-    err := json.Unmarshal([]byte(b), &f)
-    if err != nil {
-        fmt.Println("Err:", err)
-        return
-    }
-    fmt.Println(f) // Output => map[Msg:Hello Number:13]
-}
-```
-
-Nesse caso, é retornado um map ao invés de uma estrutura.
-
-## CLIs
-
-Command line interfaces (CLIs), diferente de graphical user interfaces (GUIs), são apenas texto.
-
-CLIs permitem tempos de compilação rápidos para criar programas que iniciam rapidamente e rodam em qualquer sistema.
