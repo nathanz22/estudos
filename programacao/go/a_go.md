@@ -5146,3 +5146,1311 @@ func main() {
     fmt.Println(valor) // -> 5
 }
 ```
+
+## Pacotes
+
+Os pacotes são usados para reutilização de código, permitindo importar várias funcionalidades já definidas anteriormente.
+
+Os pacotes podem ser utilizados após terem sidos importados, e para isso, é usada a palavra-chave **`import`**, seguida do nome do pacote entre aspas duplas.
+
+**Sintaxe:**
+
+``` go
+import "pacote"
+```
+
+**Para importar vários pacotes:**
+
+``` go
+import (
+    "pacote1"
+    "pacote2"
+    "pacote3"
+)
+```
+
+O uso de pacotes é útil por vários motivos, entre eles:
+
+* Menor chance de duplicidade de nomes.
+* Organização e reúso do código.
+* Ele acelera o compilador, exigindo apenas a recompilação de partes menores de um programa.
+
+### Criação de Pacotes
+
+Todos os pacotes são listados na pasta `~/go/src`, e se quiser criar um pacote, é lá onde ele deve estar.
+
+Ao criar um novo pacote, é recomendado criar uma pasta com o mesmo nome do pacote. Dentro dessa pasta, deve ser escrito o arquivo com as funcionalidades do pacote.
+
+**Exemplo:**
+
+``` go
+// Pacote em ~\go\src\meupacote\main.go
+package olamundo
+
+import "fmt"
+
+func OlaMundo() {
+    fmt.Println("Olá, Mundo!")
+}
+```
+
+``` go
+// Arquivo principal
+package main
+
+import "olamundo"
+
+func main() {
+    olamundo.OlaMundo() // -> Olá, Mundo!
+}
+```
+
+É importante observar que o nome pelo qual o pacote é importado é o mesmo que foi definido após a palavra-chave `package` no início do arquivo.
+
+> **NOTA:** Se o pacote estiver em uma subpasta, o caminho completo deve ser especificado. Por exemplo: `import "meuspacotes/pacote1"`. Isso garante que o compilador encontre o pacote corretamente.
+
+## Números Aleatórios
+
+O pacote **`math/rand`** faz parte da biblioteca padrão, e é usado para gerar números pseudoaleatórios considerando uma semente.
+
+**As principais funções são:**
+
+* **'`rand.Float64()`'**: Gera um número float aleatório no intervado [0, 1).
+* **'`rand.Int()`'**: Gera um número inteiro aleatório.
+* **'`rand.Intn()`'**: Gera um número aleatório no intervalo [0, n).
+* **'`rand.Seed()`'**: Inicializa a fonte de números aleatório com um valor semente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "math/rand"
+)
+
+func main() {
+    // Números aleatórios
+    randomFloat := rand.Float64()
+    randomInt := rand.Intn(10)
+
+    // Imprime os resultados
+    fmt.Println(randomFloat)
+    fmt.Println(randomInt)
+}
+```
+
+> **NOTA:** Números gerados pelo pacote `math/rand` não são adequados em situação que exigem segurança, como criptografia. Nesses casos, é adequado utilizar o pacote `crypto/rand`.
+
+## Data, Horário e Tempo
+
+O pacote **`time`** faz parte da biblioteca padrão, e possui diversas funcionalidades para trabalhar com informações relacionadas ao tempo, como funções para representar e manipular datas, horários e durações.
+
+### Constanstes de `time`
+
+**Constantes que representam tempo:**
+
+* **'`Nanosecond`'**: Representa um nanossegundo.
+* **'`Microsecond`'**: Representa um microssegundo.
+* **'`Millisecond`'**: Representa um milissegundo.
+* **'`Second`'**: Representa um segundo.
+* **'`Minute`'**: Representa um minuto.
+* **'`Hour`'**: Representa uma hora;
+
+**Constantes para dias da semana:**
+
+* **'`Sunday`'**: Representa domingo.
+* **'`Monday`'**: Representa segunda-feira.
+* **'`Tuesday`'**: Representa terça-feira.
+* **'`Wednesday`'**: Representa quarta-feira.
+* **'`Thursday`'**: Representa quinta-feira.
+* **'`Friday`'**: Representa sexta-feira.
+* **'`Saturday`'**: Representa sábado.
+
+**Constantes para os meses:**
+
+* **'`January`'**: Representa janeiro.
+* **'`February`'**: Representa fevereiro.
+* **'`March`'**: Representa março.
+* **'`April`'**: Representa abril.
+* **'`May`'**: Representa maio.
+* **'`June`'**: Representa junho.
+* **'`July`'**: Representa julho.
+* **'`August`'**: Representa agosto.
+* **'`September`'**: Representa setembro.
+* **'`October`'**: Representa outubro.
+* **'`November`'**: Representa novembro.
+* **'`December`'**: Representa dezembro.
+
+### Representar Datas e Horários
+
+Para representar uma datas e horários, são usadas funções.
+
+* **'`Now()`'**: Retorna a data e hora atuais.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        dataAtual := time.Now() // Data e hora atuais
+        fmt.Println(dataAtual) // Imprime a data e horas atuais
+    }
+    ```
+
+* **'`Date()`'**: Cria uma data e horário específicos. A variável que armazena será uma instância de `time.Time`.
+
+    Os argumentos são:
+
+    1. Ano
+    1. Mês
+    1. Dia
+    1. Horas
+    1. Minutos
+    1. Segundos
+    1. Milisegundos
+    1. Timezone
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Cria a data Data => 30/01/2005 13:22:04
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Imprime a data criada
+        fmt.Println(data) // -> 2005-01-30 13:22:04 +0000 UTC
+    }
+    ```
+
+* **'`Parse()`'**: Converte uma string em uma instância `time.Time` usando um formato específico.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Data em string
+        dataString := "2005-01-30T13:22:04Z"
+
+        // Converte a data em string para uma instância `time.Time`
+        data, err := time.Parse(time.RFC3339, dataString)
+
+        // Verifica se houve um erro na conversão
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Imprime a data criada
+        fmt.Println(data) // -> 2005-01-30 13:22:04 +0000 UTC
+    }
+    ```
+
+**Métodos de Instâncias `time.Time`:**
+
+* **'`Format()`'**: Converte uma instância de `time.Time` em um formato específico.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Converte a instância `time.Time` para uma string
+        dataFormatada := data.Format(time.RFC822)
+
+        // Imprime a data criada
+        fmt.Println(dataFormatada) // -> 30 Jan 05 13:22 UTC
+    }
+    ```
+
+* **'`Year()`'**: Retorna o ano da data.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Ano da data
+        ano := data.Year()
+
+        // Imprime o ano da data
+        fmt.Println(ano) // -> 2005
+    }
+    ```
+
+* **'`Month()`'**: Retorna o mês da data.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Mês da data
+        mes := data.Month()
+
+        // Imprime o mês da data
+        fmt.Println(mes) // -> January
+    }
+    ```
+
+* **'`Day()`'**: Retorna o dia da data.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Dia da data
+        dia := data.Day()
+
+        // Imprime o dia da data
+        fmt.Println(dia) // -> 30
+    }
+    ```
+
+* **'`Weekday()`'**: Retorna o dia da semana da data.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Dia da semana da data
+        diaSemana := data.Weekday()
+
+        // Imprime o dia da semana da data
+        fmt.Println(diaSemana) // -> Sunday
+    }
+    ```
+
+* **'`Add()`'**: Retorna uma nova data que é a soma entre `self` e um dado tempo.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 22, 4, 0, time.UTC)
+
+        // Adiciona 2 dias a data
+        novaData := data.Add(48 * time.Hour)
+
+        // Imprime a nova data
+        fmt.Println(novaData) // -> 2005-02-01 13:22:04 +0000 UTC
+    }
+    ```
+
+* **'`Sub()`'**: Retorna a diferença entre `self` e uma dada data.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "time"
+    )
+
+    func main() {
+        // Instância de `time.Time`
+        data := time.Date(2005, time.January, 30, 13, 0, 0, 0, time.UTC)
+
+        // Subtrai 2 dias da data
+        novaData := data.Sub(time.Date(2005, time.January, 30, 9, 0, 0, 0, time.UTC))
+
+        // Imprime a nova data
+        fmt.Println(novaData) // -> 4h0m0s
+    }
+    ```
+
+#### Comparação entre Datas
+
+As funções **`Equal()`**, **`Before()`** e **`After()`** verificam se `self` e igual, anterior ou posterior a uma dada data, retornando um valor booleano.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    // Instâncias de `time.Time`
+    data1 := time.Date(2005, 05, 23, 12, 0, 0, 0, time.UTC)
+    data2 := time.Date(2002, 03, 15, 13, 30, 0, 0, time.UTC)
+
+    // Verifica a ordem das datas
+    if data1.Equal(data2) {
+        fmt.Println("As datas são iguais")
+    } else if data1.Before(data2) {
+        fmt.Println("A primeira data é anterior à segunda")
+    } else { // Ou `data1.After(data2)`
+        fmt.Println("A primeira data é posterior à segunda")
+    }
+}
+```
+
+#### Duração
+
+Com a função **`Duration()`** do pacote **`time`** é possível expressar durações para impressão ou como argumentos.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    duration := 5 * time.Second
+    fmt.Println("Duração:", duration)
+    // -> Duração: 5s
+}
+```
+
+#### Espera na Execução
+
+A função **`Sleep()`** do pacote `time` permite pausar a execução do programa por um determinado tempo.
+
+**Sintaxe:**
+
+``` go
+time.Sleep(tempo)
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    for i := 10; i >= 0; i-- {
+        fmt.Printf("%d ", i)
+        time.Sleep(time.Second)
+        if i == 0 {
+            fmt.Println("FIM")
+        }
+    }
+    // Imprime uma contagem regressiva
+}
+```
+
+#### Temporizadores
+
+Um *timer* é usado para agendar a execução de uma determinada ação após um certo período de tempo.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    // Timer que dispara após 5 segundos
+    timer := time.NewTimer(5 * time.Second)
+
+    // Espera o temporizador expirar
+    <-timer.C
+
+    fmt.Println("Temporizador expirado!")
+}
+```
+
+#### Tickers
+
+Um ticker é semelhante a um temporizador, mas ele dispara repetidamente em intervalos regulares até ser parado.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    // Ticker que dispara a cada segundo
+    ticker := time.NewTicker(time.Second)
+
+    // Executa a cada segundo
+    i := 0
+    for {
+        <-ticker.C
+        i++
+        fmt.Printf("%d ", i)
+        if i == 10 {
+            fmt.Println("FIM")
+            ticker.Stop() // Para o ticker
+            break
+        }
+    }
+}
+```
+
+> **NOTA:** Lembre-se de parar o ticker quando não for mais necessário para evitar vazamentos de recursos. Para parar um ticker, use o método **`Stop()`** no ticker.
+
+## Manipulação de Arquivos
+
+O pacote **`os`** fornece funcionalidades para trabalhar com arquivos.
+
+### Criar Arquivos
+
+A função **`os.Create()`** recebe como argumento um caminho, criando-o caso não exista, ou sobrescrevendo-o, caso exista.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Cria um arquivo chamado `file.txt`
+    file, err := os.Create("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+
+    // Imprime o nome do arquivo criado
+    fmt.Println(file.Name()) // -> file.txt
+}
+```
+
+### Excluir Arquivos
+
+A função **`os.Remove()`** é usada para excluir um arquivo ou pasta.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    // Exclui o arquivo `exemplo.txt` na pasta `caminho`
+    os.Remove("caminho/exemplo.txt")
+}
+```
+
+Para excluir todo o caminho, mesmo que seja uma pasta com outros arquivos, é usado **`os.RemoveAll()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    // Exclui a pasta `exemplo` junto de seus arquivos
+    os.RemoveAll("caminho/exemplo")
+}
+```
+
+### Renomear/Mover Arquivos
+
+A função **`os.Rename()`** move um arquivo ou pasta para um outro diretório.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "os"
+)
+
+func main() {
+    // Move o arquivo `file.txt` para um novo caminho
+    os.Rename("file.txt", "novo/caminho/file.txt")
+}
+```
+
+### Ler Arquivos
+
+Para ler arquivos, pode ser usada a função **`os.ReadFile()`**, que recebe o caminho do arquivo como argumento.
+
+**Exemplo:**
+
+``` txt
+Olá, Mundo!
+Olá, Go!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    data, err := os.ReadFile("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+
+    os.Stdout.Write(data)
+    /* Output:
+    Olá, Mundo!
+    Olá, Go!
+    */
+}
+```
+
+### Escrever em Arquivos
+
+Para escrever em arquivos, é usada a função **`os.WriteFile()`**, que recebe como argumentos:
+
+1. **'`name`'**: Arquivo.
+1. **'`data`'**: Dados que serão escritos.
+1. **'`perm`'**: Permissão do arquivo.
+
+Antes de escrever no arquivo, ele é truncado, mas sem alterar as permissões.
+
+Se o arquivo não existir, ele será criado com as permissões definidas em `perm`.
+
+> **NOTA:** Se ocorrer algum erro durante a operação de escrita, o arquivo pode ficar em um estado parcialmente escrito.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    err := os.WriteFile("file.txt", []byte("Olá, Mundo!"), 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+
+    // Imprime o arquivo
+    data, err := os.ReadFile("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+    }
+    fmt.Printf("%s\n", string(data)) // -> Olá, Mundo!
+}
+```
+
+### Abrir Arquivos
+
+A função **`os.Open()`** abre o arquivo especificado para leitura. O arquivo aberto terá o modo **`O_RDONLY`**.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+Olá, Mundo!
+Olá, Go!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.Open("file.txt")
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Imprime o conteúdo do arquivo
+    data := make([]byte, 1024)
+    n, err := file.Read(data)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+
+    fmt.Printf("%s\n", data[:n])
+    /* Output:
+    Olá, Mundo!
+    Olá, Go!
+    */
+}
+```
+
+Como visto acima, é usado o método **`Read()`** para ler o conteúdo do arquivo.
+
+Outra maneira de abrir arquivos, é usando a função **`os.OpenFile()`**, que funciona como `os.Open()`, porém pede que especifique o flag e a permissão para abrir o arquivo.
+
+Os flags para abrir arquivos são representados por constantes:
+
+* **'`O_RDONLY`'**: Apenas leitura.
+* **'`O_WRONLY`'**: Apenas escrita.
+* **'`O_RDWR`'**: Leitura e escrita.
+* **'`O_APPEND`'**: Adicionar dados no arquivo quando escrever.
+* **'`O_CREATE`'**: Criar um novo arquivo se o nome não existir.
+* **'`O_TRUNC`'**: Truncar o arquivo ao abrí-lo.
+
+> **NOTA:** Ao abrir um arquivo, não se esqueça de fechá-lo com o método **`Close()`**. Para garantir o fechamento, é utilizado `defer`.
+
+O método **`Write()`** **escreve no arquivo**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.OpenFile("file.txt", os.O_APPEND, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Escreve "Olá, Go!" no arquivo
+    n, err := file.Write([]byte("\nOlá, Go!"))
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println("Bytes gravados:", n)
+}
+```
+
+O método **`os.WriteAt()`** é usado para escrever no arquivo a partir de um determinado byte.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+____, Mundo!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.OpenFile("file.txt", os.O_WRONLY, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Escreve substitui `____` por `Olá` no arquivo
+    n, err := file.WriteAt([]byte("Olá"), 0)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println("Bytes gravados:", n)
+}
+```
+
+O arquivo de texto será "Olá, Mundo!".
+
+Outro método para escrever em arquivos é `os.WriteString()`, que grava no arquivo a string especificada.
+
+**Exemplo:**
+
+Arquivo de texto:
+
+``` txt
+Olá, Mundo!
+```
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo `file.txt`
+    file, err := os.OpenFile("file.txt", os.O_APPEND, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    defer file.Close() // Garante o fechamento do arquivo
+
+    // Escreve "Olá, Go!" no arquivo
+    n, err := file.WriteString("\nOlá, Go!")
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println("Bytes gravados:", n)
+}
+```
+
+## Concorrência
+
+Concorrência refere-se à execução simultânea de tarefas ou processos independentes, onde a ordem de execução não é prioridade.
+
+Em Go, a abordagem principal para a concorrência é baseada em goroutines e canais (channels).
+
+### Goroutines
+
+É uma função que é executada concorrentemente com outras goroutines.
+
+São criadas a partir da palavra-chave **`go`** antes de chamar uma função. Isso inicia a execução da função em uma nova goroutine, permitindo que ela seja executada em paralelo com outras partes do programa.
+
+**Sintaxe:**
+
+``` go
+// Função concorrente (goroutine)
+func FuncaoConcorrente() {
+    // Código da goroutine
+}
+
+func main() {
+    // Chama a goroutine
+    go FuncaoConcorrente()
+}
+```
+
+Também é comum utilizá-las como funções anônimas.
+
+``` go
+func main() {
+    // Chama a goroutine
+    go func() {
+        // Código da goroutine
+    }()
+}
+```
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+// Função que imprime "Olá, Mundo!" a cada 1 segundo
+func OlaMundo() {
+    for {
+        fmt.Println("Olá, Mundo!")
+        time.Sleep(time.Second) // Espera 1 segundo
+    }
+}
+
+func main() {
+    go OlaMundo()
+
+    // Entrada para encerrar
+    fmt.Println("Pressione ENTER para encerrar")
+    fmt.Scanln()
+}
+```
+
+### Channels
+
+Os canais são usados para a comunicação entre goroutines. Eles permitem que as goroutines enviem e recebam dados de forma segura e coordenada.
+
+Um canal é declarado usando **`make`** e a palavra-chave **`chan`**. A comunicação é feita através do operador **`<-`**, que pode ser usado para enviar e receber dados no canal.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+// Função que faz uma contagem progressiva
+func Contagem(canal chan int) {
+    cont := 0
+    for {
+        cont++
+        canal <- cont
+        time.Sleep(time.Second) // Espera 1 segundo antes de continuar
+    }
+}
+
+// Função que imprime cada valor da contagem
+func ImprimirContagem(canal chan int) {
+    for {
+        valor := <- canal
+        fmt.Println(valor)
+    }
+}
+
+func main() {
+    // Canal
+    canal := make(chan int)
+
+    // Chama a contagem
+    go Contagem(canal)
+
+    // Chama a função para imprimir
+    go ImprimirContagem(canal)
+
+    // Entrada para encerrar
+    fmt.Println("Pressione ENTER para encerrar")
+    fmt.Scanln()
+}
+```
+
+### Declaração `select`
+
+É usado para lidar com várias operações de canal de forma concorrente. Ele permite que o programa aguarde várias comunicações de canal, escolhendo a primeira que estiver pronta.
+
+**Sintaxe:**
+
+``` go
+select {
+case msg1 := <- canal1:
+    // Código
+case msg2 := <- canal2:
+    // Código
+case msg3 := <- canal3:
+    // Código
+default:
+    // Código
+}
+```
+
+A sintaxe básica de `select` é semelhando a um bloco `switch`, mas em vez de avaliar condições de caso, o `select` lida com operações de canal.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+// Função que faz uma contagem regressiva
+func Contagem(canal chan int) {
+    cont := 10
+    for cont >= 0 {
+        canal <- cont
+        cont--
+        time.Sleep(time.Second) // Espera 1 segundo antes de continuar
+    }
+    close(canal) // Fecha o canal
+}
+
+// Função que imprime cada valor da contagem
+func ImprimirContagem(canal chan int) {
+    for {
+        select {
+        case valor, ok := <- canal:
+            if !ok {
+                fmt.Println("Canal fechado...")
+                return
+            }
+            fmt.Println(valor)
+        case <- time.After(2 * time.Second):
+            fmt.Println("TIMEOUT | Nenhuma mensagem após 2 segundos")
+        }
+    }
+}
+
+func main() {
+    // Canal
+    canal := make(chan int)
+
+    // Chama a contagem
+    go Contagem(canal)
+
+    // Chama a função para imprimir
+    go ImprimirContagem(canal)
+
+    // Espera a execução das goroutines
+    time.Sleep(15 * time.Second)
+}
+```
+
+No exemplo acima, a goroutine `ImprimirContagem()` imprime o valor do canal depois de verificar se o canal foi fechado por meio da variável `ok`, atribuída por meio do próprio canal junto do valor desse canal. Se não houver nenhuma resposta por 2 segundos, é executado o segundo caso.
+
+### Context
+
+O pacote **`context`** fornece ferramentas para lidar cancelamento de operações e compartilhamento de valores entre goroutines.
+
+Um contexto permito passar sinais de cancelamento e prazos de execução para goroutines de maneira coordenada e segura, além de permitir transmitir valores específicos para uma árvore de chamadas de funções, como valores de autenticação, limites de tempo ou cancelamento, e outras informações de rastreamento.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "context"
+    "fmt"
+    "time"
+)
+
+func main() {
+    // Criando um contexto com cancelamento após 1 segundo
+    ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+    defer cancel() // Garante que o contexto seja cancelado quando a função main sair
+
+    // Executando uma operação em uma goroutine com o contexto criado
+    go func(ctx context.Context) {
+        select {
+        case <-time.After(2 * time.Second):
+            fmt.Println("Operação concluída com sucesso.")
+        case <-ctx.Done(): // Verifica se o contexto foi cancelado
+            fmt.Println("Operação cancelada:", ctx.Err())
+        }
+    }(ctx)
+
+    // Esperando alguns segundos para ver a saída
+    time.Sleep(3 * time.Second)
+}
+```
+
+### Data Races
+
+Uma data race é quando goroutines tentam acessar simultaneamente um mesmo dado, podendo uma alterar esse dado de forma com que a outra goroutine funcione de maneira inesperada.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func IsEven(n int) bool {
+    return n % 2 == 0
+}
+
+func main() {
+    n := 0
+
+    // goroutine 1
+    go func() {
+        result := IsEven(n)
+        time.Sleep(5 * time.Millisecond)
+        if result {
+            fmt.Println(n, "é par")
+            return
+        }
+        fmt.Println(n, "é ímpar")
+    }()
+
+    // goroutine 2
+    go func() {
+        n++
+    }()
+
+    time.Sleep(time.Second)
+}
+```
+
+**Analisando o código acima:**
+
+1. A primeira goroutine armazena na variável `result` se o valor de `n` - que é inicialmente 0 - é par.
+1. Após armazenar o resultado em `result`, é feita uma pausa com `time.Sleep()`.
+1. Durante essa pausa, a segunda goroutine executa, incrementando a variável `n`, tornando seu valor igual a 1.
+1. De volta à primeira goroutine, o tempo da pausa termina, e então é verificado o resultado da verificação.
+1. É impresso que "1 é par" porque ao imprimir a mensagem a variável `n` não possui o mesmo valor de antes da pausa, já que foi incrementada durante essa pausa.
+
+Basicamente, o resultado depende de qual das ações é executada primeiro.
+
+**Um exemplo mais simples:**
+
+``` go
+package main
+
+import "fmt"
+
+func Num() int {
+    var n int
+    go func() {
+        n = 13
+    }()
+
+    return n
+}
+
+func main() {
+    fmt.Println(Num())
+    // -> 0
+}
+```
+
+#### Correção de Data Races
+
+Há mais de uma solução para data races, tendo todas elas em comum o acesso à variável e bloqueio caso seja escrito nela.
+
+**As soluções são:**
+
+* Bloqueio com Waitgroups
+* Bloqueio com canais
+* Com mutex
+
+##### Bloqueio com Waitgroups
+
+Bloqueia o acesso até que a operação de escrita tenha sido compleatada.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func Num() int {
+    // Valor que será retornado
+    var n int
+
+    // Variável waitgroup
+    var wg sync.WaitGroup
+    wg.Add(1)
+
+    go func() {
+        n = 13
+        // Indica o fim da escrita
+        wg.Done()
+    }()
+    // Espera a escrita ser concluída
+    wg.Wait()
+
+    // Retorna o valor
+    return n
+}
+
+func main() {
+    fmt.Println(Num())
+    // -> 13
+}
+```
+
+##### Bloqueio com Canais
+
+É feito o uso de canais para bloquear a variável.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Num() int {
+    // Valor que será retornado
+    var n int
+
+    // Canal
+    done := make(chan struct{})
+
+    go func() {
+        n = 13
+        // Indica o fim da escrita
+        done <- struct{}{}
+    }()
+    // Espera a escrita ser concluída
+    <-done
+
+    // Retorna o valor
+    return n
+}
+
+func main() {
+    fmt.Println(Num())
+    // -> 13
+}
+```
+
+**Outra possibilidade ao usar canais, é retornar o canal em si:**
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func Num() chan int {
+    // Canal
+    c := make(chan int)
+
+    go func() {
+        // Atribui o valor ao canal
+        c <- 13
+    }()
+    // Retorna o canal
+    return c
+}
+
+func main() {
+    x := <- Num()
+    fmt.Println(x)
+    // -> 13
+}
+```
+
+##### Mutex
+
+São eficazes quando é preciso garantir a exclusão simultânea para proteger dados compartilhados contra race conditions.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+type SafeNumber struct {
+    n           int
+    m           sync.Mutex
+    initialized bool
+}
+
+func (x *SafeNumber) Set(n int) {
+    x.m.Lock()
+    defer x.m.Unlock()
+    x.n = n
+    x.initialized = true
+}
+
+func (x *SafeNumber) Get() (int, bool) {
+    x.m.Lock()
+    defer x.m.Unlock()
+    if !x.initialized {
+        return 0, false
+    }
+    return x.n, true
+}
+
+func Num() int {
+    x := &SafeNumber{}
+
+    // Inicia a goroutine que define o valor de x
+    go x.Set(13)
+
+    // Aguarda até que o valor de x seja definido
+    for {
+        if n, ok := x.Get(); ok {
+            return n
+        }
+    }
+}
+
+func main() {
+    fmt.Println(Num())
+    // Saída esperada: 13
+}
+```
