@@ -1,0 +1,44 @@
+{
+    "perguntas": [
+        {
+            "p": "Biologia",
+            "r": "É o campo da ciência que estuda a vida."
+        },
+        {
+            "p": "Metabolismo",
+            "r": "São reações bioquímicas que ocorrem no organismo. É subdividido em anabolismo e catabolismo."
+        },
+        {
+            "p":"Anabolismo",
+            "r": "Os organismos produzem moléculas complexas a partir de moléculas mais simples. Os processos consomem energia."
+        },
+        {
+            "p":"Catabolismo",
+            "r": "Os organismos produzem moléculas simples a partir de moléculas complexas. Os processos podem disponibilizar energia armazenada."
+        },
+        {
+            "p": "Células",
+            "r": "É a unidade fundamental da vida, e todos os seres vivos são constituídos por uma ou mais."
+        },
+        {
+            "p": "Homeostase",
+            "r": "É a regulação do organismo em resposta a determinada condição, como por exemplo, o ajuste da temperatura corporal."
+        },
+        {
+            "p": "Qual a diferença entre o crescimento em organismos unicelulares e em organismos multicelulares?",
+            "r": "Em organismos unicelulares, a célula cresce em tamanho. Já em organismos multicelulares, as células se dividem, gerando outras células."
+        },
+        {
+            "p": "Evolução",
+            "r": "É a mudança na composição genética ao longo do tempo."
+        },
+        {
+            "p": "Seleção natural",
+            "r": "É a seleção de populações de organismos que são mais aptos a viver em um determinado ambiente."
+        },
+        {
+            "p": "Quesitos para ser vivo",
+            "r": "Organização, Metabolismo, Homeostase, Crescimento, Reprodução, Reação e Evolução."
+        }
+    ]
+}

@@ -4337,6 +4337,159 @@ func main() {
 }
 ```
 
+### Funções Adiadas
+
+Uma declaração **`defer`** adia a execução de uma função até que a função envolvente seja concluída. A função adiada é colocada em uma pilha e será executada por último antes do retorno da função envolvente, garantindo a execução de determinadas operações de limpeza, como fechar arquivos ou liberar recursos.
+
+As funções adiadas são executadas em ordem reversa, ou seja, a última função adiada é a primeira a ser executada após a conclusão da função envolvente.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    defer fmt.Println("Primeira chamada defer")
+    fmt.Println("Início da função")
+    defer fmt.Println("Segunda chamada defer")
+    fmt.Println("Fim da função")
+
+    /* Output:
+    Início da função
+    Fim da função
+    Segunda chamada defer
+    Primeira chamada defer
+    */
+}
+```
+
+A ação adiada irá considerar o valor que recebeu quando ela foi declarada, e não o valor final.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    i := 0
+    defer fmt.Println(i)
+    i++
+    // -> 0
+}
+```
+
+Assim, seria possível até mesmo imprimir números de maneira regressiva com um loop `for`.
+
+**Exemplo:**
+
+``` go
+package main
+
+import "fmt"
+
+func main() {
+    for i := 0; i <= 5; i++ {
+        defer fmt.Printf("%d ", i)
+    }
+    // -> 5 4 3 2 1 0
+}
+```
+
+A declaração `defer` é frequentemente usada para garantir a limpeza de recursos, como fechar arquivos, liberar mutexes, ou desalocar memória. Isso é útil para garantir que os recursos sejam liberados mesmo se ocorrerem erros ou exceções durante a execução da função.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main() {
+    // Abre o arquivo
+    f, err := os.OpenFile("file.txt", os.O_RDONLY, 0666)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+
+    // Garante o fechamento do arquivo
+    defer f.Close()
+
+    // Lê e imprime o conteúdo do arquivo
+    c := make([]byte, 1024)
+    n, err := f.Read(c)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(string(c[:n])) // -> Hello, World!
+}
+```
+
+No exemplo acima, existe o arquivo `file.txt` que tem como conteúdo gravado o texto "Hello, World!". O programa acima abre o arquivo e então garante o fechamento do arquivo no final da função `main()` com `defer`.
+
+### Execução Única de Função
+
+O pacote **`sync`** fornece o tipo **`Once`** que é usado para executar uma função apenas uma vez, independentemente de quantas vezes ela for chamada após a primeira. Isso é feito por meio do método **`Doc()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+    var once sync.Once
+
+    f := func() {
+        fmt.Println("Hello, World!")
+    }
+
+    once.Do(f) // -> Hello, World!
+    once.Do(f) // Não imprime
+}
+```
+
+No exemplo acima, é impresso "Hello, World!" apenas uma vez, mesmo que a função `f` seja chamada duas vezes a partir de `once.Do()` (instância do tipo `sync.Once`).
+
+Mesmo se passado outra função em uma chamada posterior à primeira, ela não será executada.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+    var once sync.Once
+
+    f1 := func() {
+        fmt.Println("Hello, World!")
+    }
+    f2 := func() {
+        fmt.Println("Hello, Go!")
+    }
+
+    once.Do(f1) // -> Hello, World!
+    once.Do(f2) // Não imprime
+}
+```
+
 ## Structs
 
 Estruturas são usadas para criar uma coleção de membros que pode ser composta por diferentes tipos de dados.
@@ -5208,6 +5361,76 @@ func main() {
 É importante observar que o nome pelo qual o pacote é importado é o mesmo que foi definido após a palavra-chave `package` no início do arquivo.
 
 > **NOTA:** Se o pacote estiver em uma subpasta, o caminho completo deve ser especificado. Por exemplo: `import "meuspacotes/pacote1"`. Isso garante que o compilador encontre o pacote corretamente.
+
+## Módulos
+
+Um módulo é um conjunto de pacotes, gerenciados a partir de um arquivo `go.mod`. Esse arquivo define o caminho do módulo e gerencia as dependências e suas versões.
+
+O arquivo `go.mod` é inicializado a partir de um comando.
+
+**Sintaxe:**
+
+``` bash
+go mod init nome_modulo
+```
+
+**Exemplo:**
+
+``` bash
+go mod init meumodulo
+```
+
+O comando acima irá gerar o seguinte arquivo:
+
+``` mod
+module meumodulo
+
+go 1.22.0
+```
+
+Desde que haja um módulo, é possível que um arquivo importe um pacote no mesmo diretório.
+
+**Exemplo:**
+
+``` go
+// Pacote olamundo
+package olamundo
+
+import "fmt"
+
+func OlaMundo() {
+    fmt.Println("Olá, Mundo!")
+}
+```
+
+``` go
+// Arquivo principal (main.go)
+package main
+
+import "meumodulo/olamundo"
+
+func main() {
+    olamundo.OlaMundo() // -> Olá, Mundo!
+}
+```
+
+### Dependências
+
+Para implementar uma dependência ao projeto, é usado o comando:
+
+``` bash
+go get diretorio_remoto
+```
+
+Geralmente, o `diretorio_remoto` é um repositório do GitHub que armazena o pacote do qual o projeto necessita.
+
+**Exemplo:**
+
+<!-- Exemplo de código com Cobra -->
+
+``` go
+
+```
 
 ## Números Aleatórios
 
@@ -6454,3 +6677,468 @@ func main() {
     // Saída esperada: 13
 }
 ```
+
+## Expressões Regulares
+
+As expressões regulares são implementas no pacote padrão **`regexp`**. Este pacote fornece funções para compilar e usar padrões de expressões regulares.
+
+### Sintaxe de Expressões Regulares
+
+#### Correspondência Literal
+
+**Exemplo:**
+
+``` go
+// Corresponde à sequência literal "abc" na string "abcdef"
+regexp.MatchString("abc", "abcdef")
+```
+
+#### Meta-caracteres
+
+* **'`.`'**: Corresponde a qualquer caractere entre os dois caracteres que cercam o `.`.
+
+    ``` go
+    // Corresponde a qualquer caractere entre "a" e "c"
+    regexp.MatchString("a.c", "abc")
+    ```
+
+* **'`*`'**: Corresponde a zero ou mais ocorrências do elemento anterior.
+
+    ``` go
+    // Corresponde a "ac", "abc", "abbc", etc
+    regexp.MatchString("ab*c", "ac")
+    ```
+
+* **'`+`'**: Corresponde a uma ou mais ocorrências do elemento anterior.
+
+    ``` go
+    // Corresponde a "abc", "abbc", "abbbc", "etc
+    regexp.MatchString("ab+c", "abbc")
+    ```
+
+* **'`?`'**: Torna o elemento anterior opcional (zero ou uma ocorrência).
+
+    ``` go
+    // Corresponde a "ac" ou "abc"
+    regexp.MatchString("ab?c", "ac")
+    ```
+
+#### Classes de Caracteres
+
+* **'`[abc]`'**: Corresponde a "a", "b" ou "c".
+* **'`[^abc]`'**: Corresponde a qualquer caractere que não seja "a", "b" ou "c".
+* **'`[a-z]`'**: Corresponde a qualquer caractere de  "a" a "z". O mesmo funciona para caracteres em maiúsculo (`[A-Z]`) e para números (`[0-9]`) .
+
+#### Quantificadores
+
+* **'`{n}`'**: Corresponde se houver n ocorrências do caractere anterior.
+
+    ``` go
+    // Corresponde a "aaa"
+    regexp.MatchString("a{3}", "aaa")
+    ```
+
+* **'`{n,}`'**: Corresponde se houver pelo menos n ocorrências do caractere anterior.
+
+    ``` go
+    // Corresponde a "aaa", "aaaa", "aaaaa", etc
+    regexp.MatchString("a{3,}", "aaaaa")
+    ```
+
+* **'`{n, m}`'**: Corresponde se o caractere anterior se repetir entre n e m.
+
+    ``` go
+    // Corresponde a "aa", "aaa", "aaaa" e "aaaaa"
+    regexp.MatchString("a{2, 5}", "aaaaa")
+    ```
+
+#### Âncoras
+
+* **'`^`'**: Corresponde se o padrão estiver no início da string.
+
+    ``` go
+    // Corresponde se a string se iniciar com "a"
+    regexp.MatchString("^a", "abc")
+    ```
+
+* **'`$`'**: Corresponde se o padrão estiver no final da string.
+
+    ``` go
+    // Corresponde a qualquer string que terminar com "c"
+    regexp.MatchString("c$", "abc")
+    ```
+
+#### Caracteces de Escape em RegExp
+
+* **'`\`'**: Corresponde a um caractere de escape literal.
+
+    ``` go
+    regexp.MatchString("\\.", ".abc")
+    ```
+
+* **'`\b`'**: Corresponde à posição entre um caractere de palavra (como letras e números) e um caractere que não é uma palavra.
+
+    ``` go
+    // Corresponde a "Olá, Mundo!"
+    regexp.MatchString(`\bMundo\b`, "Olá, Mundo!")
+    ```
+
+#### Grupos de Captura
+
+* **'`()`'**: Agrupa caracteres, fazendo-os agir como se fosse um.
+
+    ``` go
+    // Corresponde a "abc", "abcabc", "abcabcabc", etc
+    regexp.MatchString("(abc)+", "abcabcabc")
+    ```
+
+### Compilação de Expressões Regulares
+
+Para começar a trabalhar com exmpressões regulares, é necessário compilar o padrão de expressão regular usando a função **`Compile()`**. Essa função retorna um objeto `*Regexp`, que pode ser usado para realizar operações de correspondência em strings.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex, err := regexp.Compile(`[a-zA-Z]`)
+
+    // Em caso de erro na compilação da expressão regular
+    if err != nil {
+        fmt.Println("Erro ao compilar a regexp:", err)
+        return
+    }
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // -> true
+}
+```
+
+No exemplo acima, `regex` é um objeto `*Regexp` que posteriormente é usado para verificar se há letras em uma string com o método **`MatchString()`**.
+
+> **NOTA:** Sempre que possível, reutilize objetos `*Regexp` para melhorar o desempenho, especialmente em cenários de alto uso.
+
+Se houver a certeza de que a expressão regular está correta, você pode usar a função **`MustCompile()`** para compilar. Essa função assume que a expressão está correta e não retorna um erro.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex := regexp.MustCompile(`[a-zA-Z]`)
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // -> true
+}
+```
+
+#### `CompilePOSIX()`
+
+É possível também compilar com a função **`CompilePOSIX()`**, que usa uma interpretação mais restrita, seguindo o padrão POSIX (Portable Operating System Interface). É considerada geralmente quando há requisitos específicos em relação a compatibilidade com POSIX ou precise de um conjunto de recursos mais restrito.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex, err := regexp.CompilePOSIX(`[a-zA-Z]`)
+
+    // Em caso de erro na compilação da expressão regular
+    if err != nil {
+        fmt.Println("Erro ao compilar a regexp:", err)
+        return
+    }
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // -> true
+}
+```
+
+Assim como `MustCompile()`, há também a função **`MustCompilePOSIX()`** que não retorna um erro, pois assume que a expressão regular está correta.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "fmt"
+    "regexp"
+)
+
+func main() {
+    // Compila uma expressão regular para verificar se há letras
+    regex := regexp.MustCompilePOSIX(`[a-zA-Z]`)
+
+    // Verifica se há correspondência na string "Olá, Mundo!"
+    match := regex.MatchString("Olá, Mundo!")
+    fmt.Println(match) // -> true
+}
+```
+
+### Principais Métodos de `*Regexp`
+
+* **'`MatchString()`'**: Verifica se a expressão regular corresponde a uma dada string.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular que verifica se a primeira letra é maiúcula
+        regex, err := regexp.Compile(`[A-Z]`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde duas strings
+        fmt.Println(regex.MatchString("Olá")) // -> true
+        fmt.Println(regex.MatchString("olá")) // -> false
+    }
+    ```
+
+* **'`FindString()`'**: Retorna a primeira correspondência da expressão regular na string fornecida.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular que verifica há a palavra "Mundo"
+        regex, err := regexp.Compile(`Mundo`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde a uma string
+        str := "Olá, Mundo!"
+        match := regex.FindString(str)
+        fmt.Println(match) // -> Mundo
+    }
+    ```
+
+* **'`FindAllString()`'**: Retorna todas as correspondências da expressão regular na string fornecida em um slice. Aceita um segundo argumento, que deve ser um valor inteiro relativo ao máximo de correspondências.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular
+        regex, err := regexp.Compile(`lang`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde duas strings
+        str := "Golang! Clang!"
+        matches := regex.FindAllString(str, len(str))
+        fmt.Println(matches) // -> [lang lang]
+    }
+    ```
+
+* **'`FindStringIndex()`'**: Retorna um slice de inteiros que contém os índices de início e fim da primeira ocorrência da expressão regular na string fornecida.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular
+        regex, err := regexp.Compile(`lang`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Verifica se a expressão regular corresponde a uma string
+        str := "Golang!"
+        index := regex.FindStringIndex(str)
+        fmt.Println(index) // -> [2 6]
+    }
+    ```
+
+* **'`ReplaceAllString()`'**: Substitui todas as correspondências da expressão regular na string fornecida pela segunda string fornecida.
+
+    ``` go
+    package main
+
+    import (
+        "fmt"
+        "regexp"
+    )
+
+    func main() {
+        // Expressão regular
+        regex, err := regexp.Compile(`Mundo`)
+
+        // Veririca se há um erro na compilação
+        if err != nil {
+            fmt.Println("Erro:", err)
+            return
+        }
+
+        // Substitui uma palavra na string
+        str := "Olá, Mundo!"
+        replace := regex.ReplaceAllString(str, "Go")
+        fmt.Println(replace) // -> Olá, Go!
+    }
+    ```
+
+## JSON
+
+Para trabalhar com JSON em Go, é usado o pacote **`encoding/json`**, que possui ferramentas para codificar e decodificar JSON.
+
+### Codificar JSON
+
+Para **codificar dados JSON**, é usada a função **`json.Marshal()`**.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Foo struct {
+    Msg    string
+    Number int
+}
+
+func main() {
+    f := Foo{"Hello", 13}
+    b, err := json.Marshal(f)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(b)
+    fmt.Println(string(b))
+
+    /* Output:
+    [123 34 77 115 103 34 58 34 72 101 108 108 111 34 44 34 78 117 109 98 101 114 34 58 49 51 125]
+    {"Msg":"Hello","Number":13}
+    */
+}
+```
+
+No exemplo acima, uma instância (`f`) da estrutura `Foo` é criada com os valores "Hello", para `Msg` e 13 para `Number`, e com essa instâcia é feita uma codificação para JSON, sendo o resultado um slice de bytes.
+
+> **NOTA:** Os campos da estrutura só serão exportados corretamente se a primeira letra for maiúscula, assim como no exemplo anterior.
+
+### Decodificar JSON
+
+Para decodificar um JSON, é usada a função **`json.Unmarshal()`**, que recebe dois argumentos:
+
+1. JSON em bytes que será decodificado.
+1. Endereço de memória da instância da estrutura que receberá a decodificação.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+type Foo struct {
+    Msg    string
+    Number int
+}
+
+func main() {
+    var f Foo
+    b := `{"Msg":"Hello","Number":13}`
+    err := json.Unmarshal([]byte(b), &f)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(f.Msg)    // -> "Hello"
+    fmt.Println(f.Number) // -> 13
+}
+```
+
+#### Decodificação Arbitrária
+
+Quando não se tem conhecimento dos dados de um JSON, pode-se usar uma interface vazia para decodificar ele.
+
+**Exemplo:**
+
+``` go
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+)
+
+func main() {
+    var f interface{}
+    b := `{"Msg":"Hello","Number":13}`
+    err := json.Unmarshal([]byte(b), &f)
+    if err != nil {
+        fmt.Println("Err:", err)
+        return
+    }
+    fmt.Println(f) // -> map[Msg:Hello Number:13]
+}
+```
+
+Nesse caso, é retornado um map ao invés de uma estrutura.
