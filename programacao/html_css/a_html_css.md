@@ -143,7 +143,7 @@ Para criar uma lista não ordenada, é usada a tag **`<ul>`** (precisa ser fecha
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Títulos</title>
+    <title>Listas Mistas</title>
 </head>
 <body>
     <ol>
@@ -189,7 +189,7 @@ As ***definition lists*** são como dicionários criados a partir da tag **`dl`*
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Títulos</title>
+    <title>Listas de Definição</title>
 </head>
 <body>
     <dl>
@@ -313,7 +313,22 @@ Tags como `<u>` e `<b>`, que transformam seu conteúdo em itálico e negrito, re
     </body>
     ```
 
-<!-- Emojis -->
+## Emojis
+
+Para usar emojis em uma página, é necessário o ***Codepoint*** do emoji.
+
+> Os codepoints dos emojis podem ser encontrados em [Emojipedia](www.emojipedia.org).
+
+Um codepoint deve ser transcrito substituindo "U+" por `&#x`, acrescentando um ponto e vírgula (`;`) no final.
+
+**Exemplo:**
+
+``` html
+<body>
+    <p>Fire:&#x1F525;</p>
+</body>
+```
+
 <!-- Citações -->
 <!-- Abreviação -->
 <!-- Imagens -->

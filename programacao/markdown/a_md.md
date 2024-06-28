@@ -141,9 +141,9 @@ Cada item de uma lista ordenada é criado a partir de um número seguido de um p
 1. Item 3
 ```
 
-3. Item 1
-3. Item 2
-3. Item 3
+1. Item 1
+1. Item 2
+1. Item 3
 
 A numeração dos itens é feita automaticamente a partir do valor do primeiro item, ou seja, só o que importa é numerar corretamente o primeiro item.
 
@@ -185,4 +185,3 @@ Você pode aninhar uma lista dentro da outra, e a única regra a se lembrar é q
 
         Lorem ipsum, dolor sit amet consectetur adipisicing elit.
 ```
-
