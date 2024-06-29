@@ -1,4 +1,4 @@
-# HTML e CSS
+# HTML
 
 ## Sintaxe Básica de HTML
 
@@ -16,7 +16,23 @@ Em HTML, os elementos são criados a partir de **tags**. Existem dois tipos de t
 <img>
 ```
 
-### Parágrafos
+### Comentários
+
+Em HTML, é considerado um comentário tudo entre **`<!--`** e **`-->`**.
+
+**Exemplo:**
+
+``` html
+<!-- Isso é um comentário! -->
+<!--
+Isso
+também
+é um
+comentário
+-->
+```
+
+## Parágrafos
 
 Para criar um parágrafo, é utilizada a tag **`<p>`**.
 
@@ -29,7 +45,7 @@ Para criar um parágrafo, é utilizada a tag **`<p>`**.
 </body>
 ```
 
-### Títulos
+## Títulos
 
 Existem seis títulos em HTML.
 
@@ -77,11 +93,11 @@ Além disso, não há problema nenhum em haver dois **`<h1>`** em uma mesma pág
 </body>
 ```
 
-### Listas
+## Listas
 
 As listas podem ser ordenadas e não ordenadas, sendo marcadas por número e marcadores, respectivamente.
 
-#### Listas Ordenadas
+### Listas Ordenadas
 
 As ***ordered lists*** são aquelas listas que a ordem de cada item é importante.
 
@@ -111,7 +127,7 @@ A tag `<ol>` possui o parâmetro **`type`**, onde é definido o tipo de marcador
 
 > **Parâmetro `start`**: O parâmetro `start` define o primeiro valor de uma lista, a atualizando a partir desse valor. O valor desse parâmetro deve ser numérico, mesmo que a forma de contagem da lista seja alfabética.
 
-#### Listas não Ordenadas
+### Listas não Ordenadas
 
 As ***unordered lists*** são aquelas em que a ordem dos itens não importa.
 
@@ -131,7 +147,7 @@ Para criar uma lista não ordenada, é usada a tag **`<ul>`** (precisa ser fecha
 </body>
 ```
 
-#### Listas Mistas
+### Listas Mistas
 
 É possível criar listas dentro de listas, criando assim uma lista mista.
 
@@ -139,7 +155,7 @@ Para criar uma lista não ordenada, é usada a tag **`<ul>`** (precisa ser fecha
 
 ``` html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -177,7 +193,7 @@ Para criar uma lista não ordenada, é usada a tag **`<ul>`** (precisa ser fecha
 </html>
 ```
 
-#### Listas de Definição
+### Listas de Definição
 
 As ***definition lists*** são como dicionários criados a partir da tag **`dl`** (precisa ser fechada), onde o termo a ser definido é posto na tag **`<dt>`** (precisa ser fechada) e a definição é posta na tag **`<dd>`**.
 
@@ -185,7 +201,7 @@ As ***definition lists*** são como dicionários criados a partir da tag **`dl`*
 
 ``` html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -204,7 +220,7 @@ As ***definition lists*** são como dicionários criados a partir da tag **`dl`*
 </html>
 ```
 
-#### *Entities*
+## *Entities*
 
 As entidades são caracteres especiais, escritos a partir de um código de identificação.
 
@@ -238,7 +254,7 @@ Em HTML, o que importa é o significado, já a parte da forma (estilização) é
 
 Tags como `<u>` e `<b>`, que transformam seu conteúdo em itálico e negrito, respectivamente, são tags genéricas. Já as tags `<em>` e `<strong>`, são tags que possuem semântica (elas significam "ênfase" e "forte").
 
-### Destaques em Textos
+## Destaques em Textos
 
 * **Negrito**: É utilizada a tag **`<strong>`** (semântico) ou **`<b>`** (não semântico).
 
@@ -329,6 +345,225 @@ Um codepoint deve ser transcrito substituindo "U+" por `&#x`, acrescentando um p
 </body>
 ```
 
-<!-- Citações -->
-<!-- Abreviação -->
-<!-- Imagens -->
+## Manter Escrita da Forma Digitada
+
+Todo texto dentro da tag **`<pre>`** e seu fechamento é mantido da forma digitada, com espaços e quebras de linha.
+
+**Exemplo:**
+
+``` html
+<body>
+    <pre>
+        Lorem
+        ipsum dolor sit amet consectetur adipisicing
+        elit. Sunt minus cum voluptate
+        laborum quisquam facilis cumque
+        reiciendis magnam aspernatur.
+        Eaque, amet cumque
+        adipisci magni consequatur natus id
+        doloremque culpa
+        molestiae.
+    </pre>
+</body>
+```
+
+Geralmente é usado em conjunto com a tag **`<code>`**, que é usada para ilustrar código.
+
+## Ilustração de Código
+
+Para ilustrar código, é usada a tag **`<code>`** (precisa ser fechada).
+
+**Exemplo:**
+
+``` html
+<body>
+    <h1>
+        <pre>   Ímpar ou Par em Python</pre>
+    </h1>
+    <pre>
+        <code>
+            n = int(input('Digite um número: '))
+            if n % 2 == 0:
+                print(f'O número {n} é PAR!')
+            else:
+                print(f'O número {n} é ÍMPAR!')
+        </code>
+    </pre>
+</body>
+```
+
+## Citações
+
+Para fazer uma citação, é usada a tag **`<q>`** (*"quote"*), que precisa ser fechada.
+
+**Exemplo:**
+
+``` html
+<body>
+    <p>
+        Lorem ipsum dolor <q>sit amet consectetur adipisicing</q> elit. Sint perspiciatis ab suscipit dicta mollitia et quibusdam incidunt, error, natus doloribus voluptates dolorum aliquid molestias commodi, minima voluptas quaerat veritatis eius?
+    </p>
+</body>
+```
+
+Para citar um bloco inteiro, é usada a tag **`<blockquote>`** (precisa ser fechada), que recebe o parâmetro `cite`, que deve receber uma URL.
+
+**Exemplo:**
+
+``` html
+<body>
+    <blockquote cite="link.com">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium eveniet dolorum tenetur possimus distinctio asperiores corporis quo quia. Minus asperiores quae neque magnam debitis suscipit, iste ratione iure cumque commodi.
+    </blockquote>
+</body>
+```
+
+## Abreviação
+
+A tag **`<abbr>`** (precisa ser fechada) é usada para criar uma abreviação de um trecho do texto. Ela faz com que apareça um texto quando passado o cursor sobre o trecho. O texto que irá aparecer deve ser definido no parâmetro **`title`**.
+
+**Exemplo:**
+
+``` html
+<body>
+    <p>
+        Lorem ipsum <abbr title="foobar">dolor</abbr>, sit amet consectetur adipisicing elit.
+    </p>
+</body>
+```
+
+## Imagens
+
+### Formatos de Imagens
+
+Existem diversos formatos para imagens, e os melhores para se usar são **PNG** e **JPEG** por serem formatos leves, o que facilita sua renderização.
+
+**Utilize PNG** caso seja necessário um fundo transparente. Em qualquer outro caso, **utilize JPEG**.
+
+### Importação de Imagem
+
+Para importar uma imagem, é usada a tag `<img>` (não precisa ser fechada).
+
+**Sintaxe:**
+
+``` html
+<img src="caminho_da_imagem" alt="texto alternativo">
+```
+
+**Exemplo:**
+
+``` html
+<body>
+    <img src="img.jpeg" alt="Imagem">
+</body>
+```
+
+O **texto alternativo** aparecerá quando a imagem não puder ser carregada.
+
+### *Favicons*
+
+Os ***favicons*** são os ícones ao lado do título da página. Para eles, é recomendado o formato **`ico`**, que são arquivos de ícones.
+
+Os *favicons* são definidos na área **`<head>`** por meio da tag **`<link>`**.
+
+**Exemplo:**
+
+``` html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.jpeg" type="image/x-icon">
+    <title>Favicon</title>
+</head>
+<body>
+    <h1>Favicon</h1>
+</body>
+</html>
+```
+
+## Hyperlinks
+
+Para colocar um link, é usada a tag **`<a>`** (precisa ser fechada). O texto que ficar dentro dessa tag será transformado em um link, definido no parâmetro **`href`**.
+
+**Exemplo:**
+
+``` html
+<body>
+    <p>
+        Link do <a href="https://www.youtube.com">YouTube</a>.
+    </p>
+</body>
+```
+
+Ao clicar em um link o usuário é, por padrão, redirecionado a uma página aberta na mesma aba, substituindo a aba anterior. É possível incluir o parâmetro **`target`** para definir se a página do link deve ser aberta em uma nova aba ou na mesma.
+
+**Os valores para `target` são:**
+
+* **'`_blank`'**: Vai abrir o link em uma nova aba.
+* **'`_self`'**: Vai abrir o link na mesma aba (padrão).
+
+**Exemplo:**
+
+``` html
+<body>
+    <p>
+        Link do <a href="https://www.youtube.com" target="_blank">YouTube</a>.
+    </p>
+</body>
+```
+
+### Tipos de Redirecionamento
+
+A tag `<a>` aceita também o parâmetro **`rel`**, que determina o tipo de redirecionamento.
+
+**Os valores para `rel` são:**
+
+* **'`next`'**: Próxima página.
+* **'`prev`'**: Página anterior.
+* **'`author`'**: Para o site do autor do documento atual.
+* **'`external`'**: Para um site que não faz parte do atual.
+* **'`nofollow`'**: Para um site não endosado, como um link pago.
+
+### Link Interno
+
+Um link interno direciona o usuário para uma página dentro do mesmo site. Dessa forma, é especificado o caminho da página dentro da pasta do arquivo do site.
+
+**Exemplo:**
+
+``` html
+<!-- Página principal -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página inicial</title>
+</head>
+<body>
+    <h1>Página 1</h1>
+    <p>
+        Clique <a href="pagina2.html">aqui</a> para ir para a próxima página.
+    </p>
+</body>
+</html>
+```
+
+``` html
+<!-- Página 2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página 2</title>
+</head>
+<body>
+    <h2>Página 2</h2>
+    <p>
+        Clique <a href="index.html">aqui</a> para voltar para a página inicial.
+    </p>
+</body>
+</html>
+```
