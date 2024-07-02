@@ -1,6 +1,24 @@
 # HTML
 
-## Sintaxe Básica de HTML
+## Sintaxe Básica
+
+Um documento HTML possui duas áreas principais: **`<head>`** e **`<body>`**, onde são definidas as configurações e o conteúdo da página, respectivamente.
+
+**Código base:**
+
+``` html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Título do documento (nome da aba)</title>
+</head>
+<body>
+    <!-- Conteúdo da página -->
+</body>
+</html>
+```
 
 Em HTML, os elementos são criados a partir de **tags**. Existem dois tipos de tags, as que precisam ser fechadas, e as que não.
 
@@ -8,15 +26,15 @@ Em HTML, os elementos são criados a partir de **tags**. Existem dois tipos de t
 
 ``` html
 <!-- Tags com fechamento -->
-<h1>titulo</h1>
-<p>paragrafo</p>
+<h1></h1>
+<p></p>
 
 <!-- Tags sem fechamento -->
 <link>
 <img>
 ```
 
-### Comentários
+### Comentários em HTML
 
 Em HTML, é considerado um comentário tudo entre **`<!--`** e **`-->`**.
 
@@ -432,57 +450,6 @@ A tag **`<abbr>`** (precisa ser fechada) é usada para criar uma abreviação de
 </body>
 ```
 
-## Imagens
-
-### Formatos de Imagens
-
-Existem diversos formatos para imagens, e os melhores para se usar são **PNG** e **JPEG** por serem formatos leves, o que facilita sua renderização.
-
-**Utilize PNG** caso seja necessário um fundo transparente. Em qualquer outro caso, **utilize JPEG**.
-
-### Importação de Imagem
-
-Para importar uma imagem, é usada a tag `<img>` (não precisa ser fechada).
-
-**Sintaxe:**
-
-``` html
-<img src="caminho_da_imagem" alt="texto alternativo">
-```
-
-**Exemplo:**
-
-``` html
-<body>
-    <img src="img.jpeg" alt="Imagem">
-</body>
-```
-
-O **texto alternativo** aparecerá quando a imagem não puder ser carregada.
-
-### *Favicons*
-
-Os ***favicons*** são os ícones ao lado do título da página. Para eles, é recomendado o formato **`ico`**, que são arquivos de ícones.
-
-Os *favicons* são definidos na área **`<head>`** por meio da tag **`<link>`**.
-
-**Exemplo:**
-
-``` html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.jpeg" type="image/x-icon">
-    <title>Favicon</title>
-</head>
-<body>
-    <h1>Favicon</h1>
-</body>
-</html>
-```
-
 ## Hyperlinks
 
 Para colocar um link, é usada a tag **`<a>`** (precisa ser fechada). O texto que ficar dentro dessa tag será transformado em um link, definido no parâmetro **`href`**.
@@ -567,3 +534,170 @@ Um link interno direciona o usuário para uma página dentro do mesmo site. Dess
 </body>
 </html>
 ```
+
+### Link de Download
+
+Para criar um link de download, é necessário adicionar o parâmetro **`download`** à tag `<a>`.
+
+**Exemplo:**
+
+``` html
+<body>
+    <a href="song.mp3" download="musica.mp3">Baixar música</a>
+</body>
+```
+
+## *Media Types*
+
+As **media types** são os tipos de arquivos. Abaixo está uma lista com os mais comuns.
+
+* **`aplication/pdf`**
+* **`aplication/zip`**
+* **`text/txt`**
+* **`text/html`**
+* **`text/css`**
+* **`text/javascript`**
+* **`video/mp4`**
+* **`video/JPEG`**
+* **`audio/aac`**
+* **`audio/mpeg`**
+* **`font/ttf`**
+* **`image/jpeg`**
+* **`image/png`**
+
+> Para ver mais: [Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml)
+
+## Imagens
+
+Para importar uma imagem, é usada a tag **`<img>`** (não precisa ser fechada).
+
+**Sintaxe:**
+
+``` html
+<img src="caminho_da_imagem" alt="texto alternativo">
+```
+
+**Exemplo:**
+
+``` html
+<body>
+    <img src="img.jpeg" alt="Imagem">
+</body>
+```
+
+O **texto alternativo** aparecerá quando a imagem não puder ser carregada.
+
+### *Favicons*
+
+Os ***favicons*** são os ícones ao lado do título da página. Para eles, é recomendado o formato **`ico`**, que são arquivos de ícones.
+
+Os *favicons* são definidos na área **`<head>`** por meio da tag **`<link>`**.
+
+**Exemplo:**
+
+``` html
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.jpeg" type="image/x-icon">
+    <title>Favicon</title>
+</head>
+<body>
+    <h1>Favicon</h1>
+</body>
+</html>
+```
+
+### Formatos de Imagens
+
+Existem diversos formatos para imagens, e os melhores para se usar são **PNG** e **JPEG** por serem formatos leves, o que facilita sua renderização.
+
+**Utilize PNG** caso seja necessário um fundo transparente. Em qualquer outro caso, **utilize JPEG**.
+
+### Imagens Dinâmicas
+
+A tag **`<picture>`** concentra todas as fontes de uma imagem.
+
+**Exemplo:**
+
+``` html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens que se Adaptam</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(27, 27, 27);
+            color: rgb(202, 179, 179);
+        }
+    </style>
+</head>
+<body>
+    <h1>IMAGENS QUE SE ADAPTAM</h1>
+    <p>
+        Modifique o tamanho da janela do seu navegador e a imagem se adaptará!
+    </p>
+    <picture>
+        <source media="(max-width: 750px)" srcset="imgs/img-p.jpg" type="image/jpg">
+        <source media="(max-width: 1050px)" srcset="imgs/img-m.jpg" type="image/jpg">
+        <img src="imgs/img-g.jpg" alt="imagem grande">
+    </picture>
+</body>
+</html>
+```
+
+Dentro dela, são postas as tags **`<source>`** que definem, no caso, a largura máxima da janela para que a imagem especificada em **`srcset`** seja carregada.
+
+**Atributos da tag `<source>`:**
+
+* **'`type`'**: *Media type*.
+* **'`scrset`'**: Imagem que será carregada quando determinada condição for atendida.
+* **'`media`'**: Indica a condição a ser atendida para que a imagem especificada em `srcset` seja carregada.
+
+No código acima, a imagem a ser carregada quando o navegador está com mais de 1050 pixels é a especificada na tag `<img>`, porém, quando a janela estiver com no máximo 1050 pixels, essa imagem será substituída pela imagem especificada em **`srcset`**. O mesmo acontece quando a janela estiver com no máximo 750 piexls.
+
+## Áudios
+
+A tag **`<audio>`** é usada para implementar um áudio na página.
+
+**Essa tag pode receber vários atributos:**
+
+* **'`type`'**: *Media type*.
+* **'`scrset`'**: Configura o tamanho da imagem que será carregada quando o tamanho máximo for atingido.
+* **'`preload`'**: Define se o áudio será carregado ou não. Recebe três valores:
+  * **`metadata`**: Vai carregar apenas as informações sobre o arquivo (tempo, tamanho, etc).
+  * **`none`**: Não vai iniciar absolutamente nada a não ser que o usuário aperte o play ou um script inicie a reprodução.
+  * **`auto`**: Vai carregar o arquivo de áudio inteiro assim que a página for carregada, mesmo que o usuário nunca aperte o play.
+* **'`controls`'**: Oculta o player.
+* **'`autoplay`'**: Inicia o áudio assim que a página é carregada.
+* **'`loop`'**: Reinicia o áudio sempre que ele terminar.
+
+## Vídeos
+
+Para exibir um vídeo em uma página ele pode ser hospedado ou incorporado de um site (geralmente usando o YouTube ou o Vimeo).
+
+### Vídeos Hospedados
+
+Para hospedar um vídeo é usada a tag **`<video>`**.
+
+**Essa tag aceita os seguintes atributos:**
+
+* **'`width`'**: Define o tamanho do vídeo na tela. O tamanho é em pixels.
+* **'`poster`'**: Mostra a miniatura no vídeo assim que a página carrega ele.
+* **'`controls`'**: Oculta o player.
+* **'`autoplay`'**: Inicia o vídeo assim que a página é carregada.
+* **'`loop`'**: Reinicia o vídeo assim que ele termina.
+
+### Vídeos Incorporados
+
+Para incorporar um vídeo, vá até o vídeo que deseja incorporar no YouTube, por exemplo, então clique em “compartilhar” e depois em “incorporar”, então copie o código HTML que vai aparecer e cole em seu editor de código.
+
+## *Background*
+
+<!-- Fala dos fundos -->

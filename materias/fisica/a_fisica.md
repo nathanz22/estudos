@@ -36,6 +36,10 @@ Um objeto está em repouso ou em movimento com base em um referencial. Por exemp
 
 Um móvel é qualquer objeto que pode mudar de posição ao longo do tempo.
 
+### Ponto Material
+
+É um ponto em uma trajetória, onde suas medidas são irrelevantes comparada às medidas da trajetória.
+
 ### Trajetórias
 
 A trajetória é o caminho que um móvel segue ao longo do tempo. Essas trajetórias podem ser retilíneas, curvilíneas ou caóticas.
