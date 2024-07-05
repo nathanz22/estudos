@@ -701,3 +701,49 @@ Para incorporar um vídeo, vá até o vídeo que deseja incorporar no YouTube, p
 ## *Background*
 
 <!-- Fala dos fundos -->
+
+## *Grouping Tags*
+
+As tags **`<div>`** e **`<span>`** são tags de agrupamento genérico, uma *block-level* e outra para *inline-level*, respectivamente.
+
+Existem também as tags de agrupamento semânticas:
+
+* **'`<header>`'**: Área para cabeçalho. Pode ser o cabeçalho principal de um site ou até mesmo o cabeçalho de uma seção ou artigo. Normalmente inclui títulos e subtítulos. Além disso, eles também podem conter menus de navegação.
+* **'`<nav>`'**: Define uma área que possui os links de navegação pela estrutura de página que vão compor o website.
+* **'`<main>`'**: É um agrupamento usado para delimitar o conteúdo principal de um site. Geralmente concentra as seções, os artigos e os conteúdos periféricos.
+* **'`<section>`'**: Define uma seção. Essa seção pode contr o conteúdo diretamente no seu corpo ou dividir os conteúdos em artigos com conteúdos específicos. "Uma seção é um agrupamento temático de conteúdos, tipicamente com um cabeçalho".
+* **'`<article>`'**: Um artigo geralmente contém o conteúdo que pode ser lido de forma independente. Os artigos dizem respeito a um mesmo assunto, e podem também ser usados para delimitar um post de blog ou fórum, uma notícia, etc.
+* **'`<aside>`'**: Em onde é posto o complemento do conteúdo principal, mas pode ser retirado sem afetar significativamente o significado do conteúdo principal.
+* **'`<footer>`'**: É o rodapé para o site, para uma seção, ou para um artigo. Seu conteúdo não faz parte diretamente do conteúdo principal e também não é um conteúdo periférico, mas possui informações sobre a autoria do conteúdo, links adicionais, mapa do site, documentos relacionados, etc.
+
+**Exemplo:**
+
+``` html
+<body>
+    <header>
+        <h1>Meu Site</h1>
+        <nav>link1 link2 link3 link4</nav>
+    </header>
+    <main>
+        <section>
+            <article>
+                <h2>Título</h2>
+                <p>Texto do artigo</p>
+            </article>
+            <article>
+                <h2>Título</h2>
+                <p>Texto do artigo</p>
+                <aside>
+                    Conteúdo periférico do artigo
+                </aside>
+            </article>
+        </section>
+        <aside>
+            Conteúdo periférico do site
+        </aside>
+    </main>
+    <footer>
+        Conteúdo do rodapé
+    </footer>
+</body>
+```

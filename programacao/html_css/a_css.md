@@ -439,6 +439,164 @@ Definir **`auto`** como valor de **`margin`** fará com que o navegador calcule 
 
 > **Tamanho total da caixa:** Para calcular o tamanho total de um elemento, é preciso somar: `content` + `padding` + `border` + `margin`. O `outline` (contorno) não entra nessa conta, pois o mesmo utiliza parte da margem.
 
+### Tipos de Caixas
+
+Existem dois tipos de caixa, classificados de acordo com seu comportamento. São eles ***block-level*** e ***inline-level***.
+
+#### Caixas *Block-level*
+
+Um elemento *block-level* sempre se inicia em uma nova linha, e vai ocupar a largura total do elemento onde está contido. Se não estiver contido em nenhuma outra caixa, vai ocupar a largura total do `<body>`.
+
+**Exemplos de elementos *block-level*:**
+
+* `<address>`
+* `<articles>`
+* `<aside>`
+* `<blockquote>`
+* `<canvas>`
+* `<dd>`
+* `<div>`
+* `<main>`
+* `<ol>`
+* `<h1>`
+* `<p>`
+* `<pre>`
+
+#### Caixas *Inline-level*
+
+Elementos *inline-level* ocupam o espaço relativo ao seu conteúdo, e se iniciam no ponto exato em que está definido.
+
+**Exemplos de elementos *inline-level*:**
+
+* `<a>`
+* `<abbr>`
+* `<b>`
+* `<br>`
+* `<i>`
+* `<label>`
+* `<select>`
+* `<sub>`
+* `<strong>`
+* `<tt>`
+* `<img>`
+* `<button>`
+* `<input>`
+
+### Bordas Arredondadas
+
+Para arredondar as bordas da caixa, é usada a propriedade **`border-radius`**, que recebe o valor de arredondamento para cada canto.
+
+**Os valores são:**
+
+1. Valor de arredondamento para o canto superior esquerdo.
+1. Valor de arredondamento para o canto superior direito.
+1. Valor de arredondamento para o canto inferior esquerdo.
+1. Valor de arredondamento para o canto inferior direito.
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: grey;
+        padding: 10px;
+        margin: 10px;
+        text-align: justify;
+        font-family: Arial, Helvetica, sans-serif;
+
+        /* Arredondamento da borda */
+        border-radius: 1em 2em 1em 1.5em;
+    }
+
+    h1 {
+        font-variant: small-caps;
+    }
+
+    p {
+        text-indent: 10px;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, unde eum exercitationem non corporis blanditiis tempore quisquam possimus expedita architecto vero quia natus voluptatum culpa assumenda totam fuga quaerat ipsum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, distinctio! Obcaecati tenetur, delectus dignissimos earum reprehenderit quibusdam doloribus magni nesciunt dolorem odio, sed temporibus ipsam at reiciendis. Excepturi, est ea.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, enim blanditiis qui doloremque eligendi voluptatum, ipsa iusto similique eum temporibus in perferendis consequatur nesciunt placeat nulla odit hic natus facilis.
+        </p>
+    </div>
+</body>
+```
+
+> **NOTA:** Especificar um único valor para a propriedade `border-radius` irá definir um mesmo tamanho para todos os quatro cantos.
+
+### Sombras nas Caixas
+
+Para criar sombras nas caixas, é usada a propriedade **`box-shadow`**. Essa propriedade recebe quatro valores:
+
+1. Largura da sombra à direita.
+1. Largura da sombra para baixo.
+1. Dissipação da sombra.
+1. Cor da sombra.
+
+**Exemplo:**
+
+``` html
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+        background-color: darkslategray;
+    }
+
+    section#principal {
+        background-color: white;
+        padding: 1em;
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+    }
+
+    h1, h2 {
+        font-variant: small-caps;
+    }
+
+    p {
+        text-indent: 1em;
+        text-align: justify;
+    }
+
+    aside#sombra {
+        background-color: #e0dcdc;
+        width: 400px;
+        margin: auto;
+        padding: 1px 10px;
+
+        /* Sombra */
+        box-shadow: 2px 1px 10px #00000073;
+
+        /* Arredondando a borda */
+        border-radius: 1em;
+    }
+</style>
+<body>
+    <main>
+        <section id="principal">
+            <h1>Formato da Terra</h1>
+            <p>
+                A Terra não é uma esfera perfeita. Ela é ligeiramente achatada nos polos e um pouco mais larga no equador, um formato conhecido como elipsoide ou geoide.
+            </p>
+            <aside id="sombra">
+                <h2>Curiosidade</h2>
+                <p>
+                    Esse achatamento ocorre devido à rotação da Terra. A força centrífuga resultante da rotação faz com que o material no equador se afaste um pouco mais do centro da Terra do que o material nos polos. Como resultado, o diâmetro equatorial da Terra é cerca de 43 quilômetros maior que o diâmetro polar.
+                </p>
+            </aside>
+        </section>
+    </main>
+</body>
+```
+
 ## Fontes
 
 As propriedades que configuram as fontes são:
