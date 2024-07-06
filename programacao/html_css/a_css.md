@@ -376,6 +376,352 @@ Os elementos internos de um outro elemento podem ser acessados por meio de um ca
 </body>
 ```
 
+## Textos
+
+### Fontes
+
+As propriedades que configuram as fontes são:
+
+1. **`font-style`**: Estilo da fonte (itálico, obliquo).
+1. **`font-variant`**: Versaletes (letras maiúsculas com tamanho de minúsculas).
+1. **`font-weight`**: Peso.
+1. **`font-size`**: Tamanho.
+1. **`font-family`**: Familia tipográfica.
+
+**Exemplo:**
+
+``` css
+body {
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+```
+
+A propriedade **`font`** é uma *shorthand* para todas as propriedades acima, na mesma ordem que elas estão dispostas.
+
+``` css
+body {
+    font: oblique small-caps bold 16px Arial, Helvetica, sans-serif;
+}
+```
+
+### Fontes Externas
+
+É possível usar fontes externas por meio de arquivos de fonte. Esses arquivos são do tipo **OTF** ou **TTF**, e a diferença entre elas é a compatibilidade com os navegadores.
+
+Para aplicar uma fonte externa, é necessário criar a regra **`@font-face`** no início do código CSS.
+
+**Sintaxe:**
+
+``` css
+@font-face {
+    font-family: ; /* Nome de referência para a fonte */
+    src: url() format();
+    /* Em `src`, especifique o iretório do arquivo da fonte */
+    /* Em `format()`, especifique o tipo da fonte */
+}
+```
+
+**Tipos de fonte:**
+
+* **'`opentype`'**: Para fontes OTF (algumas fontes opentype são TTF).
+* **'`truetype`'**: Para fontes TTF.
+* **'`embedded-opentype`'**
+* **'`truetype-att`'**: Apple Advanced Typography.
+* **'`svg`'**
+
+> **NOTA:** É possível colocar vários url, mas cada um deve vir acompanhado de um format e cada conjunto de url e format devem ser separados por vírgula. Isso é útil para garantir que o site seja compatível com vários navegadores.
+
+### Transformações de Texto
+
+A propriedade **`text-transform`** pode transformar um texto em maiúsculo, minúsculo ou capitalizá-lo.
+
+**Seus valores são:**
+
+* `capitalize`
+* `lowercase`
+* `uppercase`
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: #dbd9d9;
+        padding: 10px;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+    }
+
+    p#capitalize {
+        text-transform: capitalize;
+    }
+
+    p#lower {
+        text-transform: lowercase;
+    }
+
+    p#upper {
+        text-transform: uppercase;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p id="capitalize">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa, ducimus. Minus necessitatibus pariatur recusandae hic cum mollitia aut voluptas, officiis ipsa repellat sapiente quos, ut beatae possimus distinctio ex? Maiores!
+        </p>
+        <p id="lower">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde incidunt ex sunt aliquam blanditiis ut fuga rem veritatis consequatur repellendus voluptate dolores earum, aut velit qui deleniti excepturi alias. Fugiat!
+        </p>
+        <p id="upper">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem veniam praesentium quia alias sunt blanditiis, asperiores soluta quisquam harum ipsum placeat laudantium reprehenderit neque nam commodi, nostrum id quod sed.
+        </p>
+    </div>
+</body>
+```
+
+### Espaçamento Horizontal
+
+O espaçamento horizontal entre as linhas é definido pela propriedade **`line-height`**.
+
+**Exemplo:**
+
+``` css
+body {
+    line-height: 16px;
+}
+```
+
+### Espaçamento Entre os Caracteres
+
+A propriedade **`letter-spacing`** recebe um valor de tamanho, relativo ao espaçamento horizontal entre os caracteres.
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: #dbd9d9;
+        padding: 10px;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+    }
+
+    p {
+        letter-spacing: 5px;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa, ducimus. Minus necessitatibus pariatur recusandae hic cum mollitia aut voluptas, officiis ipsa repellat sapiente quos, ut beatae possimus distinctio ex? Maiores!
+        </p>
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde incidunt ex sunt aliquam blanditiis ut fuga rem veritatis consequatur repellendus voluptate dolores earum, aut velit qui deleniti excepturi alias. Fugiat!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem veniam praesentium quia alias sunt blanditiis, asperiores soluta quisquam harum ipsum placeat laudantium reprehenderit neque nam commodi, nostrum id quod sed.
+        </p>
+    </div>
+</body>
+```
+
+### Espaçamento Entre as Palavras
+
+A propriedade **`word-spacing`** recebe um valor em tamanho que determina o espaçamento entre as palavras.
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: #dbd9d9;
+        padding: 10px;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+    }
+
+    p {
+        word-spacing: 1.5em;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa, ducimus. Minus necessitatibus pariatur recusandae hic cum mollitia aut voluptas, officiis ipsa repellat sapiente quos, ut beatae possimus distinctio ex? Maiores!
+        </p>
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde incidunt ex sunt aliquam blanditiis ut fuga rem veritatis consequatur repellendus voluptate dolores earum, aut velit qui deleniti excepturi alias. Fugiat!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem veniam praesentium quia alias sunt blanditiis, asperiores soluta quisquam harum ipsum placeat laudantium reprehenderit neque nam commodi, nostrum id quod sed.
+        </p>
+    </div>
+</body>
+```
+
+### Alinhamento de Texto
+
+A propriedade **`text-align`** é usada para alinhar o texto. Os valores são:
+
+* **'`left`'**, **'`start`**': Alinha à esquerda (no começo).
+* **'`right`'**, **'`end`**': Alinha à direita (no final).
+* **'`center`'**: Alinha no centro.
+* **'`justify`'**: Padrão.
+
+### Identação do Texto
+
+A propriedade **`text-indent`** recebe um valor de tamanho relativo à identação do texto.
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: #dbd9d9;
+        padding: 10px;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+    }
+
+    p {
+        text-indent: 1.5em;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa, ducimus. Minus necessitatibus pariatur recusandae hic cum mollitia aut voluptas, officiis ipsa repellat sapiente quos, ut beatae possimus distinctio ex? Maiores!
+        </p>
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde incidunt ex sunt aliquam blanditiis ut fuga rem veritatis consequatur repellendus voluptate dolores earum, aut velit qui deleniti excepturi alias. Fugiat!
+        </p>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem veniam praesentium quia alias sunt blanditiis, asperiores soluta quisquam harum ipsum placeat laudantium reprehenderit neque nam commodi, nostrum id quod sed.
+        </p>
+    </div>
+</body>
+```
+
+### Comportamento do Espaço em Branco
+
+A propriedade **`white-space`** determina como o espaço em branco dentro do elemento deve se comportar.
+
+**Seus valores são:**
+
+* **'`normal`'**: O texto será quebrado quando necessário.
+* **'`nowrap`'**: Não haverá quebra de linha.
+* **'`pre`'**: O texto será mantido da forma que foi digitado.
+* **'`pre-line`'**: Igual `pre`, porém exclui os espaços de identação.
+* **'`pre-wrap`'**: Igual `pre`, porém quebra de linha quando necessário.
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: #dbd9d9;
+        padding: 10px;
+        margin: 5px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    p {
+        white-space: pre;
+    }
+</style>
+<body>
+    <div>
+        <h1>Par ou Ímpar em Go</h1>
+        <p>
+            package main
+
+            import "fmt"
+
+            func main() {
+                var n int
+                fmt.Print("Digite um número: ")
+                _, err := fmt.Scan(&n)
+                if err != nil {
+                    fmt.Println("Err:", err)
+                    return
+                }
+                if n % 2 == 0 {
+                    fmt.Printf("O número %d é PAR\n", n)
+                } else {
+                    fmt.Printf("O número %d é ÍMPAR\n", n)
+                }
+            }
+        </p>
+    </div>
+</body>
+```
+
+## Estilização de Estados de Links
+
+Para estilizar um estado específico de um link, são usadas as seguintes pseudo-classes:
+
+* **'`:link`'**: Ainda não visitado.
+* **'`:visited`'**: Já visitado.
+* **'`:hover`'**: Cursor sobre o link.
+* **'`:active`'**: No momento do clique.
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        background-color: #dbd9d9;
+        padding: 10px;
+        margin: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1em;
+    }
+
+    a {
+        display: block;
+        text-align: center;
+    }
+
+    a:link {
+        color: red;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: blue;
+    }
+
+    a:hover {
+        color: darkred;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: blueviolet;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <div>
+        <a href="#">Link</a>
+    </div>
+</body>
+```
+
 ## Caixas (Boxes)
 
 As caixas são a grande maioria dos objetos em HTML, como os títulos e os parágrafos. Elas armazenam conteúdos dentro deles, podendo esses conteúdos ser outras caixas.
@@ -482,7 +828,7 @@ Elementos *inline-level* ocupam o espaço relativo ao seu conteúdo, e se inicia
 * `<button>`
 * `<input>`
 
-### Bordas Arredondadas
+### Cantos da Borda Arredondados
 
 Para arredondar as bordas da caixa, é usada a propriedade **`border-radius`**, que recebe o valor de arredondamento para cada canto.
 
@@ -529,6 +875,39 @@ Para arredondar as bordas da caixa, é usada a propriedade **`border-radius`**, 
 ```
 
 > **NOTA:** Especificar um único valor para a propriedade `border-radius` irá definir um mesmo tamanho para todos os quatro cantos.
+
+### Borda Personalizada
+
+É possível criar uma borda personalizada usando uma imagem. Essa imagem precisa ser feita contendo todos os lados da borda e possuir o tamanho de 80x80px.
+
+Para criar a borda, é necessário antes definir uma borda simples como `border: 10px solid black`. A borda personalizada é aplicada a partir da propriedade **`border-image`**, que recebe três valores:
+
+1. `url('caminho/da/borda.png')` (caminho da borda)
+1. Repetições
+1. Modo de repetição
+
+**Exemplo:**
+
+``` html
+<style>
+    div {
+        border: 10px solid black;
+        border-image: url(borda.png) 15 repeat;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, unde eum exercitationem non corporis blanditiis tempore quisquam possimus expedita architecto vero quia natus voluptatum culpa assumenda totam fuga quaerat ipsum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, distinctio! Obcaecati tenetur, delectus dignissimos earum reprehenderit quibusdam doloribus magni nesciunt dolorem odio, sed temporibus ipsam at reiciendis. Excepturi, est ea.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, enim blanditiis qui doloremque eligendi voluptatum, ipsa iusto similique eum temporibus in perferendis consequatur nesciunt placeat nulla odit hic natus facilis.
+        </p>
+    </div>
+</body>
+```
+
+> **NOTA:** A propriedade `border-image` é uma *shorthand* para as propriedades `border-image-source`, `border-image-slice` e `border-image-repeat`.
 
 ### Sombras nas Caixas
 
@@ -597,92 +976,41 @@ Para criar sombras nas caixas, é usada a propriedade **`box-shadow`**. Essa pro
 </body>
 ```
 
-## Fontes
+### *Outline*
 
-As propriedades que configuram as fontes são:
+O *outline*, ou o contorno, é parecido com uma borda, porém desenhado no lado de fora. Suas propriedades são as seguintes:
 
-1. **`font-style`**: Estilo da fonte (itálico, obliquo).
-1. **`font-variant`**: Versaletes (letras maiúsculas com tamanho de minúsculas).
-1. **`font-weight`**: Peso.
-1. **`font-size`**: Tamanho.
-1. **`font-family`**: Familia tipográfica.
+* **'`outline-style`'**: Estilo do contorno.
+* **'`outline-color`'**: Cor do contorno.
+* **'`outline-width`'**: Largura do contorno.
+* **'`outline-offset`'**: Espaço transparente entre o contorno e a borda.
+* **'`outline`'** (*shorthand*)
 
-**Exemplo:**
-
-``` css
-body {
-    font-style: italic;
-    font-variant: small-caps;
-    font-weight: bold;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-```
-
-A propriedade **`font`** é uma *shorthand* para todas as propriedades acima, na mesma ordem que elas estão dispostas.
-
-``` css
-body {
-    font: oblique small-caps bold 16px Arial, Helvetica, sans-serif;
-}
-```
-
-### Espaçamento Horizontal
-
-O espaçamento horizontal entre as linhas é definido pela propriedade **`line-height`**.
+> **NOTA:** A propriedade `outline-offset` não faz parte da *shorthand*, precisando então ser escrita separadamente.
 
 **Exemplo:**
 
-``` css
-body {
-    line-height: 16px;
-}
+``` html
+<style>
+    div {
+        outline: 2px outset black;
+        outline-offset: 10px;
+    }
+</style>
+<body>
+    <div>
+        <h1>Título</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, unde eum exercitationem non corporis blanditiis tempore quisquam possimus expedita architecto vero quia natus voluptatum culpa assumenda totam fuga quaerat ipsum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, distinctio! Obcaecati tenetur, delectus dignissimos earum reprehenderit quibusdam doloribus magni nesciunt dolorem odio, sed temporibus ipsam at reiciendis. Excepturi, est ea.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, enim blanditiis qui doloremque eligendi voluptatum, ipsa iusto similique eum temporibus in perferendis consequatur nesciunt placeat nulla odit hic natus facilis.
+        </p>
+    </div>
+</body>
 ```
 
-### Alinhamento de Texto
+## Sobreposição de Elementos
 
-A propriedade **`text-align`** é usada para alinhar o texto. Os valores são:
+A propriedade **`z-index`** espeficifica a ordem em que um elemento fica em um plano de fundo, isso é, se ele vai ficar mais à frente ou atrás de um outro elemento.
 
-* **'`left`'**, **'`start`**': Alinha à esquerda (no começo).
-* **'`right`'**, **'`end`**': Alinha à direita (no final).
-* **'`center`'**: Alinha no centro.
-* **'`justify`'**: Padrão.
-
-### Identação
-
-A propriedade **`text-indent`** é usada para definir o tamanho da identação de um texto.
-
-**Exemplo:**
-
-``` css
-p {
-    text-indent: 30px;
-}
-```
-
-### Fontes Externas
-
-É possível usar fontes externas por meio de arquivos de fonte. Esses arquivos são do tipo **OTF** ou **TTF**, e a diferença entre elas é a compatibilidade com os navegadores.
-
-Para aplicar uma fonte externa, é necessário criar a regra **`@font-face`** no início do código CSS.
-
-**Sintaxe:**
-
-``` css
-@font-face {
-    font-family: ; /* Nome de referência para a fonte */
-    src: url() format();
-    /* Em `src`, especifique o iretório do arquivo da fonte */
-    /* Em `format()`, especifique o tipo da fonte */
-}
-```
-
-**Tipos de fonte:**
-
-* **'`opentype`'**: Para fontes OTF (algumas fontes opentype são TTF).
-* **'`truetype`'**: Para fontes TTF.
-* **'`embedded-opentype`'**
-* **'`truetype-att`'**: Apple Advanced Typography.
-* **'`svg`'**
-
-> **NOTA:** É possível colocar vários url, mas cada um deve vir acompanhado de um format e cada conjunto de url e format devem ser separados por vírgula. Isso é útil para garantir que o site seja compatível com vários navegadores.
+Essa propriedade pode ter valores positivos ou negativos, onde o elemento com o menor valor ficará mais atrás e o elemento com maior valor ficará mais à frente.
