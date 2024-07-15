@@ -78,3 +78,22 @@ V = \frac{\text{espaço total}}{\Delta t}
 $$**
 
 * **$\Delta t$**: Intervalo de tempo.
+
+##### Velocidade Escalar Média Total Entre Duas Metades
+
+Quando em uma situação se tem um percurso dividido em dois, ou seja, duas metades, e é apresentado apenas a velocidade escalar média deles, é possível aplicar a seguinte fórmula para encontrar a velocidade escalar média total dos dois percursos:
+
+**$$
+V = \frac{2*V_1*V_2}{V_1+V_2}
+$$**
+
+**Exemplo:**
+
+Percurso de A até B, onde a metade desse percurso foi percorrido a uma velocidade média escalar de $30km/h$ e a outra metade foi percorridada a $10km/h$.
+
+Aplicando a fórmula:
+
+**$$
+V = \frac{2*30*10}{30+10}
+= \frac{600}{40} = 15km/h
+$$**
