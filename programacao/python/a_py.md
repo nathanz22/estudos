@@ -70,15 +70,14 @@ Comentário multilinha
 
 > **OBS.:** Strings podem ser escritas com aspas simples ou duplas, e o mesmo vale para strings multiplinha.
 
-## Output de Valores
+## *Output* de Valores
 
 Para imprimir valores, é usada a função **`print()`**.
 
 **Exemplo:**
 
 ``` py
-print('Olá, Mundo!')
-# Output => Olá, Mundo!
+print('Olá, Mundo!') # -> Olá, Mundo!
 ```
 
 ## Variáveis
@@ -108,9 +107,9 @@ minha_variavel = 'Olá, Mundo!'
 x, y, z = 5, 'Olá, Mundo', 10.2
 
 # Imprime as variáveis
-print(x) # Output => 5
-print(y) # Output => Olá, Mundo!
-print(z) # Output => 10.2
+print(x) # -> 5
+print(y) # -> Olá, Mundo!
+print(z) # -> 10.2
 ```
 
 **Para atribuir um único valor à várias variáveis:**
@@ -120,9 +119,9 @@ print(z) # Output => 10.2
 x = y = z = 10
 
 # Imprime as variáveis
-print(x) # Output => 10
-print(y) # Output => 10
-print(z) # Output => 10
+print(x) # -> 10
+print(y) # -> 10
+print(z) # -> 10
 ```
 
 **Desempacotar:**
@@ -139,9 +138,9 @@ linguagens = ['Python', 'C', 'JavaScript']
 x, y, z = linguagens
 
 # Impriem as variáveis
-print(x) # Output => Python
-print(y) # Output => C
-print(z) # Output => JavaScript
+print(x) # -> Python
+print(y) # -> C
+print(z) # -> JavaScript
 ```
 
 ### Nomes de Variáveis
@@ -166,10 +165,10 @@ Os principais tipos são:
 **Exemplo:**
 
 ``` py
-print(type(23)) # Output => <class 'int'>
-print(type('Olá, Mundo!')) # Output => <class 'str'>
-print(type(5.2)) # Output => <class 'float'>
-print(type(True)) # Output => <class 'bool'>
+print(type(23)) # -> <class 'int'>
+print(type('Olá, Mundo!')) # -> <class 'str'>
+print(type(5.2)) # -> <class 'float'>
+print(type(True)) # -> <class 'bool'>
 ```
 
 ### Inteiros
@@ -234,7 +233,7 @@ O operador `+` pode ser usado para concatenar strings.
 ``` py
 str1 = 'Olá'
 str2 = 'Mundo'
-print(str1 + ' ' + str2) # Output => Olá Mundo
+print(str1 + ' ' + str2) # -> Olá Mundo
 ```
 
 O operador `+` é também o operador de adição, e se tentar somar um número e uma string, ocorrerá um erro.
@@ -256,7 +255,7 @@ A função **`len()`** pode ser usada em strings. Ela retorna a quantidade de ca
 ``` py
 str = 'Olá, Mundo!'
 countChars = len(str)
-print(countChars) # Output => 11
+print(countChars) # -> 11
 ```
 
 #### Operador `in` para Strings
@@ -268,7 +267,7 @@ O operador **`in`** pode ser usado para verificar se uma dada string existe dent
 ``` py
 str = 'Olá, Mundo!'
 analise = 'Mundo' in str
-print(analise) # Output => True
+print(analise) # -> True
 ```
 
 Para verificar se não existe, poderá usar **`not in`**.
@@ -278,7 +277,7 @@ Para verificar se não existe, poderá usar **`not in`**.
 ``` py
 str = 'Olá, Mundo!'
 analise = 'Mundo' not in str
-print(analise) # Output => False
+print(analise) # -> False
 ```
 
 #### Índices em Strings
@@ -293,9 +292,9 @@ Esses índices são acessados por notação de colchete.
 
 ``` py
 str = 'Olá'
-print(str[0]) # Output => O
-print(str[1]) # Output => l
-print(str[2]) # Output => á
+print(str[0]) # -> O
+print(str[1]) # -> l
+print(str[2]) # -> á
 ```
 
 **Índices negativos** representam os caracteres começando do final, ou seja, `-1` representa o último caractere, `-2` representa o penúltimo, e assim por diante.
@@ -304,9 +303,9 @@ print(str[2]) # Output => á
 
 ``` py
 str = 'Olá'
-print(str[-1]) # Output => á
-print(str[-2]) # Output => l
-print(str[-3]) # Output => O
+print(str[-1]) # -> á
+print(str[-2]) # -> l
+print(str[-3]) # -> O
 ```
 
 #### Fatiamentos em Strings
@@ -326,7 +325,7 @@ novaStr = str[inicio:fim]
 ``` py
 str = 'Olá, Mundo!'
 novaStr = str[5:8]
-print(novaStr) # Output => Mun
+print(novaStr) # -> Mun
 ```
 
 Caso não definido o início, será considerado 0, e se não definido o fim, será considerado todo o resto da string.
@@ -335,8 +334,8 @@ Caso não definido o início, será considerado 0, e se não definido o fim, ser
 
 ``` py
 str = 'Olá, Mundo!'
-print(str[5:]) # Output => Mundo!
-print(str[:3]) # Output => Olá
+print(str[5:]) # -> Mundo!
+print(str[:3]) # -> Olá
 ```
 
 É possível saltar posições ao definir `inicio:fim:saltos`, onde o número final é a quantidade de saltos nos índices.
@@ -345,7 +344,7 @@ print(str[:3]) # Output => Olá
 
 ``` py
 str = 'Olá, Mundo!'
-print(str[5::2]) # Output => Mno
+print(str[5::2]) # -> Mno
 ```
 
 No exemplo acima, é considerado a string a partir do índice 5 até o fim, pulando os caracteres a cada 2 índices (inclusivo).
@@ -363,7 +362,7 @@ Pode ser feita de duas maneiras:
 num1 = 5
 num2 = 2
 print("A soma entre {} e {} é {}".format(num1, num2, num1 + num2))
-# Output => A soma entre 5 e 2 é 7
+# -> A soma entre 5 e 2 é 7
 ```
 
 Definir índices numéricos entre as chaves na string fará com que os argumentos de **`format()`** sejam formatados de acordo.
@@ -374,7 +373,7 @@ Definir índices numéricos entre as chaves na string fará com que os argumento
 num1 = 5
 num2 = 2
 print("A soma entre {1} e {0} é {2}".format(num2, num1, num1 + num2))
-# Output => A soma entre 5 e 2 é 7
+# -> A soma entre 5 e 2 é 7
 ```
 
 **Exemplo com *F string*:**
@@ -383,7 +382,7 @@ print("A soma entre {1} e {0} é {2}".format(num2, num1, num1 + num2))
 num1 = 5
 num2 = 2
 print(f"A soma entre {num1} e {num2} é {num1 + num2}")
-# Output => A soma entre 5 e 2 é 7
+# -> A soma entre 5 e 2 é 7
 ```
 
 ##### Formatação na Interpolação
@@ -399,7 +398,7 @@ Para formatar uma string dentro de uma interpolação é utilizado `:`, seguido 
 ``` py
 str = 'Olá, Mundo!'
 print("{:-^25}".format(str))
-# Output => -------Olá, Mundo!-------
+# -> -------Olá, Mundo!-------
 ```
 
 **Exemplo com *F String*:**
@@ -407,10 +406,36 @@ print("{:-^25}".format(str))
 ``` py
 str = 'Olá, Mundo!'
 print(f'{str:-^25}')
-# Output => -------Olá, Mundo!-------
+# -> -------Olá, Mundo!-------
 ```
 
 Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que preenchem o espaço até a string inteira ocupar 25 caracteres.
+
+**Os formatadores são:**
+
+* **'`:<`'**: Alinhamento à esquerda.
+* **'`:>`'**: Alinhamento à direita.
+* **'`:^`'**: Alinhamento no centro.
+* **'`:=`'**: Posiciona o resultado mais a direita possível.
+* **'`:+`'**: Indica se o resultado é positivo ou negativo.
+* **'`:-`'**: O resultado será sempre mostrado como negativo.
+* **'`:{whitespace}`'**: Irá inserir um espaço em branco antes do resultado.
+* **'`:,`'**: Formata o resultado com uma vírgula separando a milhar.
+* **'`:_`'**: Formata o resultado com um *underline* separando a milhar.
+* **'`:b`'**: Mostra o resultado em binário.
+* **'`:c`'**: Converte o resultado para o caractere Unicode correspondente.
+* **'`:d`'**: Mostra o resultado em decimal.
+* **'`:e`'**: Mostra o resultado em formato científico ("e" em minúsculo).
+* **'`:E`'**: Mostra o resultado em formato científico ("E" em maiúsculo).
+* **'`:f`'**: Fixa os números de ponto flutuante.
+* **'`:F`'**: Fixa os números de ponto flutuante em formato maiúsculo.
+* **'`:g`'**: Formato geral.
+* **'`:G`'**: Formato geral usando notação científica com "E".
+* **'`:o`'**: Mostra o resultado em octal.
+* **'`:x`'**: Mostra o resultado em hexadecimal (minúsculo).
+* **'`:X`'**: Mostra o resultado em hexadecimal (maiúsculo).
+* **'`:n`'**: Em formato numérico.
+* **'`:%`'**: Em formato de porcentagem.
 
 #### Caracteres de Escape
 
@@ -432,7 +457,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo!'
     newStr = str.upper()
-    print(newStr) # Output => OLÁ, MUNDO!
+    print(newStr) # -> OLÁ, MUNDO!
     ```
 
 * **'`lower()`'**: Retorna `self` com todos os caracteres em minúsculo.
@@ -440,7 +465,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo!'
     newStr = str.lower()
-    print(newStr) # Output => olá, mundo!
+    print(newStr) # -> olá, mundo!
     ```
 
 * **'`capitalize()`'**: Retorna `self` com o primeiro caractere em maiúsculo e o resto em minúsculo.
@@ -448,7 +473,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo!'
     newStr = str.capitalize()
-    print(newStr) # Output => Olá, mundo!
+    print(newStr) # -> Olá, mundo!
     ```
 
 * **'`title()`'**: Retorna `self` com o primeiro caractere de todas as palavras em maiúsculo e o resto em minúsculo.
@@ -456,7 +481,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'oLá, mUndO!'
     newStr = str.title()
-    print(newStr) # Output => Olá, Mundo!
+    print(newStr) # -> Olá, Mundo!
     ```
 
 * **'`count()`'**: Retorna a quantidade de ocorrência de uma dada substring em `self`.
@@ -464,7 +489,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo!!!'
     contador = str.count('!')
-    print(contador) # Output => 3
+    print(contador) # -> 3
     ```
 
 * **'`find()`'**: Retorna o índice em que uma dada substring se inicia em `self`.
@@ -472,7 +497,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo!'
     indice = str.find('Mundo!')
-    print(indice) # Output => 5
+    print(indice) # -> 5
     ```
 
 * **'`replace()`'**: Substitui uma substring de `self` por uma nova substring.
@@ -480,7 +505,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo!'
     newStr = str.replace('Mundo', 'Python')
-    print(newStr) # Output => Olá, Python!
+    print(newStr) # -> Olá, Python!
     ```
 
     É possível passar um terceiro argumento, e esse argumento define a quantidade de substituições que serão feitas.
@@ -488,7 +513,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Olá, Mundo! Olá, Mundo!'
     newStr = str.replace('Mundo', 'Python', 1)
-    print(newStr) # Output => Olá, Python! Olá, Mundo!
+    print(newStr) # -> Olá, Python! Olá, Mundo!
     ```
 
     O valor padrão para esse terceiro padrão é `-1`, que define que serão feitas todas as substituições.
@@ -498,7 +523,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = '     Olá, Mundo!     '
     newStr = str.strip()
-    print(newStr) # Output => Olá, Mundo!
+    print(newStr) # -> Olá, Mundo!
     ```
 
     Os métodos **`lstrip()`** e **`rstrip()`** removem apenas os espaços em branco na esquerda e direita, respectivamente.
@@ -508,7 +533,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Eu amo Python'
     lista = str.split()
-    print(lista) # Output => ['Eu', 'amo', 'Python']
+    print(lista) # -> ['Eu', 'amo', 'Python']
     ```
 
     Exemplo com um seperador definido:
@@ -516,7 +541,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Eu-amo-Python'
     lista = str.split('-')
-    print(lista) # Output => ['Eu', 'amo', 'Python']
+    print(lista) # -> ['Eu', 'amo', 'Python']
     ```
 
     É possível passar um segundo argumento, que define o limite de elementos que a lista terá.
@@ -524,7 +549,7 @@ Em ambos os exemplos é impresso `"Olá, Mundo!"` entre os caracteres `"-"`, que
     ``` py
     str = 'Eu-amo-Python'
     lista = str.split('-', 1)
-    print(lista) # Output => ['Eu', 'amo-Python']
+    print(lista) # -> ['Eu', 'amo-Python']
     ```
 
     `-1` é o valor padrão, onde serão separadados todos os elementos possívels.
@@ -565,9 +590,9 @@ x = 5
 y = 'Olá, Mundo!'
 z = 10.2
 
-print(type(x)) # Output => <class 'int'>
-print(type(y)) # Output => <class 'str'>
-print(type(z)) # Output => <class 'float'>
+print(type(x)) # -> <class 'int'>
+print(type(y)) # -> <class 'str'>
+print(type(z)) # -> <class 'float'>
 ```
 
 **Exemplo com `__class__`:**
@@ -577,9 +602,9 @@ x = 5
 y = 'Olá, Mundo!'
 z = 10.2
 
-print(x.__class__) # Output => <class 'int'>
-print(y.__class__) # Output => <class 'str'>
-print(z.__class__) # Output => <class 'float'>
+print(x.__class__) # -> <class 'int'>
+print(y.__class__) # -> <class 'str'>
+print(z.__class__) # -> <class 'float'>
 ```
 
 Para converter um valor para outro tipo (*casting*), é usada a função do tipo para qual o valor será convertido, e passar o valor que será convertido como argumento.
@@ -595,6 +620,38 @@ print(type(x)) # <class 'str'>
 print(type(y)) # <class 'int'>
 print(type(z)) # <class 'float'>
 ```
+
+## *Input* de Valores
+
+A função **`input()`** retorna o valor digitado pelo usuário. Essa função aceita uma string como argumento, que será impressa antes da digitação do usuário. Essa string é usada para informar o usuário sobre o que ele deve digitar.
+
+**Exemplo:**
+
+``` py
+valor = input('Digite algo: ')
+print(valor) # Imprime o valor digitado pelo usuário
+```
+
+A função **`input()`** retorna uma string, então se o valor requisitado ao usuário for numérico, deverá ser feita a conversão.
+
+**Exemplo:**
+
+``` py
+x = input('Digite um número: ')
+y = input('Digite outro número: ')
+soma = int(x) + int(y)
+print(f'A soma entre {x} e {y} é {soma}')
+```
+
+Essa conversão pode ser feita na função `input` diretamente:
+
+``` py
+x = int(input('Digite um número: '))
+y = int(input('Digite outro número: '))
+print(f'A soma entre {x} e {y} é {x+y}')
+```
+
+> **NOTA:** O programa para no momento da declaração da função `input()` e continua quando o valor dela é retornado, ou seja, as declações abaixo não são executadas junto à `input()`.
 
 ## Operadores
 
@@ -626,13 +683,13 @@ x = 5
 y = 2
 
 # Imprime as operações
-print(x + y)    # Output => 7
-print(x - y)    # Output => 3
-print(x * y)    # Output => 10
-print(x / y)    # Output => 2.5
-print(x // y)   # Output => 2
-print(x % y)    # Output => 1
-print(x ** y)   # Output => 25
+print(x + y)    # -> 7
+print(x - y)    # -> 3
+print(x * y)    # -> 10
+print(x / y)    # -> 2.5
+print(x // y)   # -> 2
+print(x % y)    # -> 1
+print(x ** y)   # -> 25
 ```
 
 ### Operadores de Comparação
@@ -640,49 +697,49 @@ print(x ** y)   # Output => 25
 * **'`==`' (Igual)**: Verdadeiro se ambos os operandos forem iguais.
 
     ``` py
-    print(1 == 1)       # Output => True
-    print('Py' == "Py") # Output => True
-    print('5' == 5)     # Output => False
+    print(1 == 1)       # -> True
+    print('Py' == "Py") # -> True
+    print('5' == 5)     # -> False
     ```
 
 * **'`!=`' (Diferente)**: Verdadeiro se os operandos forem diferentes um do outro.
 
     ``` py
-    print(2 != 5)        # Output => True
-    print(5.0 != 5)      # Output => False
-    print('Oi' != 'Olá') # Output => True
+    print(2 != 5)        # -> True
+    print(5.0 != 5)      # -> False
+    print('Oi' != 'Olá') # -> True
     ```
 
 * **'`<`' (Menor)**: Verdadeiro se o operando à esquerda for menor.
 
     ``` py
-    print(1 < 5)        # Output => True
-    print(7 < 6)        # Output => False
-    print('Oi' < 'Olá') # Output => True
+    print(1 < 5)        # -> True
+    print(7 < 6)        # -> False
+    print('Oi' < 'Olá') # -> True
     ```
 
 * **'`>`' (Maior)**: Verdadeiro se o operando da esquerda for maior.
 
     ``` py
-    print(7 > 2)        # Output => True
-    print(2 > 4)        # Output => False
-    print('Oi' > 'Olá') # Output => False
+    print(7 > 2)        # -> True
+    print(2 > 4)        # -> False
+    print('Oi' > 'Olá') # -> False
     ```
 
 * **'`<=`' (Menor ou igual)**: Verdadeiro se o operando à esquerda for menor ou igual ao da direita.
 
     ``` py
-    print(0 <= 2) # Output => True
-    print(5 <= 5) # Output => True
-    print(2 <= 1) # Output => False
+    print(0 <= 2) # -> True
+    print(5 <= 5) # -> True
+    print(2 <= 1) # -> False
     ```
 
 * **'`>=`' (Maior ou igual)**: Verdadeiro se o operando à esquerda for maior ou igual ao da direita.
 
     ``` py
-    print(1 >= -1) # Output => True
-    print(4 >= 4)  # Output => True
-    print(2 >= 3)  # Output => False
+    print(1 >= -1) # -> True
+    print(4 >= 4)  # -> True
+    print(2 >= 3)  # -> False
     ```
 
 ### Operadores Lógicos
@@ -690,26 +747,26 @@ print(x ** y)   # Output => 25
 * **'`and`'**: Verdadeiro quando ambos os operandos forem verdadeiro.
 
     ``` py
-    print(True and True)    # Output => True
-    print(True and False)   # Output => False
-    print(False and True)   # Output => False
-    print(False and False)  # Output => False
+    print(True and True)    # -> True
+    print(True and False)   # -> False
+    print(False and True)   # -> False
+    print(False and False)  # -> False
     ```
 
 * **'`or`'**: Verdadeiro se pelo menos um dos operandos for verdadeiro.
 
     ``` py
-    print(True or True)    # Output => True
-    print(True or False)   # Output => True
-    print(False or True)   # Output => True
-    print(False or False)  # Output => False
+    print(True or True)    # -> True
+    print(True or False)   # -> True
+    print(False or True)   # -> True
+    print(False or False)  # -> False
     ```
 
 * **'`not`'**: Inverte o valor (verdadeiro se torna falso e falso se torna verdadeiro).
 
     ``` py
-    print(not True)    # Output => False
-    print(not False)   # Output => True
+    print(not True)    # -> False
+    print(not False)   # -> True
     ```
 
 ### Operadores de Identidade
@@ -719,11 +776,11 @@ print(x ** y)   # Output => 25
     ``` py
     x = 5
     y = 5
-    print(x is y) # Output => True
+    print(x is y) # -> True
 
     x = [1, 2, 3]
     y = [1, 2, 3]
-    print(x is y) # Output => False
+    print(x is y) # -> False
     ```
 
 * **'`is not`'**: Verdadeiro se ambos os valores não corresponderem ao mesmo endereço de memória.
@@ -731,11 +788,11 @@ print(x ** y)   # Output => 25
     ``` py
     x = 5
     y = 5
-    print(x is not y) # Output => False
+    print(x is not y) # -> False
 
     x = [1, 2, 3]
     y = [1, 2, 3]
-    print(x is not y) # Output => True
+    print(x is not y) # -> True
     ```
 
 > **NOTA:** O Python otimiza o uso da memória e reutiliza objetos imutáveis como inteiros de pequeno valor. Isso é conhecido como *int caching* (memorização de inteiros). Para valores pequenos, como pequenos inteiros, o Python reutiliza o mesmo objeto na memória.
@@ -746,14 +803,14 @@ print(x ** y)   # Output => 25
 
     ``` py
     lista = [1, 2, 3, 4, 5]
-    print(2 in lista) # Output => True
+    print(2 in lista) # -> True
     ```
 
 * **'`not in`'**: Verdadeiro se o primeiro operando não estiver dentro do segundo.
 
     ``` py
     lista = [1, 2, 3, 4, 5]
-    print(2 not in lista) # Output => False
+    print(2 not in lista) # -> False
     ```
 
 ### Operadores Bitwise
@@ -768,7 +825,7 @@ print(x ** y)   # Output => 25
 
     # Imprime o resultado da operação
     print(f'Binário: {bin(resultado)} | Decimal: {resultado}')
-    # Output => Binário: 0b1 | Decimal: 1
+    # -> Binário: 0b1 | Decimal: 1
     ```
 
 * **'`|`' (OR)**: Retorna 1 para cada posição de bit em que pelo menos um dos operandos tem o bit 1.
@@ -781,7 +838,7 @@ print(x ** y)   # Output => 25
 
     # Imprime o resultado da operação
     print(f'Binário: {bin(resultado)} | Decimal: {resultado}')
-    # Output => Binário: 0b111 | Decimal: 7
+    # -> Binário: 0b111 | Decimal: 7
     ```
 
 * **'`^`' (XOR)**: Retorna 1 para cada posição de bit em que apenas um dos operandos tem um bit 1.
@@ -794,7 +851,7 @@ print(x ** y)   # Output => 25
 
     # Imprime o resultado da operação
     print(f'Binário: {bin(resultado)} | Decimal: {resultado}')
-    # Output => Binário: 0b110 | Decimal: 6
+    # -> Binário: 0b110 | Decimal: 6
     ```
 
 * **'`<<`' (Deslocamento à Esquerda)**: Move os bits dos números para a esquerda.
@@ -807,7 +864,7 @@ print(x ** y)   # Output => 25
 
     # Imprime o resultado da operação
     print(f'Binário: {bin(resultado)} | Decimal: {resultado}')
-    # Output => Binário: 0b101000 | Decimal: 40
+    # -> Binário: 0b101000 | Decimal: 40
     ```
 
 * **'`>>`' (Deslocamento à Direita)**: Move os bits dos números para a direta.
@@ -820,7 +877,7 @@ print(x ** y)   # Output => 25
 
     # Imprime o resultado da operação
     print(f'Binário: {bin(resultado)} | Decimal: {resultado}')
-    # Output => Binário: 0b0 | Decimal: 0
+    # -> Binário: 0b0 | Decimal: 0
     ```
 
 ### Operadores de Atribuição
@@ -835,7 +892,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x += 2
-    print(x) # Output => 7
+    print(x) # -> 7
     ```
 
 * **'`-=`'**: Subtrai um valor da variável.
@@ -843,7 +900,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x -= 2
-    print(x) # Output => 3
+    print(x) # -> 3
     ```
 
 * **'`*=`'**: Multiplica a variável por um valor.
@@ -851,7 +908,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x *= 2
-    print(x) # Output => 10
+    print(x) # -> 10
     ```
 
 * **'`/=`'**: Divide a variável por um valor.
@@ -859,7 +916,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x /= 2
-    print(x) # Output => 2.5
+    print(x) # -> 2.5
     ```
 
 * **'`//=`'**: Calcula a divisão inteira da variável pelo valor e atribui o resultado à variável.
@@ -867,7 +924,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x //= 2
-    print(x) # Output => 2
+    print(x) # -> 2
     ```
 
 * **'`%=`'**: Calcula o resto da divisão da variável pelo valor e atribui o resultado à variável.
@@ -875,7 +932,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x %= 2
-    print(x) # Output => 1
+    print(x) # -> 1
     ```
 
 * **'`**=`'**: Calcula a potência da variável pelo valor e atribui o resultado à variável.
@@ -883,7 +940,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x **= 2
-    print(x) # Output => 25
+    print(x) # -> 25
     ```
 
 * **'`&=`'**: Realiza a operação bit a bit AND com a variável e o valor, e então atribui o resultado à variável.
@@ -891,7 +948,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x &= 3
-    print(x) # Output => 1
+    print(x) # -> 1
     ```
 
 * **'`|=`'**: Realiza a operação bit a bit OR com a variável e o valor, e então atribui o resultado à variável.
@@ -899,7 +956,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x |= 3
-    print(x) # Output => 7
+    print(x) # -> 7
     ```
 
 * **'`^=`'**: Realiza a operação bit a bit XOR com a variável e o valor, e então atribui o resultado à variável.
@@ -907,7 +964,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x ^= 3
-    print(x) # Output => 6
+    print(x) # -> 6
     ```
 
 * **'`<<=`'**: Desloca os bits da variável para a esquerda na mesma quantidade de vezes do valor.
@@ -915,7 +972,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x <<= 3
-    print(x) # Output => 40
+    print(x) # -> 40
     ```
 
 * **'`>>=`'**: Desloca os bits da variável para a direita na mesma quantidade do valor.
@@ -923,7 +980,7 @@ O operador de atribuição mais comum é **`=`**, mas também há outros operado
     ``` py
     x = 5
     x >>= 3
-    print(x) # Output => 0
+    print(x) # -> 0
     ```
 
 ### Precedência de Operadores
@@ -960,7 +1017,7 @@ nomeTupla = (elemento1, elemento2, ..., elementoN)
 
 ``` py
 languages = ('JavaScript', 'PHP', 'Python')
-print(languages) # Output => ('JavaScript', 'PHP', 'Python')
+print(languages) # -> ('JavaScript', 'PHP', 'Python')
 ```
 
 A função **`tuple()`** ou simplesmente **`()`** criam uma tupla vazia.
@@ -981,7 +1038,7 @@ tuplaVazia = tuple()
 
 ``` py
 tupla = tuple(range(0, 11, 2))
-print(tupla) # Output => (0, 2, 4, 6, 8, 10)
+print(tupla) # -> (0, 2, 4, 6, 8, 10)
 ```
 
 ### Acesso aos Elementos de uma Tupla
@@ -992,9 +1049,9 @@ Cada elemento da tupla é numerado com índices começando do 0, podendo ser ace
 
 ``` py
 languages = ('JavaScript', 'PHP', 'Python')
-print(languages[0]) # Output => JavaScript
-print(languages[1]) # Output => PHP
-print(languages[2]) # Output => Python
+print(languages[0]) # -> JavaScript
+print(languages[1]) # -> PHP
+print(languages[2]) # -> Python
 ```
 
 Índices negativos correspondem aos elementos do final, por exemplo: `-1` corresponde ao último elemento, `-2`, corresponde ao penúltimo elemento, etc.
@@ -1003,9 +1060,9 @@ print(languages[2]) # Output => Python
 
 ``` py
 languages = ('JavaScript', 'PHP', 'Python')
-print(languages[-3]) # Output => JavaScript
-print(languages[-2]) # Output => PHP
-print(languages[-1]) # Output => Python
+print(languages[-3]) # -> JavaScript
+print(languages[-2]) # -> PHP
+print(languages[-1]) # -> Python
 ```
 
 ### Fatiamento de Tuplas
@@ -1016,7 +1073,7 @@ O fatiamento de tuplas funciona da mesma maneira que em strings e listas.
 
 ``` py
 tupla = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-print(tupla[3:6]) # Output => (4, 5, 6)
+print(tupla[3:6]) # -> (4, 5, 6)
 ```
 
 Também é possível fatiar pulando elementos com `inicio:fim:saltos`.
@@ -1025,7 +1082,7 @@ Também é possível fatiar pulando elementos com `inicio:fim:saltos`.
 
 ``` py
 tupla = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-print(tupla[1:8:2]) # Output => (2, 4, 6, 8)
+print(tupla[1:8:2]) # -> (2, 4, 6, 8)
 ```
 
 ### Ordenar Tupla para Impressão
@@ -1038,8 +1095,8 @@ Mesmo que as tuplas sejam imutáveis, é possível organizá-las numericamente o
 numeros = (2, 4, 1, 5, 3)
 letras = ('c', 'a', 'e', 'b', 'd')
 
-print(sorted(numeros)) # Output => [1, 2, 3, 4, 5]
-print(sorted(letras)) # Output => ['a', 'b', 'c', 'd', 'e']
+print(sorted(numeros)) # -> [1, 2, 3, 4, 5]
+print(sorted(letras)) # -> ['a', 'b', 'c', 'd', 'e']
 ```
 
 > **NOTA:** A função `sorted()` retorna uma lista ao invés de uma nova tupla.
@@ -1052,8 +1109,8 @@ Para organizá-las ao contrários, define `True` para o parâmetro **`reverse`**
 numeros = (2, 4, 1, 5, 3)
 letras = ('c', 'a', 'e', 'b', 'd')
 
-print(sorted(numeros, reverse=True)) # Output => [5, 4, 3, 2, 1]
-print(sorted(letras, reverse=True)) # Output => ['e', 'd', 'c', 'b', 'a']
+print(sorted(numeros, reverse=True)) # -> [5, 4, 3, 2, 1]
+print(sorted(letras, reverse=True)) # -> ['e', 'd', 'c', 'b', 'a']
 ```
 
 ### Desempacotar Tupla
@@ -1065,10 +1122,10 @@ print(sorted(letras, reverse=True)) # Output => ['e', 'd', 'c', 'b', 'a']
 ``` py
 languages = ('JavaScript', 'PHP', 'Python', 'Ruby')
 a, b, c, d = languages
-print(a) # Output => JavaScript
-print(b) # Output => PHP
-print(c) # Output => Python
-print(d) # Output => Ruby
+print(a) # -> JavaScript
+print(b) # -> PHP
+print(c) # -> Python
+print(d) # -> Ruby
 ```
 
 Se definido **`*`** no início do nome de uma das variáveis, ela será uma lista com os elementos que não têm variáveis definidas.
@@ -1078,9 +1135,9 @@ Se definido **`*`** no início do nome de uma das variáveis, ela será uma list
 ``` py
 languages = ('JavaScript', 'PHP', 'Python', 'Ruby')
 a, *b, c = languages
-print(a) # Output => JavaScript
-print(b) # Output => ['PHP', 'Python']
-print(c) # Output => Ruby
+print(a) # -> JavaScript
+print(b) # -> ['PHP', 'Python']
+print(c) # -> Ruby
 ```
 
 ## Listas
@@ -1097,7 +1154,7 @@ nomeLista = [elemento1, elemento2, ..., elementoN]
 
 ``` py
 languages = ['JavaScript', 'PHP', 'Python']
-print(languages) # Output => ['JavaScript', 'PHP', 'Python']
+print(languages) # -> ['JavaScript', 'PHP', 'Python']
 ```
 
 A função **`list()`** ou simplesmente **`[]`** criam uma lista vazia.
@@ -1118,7 +1175,7 @@ Assim como em tuplas, é possível criar uma lista numérica com um range.
 
 ``` py
 lista = list(range(0, 11, 2))
-print(lista) # Output => [0, 2, 4, 6, 8, 10]
+print(lista) # -> [0, 2, 4, 6, 8, 10]
 ```
 
 ### Acesso aos Elementos de uma Lista
@@ -1129,9 +1186,9 @@ Assim como nas tuplas, os elementos nas listas são acessados por notação de c
 
 ``` py
 languages = ['JavaScript', 'PHP', 'Python']
-print(languages[0]) # Output => JavaScript
-print(languages[1]) # Output => PHP
-print(languages[2]) # Output => Python
+print(languages[0]) # -> JavaScript
+print(languages[1]) # -> PHP
+print(languages[2]) # -> Python
 ```
 
 Índices negativos, assim como em tuplas, referenciam os elementos do final da lista.
@@ -1140,9 +1197,9 @@ print(languages[2]) # Output => Python
 
 ``` py
 languages = ['JavaScript', 'PHP', 'Python']
-print(languages[-3]) # Output => JavaScript
-print(languages[-2]) # Output => PHP
-print(languages[-1]) # Output => Python
+print(languages[-3]) # -> JavaScript
+print(languages[-2]) # -> PHP
+print(languages[-1]) # -> Python
 ```
 
 ### Operador `del` para Remover Elementos em Listas
@@ -1154,7 +1211,7 @@ Com o operador **`del`** é possível remover um elemento de uma lista a partir 
 ``` py
 lista = [1, 2, 3, 4, 5]
 del lista[2]
-print(lista) # Output => [1, 2, 4, 5]
+print(lista) # -> [1, 2, 4, 5]
 ```
 
 ### Funções `max()` e `min()` em Listas
@@ -1168,8 +1225,8 @@ lista = [1, 2, 3, 4, 5]
 maior = max(lista)
 menor = min(lista)
 
-print(maior) # Output => 5
-print(menor) # Output => 1
+print(maior) # -> 5
+print(menor) # -> 1
 ```
 
 ### Fatiamento de Listas
@@ -1180,7 +1237,7 @@ O fatiamento de listas funciona da mesma maneira que em strings e tuplas.
 
 ``` py
 lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print(lista[3:6]) # Output => [4, 5, 6]
+print(lista[3:6]) # -> [4, 5, 6]
 ```
 
 Também é possível fatiar pulando elementos com `inicio:fim:saltos`.
@@ -1189,7 +1246,7 @@ Também é possível fatiar pulando elementos com `inicio:fim:saltos`.
 
 ``` py
 lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print(lista[1:8:2]) # Output => [2, 4, 6, 8]
+print(lista[1:8:2]) # -> [2, 4, 6, 8]
 ```
 
 ### Desempacotar Lista
@@ -1201,10 +1258,10 @@ Assim como as tuplas, é possível atribuir os elementos de uma lista à variáv
 ``` py
 languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
 a, b, c, d = languages
-print(a) # Output => JavaScript
-print(b) # Output => PHP
-print(c) # Output => Python
-print(d) # Output => Ruby
+print(a) # -> JavaScript
+print(b) # -> PHP
+print(c) # -> Python
+print(d) # -> Ruby
 ```
 
 **Exemplo com `*`:**
@@ -1212,9 +1269,9 @@ print(d) # Output => Ruby
 ``` py
 languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
 a, *b, c = languages
-print(a) # Output => JavaScript
-print(b) # Output => ['PHP', 'Python']
-print(c) # Output => Ruby
+print(a) # -> JavaScript
+print(b) # -> ['PHP', 'Python']
+print(c) # -> Ruby
 ```
 
 ### Compreensão de Lista
@@ -1231,7 +1288,7 @@ for i in languages:
     if "P" in i:
         new_list.append(i)
 
-print(new_list) # Output => ['PHP', 'Python']
+print(new_list) # -> ['PHP', 'Python']
 ```
 
 Com uma compreensão de lista, é possível fazer exatamente o mesmo que no exemplo acima, porém de maneira mais curta.
@@ -1242,7 +1299,7 @@ Com uma compreensão de lista, é possível fazer exatamente o mesmo que no exem
 languages = ['JavaScript', 'PHP', 'Python', 'Ruby']
 new_list = [i for i in languages if "P" in i]
 
-print(new_list) # Output => ['PHP', 'Python']
+print(new_list) # -> ['PHP', 'Python']
 ```
 
 **A sintaxe é a seguinte:**
@@ -1258,7 +1315,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4]
     lista.append(5)
-    print(lista) # Output => [1, 2, 3, 4, 5]
+    print(lista) # -> [1, 2, 3, 4, 5]
     ```
 
 * **'`insert()`'**: Insere um elemento dentro de `self` em índice específico.
@@ -1266,7 +1323,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4, 5]
     lista.insert(2, 10)
-    print(lista) # Output => [1, 2, 10, 3, 4, 5]
+    print(lista) # -> [1, 2, 10, 3, 4, 5]
     ```
 
 * **'`remove()`'**: Remove um elemento de `self` pelo valor.
@@ -1274,7 +1331,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4, 5]
     lista.remove(3)
-    print(lista) # Output => [1, 2, 4, 5]
+    print(lista) # -> [1, 2, 4, 5]
     ```
 
     Este método remove apenas o primeiro elemento com esse valor.
@@ -1282,7 +1339,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [3, 1, 2, 3, 4, 5]
     lista.remove(3)
-    print(lista) # Output => [1, 2, 3, 4, 5]
+    print(lista) # -> [1, 2, 3, 4, 5]
     ```
 
 * **'`pop()`'**: Remove o elemento em um dado índice.
@@ -1290,7 +1347,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4, 5]
     lista.pop(2)
-    print(lista) # Output => [1, 2, 4, 5]
+    print(lista) # -> [1, 2, 4, 5]
     ```
 
     Se não passado um argumento, será removido o último elemento da lista.
@@ -1298,7 +1355,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4, 5]
     lista.pop()
-    print(lista) # Output => [1, 2, 3, 4]
+    print(lista) # -> [1, 2, 3, 4]
     ```
 
 * **'`clear()`'**: Limpa `self`, tornando-a uma lista vazia.
@@ -1306,7 +1363,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4, 5]
     lista.clear()
-    print(lista) # Output => []
+    print(lista) # -> []
     ```
 
 * **'`sort()`'**: Organiza `self` numericamente ou alfabeticamente.
@@ -1314,7 +1371,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [3, 1, 2, 5, 4]
     lista.sort()
-    print(lista) # Output => [1, 2, 3, 4, 5]
+    print(lista) # -> [1, 2, 3, 4, 5]
     ```
 
     Para organizar em ordem contrária, defina o parâmetro `reverse` para `True`.
@@ -1322,7 +1379,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [3, 1, 2, 5, 4]
     lista.sort(reverse=True)
-    print(lista) # Output => [5, 4, 3, 2, 1]
+    print(lista) # -> [5, 4, 3, 2, 1]
     ```
 
 * **'`reverse()`'**: Inverte a ordem dos elementos em `self`.
@@ -1330,7 +1387,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = [1, 2, 3, 4, 5]
     lista.reverse()
-    print(lista) # Output => [5, 4, 3, 2, 1]
+    print(lista) # -> [5, 4, 3, 2, 1]
     ```
 
 * **'`index()`'**: Retorna o índice de um dado elemento de `self`.
@@ -1338,7 +1395,7 @@ lista = [expressao for item in iterador if condicao]
     ``` py
     lista = ['Python', 'Ruby', 'Go']
     indice = lista.index('Ruby')
-    print(indice) # Output => 1
+    print(indice) # -> 1
     ```
 
 * **'`copy()`'**: Retorna `self` como uma cópia.
@@ -1352,8 +1409,8 @@ lista = [expressao for item in iterador if condicao]
     novaLista[0] = 10
 
     # Imprime as listas
-    print(lista) # Output => [1, 2, 3, 4, 5]
-    print(novaLista) # Output => [10, 2, 3, 4, 5]
+    print(lista) # -> [1, 2, 3, 4, 5]
+    print(novaLista) # -> [10, 2, 3, 4, 5]
     ```
 
 * **'`extend()`'**: Atribui a `self` os elementos de uma dada lista ou tupla.
@@ -1363,7 +1420,7 @@ lista = [expressao for item in iterador if condicao]
     lista2 = [4, 5, 6]
 
     lista1.extend(lista2)
-    print(lista1) # Output => [1, 2, 3, 4, 5, 6]
+    print(lista1) # -> [1, 2, 3, 4, 5, 6]
     ```
 
 ## Estruturas Condicionais
@@ -1410,7 +1467,7 @@ Repete um número específico de vezes a partir de um range.
 for c in range(5):
     print(c, end=' ')
 print()
-# Output => 0 1 2 3 4
+# -> 0 1 2 3 4
 ```
 
 > **NOTA:** O valor final é descartado (exclusivo).
@@ -1434,7 +1491,7 @@ Se não definido, o incremento será 1.
 for c in range(0, 11, 2):
     print(c, end=' ')
 print()
-# Output => 0 2 4 6 8 10
+# -> 0 2 4 6 8 10
 ```
 
 #### `for` como Iterador
@@ -1455,7 +1512,7 @@ lista = [2, 4, 6, 8, 10]
 for e in lista:
     print(e, end=' ')
 print()
-# Output => 2 4 6 8 10
+# -> 2 4 6 8 10
 ```
 
 Para iterar sobre os índices e elementos de uma tupla/lista, use **`for in enumerate()`**.
@@ -1493,7 +1550,7 @@ for c in range(6):
     print(c, end=' ')
 else:
     print('FIM!')
-# Output => 0 1 2 3 4 5 FIM!
+# -> 0 1 2 3 4 5 FIM!
 ```
 
 > **NOTA:** Se o loop `for` for parado com `break`, o bloco `else` não irá executar.
@@ -1517,7 +1574,7 @@ while contador < 5:
     contador += 1
     print(contador, end=' ')
 print()
-# Output => 1 2 3 4 5
+# -> 1 2 3 4 5
 ```
 
 #### `else` no loop `while`
@@ -1533,7 +1590,7 @@ while i < 5:
     print(i, end=' ')
 else:
     print('FIM!')
-# Output => 1 2 3 4 5 FIM!
+# -> 1 2 3 4 5 FIM!
 ```
 
 > **NOTA:** Se o loop `while` for parado com `break`, o bloco `else` não irá executar.
@@ -1555,7 +1612,7 @@ while True:
     if contador == 5:
         break
 print()
-# Output => 1 2 3 4 5
+# -> 1 2 3 4 5
 ```
 
 No exemplo acima, `while True` cria um loop infinito que só pode ser parado com `break`. O loop é interrompido apenas quando o contador chega a 5.
@@ -1568,7 +1625,7 @@ for c in range(11):
         continue
     print(c, end=' ')
 print()
-# Output => 0 2 4 6 8 10
+# -> 0 2 4 6 8 10
 ```
 
 No exemplo acima, é pulada para a próxima repetição sempre que `c` for ímpar, imprimindo apenas os valores pares.
@@ -1593,7 +1650,7 @@ Como não são permitidos itens duplicados, valores como `1` e `True` não são 
 
 ``` py
 my_set = {'Olá', True, 3, 2.5, 1}
-print(my_set) # Output => {True, 2.5, 3, 'Olá'}
+print(my_set) # -> {True, 2.5, 3, 'Olá'}
 ```
 
 Perceba que o valor `1` não existe, já que antes dele foi declarado `True`.
@@ -1610,7 +1667,7 @@ Para obter o comprimento de um conjunto, é usada a função **`len()`**.
 
 ``` py
 my_set = {'Olá', 3, 2.5, True}
-print(len(my_set)) # Output => 4
+print(len(my_set)) # -> 4
 ```
 
 ### Acesso aos Elementos de um Conjunto
@@ -1645,7 +1702,7 @@ my_set = {'Olá', 3, 2.5, True}
 my_set.add('Olá, Python!')
 
 print(my_set)
-# Output => {True, 2.5, 3, 'Olá, Python!', 'Olá'}
+# -> {True, 2.5, 3, 'Olá, Python!', 'Olá'}
 ```
 
 Há também o método **`update()`**, que permite **atualizar um set com outro set, tupla ou lista**.
@@ -1659,7 +1716,7 @@ set2 = {True, 2.5, 'Olá'}
 set1.update(set2)
 
 print(set1)
-# Output => {False, True, 2.5, 3, 'Olá', 'Oi'}
+# -> {False, True, 2.5, 3, 'Olá', 'Oi'}
 ```
 
 ### Remover Itens de um Conjunto
@@ -1675,7 +1732,7 @@ my_set.remove('Oi')
 my_set.discard(False)
 
 print(my_set)
-# Output => {True, 2.5, 3}
+# -> {True, 2.5, 3}
 ```
 
 > **NOTA:** Será retornado um erro caso o argumento do método `remove()` não existir dentro do set. Por outro lado, o método `discard()` ignora caso o itens não exista dentro do set, prosseguindo como se tivesse excluído o item.
@@ -1689,8 +1746,8 @@ my_set = {'Oi', 3, False, 2.5, True}
 
 item = my_set.pop()
 
-print(item)   # Output => False
-print(my_set) # Output => {True, 2.5, 3, 'Oi'}
+print(item)   # -> False
+print(my_set) # -> {True, 2.5, 3, 'Oi'}
 ```
 
 O método **`clear()`** irá excluir todos os itens do set.
@@ -1702,7 +1759,7 @@ my_set = {'Oi', 3, False, 2.5, True}
 
 my_set.clear()
 
-print(my_set) # Output => set()
+print(my_set) # -> set()
 ```
 
 A palavra-chave **`del`** exclui um set por completo.
@@ -1715,7 +1772,7 @@ my_set = {'Oi', 3, False, 2.5, True}
 del my_set
 
 # Ocorrerá um erro, já que `my_set` não existe mais
-print(my_set) # Output => set()
+print(my_set) # -> set()
 ```
 
 ### Unir Coleções
@@ -1730,7 +1787,7 @@ set2 = {5, 2, False, 'Olá'}
 set3 = set1.union(set2)
 
 print(set3)
-# Output => {False, True, 2.5, 3, 'Oi', 2, 5, 'Olá'}
+# -> {False, True, 2.5, 3, 'Oi', 2, 5, 'Olá'}
 ```
 
 ### Itens Duplicados em um Conjunto
@@ -1745,7 +1802,7 @@ set2 = {5, 2, False, 'Olá', True}
 set3 = set1.intersection(set2)
 
 print(set3)
-# Output => {True, 5}
+# -> {True, 5}
 ```
 
 Para manter apenas os itens que não são duplicados, há o método **`symmetric_difference()`**.
@@ -1758,7 +1815,7 @@ set2 = {5, 2, False, 'Olá', True}
 set3 = set1.symmetric_difference(set2)
 
 print(set3)
-# Output => {False, 2, 2.5, 3, 'Oi', 'Olá'}
+# -> {False, 2, 2.5, 3, 'Oi', 'Olá'}
 ```
 
 ## Dicionários
@@ -1800,8 +1857,8 @@ dicionario = {
 }
 
 # Imprime os itens do dicionário
-print(dicionario['nome'])   # Output => Luana
-print(dicionario['idade'])  # Output => 22
+print(dicionario['nome'])   # -> Luana
+print(dicionario['idade'])  # -> 22
 ```
 
 Como visto no exemplo acima, os valores são acessados por meio de suas chaves.
@@ -1824,7 +1881,7 @@ dicionario['nome'] = 'John'
 dicionario['idade'] = 32
 
 # Imprime o dicionário
-print(dicionario) # Output => {'nome': 'John', 'idade': 32}
+print(dicionario) # -> {'nome': 'John', 'idade': 32}
 ```
 
 Para **criar uma nova chave**, basta selecioná-la como se ela já existesse e atribuir um valor a ela.
@@ -1842,7 +1899,7 @@ dicionario = {
 dicionario['sexo'] = 'feminino'
 
 # Imprime o dicionário
-print(dicionario) # Output => {'nome': 'Luana', 'idade': 22, 'sexo': 'feminino'}
+print(dicionario) # -> {'nome': 'Luana', 'idade': 22, 'sexo': 'feminino'}
 ```
 
 ### Excluir Itens
@@ -1862,7 +1919,7 @@ dicionario = {
 del dicionario['idade']
 
 # Imprime o dicionário
-print(dicionario) # Output => {'nome': 'Luana'}
+print(dicionario) # -> {'nome': 'Luana'}
 ```
 
 Outra opção para excluir itens em um dicionário, é o método **`pop()`**, que recebe como argumento a chave do item que será excluído.
@@ -1880,8 +1937,8 @@ dicionario = {
 item_excluido = dicionario.pop('nome')
 
 # Imprime o dicionário
-print(item_excluido) # Output => Luana
-print(dicionario) # Output => {'idade': 22}
+print(item_excluido) # -> Luana
+print(dicionario) # -> {'idade': 22}
 ```
 
 > **NOTA:** Há também o método **`popitem()`**, que exclui o último item do dicionário.
@@ -1971,8 +2028,8 @@ for k, v in dicionario.items():
     copiaDicionario['idade'] = '32'
 
     # Imprime os dicionários
-    print(dicionario)       # Output => {'nome': 'Luana', 'idade': 22}
-    print(copiaDicionario)  # Output => {'nome': 'John', 'idade': '32'}
+    print(dicionario)       # -> {'nome': 'Luana', 'idade': 22}
+    print(copiaDicionario)  # -> {'nome': 'John', 'idade': '32'}
     ```
 
 * **'`clear()`'**: Limpa `self`, tornando-o um dicionário vazio.
@@ -1988,7 +2045,7 @@ for k, v in dicionario.items():
     dicionario.clear()
 
     # Imprime o dicionário
-    print(dicionario) # Output => {}
+    print(dicionario) # -> {}
     ```
 
 * **'`keys()`'**: Retorna as chaves de `self`. Geralmente é usado para iterar sobre as chaves.
@@ -2004,7 +2061,7 @@ for k, v in dicionario.items():
     chaves = dicionario.keys()
 
     # Imprime as chaves do dicionário
-    print(chaves) # Output => dict_keys(['nome', 'idade'])
+    print(chaves) # -> dict_keys(['nome', 'idade'])
     ```
 
 * **'`values()`'**: Retorna os valores de `self`. Geralmente é usado para iterar sobre os valores.
@@ -2020,7 +2077,7 @@ for k, v in dicionario.items():
     valores = dicionario.values()
 
     # Imprime as chaves do dicionário
-    print(valores) # Output => dict_values(['Luana', 22])
+    print(valores) # -> dict_values(['Luana', 22])
     ```
 
 * **'`items()`'**: Retorna as chaves e os valores de `self`. Geralmente é usado para iterar sobre as chaves e os valores.
@@ -2036,7 +2093,7 @@ for k, v in dicionario.items():
     itens = dicionario.items()
 
     # Imprime as chaves do dicionário
-    print(itens) # Output => dict_items([('nome', 'Luana'), ('idade', 22)])
+    print(itens) # -> dict_items([('nome', 'Luana'), ('idade', 22)])
     ```
 
 ## Funções
@@ -2060,7 +2117,7 @@ def ola_mundo():
     print('Olá, Mundo!')
 
 # Chama a função
-ola_mundo() # Output => Olá, Mundo!
+ola_mundo() # -> Olá, Mundo!
 ```
 
 **Exemplo com parâmetros:**
@@ -2071,7 +2128,7 @@ def saudacao(nome):
     print(f'Olá, {nome}!')
 
 # Chama a função
-saudacao('Mundo') # Output => Olá, Mundo!
+saudacao('Mundo') # -> Olá, Mundo!
 ```
 
 No exemplo acima, `nome` é um parâmetro da função `saudacao()`, enquanto a string `'Mundo'` passada para a função, é chamada de argumento.
@@ -2088,9 +2145,9 @@ def soma(x, y):
     print(x + y)
 
 # Chama a função várias vezes com diferentes argumentos
-soma(y=2, x=5) # Output => 7
-soma(x=1, y=5) # Output => 6
-soma(2, y=3)   # Output => 5
+soma(y=2, x=5) # -> 7
+soma(x=1, y=5) # -> 6
+soma(2, y=3)   # -> 5
 ```
 
 Definir **`/`** como argumento impede essa atribuição por parâmetro para todos os parâmetros antes de `/`.
@@ -2101,7 +2158,7 @@ Definir **`/`** como argumento impede essa atribuição por parâmetro para todo
 def soma(x, y, /):
     print(x + y)
 
-soma(5, 2) # Output => 7
+soma(5, 2) # -> 7
 ```
 
 No exemplo acima, ocorrerá um erro se os argumentos forem passados por palavra-chave, como `soma(y = 2, x = 5)`.
@@ -2114,7 +2171,7 @@ Por outro lado, definir **`*`** como parâmetro irá permitir apenas que os argu
 def soma(*, x, y):
     print(x + y)
 
-soma(y = 5, x = 2) # Output => 7
+soma(y = 5, x = 2) # -> 7
 ```
 
 No exemplo acima, ocorrerá um erro se os argumentos forem passados por posição, como `soma(5, 2)`.
@@ -2127,7 +2184,7 @@ No exemplo acima, ocorrerá um erro se os argumentos forem passados por posiçã
 def soma(x, y, /, *, z):
     print(x + y + z)
 
-soma(5, 2, z = 3) # Output => 10
+soma(5, 2, z = 3) # -> 10
 ```
 
 No exemplo acima, os parâmetros `x` e `y` só podem receber argumentos por posição, enquanto o parâmetro `z` só pode receber argumento por palavra-chave.
@@ -2158,9 +2215,9 @@ def soma(*args):
     print(f'Soma: {soma}')
 
 # Chama a função várias vezes com diferentes argumentos
-soma(2, 4)          # Output => 6
-soma(5)             # Output => 5
-soma(1, 2, 3, 4, 5) # Output => 15
+soma(2, 4)          # -> 6
+soma(5)             # -> 5
+soma(1, 2, 3, 4, 5) # -> 15
 ```
 
 Como dito anteriormente, se a função tiver mais de um parâmetro, o parâmetro variádico (que empacota) deve ser o último.
@@ -2176,9 +2233,9 @@ def mult(x, *args):
     print(f'Soma: {soma}')
 
 # Chama a função várias vezes com diferentes argumentos
-mult(5, 2, 4)           # Output => 30
-mult(2, 5)              # Output => 10
-mult(0, 1, 2, 3, 4, 5)  # Output => 0
+mult(5, 2, 4)           # -> 30
+mult(2, 5)              # -> 10
+mult(0, 1, 2, 3, 4, 5)  # -> 0
 ```
 
 #### Argumentos de Palavras-chave
@@ -2192,7 +2249,7 @@ def my_function(**kwargs):
     print(kwargs)
 
 my_function(name='Luana', idade='23')
-# Output => {'name': 'Luana', 'idade': '23'}
+# -> {'name': 'Luana', 'idade': '23'}
 ```
 
 > **NOTA:** Argumentos de Palavras-chaves arbitrárias são frequentemente abreviadas para **`**kwargs`**.
@@ -2216,9 +2273,9 @@ def soma(x, y=5):
     print(x + y)
 
 # Chama a função várias vezes com diferentes argumentos
-soma(5, 2)  # Output => 7
-soma(3)     # Output => 8
-soma(0)     # Output => 5
+soma(5, 2)  # -> 7
+soma(3)     # -> 8
+soma(0)     # -> 5
 ```
 
 ### Retorno de Valores
@@ -2243,7 +2300,7 @@ def dobro(x):
 resultado = dobro(5)
 
 # Imprime o resultado
-print(resultado) # Output => 10
+print(resultado) # -> 10
 ```
 
 > **NOTA:** Uma função pode ter várias declarações `return`, e assim que alcança uma deles a função retorna o valor definido por ela e se encerra.
@@ -2273,7 +2330,7 @@ def minha_funcao():
     print(variavel_global)
 
 # Chama a função
-minha_funcao() # Output => Olá, Mundo!
+minha_funcao() # -> Olá, Mundo!
 ```
 
 É possível **declarar uma variável global dentro de uma função** utilizando a palavra-chave **`global`**, seguido do nome da variável (deve ser feito antes de declarar a variável).
@@ -2294,6 +2351,24 @@ print(variavel_global)
 ```
 
 > **NOTA:** É necessário chamar a função que declara a variável global antes de utilizá-la, afinal, ela não existirá se não for declarada.
+
+#### Variável em Função Externa
+
+Usar a palavra-chave **`nonlocal`** em uma variável fará com que ela pertença à função externa à função chamada.
+
+**Exemplo:**
+
+``` py
+def foo():
+    str = "Hello, World!"
+    def bar():
+        nonlocal str
+        str = "Hello, Python!"
+    bar()
+    return str
+
+print(foo()) # -> Hello, Python!
+```
 
 ### Função Recursiva
 
@@ -2336,7 +2411,7 @@ lambda argumentos : expressao
 ``` py
 my_lambda = lambda x, y : x + y
 print(my_lambda(5, 2))
-# Output => 7
+# -> 7
 ```
 
 Lambdas podem ser retornadas em funções.
@@ -2349,64 +2424,10 @@ def my_function(num):
 
 my_lambda = my_function(5)
 print(my_lambda(3))
-# Output => 15
+# -> 15
 ```
 
 No exemplo acima, a função `my_function()` retorna uma lambda que retorna um dado valor multiplicado por 5.
-
-## Tratamento de Erros
-
-Os erros são chamados de exceções, e podem ocorrer de inúmeras maneiras, como erro de sintaxe, erro de valor - como passar uma string para uma função que aceita apenas valores inteiros - e diversos outros.
-
-Exceções são tratadas a partir das estruturas **`try`**, **`except`**, **`else`** e **`finally`**.
-
-* **'`try`'**: Recebe o bloco com potencial de erro(s).
-* **'`except`'**: Se a exceção definida no `except` ocorrer no bloco `try`, é executado o bloco definido.
-* **'`else`'**: Executa o bloco caso não tenha ocorrido nenhuma exceção (opcional).
-* **'`finally`'**: Será executado independentemente de ter ou não ocorrido alguma exceção (opcional).
-
-**Exemplo:**
-
-``` py
-# Função que calcula a raíz quadrada de um valor
-def raiz_quadrada(x):
-    try:
-        resultado = x ** 0.5
-    except Exception as erro:
-        # Aqui, `erro` é um alias para a exceção ocorrida
-        return erro.__class__
-    else:
-        return resultado
-
-# Imprime o resultado
-print(raiz_quadrada(25))  # Output => 5.0
-print(raiz_quadrada(0))   # Output => 0.0
-print(raiz_quadrada('4')) # Output => <class 'TypeError'>
-```
-
-No exemplo acima, há a função `raiz_quadrada()` que calcula a raíz quadrada do valor passado como argumento. Se não houver exceções, irá retornar normalmente a raíz quadrada do valor, mas se houver, irá retornar a classe do erro que ocorreu.
-
-É possível tratar cada erro com **`except`**.
-
-**Exemplo:**
-
-``` py
-# Função que divide `x` por `y`
-def divisao(x, y):
-    try:
-        resultado = x / y
-    except ZeroDivisionError: # Caso `y` seja 0
-        return 'ERRO: Não é possível dividir por 0'
-    except TypeError: # Caso algum valor passado não seja um número
-        return 'ERRO: Valor passado é inválido'
-    else:
-        return resultado
-
-# Imprime os resultados
-print(divisao(5, 2))  # Output => 2.5
-print(divisao(3, 0))  # Output => ERRO: Não é possível dividir por 0
-print(divisao(9, -1)) # Output => -9.0
-```
 
 ## Classes
 
@@ -2430,7 +2451,7 @@ class MyClass:
 
 obj = MyClass
 print(MyClass.x + MyClass.y)
-# Output => 7
+# -> 7
 ```
 
 No exemplo acima, `obj` é uma instância da classe `MyClass`. Essa instância tem acesso às variáveis `x` e `y` declaradas na classe, e acessa elas por meio de notação de ponto.
@@ -2458,8 +2479,8 @@ class MyClass:
 my_instance = MyClass()
 
 # Imprime o resultado dos métodos
-print(my_instance.sum(5, 2)) # Output => 7
-print(my_instance.double(9)) # Output => 18
+print(my_instance.sum(5, 2)) # -> 7
+print(my_instance.double(9)) # -> 18
 ```
 
 Como primeiro parâmetro, é definido `self`, que referência à própria classe.
@@ -2480,15 +2501,15 @@ class MyClass:
         return x * 2
 
 # Imprime o resultado dos métodos
-print(MyClass.sum(5, 2)) # Output => 7
-print(MyClass.double(9)) # Output => 18
+print(MyClass.sum(5, 2)) # -> 7
+print(MyClass.double(9)) # -> 18
 ```
 
 Perceba que não há uma instância da classe. Os métodos são simplesmente acessados diretamente pela classe.
 
-## Atributos
+### Atributos
 
-Atributos de um objeto são valores definidos assim que eles são criados. Esses valores são usados como argumentos em métodos da classe e podem inclusive, ser acessados de fora dela por meio de notação de ponto.
+Os atributos de um objeto são valores definidos assim que eles são criados. Esses valores são usados como argumentos em métodos da classe e podem inclusive, ser acessados de fora dela por meio de notação de ponto.
 
 os atributos são definidas assim que uma instância é criada quando o método especial **`__init()__`** está definido na classe.
 
@@ -2516,8 +2537,8 @@ class MyClass:
 obj = MyClass(5, 2)
 
 # Imprime o resultado dos métodos
-print(obj.sum())    # Output => 7
-print(obj.mult())   # Output => 10
+print(obj.sum())    # -> 7
+print(obj.mult())   # -> 10
 ```
 
 os atributos de uma classe podem ser alteradas.
@@ -2536,17 +2557,533 @@ class MyClass:
 obj = MyClass(5, 2)
 
 # Imprime os atributos antes de alterá-las
-print(obj.x) # Output => 5
-print(obj.y) # Output => 2
+print(obj.x) # -> 5
+print(obj.y) # -> 2
 
 # Altera os atributos
 obj.x = 10
 obj.y = 23
 
 # Imprime os atributos após as alterações
-print(obj.x) # Output => 10
-print(obj.y) # Output => 23
+print(obj.x) # -> 10
+print(obj.y) # -> 23
 ```
+
+### Herança
+
+É possível que uma classe herde todos os métodos e propriedades de outra classe, isso é chamado de **herança**.
+
+**Sintaxe:**
+
+``` py
+class ClassePai:
+    # Conteúdo da classe pai
+
+class ClasseFilha(ClassePai):
+    # Conteúdo da classe filha
+```
+
+**Exemplo:**
+
+``` py
+# Classe pai
+class ClassePai:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+class ClasseFilha(ClassePai):
+    pass
+
+obj = ClasseFilha(5, 2)
+print(obj.soma()) # -> 7
+```
+
+Os métodos da classe filha têm prioridade, então se houver uma duplicidade de nomes, será o método da filha que irá executar.
+
+**Exemplo:**
+
+``` py
+# Classe pai
+class ClassePai:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+class ClasseFilha(ClassePai):
+    def soma(self):
+        return self.x - self.y
+
+obj = ClasseFilha(5, 2)
+print(obj.soma()) # -> 3
+```
+
+#### Função `super()`
+
+A função **`super()`** faz com que a classe filha herde todos os métodos e propriedades da classe pai ao definir o método `__init__()` na classe filha.
+
+**Exemplo:**
+
+``` py
+# Classe pai
+class ClassePai:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+class ClasseFilha(ClassePai):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+
+obj = ClasseFilha(5, 2)
+print(obj.soma()) # -> 7
+```
+
+Junto às propriedades já definidas pela classe pai, pode-se definir novas propriedades:
+
+**Exemplo:**
+
+``` py
+# Classe pai
+class ClassePai:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+class ClasseFilha(ClassePai):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.z = 13
+
+obj = ClasseFilha(5, 2)
+print(obj.soma()) # -> 7
+print(obj.z)      # -> 13
+```
+
+Além disso, outras propriedades podem ser diretamente definidas como parâmetros de `__init__()`.
+
+**Exemplo:**
+
+``` py
+# Classe pai
+class ClassePai:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+class ClasseFilha(ClassePai):
+    def __init__(self, x, y, z):
+        super().__init__(x, y)
+        self.z = z
+
+obj = ClasseFilha(5, 2, 22)
+print(obj.soma()) # -> 7
+print(obj.z)      # -> 22
+```
+
+### Criação de Iterador
+
+É possível criar um iterador criando uma classe com os métodos **`__iter__()`** e **`__next__()`**.
+
+O método **`__iter__()`** é similar ao método `__init__()`, porém ele deve sempre retornar o próprio objeto iterador.
+
+Já o método **`__next__()`** é usado para dar sequência à iteração, sempre retornando o próximo elemento dela.
+
+**Exemplo:**
+
+``` py
+class Foo:
+    def __iter__(self):
+        self.x = 1
+        return self
+
+    def __next__(self):
+        x = self.x
+        self.x += 1
+        return x
+
+obj = Foo()
+it = iter(obj)
+
+print(next(it)) # -> 1
+print(next(it)) # -> 2
+print(next(it)) # -> 3
+print(next(it)) # -> 4
+print(next(it)) # -> 5
+```
+
+#### Interromper a Iteração
+
+A iteração pode ser interrompida chamando a exceção **`StopIteration`** com a palavra-chave **`raise`**.
+
+**Exemplo:**
+
+``` py
+class Foo:
+    def __init__(self, end):
+        self.end = end
+
+    def __iter__(self):
+        self.x = 1
+        return self
+
+    def __next__(self):
+        x = self.x
+        if x >= self.end:
+            raise StopIteration
+        self.x += 1
+        return x
+
+obj = Foo(6)
+it = iter(obj)
+
+for n in it:
+    print(n, end=' ') # -> 1 2 3 4 5
+```
+
+## Tratamento de Erros
+
+Os erros são chamados de exceções, e podem ocorrer de inúmeras maneiras, como erro de sintaxe, erro de valor - como passar uma string para uma função que aceita apenas valores inteiros - e diversos outros.
+
+Exceções são tratadas a partir das estruturas **`try`**, **`except`**, **`else`** e **`finally`**.
+
+* **'`try`'**: Recebe o bloco com potencial de erro(s).
+* **'`except`'**: Se a exceção definida no `except` ocorrer no bloco `try`, é executado o bloco definido.
+* **'`else`'**: Executa o bloco caso não tenha ocorrido nenhuma exceção (opcional).
+* **'`finally`'**: Será executado independentemente de ter ou não ocorrido alguma exceção (opcional).
+
+**Exemplo:**
+
+``` py
+# Função que calcula a raíz quadrada de um valor
+def raiz_quadrada(x):
+    try:
+        resultado = x ** 0.5
+    except Exception as erro:
+        # Aqui, `erro` é um alias para a exceção ocorrida
+        return erro.__class__
+    else:
+        return resultado
+
+# Imprime o resultado
+print(raiz_quadrada(25))  # -> 5.0
+print(raiz_quadrada(0))   # -> 0.0
+print(raiz_quadrada('4')) # -> <class 'TypeError'>
+```
+
+No exemplo acima, há a função `raiz_quadrada()` que calcula a raíz quadrada do valor passado como argumento. Se não houver exceções, irá retornar normalmente a raíz quadrada do valor, mas se houver, irá retornar a classe do erro que ocorreu.
+
+É possível tratar cada erro com **`except`**.
+
+**Exemplo:**
+
+``` py
+# Função que divide `x` por `y`
+def divisao(x, y):
+    try:
+        resultado = x / y
+    except ZeroDivisionError: # Caso `y` seja 0
+        return 'ERRO: Não é possível dividir por 0'
+    except TypeError: # Caso algum valor passado não seja um número
+        return 'ERRO: Valor passado é inválido'
+    else:
+        return resultado
+
+# Imprime os resultados
+print(divisao(5, 2))  # -> 2.5
+print(divisao(3, 0))  # -> ERRO: Não é possível dividir por 0
+print(divisao(9, -1)) # -> -9.0
+```
+
+### Chamar uma Exceção
+
+A palavra-chave **`raise`** chama uma exceção imediatamente.
+
+**Exemplo:**
+
+``` py
+x = int(input('Digite um número positivo: '))
+if x <= 0:
+    raise Exception('Número digitado não é positivo')
+print(x) # Imprime o número digitado
+```
+
+## Módulos
+
+Um módulo é como uma biblioteca de código, onde você pode importá-la quando quiser e usar suas ferramentas.
+
+Qualquer arquivo com a extensão **`.py`** pode ser um módulo, e para importá-lo, é necessário usar a declaração **`import nome_do_modulo`**.
+
+**Exemplo:**
+
+``` py
+# Arquivo modulo.py
+def helloWorld():
+    return 'Hello, World!'
+```
+
+``` py
+# Arquivo principal
+import modulo
+
+print(modulo.helloWorld()) # -> Hello, World!
+```
+
+Além de funções, um módulo pode armazenar variáveis e classes.
+
+**Exemplo:**
+
+``` py
+# Arquivo modulo.py
+class Foo:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+    def mult(self):
+        return self.x * self.y
+
+str = 'Hello, World!'
+```
+
+``` py
+# Arquivo principal
+import modulo
+
+obj = modulo.Foo(5, 2)
+print(obj.soma()) # -> 7
+print(obj.mult()) # -> 10
+print(modulo.str) # -> Hello, World!
+```
+
+### Alias para Módulo
+
+Com a palavra-chave **`as`**, é possível criar um alias para o módulo importado.
+
+**Sintaxe:**
+
+``` py
+import modulo as alias
+```
+
+**Exemplo:**
+
+``` py
+import modulo as m
+
+str = m.helloWorld()
+print(str) # -> Hello, World!
+```
+
+### Listar Ferramentas de um Módulo
+
+A função **`dir()`** retorna todos os elementos de um
+
+**Exemplo:**
+
+``` py
+# Arquivo modulo.py
+class Foo:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+    def mult(self):
+        return self.x * self.y
+
+str = 'Hello, World!'
+linguagens = ['Python', 'JavaScript', 'Go', 'Ruby', 'Java', 'PHP', 'C']
+```
+
+``` py
+# Arquivo principal
+import modulo
+
+for x in dir(modulo):
+    print(x)
+
+# Output:
+# Foo
+# __builtins__
+# __cached__
+# __doc__
+# __file__
+# __loader__
+# __name__
+# __package__
+# __spec__
+# linguagens
+# str
+```
+
+### Importar Parte de um Módulo
+
+Utilizando a palavra-chave **`from`**, é possível importar somente uma parte de um módulo.
+
+**Sintaxe:**
+
+``` py
+from modulo import parte
+```
+
+**Exemplo:**
+
+``` py
+# Arquivo modulo.py
+class Foo:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def soma(self):
+        return self.x + self.y
+
+    def mult(self):
+        return self.x * self.y
+
+str = 'Hello, World!'
+linguagens = ['Python', 'JavaScript', 'Go', 'Ruby', 'Java', 'PHP', 'C']
+```
+
+``` py
+# Arquivo principal
+from modulo import str
+
+print(str) # -> Hello, World!
+```
+
+Perceba que desta forma não é necessário especificar o módulo ao qual a variável/objeto pertence.
+
+Se houver mais de um objeto/variável para importar de um módulo, você pode especificá-los separando-os com vírgula.
+
+**Exemplo:**
+
+``` py
+# Arquivo principal
+from modulo import str, linguagens
+
+print(str) # -> Hello, World!
+for x in linguagens:
+    print(x, end=' ')
+# -> Python JavaScript Go Ruby Java PHP C
+```
+
+## Data e Hora
+
+O módulo **`datetime`** fornece diversos objetos para trabalhar com datas e horas.
+
+**Exemplo:**
+
+``` py
+import datetime
+
+horaAtual = datetime.datetime.now()
+print(horaAtual) # Imprime a hora atual
+```
+
+Para **criar uma data**, é necessário criar um objeto de data.
+
+**Sintaxe:**
+
+``` py
+data = datetime.datetime(ano, mes, dia, hora, minuto, seg, milissegundo, timezone)
+```
+
+**Exemplo:**
+
+``` py
+import datetime
+
+d = datetime.datetime(2007, 2, 4, 0, 5, 0, 0)
+print(d) # -> 2007-02-04 00:05:00
+```
+
+Para **criar apenas uma hora**, é criado um objeto **`time`**.
+
+**Sintaxe:**
+
+``` py
+hora = datetime.time(hora, minuto, segundo, milissegundo, timezone)
+```
+
+**Exemplo:**
+
+``` py
+import datetime
+
+t = datetime.time(17, 22, 13)
+print(t) # -> 17:22:13
+```
+
+### Formatação de Datas em Strings
+
+O método **`strftime()`** formata objetos de data em strings legíveis. Ele possui apenas um parâmetro, que é o formato em que a string será retornada.
+
+**Exemplo:**
+
+``` py
+import datetime
+
+d = datetime.datetime(2022, 10, 5)
+print(d) # -> 2022-10-05 12:30:00
+
+print(f'Dia da semana: {d.strftime('%A')}') # -> Dia da semana: Wednesday
+print(f'Dia do mês: {d.strftime('%d')}') # -> Dia do mês: 05
+print(f'Mês: {d.strftime('%B')}') # -> Mês: October
+print(f'Ano: {d.strftime('%Y')}') # -> Ano: 2022
+```
+
+**Os formatos são:**
+
+* **'`%a`'**: Dia da semana (curto).
+* **'`%A`'**: Dia da semana (completo).
+* **'`%w`'**: Dia da semana como um número (0-6, onde 0 é domingo).
+* **'`%d`'**: Dia do mês (01-31).
+* **'`%b`'**: Nome do mês (curto).
+* **'`%B`'**: Nome do mês (completo).
+* **'`%m`'**: Mês como um número (01-12).
+* **'`%y`'**: Ano (curto).
+* **'`%Y`'**: Ano (completo).
+* **'`%H`'**: Hora (00-23).
+* **'`%I`'**: Hora (00-12).
+* **'`%p`'**: AM/PM.
+* **'`%M`'**: Minuto (00-59).
+* **'`%S`'**: Segundo (00-59).
+* **'`%f`'**: Microssegundo (000000-999999).
+* **'`%z`'**: UTC offset.
+* **'`%Z`'**: Timezone.
+* **'`%j`'**: Dia do ano (001-366).
+* **'`%U`'**: Dia da semana do ano, onde domingo é o primeiro dia da semana (00-53).
+* **'`%W`'**: Dia da semana do ano, onde segunda-feira é o primeiro dia da semana (00-53).
+* **'`%c`'**: Versão local da data e hora.
+* **'`%C`'**: Século.
+* **'`%x`'**: Versão local da data.
+* **'`%X`'**: Versão local da hora.
+* **'`%G`'**: ISO 8601 ano.
+* **'`%u`'**: ISO 8601 dia da semana (1-7).
+* **'`%V`'**: ISO 8601 número da semana (01-53).
+* **'`%%`'**: O caractere "%".
 
 ## Manipulação de Arquivos
 
@@ -2702,9 +3239,278 @@ with open('text.txt', 'a', encoding='UTF-8') as file:
 
 O código acima adiciona uma nova linha ao arquivo de texto com o texto "Olá, Python!".
 
+### Excluir Arquivos
+
+Para excluir um arquivo, é usada a função **`os.remove()`**.
+
+**Exemplo:**
+
+``` py
+import os
+
+os.remove('text.txt')
+```
+
+Antes da exclusão, é importante verificar se o arquivo existe com **`os.path.exists()`**.
+
+**Exemplo:**
+
+``` py
+import os
+
+if os.path.exists('text.txt'):
+    os.remove('text.txt')
+else:
+    raise Exception('Arquivo não existe')
+```
+
+> **Exclusão de pastas:** Excluir uma pasta é exatamente como excluir um arquivo, porém usando a função **`os.rmdir()`**. É possível apenas excluir pastas vazias.
+
+## JSON
+
+Python possui o pacote **`json`** para trabalhar com dados JSON.
+
+**Exemplo:**
+
+``` py
+import json
+
+# Dados em JSON
+j = '{ "nome": "Matheus", "idade": 17 }'
+
+# Extrai os dados em JSON
+s = json.loads(j)
+
+# Imprime os dados como um dicionário
+print(s['nome'])  #  -> Matheus
+print(s['idade']) #  -> 17
+```
+
+### Objetos em Python para JSON
+
+Para converter os objetos em JSON, é usada a função **`dumps()`**.
+
+**Exemplo:**
+
+``` py
+import json
+
+# Dicionário
+d = {'nome': 'Matheus', 'idade': 17}
+
+# Converte para JSON
+s = json.dumps(d)
+
+# Imprime os dados
+print(s) # -> {"nome": "Matheus", "idade": 17}
+```
+
+Essa função pode receber também o parâmetro `indent`, que define a indentação na formatação.
+
+**Exemplo:**
+
+``` py
+import json
+
+# Dicionário
+d = {'nome': 'Matheus', 'idade': 17}
+
+# Converte para JSON
+s = json.dumps(d, indent=4)
+
+# Imprime os dados
+print(s)
+# Output:
+# {
+#     "nome": "Matheus",
+#     "idade": 17
+# }
+```
+
+Além da identação, é possível também configurar os separadores passando um argumento para o parâmetro **`separators`**. Esse parâmetro deve receber uma tupla ou lista, onde o primeiro valor é o separador e o segundo é o separador da chave para o valor.
+
+**Exemplo:**
+
+``` py
+import json
+
+# Dicionário
+d = {'nome': 'Matheus', 'idade': 17}
+
+# Converte para JSON
+s = json.dumps(d, indent=4, separators=('; ', ' -> '))
+
+# Imprime os dados
+print(s)
+# Output:
+# {
+#     "nome" -> "Matheus";
+#     "idade" -> 17
+# }
+```
+
+Há também o parâmetro **`sort_keys`**. Ele recebe um valor booleano que, por padrão, é `False`, mas se `True`, ele ordena os valores.
+
+**Exemplo:**
+
+``` py
+import json
+
+# Dicionário
+d = {'nome': 'Matheus', 'idade': 17, 'sexo': 'masculino', 'peso': 68.7}
+
+# Converte para JSON
+s = json.dumps(d, indent=4, sort_keys=True)
+
+# Imprime os dados
+print(s)
+# Output:
+# {
+#     "idade": 17,
+#     "nome": "Matheus",
+#     "peso": 68.7,
+#     "sexo": "masculino"
+# }
+```
+
+## Expressões Regulares
+
+O pacote **`re`** é usado para trabalhar com expressões regulares em Python.
+
+### Função `re.findall()`
+
+A função **`findall()`** retorna uma lista com todas as ocorrências
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'Ruby Python Go Python Ruby Java Python PHP'
+regex = re.findall('Python', s)
+print(regex) # -> ['Python', 'Python', 'Python']
+```
+
+### Função `re.search()`
+
+A função **`re.search()`** retorna um objeto **`Match`** se houver alguma correspondência na string.
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'Hello, World!'
+regex = re.search('World', s)
+print(regex) # -> <re.Match object; span=(7, 12), match='World'>
+```
+
+Se não houver ocorrências, é retornado `None`.
+
+### Função `re.split()`
+
+A função **`split()`** retorna uma lista que contém as separações feitas na string com base em um padrão.
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'abcde fghij klmno pqrst'
+resultado = re.split('\s', s)
+print(resultado) # -> ['abcde', 'fghij', 'klmno', 'pqrst']
+```
+
+Se desejar, você pode controlar o número de ocorrências retornadas passando um terceiro argumento.
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'abcde fghij klmno pqrst'
+resultado = re.split('\s', s, 3)
+print(resultado) # -> ['abcde', 'fghij', 'klmno']
+```
+
+### Função `re.sub()`
+
+A função **`sub()`** substitui as ocorrências.
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'abcde fghij klmno pqrst'
+resultado = re.sub('\s', '-', s)
+print(resultado) # -> abcde-fghij-klmno-pqrst
+```
+
+O quarto parâmetro recebe o número de substituições que serão feitas.
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'abcde fghij klmno pqrst'
+resultado = re.sub('\s', '-', s, 2)
+print(resultado) # -> abcde-fghij-klmno pqrst
+```
+
+### Metacaracteres
+
+* **'`[]`'**: Conjunto de caracteres.
+* **'`.`'**: Qualquer caractere que não seja uma nova linha.
+* **'`^`'**: Começa com.
+* **'`$`'**: Termina com.
+* **'`*`'**: Zero ou mais ocorrências.
+* **'`+`'**: Uma ou mais ocorrências.
+* **'`?`'**: Zero ou uma ocorrência.
+* **'`{}`'**: O número específico de ocorrências.
+* **'`|`'**: Um ou outro.
+* **'`()`'**: Captura e grupo.
+* **'`\`'**: Usado para escape de caracteres especiais.
+
+### Sequências Especiais
+
+* **'`\A`'**: Se o caractere especificado está no começo da string.
+* **'`\Z`'**: Corresponde se o caractere especificado está no fim da string.
+* **'`\b`'**: Corresponde se o caractere especificado está no início ou no fim de uma palavra.
+* **'`\B`'**: Corresponde se o caractere especificado está presente, mas não no início e no fim da palavra.
+* **'`\d`'**: Corresponde se a string contém números (0-9).
+* **'`\D`'**: Corresponde se a string não contém números.
+* **'`\s`'**: Corresponde se a string contém um caractere de espaço em branco.
+* **'`\S`'**: Corresponde se a string não contém um caractere de espaço em branco.
+* **'`\w`'**: Corresponde se a string contém algum caractere de palavra, algum número ou um *underline* (a-Z, 0-9, _).
+* **'`\W`'**: Corresponde se a string não possui nenhum caractere de palavra, algum número ou *underline*.
+
+### Conjunto de Caracteres
+
+* **'`[xyz]`'**: Corresponde se x, y ou z estiver presente.
+* **'`[a-z]`'**: Corresponde se o caractere estiver dentro do intervalo de a até z.
+* **'`[a-zA-Z]`'**: Corresponde se o caractere estiver dentro do intervalo de a até z, tanto maiúsculas quanto minúsculas.
+* **'`[^xyz]`'**: Corresponde a qualquer caractere que não seja x, y e z.
+* **'`[0-9]`'**: Corresponde se for qualquer dígito entre 0 e 9.
+
+### Objeto `Match`
+
+Um objeto **`Match`** contém informações sobre a procura de uma ocorrência e o resultado.
+
+**Exemplo:**
+
+``` py
+import re
+
+s = 'Hello, World!'
+m = re.search('World', s)
+print(m) # -> <re.Match object; span=(7, 12), match='World'>
+```
+
 ## Estilo de Texto no Terminal
 
-Para imprimir mensagens coloridas no terminal é utilizao um código ANSI.
+Para imprimir mensagens coloridas no terminal é utilizado um código ANSI.
 
 **Sintaxe:**
 
