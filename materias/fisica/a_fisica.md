@@ -97,3 +97,7 @@ Aplicando a fórmula:
 V = \frac{2*30*10}{30+10}
 = \frac{600}{40} = 15km/h
 $$**
+
+#### Velocidade Instantânea
+
+É a velocidade de um objeto em um instante particular de tempo e com uma direção. Se não houver direção, será **velocidade escalar instantânea**.

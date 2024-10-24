@@ -747,3 +747,67 @@ Existem também as tags de agrupamento semânticas:
     </footer>
 </body>
 ```
+
+## Tabelas
+
+A anatomia de uma tabela é a seguinte:
+
+1. **table**: Contém todos os elementos de uma tabela.
+1. **table row**: É relativo à linha da tabela (tag `<tr>`).
+1. **table header**: É relativo ao cabeçalho da tabela (tag `<th>`).
+1. **table data**: É relativo a um dado da tabela (tag `<td>`).
+
+**Exemplo:**
+
+``` html
+<body>
+    <table>
+        <tr>
+            <td>A1</td>
+            <td>B1</td>
+            <td>C1</td>
+        </tr>
+
+        <tr>
+            <td>A2</td>
+            <td>B2</td>
+            <td>C2</td>
+        </tr>
+
+        <tr>
+            <td>A3</td>
+            <td>B3</td>
+            <td>C3</td>
+        </tr>
+
+        <tr>
+            <td>A4</td>
+            <td>B4</td>
+            <td>C4</td>
+        </tr>
+    </table>
+</body>
+```
+
+### Tabelas Semânticas
+
+Pode-se utilizar três tags de agrupamento diferentes:
+
+1. **'`thead`'**: É a "cabeça" da tabela. Geralmente é onde ficam os cabeçalhos da tabela.
+1. **'`tbody`'**: É o "corpo" da tabela. Geralmente é onde ficam as linhas e os dados da tabela.
+1. **'`tfoot`'**: É o "pé" da tabela. Geralmente é onde fica o rodapé da tabela.
+
+Em todas elas é possível usar as tags `<th>`, `<tr>` e `<td>`.
+
+#### Legenda
+
+A tag **`<caption>`** cria uma legenda acima da tabela. No escopo desta tag deve ser escrito apenas o texto da legenda.
+
+### Escopo `<th>`
+
+É importante especificar aos mecanismos de pesquisa se os valores relativos aos cabeçalhos estão abaixo ou ao lado. Para isso, existe um parâmetro chamado **`scope`**, que possui os seguintes valores:
+
+* **'`col`'**: Quando os valores relativos à linha estão abaixo.
+* **'`row`'**: Quando os valores relativos à linha estão ao lado.
+* **'`colgroup`'**: Quando os valores relativos à linha estão em um grupo abaixo.
+* **'`rowgroup`'**: Quando os valores relativos à linha estão em um grupo ao lado.

@@ -1595,7 +1595,7 @@ else:
 
 > **NOTA:** Se o loop `while` for parado com `break`, o bloco `else` não irá executar.
 
-### Controle de Fluxo
+### Controle de Fluxo em Loops
 
 As palavras-chave `break` e `continue` são usadas para controlar o fluxo de loops.
 
@@ -3603,4 +3603,1022 @@ print("\033[4;37;47mOlá, Mundo!\033[m")
 ``` py
 # Negrito, itálico, sublinhado e vermelho
 print('\033[1;3;4;31mOlá, Mundo!\033[m')
+```
+
+## Biblioteca NumPy
+
+NumPy é uma abreviação para Numerical Python, e é uma biblioteca usada para trabalhar com arrays.
+
+É necessário importá-la para trabalhar com ela.
+
+**Exemplo:**
+
+``` py
+import numpy
+
+arr = numpy.array([1, 2, 3, 4, 5])
+
+print(arr) # -> [1 2 3 4 5]
+```
+
+Normalmente é importada com o alias **`np`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr) # -> [1 2 3 4 5]
+```
+
+### Arrays em NumPy
+
+O objeto array de NumPy é chamado de **`ndarray`**, e uma instância pode ser criada por meio da função **`numpy.array()`**. Como argumento, `numpy.array()` pode receber uma lista, tupla, ou qualquer objeto semelhante a um array.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([0, 2, 4, 6, 8, 10])
+print(arr)       # -> [ 0  2  4  6  8 10]
+print(type(arr)) # -> <class 'numpy.ndarray'>
+```
+
+#### Tipos de Dados de Arrays
+
+Em NumPy, os tipos de dados são referenciados por um único caractere.
+
+**Tipos de dados em NumPy:**
+
+* **'`i`'**: Inteiro
+* **'`u`'**: Inteiro sem sinal
+* **'`f`'**: Float
+* **'`c`'**: Float complexo
+* **'`b`'**: Booleano
+* **'`m`'**: Timedelta
+* **'`M`'**: Datetime
+* **'`O`'**: Objeto
+* **'`S`'**: String
+* **'`U`'**: String unicode
+* **'`V`'**: Void
+
+Para verificar o tipo de dado em um array, é chamada a propriedade **`dtype`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array(['Hello, World!', 'Hello, Python!'])
+arr3 = np.array([1.2, 1.3, 1.4])
+
+print(arr1.dtype) # -> int64
+print(arr2.dtype) # -> <U14
+print(arr3.dtype) # -> float64
+```
+
+Ao criar um array com `numpy.array()`, é possível definir de imediato o tipo de dado desse array.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([], dtype='i8')
+arr2 = np.array([], dtype='S')
+arr3 = np.array([], dtype='f4')
+
+print(arr1.dtype) # -> int64
+print(arr2.dtype) # -> |S1
+print(arr3.dtype) # -> float32
+```
+
+> **NOTA:** Para `i`, `u`, `f`, `S` e `U` é possível definir também o tamanho.
+
+##### Conversão de Tipo do Array
+
+Para converter o tipo do array, é usada o método **`astype()`**. Ela cria uma cópia do array com os valores convertidos para o tipo especificado.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1.3, 3.14, 7.8])
+iarr = arr.astype('i8')
+
+print(iarr)       # -> [1 3 7]
+print(iarr.dtype) # -> int64
+```
+
+O mesmo pode ser feito especificando o tipo em Python, ao invés de em NumPy.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1.3, 3.14, 7.8])
+iarr = arr.astype(int)
+
+print(iarr)       # -> [1 3 7]
+print(iarr.dtype) # -> int64
+```
+
+#### Cópia e View de um Array
+
+##### Cópia de Arrays
+
+Para copiar um array, é usado o método **`copy()`**. Essa cópia não afeta o array original.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3])
+carr = arr.copy()
+
+print('Original:', arr) # -> Original: [1 2 3]
+print('Cópia:', carr)   # -> Cópia: [1 2 3]
+```
+
+As alterações feitas no array original não afetam a cópia do mesmo.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3])
+carr = arr.copy()
+
+arr[0] = 5
+
+print('Original:', arr) # -> Original: [5 2 3]
+print('Cópia:', carr)   # -> Cópia: [1 2 3]
+```
+
+##### View de Arrays
+
+Uma view de um array é usada apenas para mostrar os dados de um array, diferente de uma cópia, que gera um novo array com os mesmos dados do orignal.
+
+Uma view é criada a partir do método **`view()`**.
+
+**Exemplo:**
+
+``` py
+
+import numpy as np
+
+arr = np.array([1, 2, 3])
+varr = arr.view()
+
+print('Original:', arr) # -> Original: [5 2 3]
+print('View:', varr)    # -> View: [1 2 3]
+```
+
+As alterações feitas no array original também afetam as views desse array.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3])
+varr = arr.view()
+
+arr[0] = 5
+
+print('Original:', arr) # -> Original: [5 2 3]
+print('View:', varr)    # -> View: [5 2 3]
+```
+
+Além disso, as alterações feitas na view de um array também afeta o array original.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3])
+varr = arr.view()
+
+varr[2] = 9
+
+print('Original:', arr) # -> Original: [1 2 9]
+print('View:', varr)    # -> View: [1 2 9]
+```
+
+##### Dados Próprios de um Array
+
+A principal diferença entre uma cópia e uma view, é que uma cópia possui dados próprios, enquanto uma view não. Isso quer dizer que, as alterações feitas no array original afetam suas views, mas não suas cópias.
+
+Para verificar se um array possui dados próprios, é usado o atributo **`base`**. Esse atributo retorna seu objeto orignal, ou `None`, caso possua dados próprios.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3])
+carr = arr.copy()
+varr = arr.view()
+
+print(carr.base) # -> None
+print(varr.base) # -> [1 2 3]
+```
+
+#### Dimensões de Arrays
+
+##### 0-D Arrays
+
+Cada elemento de um array é chamado de **0-D arrays**, ou **Scalars** (escalares).
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array(13)
+print(arr) # -> 13
+```
+
+##### 1-D Arrays
+
+Arrays 1-D são arrays unidimensionais.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([5, 10, 15, 20])
+print(arr) # -> [ 5 10 15 20]
+```
+
+##### 2-D Arrays
+
+Arrays 2-D são arrays cujo seus elementos são 1-D arrays. São matrizes de duas dimensões.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+print(arr)
+# Output:
+# [[1 2 3]
+#  [4 5 6]]
+```
+
+##### 3-D Arrays
+
+São arrays cujo seus elementos são 2-D arrays. São matrizes 3D.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6]],
+               [[7, 8, 9], [10, 11, 12]],
+               [[13, 14, 15], [16, 17, 18]]])
+print(arr)
+# Output:
+# [[[ 1  2  3]
+#   [ 4  5  6]]
+
+#  [[ 7  8  9]
+#   [10 11 12]]
+
+#  [[13 14 15]
+#   [16 17 18]]]
+```
+
+##### Arrays de Dimensão Superior
+
+Um array pode ter qualquer número de dimensões, e esse número pode ser definido assim que o array é criado. Isso é feito por meio do argumento **`ndmin`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5], ndmin=5)
+print(arr)      # -> [[[[[1 2 3 4 5]]]]]
+print(arr.ndim) # -> 5
+```
+
+##### Verificar Número de Dimensões
+
+O atributo **`ndim`** de um array retorna o número de dimensões desse array.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array(13)
+arr2 = np.array([5, 10, 15, 20])
+arr3 = np.array([[1, 2, 3], [4, 5, 6]])
+arr4 = np.array([[[1, 2, 3], [4, 5, 6]],
+               [[7, 8, 9], [10, 11, 12]],
+               [[13, 14, 15], [16, 17, 18]]])
+
+print(arr1.ndim) # -> 0
+print(arr2.ndim) # -> 1
+print(arr3.ndim) # -> 2
+print(arr4.ndim) # -> 3
+```
+
+##### Forma do Array
+
+A forma do array é o número de elementos em cada dimensão.
+
+Esses valores podem ser verificados utilizando o atributo **`shape`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([
+    [[1, 2, 3], [4, 5, 6]],
+    [[7, 8, 9], [10, 11, 12]]
+])
+
+print(arr.shape) # -> (2, 2, 3)
+```
+
+###### Remodelagem de Array
+
+Remodelar um array é mudar sua forma. Isso é feito utilizando o método **`reshape()`**.
+
+**Exemplo 1:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+rsarr = arr.reshape(3, 4)
+
+print(rsarr)
+# Output:
+# [[ 1  2  3  4]
+#  [ 5  6  7  8]
+#  [ 9 10 11 12]]
+
+print(rsarr[0]) # -> [1 2 3 4]
+print(rsarr[1]) # -> [5 6 7 8]
+print(rsarr[2]) # -> [ 9 10 11 12]
+```
+
+**Exemplo 2:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+rsarr = arr.reshape(2, 2, 2)
+
+print(rsarr)
+# Output:
+# [[[1 2]
+#   [3 4]]
+
+#  [[5 6]
+#   [7 8]]]
+
+print(rsarr[0][0]) # -> [1, 2]
+print(rsarr[0][1]) # -> [3, 4]
+print(rsarr[1][0]) # -> [5, 6]
+print(rsarr[1][1]) # -> [7, 8]
+```
+
+É possível especificar **`-1`** para as dimensões, deixando o cálculo automático para se encaixar na dimensões corretamente. Definir `-1` é o mesmo que dizer "dimensão desconhecida".
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+rsarr = arr.reshape(3, -1)
+
+print(rsarr)
+# Output:
+# [[ 1  2  3  4]
+#  [ 5  6  7  8]
+#  [ 9 10 11 12]]
+```
+
+O mesmo resultado sairia de não especificar a primeira dimensão:
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+rsarr = arr.reshape(-1, 4)
+
+print(rsarr)
+# Output:
+# [[ 1  2  3  4]
+#  [ 5  6  7  8]
+#  [ 9 10 11 12]]
+```
+
+> **NOTA:** O valor `-1` não pode ser passado para mais de uma dimensão.
+
+O método `reshape()` **retorna uma view**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+rsarr = arr.reshape(3, 4)
+
+print(rsarr.base) # -> [ 1  2  3  4  5  6  7  8  9 10 11 12]
+```
+
+Logo, isso significa que ao alterar o array original, o array remodelado também será alterado.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+rsarr = arr.reshape(3, 4)
+
+arr[9]  = 0
+arr[10] = 1
+arr[11] = 2
+
+print(rsarr)
+# Output:
+# [[1 2 3 4]
+#  [5 6 7 8]
+#  [9 0 1 2]]
+```
+
+###### Achatar Arrays
+
+Achatar um array é tornar um array multidimensional em um array unidimensional. Isso é feito com o método **`flatten()`**, **`ravel()`** ou **`reshape()`**.
+
+**Exemplo com `flatten()`:**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+rsarr = arr.flatten()
+
+print(rsarr) # -> [1 2 3 4 5 6 7 8 9]
+```
+
+**Exemplo com `ravel()`**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+rsarr = arr.ravel()
+
+print(rsarr) # -> [1 2 3 4 5 6 7 8 9]
+```
+
+**Exemplo com `reshape()`**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+rsarr = arr.reshape(-1)
+
+print(rsarr) # -> [1 2 3 4 5 6 7 8 9]
+```
+
+#### Acesso aos Elementos do Array
+
+Acessar os elementos de um array é feita por notação de colchetes, exatamente igual a acessar os elementos de uma tupla ou lista.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr[0]) # -> 1
+print(arr[1]) # -> 2
+print(arr[2]) # -> 3
+print(arr[3]) # -> 4
+print(arr[4]) # -> 5
+```
+
+Acessar os elementos de um array multidimensional também é simples como tuplas ou listas multidimensionais.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+])
+
+print(arr[0][0]) # -> 1
+print(arr[0][1]) # -> 2
+print(arr[0][2]) # -> 3
+print(arr[1][0]) # -> 4
+print(arr[1][1]) # -> 5
+print(arr[1][2]) # -> 6
+print(arr[2][0]) # -> 7
+print(arr[2][1]) # -> 8
+print(arr[2][2]) # -> 9
+```
+
+Índices negativos, assim como em tuplas e listas, referenciam do fim para o começo.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr[-1]) # -> 5
+print(arr[-2]) # -> 4
+print(arr[-3]) # -> 3
+print(arr[-4]) # -> 2
+print(arr[-5]) # -> 1
+```
+
+#### Fatiamento de Arrays
+
+A sintaxe para fatiar arrays é a mesma que para fatiar tuplas ou listas.
+
+**Sintaxe:**
+
+``` py
+arr[inicio;fim;passo]
+```
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+print(arr[2:5]) # -> [3 4 5]
+print(arr[:7])  # -> [1 2 3 4 5 6 7]
+print(arr[::2]) # -> [1 3 5 7 9]
+```
+
+> **NOTA:** Assim como em tuplas e listas, o fatiamento de arrays inclui o índice de início e exclui o índice de fim.
+
+O mesmo é possível com índices negativos.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+print(arr[-7:-4]) # -> [3 4 5]
+print(arr[:-2])   # -> [1 2 3 4 5 6 7]
+```
+
+##### Fatiamento em Arrays Multidimensionais
+
+Em arrays multidimensionais, deve ser especificado o índice do array que será fatiado.
+
+**Exemplo 1:**
+
+``` py
+import numpy as np
+
+arr = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+print(arr[0, 0:2]) # -> [1 2]
+print(arr[0, :])   # -> [1 2 3]
+print(arr[1, 0:])  # -> [4 5 6]
+```
+
+**Exemplo 2:**
+
+``` py
+import numpy as np
+
+arr = np.array(
+    [[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]]
+)
+
+print(arr[0, 0, 0:2]) # -> [1 2]
+print(arr[1, 0, :])   # -> [7 8 9]
+print(arr[1, 1, 0:])  # -> [10 11 12]
+```
+
+#### Concatenação de Arrays
+
+Para concatenar (também chamado de *join*) dois ou mais arrays, é usada a função **`numpy.concatenate()`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+carr = np.concatenate([arr1, arr2])
+print(carr) # -> [1 2 3 4 5 6]
+```
+
+##### Concatenação e Empilhamento
+
+A função **`numpy.stack()`** concatena dois ou mais array mesmo tempo que adiciona mais uma dimensão ao novo array gerado.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+carr = np.stack([arr1, arr2], axis=1)
+print(carr)
+# Output:
+# [[1 4]
+#  [2 5]
+#  [3 6]]
+```
+
+O argumento `axis` são quantas dimensões serão adicionadas. No exemplo acima, são adicionados duas dimensões mesmo que `axis=1`, pois o valor padrão (que adiciona uma dimensão) é `axis=0` (mesmo que omitir o argumento).
+
+Com a função **`numpy.hstack()`** o empilhamento é feito nas linhas.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+carr = np.hstack([arr1, arr2])
+print(carr) # -> [1 2 3 4 5 6]
+```
+
+Já com a função **`numpy.vstack()`** o empilhamento é feito nas colunas.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+carr = np.vstack([arr1, arr2])
+print(carr)
+# Output:
+# [[1 2 3]
+#  [4 5 6]]
+```
+
+Há também como empilhar por profundidade, o que significa empilhar por largura.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+carr = np.dstack([arr1, arr2])
+print(carr)
+# Output:
+# [[[1 4]
+#   [2 5]
+#   [3 6]]]
+```
+
+#### Separação de Arrays
+
+A separação de arrays (ou *split*) é o inverso de concatenar (ou *join*). O split é feito a partir da função **`numpy.split()`**, que recebe como argumentos o array que será separado e o número de separações que serão geradas.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+
+narr = np.split(arr, 2)
+print(narr) # -> [array([1, 2, 3]), array([4, 5, 6])]
+```
+
+> **NOTA:** O valor de retorno é uma lista contendo as separações (os arrays).
+
+Há também a função `numpy.array_split()` que funciona da mesma maneira, porém permitindo um valor de separação desigual para cada array gerado.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+
+narr = np.array_split(arr, 4)
+print(narr) # -> [array([1, 2, 3]), array([4, 5, 6])]
+```
+
+A dimensão das separações depende da dimensão do array original.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+narr = np.array_split(arr, 2)
+print(narr) # -> [array([[1, 2, 3]]), array([[4, 5, 6]])]
+```
+
+Note que foram gerados arrays 2D, pois o array original também é 2D.
+
+Porém, para definir o número de dimensões de cada separação, é usado o argumento **`axis`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18]])
+
+narr = np.array_split(arr, 2, axis=1)
+print(narr)
+# Output:
+# [array([[ 1,  2],
+#        [ 4,  5],
+#        [ 7,  8],
+#        [10, 11],
+#        [13, 14],
+#        [16, 17]]), array([[ 3],
+#        [ 6],
+#        [ 9],
+#        [12],
+#        [15],
+#        [18]])]
+```
+
+As funções **`numpy.hsplit()`** e **`numpy.vsplit()`** separam o array em linha ou coluna, respectivamente.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15], [16, 17, 18]])
+
+hs = np.hsplit(arr, 3)
+vs = np.vsplit(arr, 3)
+
+print(hs)
+# Output:
+# [array([[ 1],
+#        [ 4],
+#        [ 7],
+#        [10],
+#        [13],
+#        [16]]), array([[ 2],
+#        [ 5],
+#        [ 8],
+#        [11],
+#        [14],
+#        [17]]), array([[ 3],
+#        [ 6],
+#        [ 9],
+#        [12],
+#        [15],
+#        [18]])]
+print(vs)
+# Output:
+# [array([[1, 2, 3],
+#        [4, 5, 6]]), array([[ 7,  8,  9],
+#        [10, 11, 12]]), array([[13, 14, 15],
+#        [16, 17, 18]])]
+```
+
+#### Iterando Sobre Arrays
+
+A iteração em arrays é feita da mesma maneira que em tuplas ou listas.
+
+**Exemplo 1:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+for i in arr:
+    print(i, end=' ')
+
+# -> 1 2 3 4 5 6 7 8 9
+```
+
+**Exemplo 2:**
+
+``` py
+import numpy as np
+
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+for i in arr:
+    print(i, end=' ')
+
+# -> [1 2 3] [4 5 6] [7 8 9]
+```
+
+##### Função `numpy.nditer()`
+
+A função **`numpy.nditer()`** permite iterar sobre cada elemento individualmente em um array.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
+
+for i in np.nditer(arr):
+    print(i, end=' ')
+
+# -> 1 2 3 4 5 6 7 8 9
+```
+
+###### Conversão de Dados Durante a Iteração
+
+Com o argumento **`op_dtypes()`** é possível decidir para qual tipo de dado os valores serão convertidos durante a iteração.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
+
+for i in np.nditer(arr, flags=['buffered'], op_dtypes=['S']):
+    print(i)
+
+# Output:
+# np.bytes_(b'1')
+# np.bytes_(b'2')
+# np.bytes_(b'3')
+# np.bytes_(b'4')
+# np.bytes_(b'5')
+# np.bytes_(b'6')
+# np.bytes_(b'7')
+# np.bytes_(b'8')
+# np.bytes_(b'9')
+```
+
+A conversão não é feita no local em que se localiza o elemento na matriz, e por isso é necessário um buffer. Esse buffer é habilitado com o argumento **`flags=['buffered']`**, como visto acima.
+
+###### Modificar Elementos Durante a Iteração
+
+É possível modificar os elementos no array durante a iteração. Para isso, é usado o argumento **`op_flags['readwrite']`** (modo de escrita).
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
+
+for i in np.nditer(arr, op_flags=['readwrite']):
+    i[...] = i * 2
+
+print(arr)
+# Output:
+# [[[ 2  4  6]
+#   [ 8 10 12]
+#   [14 16 18]]]
+```
+
+###### Controle sobre Acesso à Linhas ou Colunas do Array
+
+Há o argumento **`order`** que permite especificar o tipo de acesso ao array. `'C'` significa linha por linha, e `'F'` coluna por coluna, por exemplo.
+
+**Exemplo:**
+
+``` py
+iimport numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
+
+for i in np.nditer(arr, order='F'):
+    print(i, end=' ')
+
+# -> 1 4 7 2 5 8 3 6 9
+
+```
+
+###### Iteração com Múltiplos Arrays
+
+A função **`numpy.nditer()`** também permite iterar sobre dois ou mais array ao mesmo tempo. Para isso, basta agrupar os arrays que serão iterados em um objeto semelhante a um array, como uma lista ou tupla.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr1 = np.array([1, 2, 3])
+arr2 = np.array([4, 5, 6])
+
+for x, y in np.nditer([arr1, arr2]):
+    print(x, y)
+
+# Output:
+# 1 4
+# 2 5
+# 3 6
+```
+
+##### Mapear Elementos do Array
+
+Para mostrar a posição de todos os elementos do array, é usada a função **`numpy.ndenumerate()`**.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([[[1, 2, 3], [4, 5, 6], [7, 8, 9]]])
+
+for i, j in np.ndenumerate(arr):
+    print(i, j)
+
+# Output:
+# (0, 0, 0) 1
+# (0, 0, 1) 2
+# (0, 0, 2) 3
+# (0, 1, 0) 4
+# (0, 1, 1) 5
+# (0, 1, 2) 6
+# (0, 2, 0) 7
+# (0, 2, 1) 8
+# (0, 2, 2) 9
+```
+
+#### Encontrar Elementos no Array
+
+A função **`numpy.where()`** permite encontrar elementos específicos dentro de um array.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 2, 3, 4, 5])
+
+m = np.where(arr == 2)
+print(m) # -> (array([1, 2]),)
+```
+
+A tupla que essa função retorna contém os índices que o elemento aparece. No caso acima, nos índices 1 e 2.
+
+**Exemplo:**
+
+``` py
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+
+# Apenas valores pares
+m = np.where(arr%2 == 0)
+print(m) # -> (array([1, 3, 5]),)
+
+# Apenas valores ímpares
+m = np.where(arr%2 == 1)
+print(m) # -> (array([0, 2, 4]),)
 ```

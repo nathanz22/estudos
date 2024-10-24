@@ -1718,3 +1718,65 @@ A função **`matrix3d()`** recebe todos os dezesseis valores da matriz para obt
     </div>
 </body>
 ```
+
+## Tabelas
+
+### Borda da Tabela
+
+A borda de uma tabela é definida pela tag **`border`**.
+
+**Exemplo:**
+
+``` html
+<style>
+   table {
+    border: 2px solid black;
+    border-collapse: collapse;
+   }
+</style>
+<body>
+    <table>
+        <tr>
+            <td>A1</td>
+            <td>B1</td>
+            <td>C1</td>
+        </tr>
+
+        <tr>
+            <td>A2</td>
+            <td>B2</td>
+            <td>C2</td>
+        </tr>
+
+        <tr>
+            <td>A3</td>
+            <td>B3</td>
+            <td>C3</td>
+        </tr>
+
+        <tr>
+            <td>A4</td>
+            <td>B4</td>
+            <td>C4</td>
+        </tr>
+    </table>
+</body>
+```
+
+A propriedade **`border-collapse`** une as linhas umas às outras se o valor for definido como `collapse`. O valor padrão é `separate`.
+
+> **NOTA:** A propriedade `border-collapse` deve ser adicionada à tabela diretamente (tag `<table>`), como no exemplo acima.
+
+### Alinhamento na Tabela
+
+Para **alinhar verticalmente** um dado de uma tabela, é usada a propriedade **`vertical-align`**. Seus valores são:
+
+* `top` (topo)
+* `middle` (meio)
+* `bottom` (em baixo)
+
+Para **alinhar horizontalmente** um dado de uma tabela, pode ser usada a propriedade **`text-align`**. Seus valores são:
+
+* `left` (esquerda)
+* `center` (centro)
+* `right` (direita)
